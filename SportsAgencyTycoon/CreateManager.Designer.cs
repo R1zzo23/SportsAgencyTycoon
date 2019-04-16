@@ -30,13 +30,13 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.managerFirstNameTextBox = new System.Windows.Forms.TextBox();
             this.managerLastNameTextBox = new System.Windows.Forms.TextBox();
+            this.managerFirstNameTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.agencyNameTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnCreateManagerAndAgency = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -65,14 +65,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Manager Information";
             // 
-            // label2
+            // managerLastNameTextBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "First Name:";
+            this.managerLastNameTextBox.Location = new System.Drawing.Point(74, 49);
+            this.managerLastNameTextBox.Name = "managerLastNameTextBox";
+            this.managerLastNameTextBox.Size = new System.Drawing.Size(177, 20);
+            this.managerLastNameTextBox.TabIndex = 3;
+            // 
+            // managerFirstNameTextBox
+            // 
+            this.managerFirstNameTextBox.Location = new System.Drawing.Point(74, 20);
+            this.managerFirstNameTextBox.Name = "managerFirstNameTextBox";
+            this.managerFirstNameTextBox.Size = new System.Drawing.Size(177, 20);
+            this.managerFirstNameTextBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -82,6 +87,15 @@
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Last Name:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "First Name:";
             // 
             // groupBox2
             // 
@@ -94,6 +108,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Agency Information";
             // 
+            // agencyNameTextBox
+            // 
+            this.agencyNameTextBox.Location = new System.Drawing.Point(90, 17);
+            this.agencyNameTextBox.Name = "agencyNameTextBox";
+            this.agencyNameTextBox.Size = new System.Drawing.Size(208, 20);
+            this.agencyNameTextBox.TabIndex = 4;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -103,29 +124,9 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Agency Name:";
             // 
-            // managerFirstNameTextBox
-            // 
-            this.managerFirstNameTextBox.Location = new System.Drawing.Point(74, 20);
-            this.managerFirstNameTextBox.Name = "managerFirstNameTextBox";
-            this.managerFirstNameTextBox.Size = new System.Drawing.Size(177, 20);
-            this.managerFirstNameTextBox.TabIndex = 2;
-            // 
-            // managerLastNameTextBox
-            // 
-            this.managerLastNameTextBox.Location = new System.Drawing.Point(74, 49);
-            this.managerLastNameTextBox.Name = "managerLastNameTextBox";
-            this.managerLastNameTextBox.Size = new System.Drawing.Size(177, 20);
-            this.managerLastNameTextBox.TabIndex = 3;
-            // 
-            // agencyNameTextBox
-            // 
-            this.agencyNameTextBox.Location = new System.Drawing.Point(90, 17);
-            this.agencyNameTextBox.Name = "agencyNameTextBox";
-            this.agencyNameTextBox.Size = new System.Drawing.Size(208, 20);
-            this.agencyNameTextBox.TabIndex = 4;
-            // 
             // btnCreateManagerAndAgency
             // 
+            this.btnCreateManagerAndAgency.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnCreateManagerAndAgency.Location = new System.Drawing.Point(116, 225);
             this.btnCreateManagerAndAgency.Name = "btnCreateManagerAndAgency";
             this.btnCreateManagerAndAgency.Size = new System.Drawing.Size(75, 23);

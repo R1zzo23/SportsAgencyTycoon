@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SportsAgencyTycoon</RootNamespace>
     <AssemblyName>SportsAgencyTycoon</AssemblyName>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agency.cs" />
+    <Compile Include="AgencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgencyForm.Designer.cs">
+      <DependentUpon>AgencyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Agent.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="CreateManager.cs">
@@ -55,11 +64,11 @@
     <Compile Include="CreateManager.Designer.cs">
       <DependentUpon>CreateManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ManagerForm.cs">
       <SubType>Form</SubType>
@@ -69,11 +78,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AgencyForm.resx">
+      <DependentUpon>AgencyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateManager.resx">
       <DependentUpon>CreateManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerForm.resx">
       <DependentUpon>ManagerForm.cs</DependentUpon>

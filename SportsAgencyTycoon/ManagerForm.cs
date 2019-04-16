@@ -12,12 +12,11 @@ namespace SportsAgencyTycoon
 {
     public partial class ManagerForm : Form
     {
-        public ManagerForm()
+        public ManagerForm(Agent manager, Agency agency)
         {
             InitializeComponent();
-            Form1 form1 = (Form1)this.MdiParent;
-            Agent manager = form1.myManager;
             managerNameLabel.Text = manager.First + " " + manager.Last;
+            memberOfAgencyLabel.Text = "Member of " + agency.Name;
             greedLabel.Text = manager.Greed.ToString();
             industryPowerLabel.Text = manager.IndustryPower.ToString();
             levelLabel.Text = manager.Level.ToString();

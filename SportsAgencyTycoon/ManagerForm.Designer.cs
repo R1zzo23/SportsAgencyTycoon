@@ -37,6 +37,7 @@
             this.industryPowerLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
             this.greedLabel = new System.Windows.Forms.Label();
+            this.memberOfAgencyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // managerNameLabel
@@ -122,12 +123,24 @@
             this.greedLabel.TabIndex = 8;
             this.greedLabel.Text = "0";
             // 
+            // memberOfAgencyLabel
+            // 
+            this.memberOfAgencyLabel.AutoSize = true;
+            this.memberOfAgencyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.memberOfAgencyLabel.Location = new System.Drawing.Point(283, 46);
+            this.memberOfAgencyLabel.Name = "memberOfAgencyLabel";
+            this.memberOfAgencyLabel.Size = new System.Drawing.Size(210, 17);
+            this.memberOfAgencyLabel.TabIndex = 9;
+            this.memberOfAgencyLabel.Text = "Member of [Agency Name Here]";
+            this.memberOfAgencyLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // ManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.memberOfAgencyLabel);
             this.Controls.Add(this.greedLabel);
             this.Controls.Add(this.levelLabel);
             this.Controls.Add(this.industryPowerLabel);
@@ -158,5 +171,6 @@
         private System.Windows.Forms.Label industryPowerLabel;
         private System.Windows.Forms.Label levelLabel;
         private System.Windows.Forms.Label greedLabel;
+        private System.Windows.Forms.Label memberOfAgencyLabel;
     }
 }

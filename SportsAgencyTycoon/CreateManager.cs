@@ -19,7 +19,7 @@ namespace SportsAgencyTycoon
 
         private void btnCreateManagerAndAgency_Click(object sender, EventArgs e)
         {
-            Form1 form1 = (Form1)this.MdiParent;
+            MainForm form1 = (MainForm)this.MdiParent;
             form1.agency = new Agency(agencyNameTextBox.Text, 1000000, 1);
             form1.myManager = new Agent(managerFirstNameTextBox.Text,
                                       managerLastNameTextBox.Text,
@@ -36,7 +36,7 @@ namespace SportsAgencyTycoon
                 "Agent Count: " + form1.agency.AgentCount + Environment.NewLine +
                 "Client Count: " + form1.agency.ClientCount + Environment.NewLine +
                 "Cash: " + form1.agency.Money.ToString("C");
-
+            this.Close();
         }
     }
 }
