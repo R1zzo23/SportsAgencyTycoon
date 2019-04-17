@@ -13,20 +13,29 @@ namespace SportsAgencyTycoon
         public int Negotiating;
         public int Greed;
         public int IndustryPower;
+        public int Intelligence;
         public int Level;
         public Roles Role;
         public List<Client> ClientList;
+        public int ClientCount;
 
-        public Agent(string firstName, string lastName, int negotiatingRating, int greedRating, int industryPowerRating, int levelRating, Roles role)
+        public Agent(string firstName, string lastName, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {
             First = firstName;
             Last = lastName;
             Negotiating = negotiatingRating;
             Greed = greedRating;
             IndustryPower = industryPowerRating;
+            Intelligence = intelligence;
             Level = levelRating;
             Role = role;
             ClientList = new List<Client>();
+        }
+
+        public void AddClient(Client client)
+        {
+            ClientList.Add(client);
+            ClientCount = ClientList.Count();
         }
     }
 

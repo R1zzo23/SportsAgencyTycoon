@@ -32,5 +32,10 @@ namespace SportsAgencyTycoon
             Agents.Add(agent);
             AgentCount = Agents.Count;
         }
+        public void AddClient(Client client)
+        {
+            Clients.Add(client);
+            ClientCount = Clients.Count;
+        }
     }
 }
