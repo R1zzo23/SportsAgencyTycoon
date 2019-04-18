@@ -10,6 +10,7 @@ namespace SportsAgencyTycoon
     {
         public string First;
         public string Last;
+        public int Salary;
         public int Negotiating;
         public int Greed;
         public int IndustryPower;
@@ -20,10 +21,11 @@ namespace SportsAgencyTycoon
         public int ClientCount;
         public List<Licenses> LicensesHeld;
 
-        public Agent(string firstName, string lastName, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
+        public Agent(string firstName, string lastName, int salary, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {
             First = firstName;
             Last = lastName;
+            Salary = salary;
             Negotiating = negotiatingRating;
             Greed = greedRating;
             IndustryPower = industryPowerRating;

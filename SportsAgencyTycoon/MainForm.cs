@@ -32,15 +32,20 @@ namespace SportsAgencyTycoon
         {
             Random rnd = new Random();
             agency = new Agency("New Age Agency", 1000000, 1);
-            myManager = new Agent("First", "Last", 10, 10, 10, 75, 1, Roles.Manager);
+            myManager = new Agent("First", "Last", 0, 10, 10, 10, 75, 1, Roles.Manager);
+            Licenses basketballLicense = new Licenses(Sports.Basketball, 250, 1250, Months.July, 7);
+            myManager.LicensesHeld.Add(basketballLicense);
+            Agent agent = new Agent("Fake", "Agent", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
+            agency.AddAgent(agent);
             Client client = new Client("Harry", "Giles", 19, rnd.Next(1, 5), rnd.Next(4, 7), rnd.Next(20, 50), 100, 0, Sports.Basketball);
             agency.AddClient(client);
             myManager.AddClient(client);
-            PopulateAgentClientList();
+            PopulateAgentClientList(myManager);
             PopulateAgencyAgentList();
             UpdateAgencyInfo();
-            UpdateAgentInfo();
+            UpdateAgentInfo(myManager);
+            cbAgencyAgentList.SelectedIndex = 0;
         }
         private void PopulateAgencyAgentList()
         {
@@ -81,25 +86,25 @@ namespace SportsAgencyTycoon
             industryInfluenceLabel.Text = agency.IndustryInfluence.ToString() + "/100";
             clientCountLabel.Text = agency.ClientCount.ToString();
             agentCountLabel.Text = agency.AgentCount.ToString();
+            cbAgencyAgentList.SelectedIndex = 0;
         }
-        public void UpdateAgentInfo()
+        public void UpdateAgentInfo(Agent agent)
         {
-            agentNameLabel.Text = myManager.First + " " + myManager.Last;
-            greedLabel.Text = myManager.Greed.ToString();
-            industryPowerLabel.Text = myManager.IndustryPower.ToString();
-            levelLabel.Text = myManager.Level.ToString();
-            negotiatingLabel.Text = myManager.Negotiating.ToString();
-            roleLabel.Text = "Manager of " + agency.Name;
-            iqLabel.Text = myManager.Intelligence.ToString();
-            agentClientCountLabel.Text = myManager.ClientCount.ToString();
-            agency.Agents[0] = myManager;
-            PopulateAgencyAgentList();
+            agentNameLabel.Text = agent.First + " " + agent.Last;
+            greedLabel.Text = agent.Greed.ToString();
+            industryPowerLabel.Text = agent.IndustryPower.ToString();
+            levelLabel.Text = agent.Level.ToString();
+            negotiatingLabel.Text = agent.Negotiating.ToString();
+            iqLabel.Text = agent.Intelligence.ToString();
+            agentClientCountLabel.Text = agent.ClientCount.ToString();
+            roleLabel.Text = "Role: " + agent.Role.ToString();
+            PopulateAgentClientList(agent);
         }
 
-        public void PopulateAgentClientList()
+        public void PopulateAgentClientList(Agent agent)
         {
             //store current selected client
-            int currentSelection = cbAgentClientList.SelectedIndex;
+            //int currentSelection = cbAgentClientList.SelectedIndex;
 
             //empty combo box to repopulate
             cbAgentClientList.Items.Clear();
@@ -107,14 +112,14 @@ namespace SportsAgencyTycoon
             string fullName;
 
             //populate combo box
-            foreach (Client client in myManager.ClientList)
+            foreach (Client client in agent.ClientList)
             {
                 fullName = client.First + " " + client.Last;
                 cbAgentClientList.Items.Add(fullName);
             }
 
             //go back to selected client
-            cbAgentClientList.SelectedIndex = currentSelection;
+            cbAgentClientList.SelectedIndex = -1;
         }
 
         public void PopulateAvailableLicenses()
@@ -134,8 +139,8 @@ namespace SportsAgencyTycoon
                 cbAvailableLicenses.Items.Add(name);
             }
 
-            //go back to selected client
-            cbAgentClientList.SelectedIndex = currentSelection;
+            //go back to selected license
+            cbAvailableLicenses.SelectedIndex = currentSelection;
         }
 
         private void editAgentAgencyInfo_Click(object sender, EventArgs e)
@@ -152,21 +157,10 @@ namespace SportsAgencyTycoon
             {
                 agency.Name = agencyNameTextBox.Text.Trim();
             }
+            agency.Agents[0] = myManager;
             UpdateAgencyInfo();
-            UpdateAgentInfo();
-        }
-
-        private void cbManagerClientList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Client selectedClient = myManager.ClientList[cbAgentClientList.SelectedIndex];
-
-            clientSportLabel.Text = selectedClient.Sport.ToString();
-            clientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
-            clientPopularityLabel.Text = selectedClient.PopularityDescription;
-            clientTeamHappinessLabel.Text = selectedClient.TeamHappinessDescription;
-            clientAgencyHappinessLabel.Text = selectedClient.AgencyHappinessDescription;
-            clientSkillLabel.Text = selectedClient.CurrentSkill.ToString() + "/" + selectedClient.PotentialSkill.ToString();
-            clientAgeLabel.Text = selectedClient.Age.ToString();
+            PopulateAgencyAgentList();
+            UpdateAgentInfo(myManager);
         }
 
         private void cbAvailableLicenses_SelectedIndexChanged(object sender, EventArgs e)
@@ -174,17 +168,69 @@ namespace SportsAgencyTycoon
             Licenses selectedLicense = world.AvailableLicenses[cbAvailableLicenses.SelectedIndex];
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
 
-            //int index = selectedAgent.LicensesHeld.FindIndex(selectedLicense => selectedLicense.Sport == selectedLicense.Sport);
-            //if (index >= 0) licenseIsAgentLicensedLabel.Text = "YES";
-            //else licenseIsAgentLicensedLabel.Text = "NO";
-
-            if (selectedAgent.LicensesHeld.Contains(selectedLicense)) licenseIsAgentLicensedLabel.Text = "YES";
-            else licenseIsAgentLicensedLabel.Text = "NO";
+            if (selectedAgent.LicensesHeld.Contains(selectedLicense))
+            {
+                licenseIsAgentLicensedLabel.Text = "YES";
+                btnAgentApplyForLicense.Enabled = false;
+            }
+            else
+            {
+                licenseIsAgentLicensedLabel.Text = "NO";
+                btnAgentApplyForLicense.Enabled = true;
+            }
 
             licenseApplicationFeeLabel.Text = selectedLicense.ApplicationFee.ToString("C");
             licenseYearlyDuesLabel.Text = selectedLicense.YearlyDues.ToString("C");
             licenseRenewalMonthLabel.Text = selectedLicense.MonthOfRenewal.ToString();
+        }
 
+        private void btnAgentApplyForLicense_Click(object sender, EventArgs e)
+        {
+            Licenses selectedLicense = world.AvailableLicenses[cbAvailableLicenses.SelectedIndex];
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+
+            // check if agency can afford to license you
+            if (agency.Money >= selectedLicense.ApplicationFee)
+            {
+                //agent obtains license
+                //logic needs to be added so that application only happens during certain months
+                //exams for different sports also happen at different times
+                //passing an exam will be determined based on IQ rating
+            }
+        }
+
+        private void cbAgentClientList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            if (selectedAgent.ClientList.Count > 0)
+            {
+                Client selectedClient = selectedAgent.ClientList[0];
+
+                clientSportLabel.Text = selectedClient.Sport.ToString();
+                clientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
+                clientPopularityLabel.Text = selectedClient.PopularityDescription;
+                clientTeamHappinessLabel.Text = selectedClient.TeamHappinessDescription;
+                clientAgencyHappinessLabel.Text = selectedClient.AgencyHappinessDescription;
+                clientSkillLabel.Text = selectedClient.CurrentSkill.ToString() + "/" + selectedClient.PotentialSkill.ToString();
+                clientAgeLabel.Text = selectedClient.Age.ToString();
+            }
+            else
+            {
+                clientSportLabel.Text = "";
+                clientNameLabel.Text = "";
+                clientPopularityLabel.Text = "";
+                clientTeamHappinessLabel.Text = "";
+                clientAgencyHappinessLabel.Text = "";
+                clientSkillLabel.Text = "";
+                clientAgeLabel.Text = "";
+            }
+        }
+
+        private void cbAgencyAgentList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            cbAgentClientList.SelectedIndex = -1;
+            UpdateAgentInfo(selectedAgent);
         }
     }
 }
