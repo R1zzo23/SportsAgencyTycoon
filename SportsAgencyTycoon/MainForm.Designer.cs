@@ -39,6 +39,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.agencyNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.agentClientCountLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cbAgentClientList = new System.Windows.Forms.ComboBox();
+            this.iqLabel = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.roleLabel = new System.Windows.Forms.Label();
             this.greedLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
@@ -52,6 +57,18 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.clientTeamHappinessLabel = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.clientSkillLabel = new System.Windows.Forms.Label();
+            this.clientAgencyHappinessLabel = new System.Windows.Forms.Label();
+            this.clientPopularityLabel = new System.Windows.Forms.Label();
+            this.clientAgeLabel = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.clientSportLabel = new System.Windows.Forms.Label();
+            this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -63,30 +80,30 @@
             this.agencyNameTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.editAgentAgencyInfo = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.iqLabel = new System.Windows.Forms.Label();
-            this.cbManagerClientList = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.managerClientCountLabel = new System.Windows.Forms.Label();
-            this.managerClientNameLabel = new System.Windows.Forms.Label();
-            this.managerClientSportLabel = new System.Windows.Forms.Label();
-            this.managerClientTeamHappinessLabel = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.managerClientSkillLabel = new System.Windows.Forms.Label();
-            this.managerClientAgencyHappinessLabel = new System.Windows.Forms.Label();
-            this.managerClientPopularityLabel = new System.Windows.Forms.Label();
-            this.managerClientAgeLabel = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbAgencyAgentList = new System.Windows.Forms.ComboBox();
+            this.newsLabel = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cbAvailableLicenses = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.licenseApplicationFeeLabel = new System.Windows.Forms.Label();
+            this.licenseIsAgentLicensedLabel = new System.Windows.Forms.Label();
+            this.licenseRenewalMonthLabel = new System.Windows.Forms.Label();
+            this.licenseYearlyDuesLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbAgencyAgentList);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.industryInfluenceLabel);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.moneyLabel);
@@ -188,9 +205,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.managerClientCountLabel);
+            this.groupBox2.Controls.Add(this.agentClientCountLabel);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.cbManagerClientList);
+            this.groupBox2.Controls.Add(this.cbAgentClientList);
             this.groupBox2.Controls.Add(this.iqLabel);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.roleLabel);
@@ -209,6 +226,51 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
+            // 
+            // agentClientCountLabel
+            // 
+            this.agentClientCountLabel.AutoSize = true;
+            this.agentClientCountLabel.Location = new System.Drawing.Point(177, 80);
+            this.agentClientCountLabel.Name = "agentClientCountLabel";
+            this.agentClientCountLabel.Size = new System.Drawing.Size(13, 13);
+            this.agentClientCountLabel.TabIndex = 22;
+            this.agentClientCountLabel.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(129, 80);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Clients:";
+            // 
+            // cbAgentClientList
+            // 
+            this.cbAgentClientList.FormattingEnabled = true;
+            this.cbAgentClientList.Location = new System.Drawing.Point(129, 99);
+            this.cbAgentClientList.Name = "cbAgentClientList";
+            this.cbAgentClientList.Size = new System.Drawing.Size(191, 21);
+            this.cbAgentClientList.TabIndex = 20;
+            this.cbAgentClientList.SelectedIndexChanged += new System.EventHandler(this.cbManagerClientList_SelectedIndexChanged);
+            // 
+            // iqLabel
+            // 
+            this.iqLabel.AutoSize = true;
+            this.iqLabel.Location = new System.Drawing.Point(45, 191);
+            this.iqLabel.Name = "iqLabel";
+            this.iqLabel.Size = new System.Drawing.Size(13, 13);
+            this.iqLabel.TabIndex = 19;
+            this.iqLabel.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 191);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(21, 13);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "IQ:";
             // 
             // roleLabel
             // 
@@ -306,42 +368,165 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.newsLabel);
             this.groupBox3.Location = new System.Drawing.Point(824, 41);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(400, 250);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Agent Information";
+            this.groupBox3.Text = "News Briefing";
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.licenseYearlyDuesLabel);
+            this.groupBox4.Controls.Add(this.licenseRenewalMonthLabel);
+            this.groupBox4.Controls.Add(this.licenseIsAgentLicensedLabel);
+            this.groupBox4.Controls.Add(this.licenseApplicationFeeLabel);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.cbAvailableLicenses);
+            this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Location = new System.Drawing.Point(12, 297);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(400, 250);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Licensure";
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.managerClientTeamHappinessLabel);
+            this.groupBox5.Controls.Add(this.clientTeamHappinessLabel);
             this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.managerClientSkillLabel);
-            this.groupBox5.Controls.Add(this.managerClientAgencyHappinessLabel);
-            this.groupBox5.Controls.Add(this.managerClientPopularityLabel);
-            this.groupBox5.Controls.Add(this.managerClientAgeLabel);
+            this.groupBox5.Controls.Add(this.clientSkillLabel);
+            this.groupBox5.Controls.Add(this.clientAgencyHappinessLabel);
+            this.groupBox5.Controls.Add(this.clientPopularityLabel);
+            this.groupBox5.Controls.Add(this.clientAgeLabel);
             this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.label20);
             this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Controls.Add(this.label22);
-            this.groupBox5.Controls.Add(this.managerClientSportLabel);
-            this.groupBox5.Controls.Add(this.managerClientNameLabel);
+            this.groupBox5.Controls.Add(this.clientSportLabel);
+            this.groupBox5.Controls.Add(this.clientNameLabel);
             this.groupBox5.Location = new System.Drawing.Point(418, 297);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(400, 250);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Manager\'s Client Information";
+            this.groupBox5.Text = "Client Information";
+            // 
+            // clientTeamHappinessLabel
+            // 
+            this.clientTeamHappinessLabel.AutoSize = true;
+            this.clientTeamHappinessLabel.Location = new System.Drawing.Point(48, 189);
+            this.clientTeamHappinessLabel.Name = "clientTeamHappinessLabel";
+            this.clientTeamHappinessLabel.Size = new System.Drawing.Size(13, 13);
+            this.clientTeamHappinessLabel.TabIndex = 29;
+            this.clientTeamHappinessLabel.Text = "0";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 189);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(37, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Team:";
+            // 
+            // clientSkillLabel
+            // 
+            this.clientSkillLabel.AutoSize = true;
+            this.clientSkillLabel.Location = new System.Drawing.Point(49, 107);
+            this.clientSkillLabel.Name = "clientSkillLabel";
+            this.clientSkillLabel.Size = new System.Drawing.Size(13, 13);
+            this.clientSkillLabel.TabIndex = 27;
+            this.clientSkillLabel.Text = "0";
+            // 
+            // clientAgencyHappinessLabel
+            // 
+            this.clientAgencyHappinessLabel.AutoSize = true;
+            this.clientAgencyHappinessLabel.Location = new System.Drawing.Point(56, 161);
+            this.clientAgencyHappinessLabel.Name = "clientAgencyHappinessLabel";
+            this.clientAgencyHappinessLabel.Size = new System.Drawing.Size(13, 13);
+            this.clientAgencyHappinessLabel.TabIndex = 26;
+            this.clientAgencyHappinessLabel.Text = "0";
+            // 
+            // clientPopularityLabel
+            // 
+            this.clientPopularityLabel.AutoSize = true;
+            this.clientPopularityLabel.Location = new System.Drawing.Point(48, 134);
+            this.clientPopularityLabel.Name = "clientPopularityLabel";
+            this.clientPopularityLabel.Size = new System.Drawing.Size(13, 13);
+            this.clientPopularityLabel.TabIndex = 25;
+            this.clientPopularityLabel.Text = "0";
+            // 
+            // clientAgeLabel
+            // 
+            this.clientAgeLabel.AutoSize = true;
+            this.clientAgeLabel.Location = new System.Drawing.Point(48, 83);
+            this.clientAgeLabel.Name = "clientAgeLabel";
+            this.clientAgeLabel.Size = new System.Drawing.Size(13, 13);
+            this.clientAgeLabel.TabIndex = 24;
+            this.clientAgeLabel.Text = "0";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 107);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(39, 13);
+            this.label19.TabIndex = 23;
+            this.label19.Text = "SKILL:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(9, 134);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 13);
+            this.label20.TabIndex = 22;
+            this.label20.Text = "POP:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 161);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(46, 13);
+            this.label21.TabIndex = 21;
+            this.label21.Text = "Agency:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(9, 83);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(32, 13);
+            this.label22.TabIndex = 20;
+            this.label22.Text = "AGE:";
+            // 
+            // clientSportLabel
+            // 
+            this.clientSportLabel.AutoSize = true;
+            this.clientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientSportLabel.Location = new System.Drawing.Point(126, 53);
+            this.clientSportLabel.Name = "clientSportLabel";
+            this.clientSportLabel.Size = new System.Drawing.Size(155, 15);
+            this.clientSportLabel.TabIndex = 18;
+            this.clientSportLabel.Text = "Manager of [Agency Name]";
+            this.clientSportLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // clientNameLabel
+            // 
+            this.clientNameLabel.AutoSize = true;
+            this.clientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientNameLabel.Location = new System.Drawing.Point(94, 16);
+            this.clientNameLabel.Name = "clientNameLabel";
+            this.clientNameLabel.Size = new System.Drawing.Size(204, 37);
+            this.clientNameLabel.TabIndex = 2;
+            this.clientNameLabel.Text = "Client Name";
+            this.clientNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // groupBox6
             // 
@@ -437,162 +622,121 @@
             this.editAgentAgencyInfo.UseVisualStyleBackColor = true;
             this.editAgentAgencyInfo.Click += new System.EventHandler(this.editAgentAgencyInfo_Click);
             // 
-            // label11
+            // label13
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 191);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(21, 13);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "IQ:";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(171, 85);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 13);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Agents:";
             // 
-            // iqLabel
+            // cbAgencyAgentList
             // 
-            this.iqLabel.AutoSize = true;
-            this.iqLabel.Location = new System.Drawing.Point(45, 191);
-            this.iqLabel.Name = "iqLabel";
-            this.iqLabel.Size = new System.Drawing.Size(13, 13);
-            this.iqLabel.TabIndex = 19;
-            this.iqLabel.Text = "0";
+            this.cbAgencyAgentList.FormattingEnabled = true;
+            this.cbAgencyAgentList.Location = new System.Drawing.Point(174, 108);
+            this.cbAgencyAgentList.Name = "cbAgencyAgentList";
+            this.cbAgencyAgentList.Size = new System.Drawing.Size(169, 21);
+            this.cbAgencyAgentList.TabIndex = 14;
             // 
-            // cbManagerClientList
+            // newsLabel
             // 
-            this.cbManagerClientList.FormattingEnabled = true;
-            this.cbManagerClientList.Location = new System.Drawing.Point(129, 99);
-            this.cbManagerClientList.Name = "cbManagerClientList";
-            this.cbManagerClientList.Size = new System.Drawing.Size(191, 21);
-            this.cbManagerClientList.TabIndex = 20;
-            this.cbManagerClientList.SelectedIndexChanged += new System.EventHandler(this.cbManagerClientList_SelectedIndexChanged);
+            this.newsLabel.AutoSize = true;
+            this.newsLabel.Location = new System.Drawing.Point(7, 20);
+            this.newsLabel.Name = "newsLabel";
+            this.newsLabel.Size = new System.Drawing.Size(87, 13);
+            this.newsLabel.TabIndex = 0;
+            this.newsLabel.Text = "News goes here!";
             // 
-            // label12
+            // label15
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(129, 80);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 21;
-            this.label12.Text = "Clients:";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 20);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Available Licenses:";
             // 
-            // managerClientCountLabel
+            // cbAvailableLicenses
             // 
-            this.managerClientCountLabel.AutoSize = true;
-            this.managerClientCountLabel.Location = new System.Drawing.Point(177, 80);
-            this.managerClientCountLabel.Name = "managerClientCountLabel";
-            this.managerClientCountLabel.Size = new System.Drawing.Size(13, 13);
-            this.managerClientCountLabel.TabIndex = 22;
-            this.managerClientCountLabel.Text = "0";
+            this.cbAvailableLicenses.FormattingEnabled = true;
+            this.cbAvailableLicenses.Location = new System.Drawing.Point(12, 36);
+            this.cbAvailableLicenses.Name = "cbAvailableLicenses";
+            this.cbAvailableLicenses.Size = new System.Drawing.Size(184, 21);
+            this.cbAvailableLicenses.TabIndex = 1;
+            this.cbAvailableLicenses.SelectedIndexChanged += new System.EventHandler(this.cbAvailableLicenses_SelectedIndexChanged);
             // 
-            // managerClientNameLabel
+            // label16
             // 
-            this.managerClientNameLabel.AutoSize = true;
-            this.managerClientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.managerClientNameLabel.Location = new System.Drawing.Point(94, 16);
-            this.managerClientNameLabel.Name = "managerClientNameLabel";
-            this.managerClientNameLabel.Size = new System.Drawing.Size(204, 37);
-            this.managerClientNameLabel.TabIndex = 2;
-            this.managerClientNameLabel.Text = "Client Name";
-            this.managerClientNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(12, 64);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(83, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Application Fee:";
             // 
-            // managerClientSportLabel
+            // label17
             // 
-            this.managerClientSportLabel.AutoSize = true;
-            this.managerClientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.managerClientSportLabel.Location = new System.Drawing.Point(126, 53);
-            this.managerClientSportLabel.Name = "managerClientSportLabel";
-            this.managerClientSportLabel.Size = new System.Drawing.Size(155, 15);
-            this.managerClientSportLabel.TabIndex = 18;
-            this.managerClientSportLabel.Text = "Manager of [Agency Name]";
-            this.managerClientSportLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(12, 111);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(85, 13);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Renewal Month:";
             // 
-            // managerClientTeamHappinessLabel
+            // label18
             // 
-            this.managerClientTeamHappinessLabel.AutoSize = true;
-            this.managerClientTeamHappinessLabel.Location = new System.Drawing.Point(48, 189);
-            this.managerClientTeamHappinessLabel.Name = "managerClientTeamHappinessLabel";
-            this.managerClientTeamHappinessLabel.Size = new System.Drawing.Size(13, 13);
-            this.managerClientTeamHappinessLabel.TabIndex = 29;
-            this.managerClientTeamHappinessLabel.Text = "0";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(12, 88);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(67, 13);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Yearly Dues:";
             // 
-            // label14
+            // label23
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(12, 189);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(37, 13);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "Team:";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(12, 137);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(98, 13);
+            this.label23.TabIndex = 5;
+            this.label23.Text = "Is Agent Licensed?";
             // 
-            // managerClientSkillLabel
+            // licenseApplicationFeeLabel
             // 
-            this.managerClientSkillLabel.AutoSize = true;
-            this.managerClientSkillLabel.Location = new System.Drawing.Point(49, 107);
-            this.managerClientSkillLabel.Name = "managerClientSkillLabel";
-            this.managerClientSkillLabel.Size = new System.Drawing.Size(13, 13);
-            this.managerClientSkillLabel.TabIndex = 27;
-            this.managerClientSkillLabel.Text = "0";
+            this.licenseApplicationFeeLabel.AutoSize = true;
+            this.licenseApplicationFeeLabel.Location = new System.Drawing.Point(116, 64);
+            this.licenseApplicationFeeLabel.Name = "licenseApplicationFeeLabel";
+            this.licenseApplicationFeeLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseApplicationFeeLabel.TabIndex = 6;
+            this.licenseApplicationFeeLabel.Text = "label24";
             // 
-            // managerClientAgencyHappinessLabel
+            // licenseIsAgentLicensedLabel
             // 
-            this.managerClientAgencyHappinessLabel.AutoSize = true;
-            this.managerClientAgencyHappinessLabel.Location = new System.Drawing.Point(56, 161);
-            this.managerClientAgencyHappinessLabel.Name = "managerClientAgencyHappinessLabel";
-            this.managerClientAgencyHappinessLabel.Size = new System.Drawing.Size(13, 13);
-            this.managerClientAgencyHappinessLabel.TabIndex = 26;
-            this.managerClientAgencyHappinessLabel.Text = "0";
+            this.licenseIsAgentLicensedLabel.AutoSize = true;
+            this.licenseIsAgentLicensedLabel.Location = new System.Drawing.Point(116, 137);
+            this.licenseIsAgentLicensedLabel.Name = "licenseIsAgentLicensedLabel";
+            this.licenseIsAgentLicensedLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseIsAgentLicensedLabel.TabIndex = 7;
+            this.licenseIsAgentLicensedLabel.Text = "label24";
             // 
-            // managerClientPopularityLabel
+            // licenseRenewalMonthLabel
             // 
-            this.managerClientPopularityLabel.AutoSize = true;
-            this.managerClientPopularityLabel.Location = new System.Drawing.Point(48, 134);
-            this.managerClientPopularityLabel.Name = "managerClientPopularityLabel";
-            this.managerClientPopularityLabel.Size = new System.Drawing.Size(13, 13);
-            this.managerClientPopularityLabel.TabIndex = 25;
-            this.managerClientPopularityLabel.Text = "0";
+            this.licenseRenewalMonthLabel.AutoSize = true;
+            this.licenseRenewalMonthLabel.Location = new System.Drawing.Point(116, 111);
+            this.licenseRenewalMonthLabel.Name = "licenseRenewalMonthLabel";
+            this.licenseRenewalMonthLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseRenewalMonthLabel.TabIndex = 8;
+            this.licenseRenewalMonthLabel.Text = "label24";
             // 
-            // managerClientAgeLabel
+            // licenseYearlyDuesLabel
             // 
-            this.managerClientAgeLabel.AutoSize = true;
-            this.managerClientAgeLabel.Location = new System.Drawing.Point(48, 83);
-            this.managerClientAgeLabel.Name = "managerClientAgeLabel";
-            this.managerClientAgeLabel.Size = new System.Drawing.Size(13, 13);
-            this.managerClientAgeLabel.TabIndex = 24;
-            this.managerClientAgeLabel.Text = "0";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(9, 107);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(39, 13);
-            this.label19.TabIndex = 23;
-            this.label19.Text = "SKILL:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(9, 134);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(32, 13);
-            this.label20.TabIndex = 22;
-            this.label20.Text = "POP:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(9, 161);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(46, 13);
-            this.label21.TabIndex = 21;
-            this.label21.Text = "Agency:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(9, 83);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(32, 13);
-            this.label22.TabIndex = 20;
-            this.label22.Text = "AGE:";
+            this.licenseYearlyDuesLabel.AutoSize = true;
+            this.licenseYearlyDuesLabel.Location = new System.Drawing.Point(116, 88);
+            this.licenseYearlyDuesLabel.Name = "licenseYearlyDuesLabel";
+            this.licenseYearlyDuesLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseYearlyDuesLabel.TabIndex = 9;
+            this.licenseYearlyDuesLabel.Text = "label24";
             // 
             // MainForm
             // 
@@ -621,6 +765,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
@@ -668,20 +816,33 @@
         private System.Windows.Forms.Label iqLabel;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cbManagerClientList;
-        private System.Windows.Forms.Label managerClientCountLabel;
-        private System.Windows.Forms.Label managerClientSportLabel;
-        private System.Windows.Forms.Label managerClientNameLabel;
-        private System.Windows.Forms.Label managerClientTeamHappinessLabel;
+        private System.Windows.Forms.ComboBox cbAgentClientList;
+        private System.Windows.Forms.Label agentClientCountLabel;
+        private System.Windows.Forms.Label clientSportLabel;
+        private System.Windows.Forms.Label clientNameLabel;
+        private System.Windows.Forms.Label clientTeamHappinessLabel;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label managerClientSkillLabel;
-        private System.Windows.Forms.Label managerClientAgencyHappinessLabel;
-        private System.Windows.Forms.Label managerClientPopularityLabel;
-        private System.Windows.Forms.Label managerClientAgeLabel;
+        private System.Windows.Forms.Label clientSkillLabel;
+        private System.Windows.Forms.Label clientAgencyHappinessLabel;
+        private System.Windows.Forms.Label clientPopularityLabel;
+        private System.Windows.Forms.Label clientAgeLabel;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cbAgencyAgentList;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label newsLabel;
+        private System.Windows.Forms.Label licenseYearlyDuesLabel;
+        private System.Windows.Forms.Label licenseRenewalMonthLabel;
+        private System.Windows.Forms.Label licenseIsAgentLicensedLabel;
+        private System.Windows.Forms.Label licenseApplicationFeeLabel;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cbAvailableLicenses;
+        private System.Windows.Forms.Label label15;
     }
 }
 

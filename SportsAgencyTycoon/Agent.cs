@@ -18,6 +18,7 @@ namespace SportsAgencyTycoon
         public Roles Role;
         public List<Client> ClientList;
         public int ClientCount;
+        public List<Licenses> LicensesHeld;
 
         public Agent(string firstName, string lastName, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {
@@ -30,6 +31,7 @@ namespace SportsAgencyTycoon
             Level = levelRating;
             Role = role;
             ClientList = new List<Client>();
+            LicensesHeld = new List<Licenses>();
         }
 
         public void AddClient(Client client)
