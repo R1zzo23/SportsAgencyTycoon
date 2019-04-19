@@ -94,6 +94,9 @@
             this.agencyNameTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.editAgentAgencyInfo = new System.Windows.Forms.Button();
+            this.agentSalaryLabel = new System.Windows.Forms.Label();
+            this.btnTakeTest = new System.Windows.Forms.Button();
+            this.agentAppliedLicenseLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -224,6 +227,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.agentAppliedLicenseLabel);
+            this.groupBox2.Controls.Add(this.btnTakeTest);
+            this.groupBox2.Controls.Add(this.agentSalaryLabel);
             this.groupBox2.Controls.Add(this.agentClientCountLabel);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.cbAgentClientList);
@@ -295,7 +301,7 @@
             // 
             this.roleLabel.AutoSize = true;
             this.roleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roleLabel.Location = new System.Drawing.Point(126, 53);
+            this.roleLabel.Location = new System.Drawing.Point(98, 53);
             this.roleLabel.Name = "roleLabel";
             this.roleLabel.Size = new System.Drawing.Size(39, 15);
             this.roleLabel.TabIndex = 17;
@@ -751,6 +757,35 @@
             this.editAgentAgencyInfo.UseVisualStyleBackColor = true;
             this.editAgentAgencyInfo.Click += new System.EventHandler(this.editAgentAgencyInfo_Click);
             // 
+            // agentSalaryLabel
+            // 
+            this.agentSalaryLabel.AutoSize = true;
+            this.agentSalaryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agentSalaryLabel.Location = new System.Drawing.Point(212, 54);
+            this.agentSalaryLabel.Name = "agentSalaryLabel";
+            this.agentSalaryLabel.Size = new System.Drawing.Size(90, 15);
+            this.agentSalaryLabel.TabIndex = 23;
+            this.agentSalaryLabel.Text = "Monthly Salary:";
+            // 
+            // btnTakeTest
+            // 
+            this.btnTakeTest.Location = new System.Drawing.Point(304, 131);
+            this.btnTakeTest.Name = "btnTakeTest";
+            this.btnTakeTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTakeTest.TabIndex = 24;
+            this.btnTakeTest.Text = "Take Test";
+            this.btnTakeTest.UseVisualStyleBackColor = true;
+            this.btnTakeTest.Click += new System.EventHandler(this.btnTakeTest_Click);
+            // 
+            // agentAppliedLicenseLabel
+            // 
+            this.agentAppliedLicenseLabel.AutoSize = true;
+            this.agentAppliedLicenseLabel.Location = new System.Drawing.Point(132, 136);
+            this.agentAppliedLicenseLabel.Name = "agentAppliedLicenseLabel";
+            this.agentAppliedLicenseLabel.Size = new System.Drawing.Size(85, 13);
+            this.agentAppliedLicenseLabel.TabIndex = 25;
+            this.agentAppliedLicenseLabel.Text = "Applied License:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -857,6 +892,9 @@
         private System.Windows.Forms.ComboBox cbAvailableLicenses;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnAgentApplyForLicense;
+        private System.Windows.Forms.Label agentSalaryLabel;
+        private System.Windows.Forms.Label agentAppliedLicenseLabel;
+        private System.Windows.Forms.Button btnTakeTest;
     }
 }
 
