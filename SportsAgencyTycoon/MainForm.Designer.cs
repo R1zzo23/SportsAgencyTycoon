@@ -41,6 +41,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.agencyNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.agentAppliedLicenseLabel = new System.Windows.Forms.Label();
+            this.btnTakeTest = new System.Windows.Forms.Button();
+            this.agentSalaryLabel = new System.Windows.Forms.Label();
             this.agentClientCountLabel = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cbAgentClientList = new System.Windows.Forms.ComboBox();
@@ -94,9 +97,7 @@
             this.agencyNameTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.editAgentAgencyInfo = new System.Windows.Forms.Button();
-            this.agentSalaryLabel = new System.Windows.Forms.Label();
-            this.btnTakeTest = new System.Windows.Forms.Button();
-            this.agentAppliedLicenseLabel = new System.Windows.Forms.Label();
+            this.sportKnowledgeLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -227,6 +228,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.sportKnowledgeLabel);
             this.groupBox2.Controls.Add(this.agentAppliedLicenseLabel);
             this.groupBox2.Controls.Add(this.btnTakeTest);
             this.groupBox2.Controls.Add(this.agentSalaryLabel);
@@ -251,6 +253,35 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
+            // 
+            // agentAppliedLicenseLabel
+            // 
+            this.agentAppliedLicenseLabel.AutoSize = true;
+            this.agentAppliedLicenseLabel.Location = new System.Drawing.Point(132, 136);
+            this.agentAppliedLicenseLabel.Name = "agentAppliedLicenseLabel";
+            this.agentAppliedLicenseLabel.Size = new System.Drawing.Size(85, 13);
+            this.agentAppliedLicenseLabel.TabIndex = 25;
+            this.agentAppliedLicenseLabel.Text = "Applied License:";
+            // 
+            // btnTakeTest
+            // 
+            this.btnTakeTest.Location = new System.Drawing.Point(304, 131);
+            this.btnTakeTest.Name = "btnTakeTest";
+            this.btnTakeTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTakeTest.TabIndex = 24;
+            this.btnTakeTest.Text = "Take Test";
+            this.btnTakeTest.UseVisualStyleBackColor = true;
+            this.btnTakeTest.Click += new System.EventHandler(this.btnTakeTest_Click);
+            // 
+            // agentSalaryLabel
+            // 
+            this.agentSalaryLabel.AutoSize = true;
+            this.agentSalaryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agentSalaryLabel.Location = new System.Drawing.Point(212, 54);
+            this.agentSalaryLabel.Name = "agentSalaryLabel";
+            this.agentSalaryLabel.Size = new System.Drawing.Size(90, 15);
+            this.agentSalaryLabel.TabIndex = 23;
+            this.agentSalaryLabel.Text = "Monthly Salary:";
             // 
             // agentClientCountLabel
             // 
@@ -757,34 +788,14 @@
             this.editAgentAgencyInfo.UseVisualStyleBackColor = true;
             this.editAgentAgencyInfo.Click += new System.EventHandler(this.editAgentAgencyInfo_Click);
             // 
-            // agentSalaryLabel
+            // sportKnowledgeLabel
             // 
-            this.agentSalaryLabel.AutoSize = true;
-            this.agentSalaryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.agentSalaryLabel.Location = new System.Drawing.Point(212, 54);
-            this.agentSalaryLabel.Name = "agentSalaryLabel";
-            this.agentSalaryLabel.Size = new System.Drawing.Size(90, 15);
-            this.agentSalaryLabel.TabIndex = 23;
-            this.agentSalaryLabel.Text = "Monthly Salary:";
-            // 
-            // btnTakeTest
-            // 
-            this.btnTakeTest.Location = new System.Drawing.Point(304, 131);
-            this.btnTakeTest.Name = "btnTakeTest";
-            this.btnTakeTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTakeTest.TabIndex = 24;
-            this.btnTakeTest.Text = "Take Test";
-            this.btnTakeTest.UseVisualStyleBackColor = true;
-            this.btnTakeTest.Click += new System.EventHandler(this.btnTakeTest_Click);
-            // 
-            // agentAppliedLicenseLabel
-            // 
-            this.agentAppliedLicenseLabel.AutoSize = true;
-            this.agentAppliedLicenseLabel.Location = new System.Drawing.Point(132, 136);
-            this.agentAppliedLicenseLabel.Name = "agentAppliedLicenseLabel";
-            this.agentAppliedLicenseLabel.Size = new System.Drawing.Size(85, 13);
-            this.agentAppliedLicenseLabel.TabIndex = 25;
-            this.agentAppliedLicenseLabel.Text = "Applied License:";
+            this.sportKnowledgeLabel.AutoSize = true;
+            this.sportKnowledgeLabel.Location = new System.Drawing.Point(135, 162);
+            this.sportKnowledgeLabel.Name = "sportKnowledgeLabel";
+            this.sportKnowledgeLabel.Size = new System.Drawing.Size(91, 13);
+            this.sportKnowledgeLabel.TabIndex = 26;
+            this.sportKnowledgeLabel.Text = "Sport Knowledge:";
             // 
             // MainForm
             // 
@@ -895,6 +906,7 @@
         private System.Windows.Forms.Label agentSalaryLabel;
         private System.Windows.Forms.Label agentAppliedLicenseLabel;
         private System.Windows.Forms.Button btnTakeTest;
+        private System.Windows.Forms.Label sportKnowledgeLabel;
     }
 }
 
