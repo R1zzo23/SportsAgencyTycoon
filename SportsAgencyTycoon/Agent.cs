@@ -21,7 +21,7 @@ namespace SportsAgencyTycoon
         public int ClientCount;
         public List<Licenses> LicensesHeld;
         public Licenses AppliedLicense;
-        public int AppliedLicenseKnowledge;
+        public int LicenseTestPrep;
 
         public Agent(string firstName, string lastName, int salary, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {

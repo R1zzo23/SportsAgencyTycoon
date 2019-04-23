@@ -11,12 +11,19 @@ namespace SportsAgencyTycoon
         public List<Licenses> AvailableLicenses;
         public List<Client> AvailableClients;
         public List<Agent> AvailableAgents;
-
+        public int Year;
+        public int MonthNumber;
+        public Months MonthName;
+        public int WeekNumber;
         public World()
         {
             AvailableLicenses = new List<Licenses>();
             AvailableClients = new List<Client>();
             AvailableAgents = new List<Agent>();
+            Year = 2000;
+            MonthNumber = 5;
+            MonthName = Months.June;
+            WeekNumber = 1;
         }
 
         public void InitializeLicenses()

@@ -25,7 +25,9 @@ namespace SportsAgencyTycoon
         {
             world = new World();
             newsLabel.Text = "Welcome to DDS:Sports Agency Tycoon!";
+            UpdateWorldCalendar();
             world.InitializeLicenses();
+            Console.WriteLine("Month Name Int Value: " + (int)world.MonthName);
             PopulateAvailableLicenses();
         }
         public void CreateManagerAndAgency()
@@ -103,14 +105,14 @@ namespace SportsAgencyTycoon
             if (agent.AppliedLicense == null)
             {
                 agentAppliedLicenseLabel.Text = "Applied License: ";
-                sportKnowledgeLabel.Text = "Sport Knowledge: ";
+                licenseTestPrepLabel.Text = "License Test Prep: ";
             }
             else
             {
                 agentAppliedLicenseLabel.Text = "Applied License: " + agent.AppliedLicense.Sport.ToString();
-                sportKnowledgeLabel.Text = "Sport Knowledge: " + agent.AppliedLicenseKnowledge.ToString();
+                licenseTestPrepLabel.Text = "License Test Prep: " + agent.LicenseTestPrep.ToString();
             }
-            
+            if (agent.LicenseTestPrep >= 60) btnTakeTest.Enabled = true;
             PopulateAgentClientList(agent);
         }
 
@@ -220,7 +222,7 @@ namespace SportsAgencyTycoon
                 
                 //agency loses money for application fee
                 agency.Money -= selectedLicense.ApplicationFee;
-                selectedAgent.AppliedLicenseKnowledge = CalculateAgentSportKnowledge(selectedAgent);
+                selectedAgent.LicenseTestPrep = 0;
                 UpdateAgentInfo(selectedAgent);
                 UpdateAgencyInfo();
                 newsLabel.Text = selectedAgent.First + " " + selectedAgent.Last + " has applied for a license in " + selectedLicense.Sport.ToString().ToLower() + "." + Environment.NewLine + newsLabel.Text;
@@ -229,24 +231,6 @@ namespace SportsAgencyTycoon
                 //passing an exam will be determined based on IQ rating
             }
             else newsLabel.Text = "The agency doesn't have enough funds to apply for this license." + Environment.NewLine + newsLabel.Text;
-        }
-
-        private int CalculateAgentSportKnowledge(Agent agent)
-        {
-            int sportKnowledge;
-            double agentIQ = agent.Intelligence;
-            Random rnd = new Random();
-            //grab random deviation percentage
-            double randomDeviatonPercentage = rnd.Next(1, 40);
-            double plusMinusRange = Math.Round((agentIQ * randomDeviatonPercentage) / 100);
-            sportKnowledge = rnd.Next(Convert.ToInt32(agentIQ - plusMinusRange), Convert.ToInt32(agentIQ + plusMinusRange));
-
-            if (sportKnowledge <= 20) sportKnowledge = 20;
-            if (sportKnowledge >= 80) sportKnowledge = 80;
-
-            Console.WriteLine(agent.First + " " + agent.Last + "sport knowledge for applied license: " + sportKnowledge);
-            return sportKnowledge;
-
         }
 
         private void cbAgentClientList_SelectedIndexChanged(object sender, EventArgs e)
@@ -299,6 +283,31 @@ namespace SportsAgencyTycoon
             //message into newsLabel
             //reset license information
             //reset agentInfo
+        }
+
+        private void AdvanceWeekBtn_Click(object sender, EventArgs e)
+        {
+            //add 1 to week number
+            world.WeekNumber++;
+
+            //check if month ends
+            if (((world.WeekNumber == 4) && (world.MonthNumber % 3 != 0)) || ((world.WeekNumber == 5) && (world.MonthNumber % 3 == 0)))
+            {
+                SetNewMonth();
+            }
+            UpdateWorldCalendar();
+        }
+        private void SetNewMonth()
+        {
+            world.MonthNumber++;
+            world.MonthName = (Months)world.MonthNumber;
+            world.WeekNumber = 1;
+        }
+        private void UpdateWorldCalendar()
+        {
+            yearLabel.Text = world.Year.ToString();
+            monthLabel.Text = world.MonthName.ToString();
+            weekLabel.Text = world.WeekNumber.ToString();
         }
     }
 }

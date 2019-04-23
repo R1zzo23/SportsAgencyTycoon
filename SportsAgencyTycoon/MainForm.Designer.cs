@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.agencyNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.licenseTestPrepLabel = new System.Windows.Forms.Label();
             this.agentAppliedLicenseLabel = new System.Windows.Forms.Label();
             this.btnTakeTest = new System.Windows.Forms.Button();
             this.agentSalaryLabel = new System.Windows.Forms.Label();
@@ -97,7 +98,13 @@
             this.agencyNameTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.editAgentAgencyInfo = new System.Windows.Forms.Button();
-            this.sportKnowledgeLabel = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.yearLabel = new System.Windows.Forms.Label();
+            this.monthLabel = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.weekLabel = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -120,7 +127,7 @@
             this.groupBox1.Controls.Add(this.agencyNameLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(400, 250);
+            this.groupBox1.Size = new System.Drawing.Size(370, 250);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agency Information";
@@ -228,7 +235,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.sportKnowledgeLabel);
+            this.groupBox2.Controls.Add(this.licenseTestPrepLabel);
             this.groupBox2.Controls.Add(this.agentAppliedLicenseLabel);
             this.groupBox2.Controls.Add(this.btnTakeTest);
             this.groupBox2.Controls.Add(this.agentSalaryLabel);
@@ -247,12 +254,21 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.agentNameLabel);
-            this.groupBox2.Location = new System.Drawing.Point(418, 41);
+            this.groupBox2.Location = new System.Drawing.Point(388, 41);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(400, 250);
+            this.groupBox2.Size = new System.Drawing.Size(370, 250);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
+            // 
+            // licenseTestPrepLabel
+            // 
+            this.licenseTestPrepLabel.AutoSize = true;
+            this.licenseTestPrepLabel.Location = new System.Drawing.Point(135, 162);
+            this.licenseTestPrepLabel.Name = "licenseTestPrepLabel";
+            this.licenseTestPrepLabel.Size = new System.Drawing.Size(56, 13);
+            this.licenseTestPrepLabel.TabIndex = 26;
+            this.licenseTestPrepLabel.Text = "Test Prep:";
             // 
             // agentAppliedLicenseLabel
             // 
@@ -265,7 +281,8 @@
             // 
             // btnTakeTest
             // 
-            this.btnTakeTest.Location = new System.Drawing.Point(304, 131);
+            this.btnTakeTest.Enabled = false;
+            this.btnTakeTest.Location = new System.Drawing.Point(294, 131);
             this.btnTakeTest.Name = "btnTakeTest";
             this.btnTakeTest.Size = new System.Drawing.Size(75, 23);
             this.btnTakeTest.TabIndex = 24;
@@ -425,9 +442,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.newsLabel);
-            this.groupBox3.Location = new System.Drawing.Point(824, 41);
+            this.groupBox3.Location = new System.Drawing.Point(764, 41);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(400, 250);
+            this.groupBox3.Size = new System.Drawing.Size(370, 250);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "News Briefing";
@@ -456,7 +473,7 @@
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Location = new System.Drawing.Point(12, 297);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(400, 250);
+            this.groupBox4.Size = new System.Drawing.Size(370, 250);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Licensure";
@@ -575,9 +592,9 @@
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Controls.Add(this.clientSportLabel);
             this.groupBox5.Controls.Add(this.clientNameLabel);
-            this.groupBox5.Location = new System.Drawing.Point(418, 297);
+            this.groupBox5.Location = new System.Drawing.Point(388, 297);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(400, 250);
+            this.groupBox5.Size = new System.Drawing.Size(370, 250);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Client Information";
@@ -696,9 +713,9 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Location = new System.Drawing.Point(824, 297);
+            this.groupBox6.Location = new System.Drawing.Point(764, 297);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(400, 250);
+            this.groupBox6.Size = new System.Drawing.Size(370, 250);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "groupBox6";
@@ -707,25 +724,25 @@
             // 
             this.groupBox7.Location = new System.Drawing.Point(12, 553);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(400, 250);
+            this.groupBox7.Size = new System.Drawing.Size(370, 250);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
             // groupBox8
             // 
-            this.groupBox8.Location = new System.Drawing.Point(418, 553);
+            this.groupBox8.Location = new System.Drawing.Point(388, 553);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(400, 250);
+            this.groupBox8.Size = new System.Drawing.Size(370, 250);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "groupBox8";
             // 
             // groupBox9
             // 
-            this.groupBox9.Location = new System.Drawing.Point(824, 553);
+            this.groupBox9.Location = new System.Drawing.Point(764, 553);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(400, 250);
+            this.groupBox9.Size = new System.Drawing.Size(370, 250);
             this.groupBox9.TabIndex = 1;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "groupBox9";
@@ -788,20 +805,88 @@
             this.editAgentAgencyInfo.UseVisualStyleBackColor = true;
             this.editAgentAgencyInfo.Click += new System.EventHandler(this.editAgentAgencyInfo_Click);
             // 
-            // sportKnowledgeLabel
+            // label24
             // 
-            this.sportKnowledgeLabel.AutoSize = true;
-            this.sportKnowledgeLabel.Location = new System.Drawing.Point(135, 162);
-            this.sportKnowledgeLabel.Name = "sportKnowledgeLabel";
-            this.sportKnowledgeLabel.Size = new System.Drawing.Size(91, 13);
-            this.sportKnowledgeLabel.TabIndex = 26;
-            this.sportKnowledgeLabel.Text = "Sport Knowledge:";
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(1140, 50);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(65, 24);
+            this.label24.TabIndex = 11;
+            this.label24.Text = "YEAR";
+            // 
+            // yearLabel
+            // 
+            this.yearLabel.AutoSize = true;
+            this.yearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yearLabel.Location = new System.Drawing.Point(1159, 85);
+            this.yearLabel.Name = "yearLabel";
+            this.yearLabel.Size = new System.Drawing.Size(17, 17);
+            this.yearLabel.TabIndex = 12;
+            this.yearLabel.Text = "0";
+            // 
+            // monthLabel
+            // 
+            this.monthLabel.AutoSize = true;
+            this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthLabel.Location = new System.Drawing.Point(1159, 150);
+            this.monthLabel.Name = "monthLabel";
+            this.monthLabel.Size = new System.Drawing.Size(17, 17);
+            this.monthLabel.TabIndex = 13;
+            this.monthLabel.Text = "0";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(1140, 120);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(86, 24);
+            this.label27.TabIndex = 14;
+            this.label27.Text = "MONTH";
+            // 
+            // weekLabel
+            // 
+            this.weekLabel.AutoSize = true;
+            this.weekLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weekLabel.Location = new System.Drawing.Point(1159, 224);
+            this.weekLabel.Name = "weekLabel";
+            this.weekLabel.Size = new System.Drawing.Size(17, 17);
+            this.weekLabel.TabIndex = 15;
+            this.weekLabel.Text = "0";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(1140, 190);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(70, 24);
+            this.label29.TabIndex = 16;
+            this.label29.Text = "WEEK";
+            // 
+            // advanceWeekBtn
+            // 
+            this.advanceWeekBtn.Location = new System.Drawing.Point(1127, 9);
+            this.advanceWeekBtn.Name = "advanceWeekBtn";
+            this.advanceWeekBtn.Size = new System.Drawing.Size(94, 23);
+            this.advanceWeekBtn.TabIndex = 17;
+            this.advanceWeekBtn.Text = "Advance Week";
+            this.advanceWeekBtn.UseVisualStyleBackColor = true;
+            this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 805);
+            this.Controls.Add(this.advanceWeekBtn);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.weekLabel);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.monthLabel);
+            this.Controls.Add(this.yearLabel);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.editAgentAgencyInfo);
             this.Controls.Add(this.agencyNameTextBox);
             this.Controls.Add(this.label10);
@@ -906,7 +991,14 @@
         private System.Windows.Forms.Label agentSalaryLabel;
         private System.Windows.Forms.Label agentAppliedLicenseLabel;
         private System.Windows.Forms.Button btnTakeTest;
-        private System.Windows.Forms.Label sportKnowledgeLabel;
+        private System.Windows.Forms.Label licenseTestPrepLabel;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label yearLabel;
+        private System.Windows.Forms.Label monthLabel;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label weekLabel;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Button advanceWeekBtn;
     }
 }
 
