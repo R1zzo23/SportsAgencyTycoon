@@ -22,6 +22,7 @@ namespace SportsAgencyTycoon
         public List<Licenses> LicensesHeld;
         public Licenses AppliedLicense;
         public int LicenseTestPrep;
+        public bool BeingTrainedForTest;
 
         public Agent(string firstName, string lastName, int salary, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {
@@ -36,6 +37,8 @@ namespace SportsAgencyTycoon
             Role = role;
             ClientList = new List<Client>();
             LicensesHeld = new List<Licenses>();
+            BeingTrainedForTest = false;
+            AppliedLicense = null;
         }
 
         public void AddClient(Client client)

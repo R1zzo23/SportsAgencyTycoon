@@ -98,6 +98,7 @@ namespace SportsAgencyTycoon
             levelLabel.Text = agent.Level.ToString();
             negotiatingLabel.Text = agent.Negotiating.ToString();
             iqLabel.Text = agent.Intelligence.ToString();
+            agentBeingTrainedLabel.Text = agent.BeingTrainedForTest.ToString();
             agentClientCountLabel.Text = agent.ClientCount.ToString();
             roleLabel.Text = "Role: " + agent.Role.ToString();
             agentSalaryLabel.Text = agent.Salary.ToString("C0");
@@ -226,6 +227,8 @@ namespace SportsAgencyTycoon
                 UpdateAgentInfo(selectedAgent);
                 UpdateAgencyInfo();
                 newsLabel.Text = selectedAgent.First + " " + selectedAgent.Last + " has applied for a license in " + selectedLicense.Sport.ToString().ToLower() + "." + Environment.NewLine + newsLabel.Text;
+
+                IsAgentBeingTrained(selectedAgent);
                 //logic needs to be added so that application only happens during certain months
                 //exams for different sports also happen at different times
                 //passing an exam will be determined based on IQ rating
@@ -273,6 +276,18 @@ namespace SportsAgencyTycoon
             licenseRenewalMonthLabel.Text = "";
             btnAgentApplyForLicense.Enabled = false;
             licenseIsAgentLicensedLabel.Text = "";
+
+            IsAgentBeingTrained(selectedAgent);
+        }
+        private void IsAgentBeingTrained(Agent selectedAgent)
+        {
+            //check if agent is being trained to enable/disable button
+            if (selectedAgent.AppliedLicense == null) btnTrainAgent.Enabled = false;
+            else
+            {
+                if (selectedAgent.BeingTrainedForTest) btnTrainAgent.Enabled = false;
+                else btnTrainAgent.Enabled = true;
+            }
         }
 
         private void btnTakeTest_Click(object sender, EventArgs e)
@@ -287,11 +302,17 @@ namespace SportsAgencyTycoon
 
         private void AdvanceWeekBtn_Click(object sender, EventArgs e)
         {
+            HandleCalendar();
+
+            //check for agents training
+        }
+        private void HandleCalendar()
+        {
             //add 1 to week number
             world.WeekNumber++;
 
             //check if month ends
-            if (((world.WeekNumber == 4) && (world.MonthNumber % 3 != 0)) || ((world.WeekNumber == 5) && (world.MonthNumber % 3 == 0)))
+            if (((world.WeekNumber == 5) && ((world.MonthNumber + 1) % 3 != 0)) || ((world.WeekNumber == 6) && ((world.MonthNumber + 1) % 3 == 0)))
             {
                 SetNewMonth();
             }
@@ -300,6 +321,10 @@ namespace SportsAgencyTycoon
         private void SetNewMonth()
         {
             world.MonthNumber++;
+            if (world.MonthNumber == 12)
+            {
+                SetNewYear();
+            }
             world.MonthName = (Months)world.MonthNumber;
             world.WeekNumber = 1;
         }
@@ -308,6 +333,28 @@ namespace SportsAgencyTycoon
             yearLabel.Text = world.Year.ToString();
             monthLabel.Text = world.MonthName.ToString();
             weekLabel.Text = world.WeekNumber.ToString();
+        }
+        private void SetNewYear()
+        {
+            world.MonthNumber = 0;
+            world.Year++;
+        }
+
+        private void btnTrainAgent_Click(object sender, EventArgs e)
+        {
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+
+            //check for funds
+            if (agency.Money < 1000) newsLabel.Text = "Agency does not have enough funds to train this agent." + Environment.NewLine + newsLabel.Text;
+            else
+            {
+                agency.Money -= 1000;
+                newsLabel.Text = selectedAgent.First + " " + selectedAgent.Last + " has begun training for his test." + Environment.NewLine + newsLabel.Text;
+                selectedAgent.BeingTrainedForTest = true;
+                UpdateAgencyInfo();
+                UpdateAgentInfo(selectedAgent);
+                IsAgentBeingTrained(selectedAgent);
+            }
         }
     }
 }

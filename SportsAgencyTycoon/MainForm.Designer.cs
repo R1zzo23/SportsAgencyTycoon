@@ -105,6 +105,9 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
+            this.btnTrainAgent = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.agentBeingTrainedLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -114,6 +117,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnTrainAgent);
             this.groupBox1.Controls.Add(this.cbAgencyAgentList);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.industryInfluenceLabel);
@@ -235,6 +239,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.agentBeingTrainedLabel);
+            this.groupBox2.Controls.Add(this.label25);
             this.groupBox2.Controls.Add(this.licenseTestPrepLabel);
             this.groupBox2.Controls.Add(this.agentAppliedLicenseLabel);
             this.groupBox2.Controls.Add(this.btnTakeTest);
@@ -264,7 +270,7 @@
             // licenseTestPrepLabel
             // 
             this.licenseTestPrepLabel.AutoSize = true;
-            this.licenseTestPrepLabel.Location = new System.Drawing.Point(135, 162);
+            this.licenseTestPrepLabel.Location = new System.Drawing.Point(134, 183);
             this.licenseTestPrepLabel.Name = "licenseTestPrepLabel";
             this.licenseTestPrepLabel.Size = new System.Drawing.Size(56, 13);
             this.licenseTestPrepLabel.TabIndex = 26;
@@ -493,36 +499,36 @@
             this.licenseYearlyDuesLabel.AutoSize = true;
             this.licenseYearlyDuesLabel.Location = new System.Drawing.Point(116, 88);
             this.licenseYearlyDuesLabel.Name = "licenseYearlyDuesLabel";
-            this.licenseYearlyDuesLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseYearlyDuesLabel.Size = new System.Drawing.Size(13, 13);
             this.licenseYearlyDuesLabel.TabIndex = 9;
-            this.licenseYearlyDuesLabel.Text = "label24";
+            this.licenseYearlyDuesLabel.Text = "0";
             // 
             // licenseRenewalMonthLabel
             // 
             this.licenseRenewalMonthLabel.AutoSize = true;
             this.licenseRenewalMonthLabel.Location = new System.Drawing.Point(116, 111);
             this.licenseRenewalMonthLabel.Name = "licenseRenewalMonthLabel";
-            this.licenseRenewalMonthLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseRenewalMonthLabel.Size = new System.Drawing.Size(13, 13);
             this.licenseRenewalMonthLabel.TabIndex = 8;
-            this.licenseRenewalMonthLabel.Text = "label24";
+            this.licenseRenewalMonthLabel.Text = "0";
             // 
             // licenseIsAgentLicensedLabel
             // 
             this.licenseIsAgentLicensedLabel.AutoSize = true;
             this.licenseIsAgentLicensedLabel.Location = new System.Drawing.Point(116, 137);
             this.licenseIsAgentLicensedLabel.Name = "licenseIsAgentLicensedLabel";
-            this.licenseIsAgentLicensedLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseIsAgentLicensedLabel.Size = new System.Drawing.Size(13, 13);
             this.licenseIsAgentLicensedLabel.TabIndex = 7;
-            this.licenseIsAgentLicensedLabel.Text = "label24";
+            this.licenseIsAgentLicensedLabel.Text = "0";
             // 
             // licenseApplicationFeeLabel
             // 
             this.licenseApplicationFeeLabel.AutoSize = true;
             this.licenseApplicationFeeLabel.Location = new System.Drawing.Point(116, 64);
             this.licenseApplicationFeeLabel.Name = "licenseApplicationFeeLabel";
-            this.licenseApplicationFeeLabel.Size = new System.Drawing.Size(41, 13);
+            this.licenseApplicationFeeLabel.Size = new System.Drawing.Size(13, 13);
             this.licenseApplicationFeeLabel.TabIndex = 6;
-            this.licenseApplicationFeeLabel.Text = "label24";
+            this.licenseApplicationFeeLabel.Text = "0";
             // 
             // label23
             // 
@@ -695,9 +701,9 @@
             this.clientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clientSportLabel.Location = new System.Drawing.Point(126, 53);
             this.clientSportLabel.Name = "clientSportLabel";
-            this.clientSportLabel.Size = new System.Drawing.Size(155, 15);
+            this.clientSportLabel.Size = new System.Drawing.Size(79, 15);
             this.clientSportLabel.TabIndex = 18;
-            this.clientSportLabel.Text = "Manager of [Agency Name]";
+            this.clientSportLabel.Text = "[Sport Name]";
             this.clientSportLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // clientNameLabel
@@ -875,6 +881,35 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
+            // btnTrainAgent
+            // 
+            this.btnTrainAgent.Enabled = false;
+            this.btnTrainAgent.Location = new System.Drawing.Point(205, 135);
+            this.btnTrainAgent.Name = "btnTrainAgent";
+            this.btnTrainAgent.Size = new System.Drawing.Size(113, 23);
+            this.btnTrainAgent.TabIndex = 15;
+            this.btnTrainAgent.Text = "Train Agent for Test";
+            this.btnTrainAgent.UseVisualStyleBackColor = true;
+            this.btnTrainAgent.Click += new System.EventHandler(this.btnTrainAgent_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(137, 159);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(76, 13);
+            this.label25.TabIndex = 27;
+            this.label25.Text = "Being Trained:";
+            // 
+            // agentBeingTrainedLabel
+            // 
+            this.agentBeingTrainedLabel.AutoSize = true;
+            this.agentBeingTrainedLabel.Location = new System.Drawing.Point(212, 159);
+            this.agentBeingTrainedLabel.Name = "agentBeingTrainedLabel";
+            this.agentBeingTrainedLabel.Size = new System.Drawing.Size(29, 13);
+            this.agentBeingTrainedLabel.TabIndex = 28;
+            this.agentBeingTrainedLabel.Text = "false";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -999,6 +1034,9 @@
         private System.Windows.Forms.Label weekLabel;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Button advanceWeekBtn;
+        private System.Windows.Forms.Button btnTrainAgent;
+        private System.Windows.Forms.Label agentBeingTrainedLabel;
+        private System.Windows.Forms.Label label25;
     }
 }
 
