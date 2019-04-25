@@ -302,44 +302,21 @@ namespace SportsAgencyTycoon
 
         private void AdvanceWeekBtn_Click(object sender, EventArgs e)
         {
-            HandleCalendar();
-
-            //check for agents training
-        }
-        private void HandleCalendar()
-        {
-            //add 1 to week number
-            world.WeekNumber++;
-
-            //check if month ends
-            if (((world.WeekNumber == 5) && ((world.MonthNumber + 1) % 3 != 0)) || ((world.WeekNumber == 6) && ((world.MonthNumber + 1) % 3 == 0)))
-            {
-                SetNewMonth();
-            }
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            world.HandleCalendar();
             UpdateWorldCalendar();
+            //check for agents training
+            agency.TrainAgentsForTest();
+            UpdateAgentInfo(selectedAgent);
         }
-        private void SetNewMonth()
-        {
-            world.MonthNumber++;
-            if (world.MonthNumber == 12)
-            {
-                SetNewYear();
-            }
-            world.MonthName = (Months)world.MonthNumber;
-            world.WeekNumber = 1;
-        }
+        
         private void UpdateWorldCalendar()
         {
             yearLabel.Text = world.Year.ToString();
             monthLabel.Text = world.MonthName.ToString();
             weekLabel.Text = world.WeekNumber.ToString();
         }
-        private void SetNewYear()
-        {
-            world.MonthNumber = 0;
-            world.Year++;
-        }
-
+        
         private void btnTrainAgent_Click(object sender, EventArgs e)
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];

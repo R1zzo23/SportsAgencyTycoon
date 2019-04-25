@@ -33,6 +33,33 @@ namespace SportsAgencyTycoon
             AvailableLicenses.Add(basketballLicense);
             AvailableLicenses.Add(footballLicense);
         }
+
+        public void HandleCalendar()
+        {
+            //add 1 to week number
+            WeekNumber++;
+
+            //check if month ends
+            if (((WeekNumber == 5) && ((MonthNumber + 1) % 3 != 0)) || ((WeekNumber == 6) && ((MonthNumber + 1) % 3 == 0)))
+            {
+                SetNewMonth();
+            }
+        }
+        private void SetNewMonth()
+        {
+            MonthNumber++;
+            if (MonthNumber == 12)
+            {
+                SetNewYear();
+            }
+            MonthName = (Months)MonthNumber;
+            WeekNumber = 1;
+        }
+        private void SetNewYear()
+        {
+            MonthNumber = 0;
+            Year++;
+        }
     }
 
     public enum Months

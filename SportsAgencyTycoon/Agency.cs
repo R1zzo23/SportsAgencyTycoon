@@ -37,5 +37,29 @@ namespace SportsAgencyTycoon
             Clients.Add(client);
             ClientCount = Clients.Count;
         }
+        public void TrainAgentsForTest()
+        {
+            foreach (Agent agent in Agents)
+            {
+                //check if agent has applied for a new license
+                if (agent.AppliedLicense != null)
+                {
+                    Random rnd = new Random();
+                    double addedTestPrep = 0;
+
+                    //check if agent is being trained by agency
+                    if (agent.BeingTrainedForTest)
+                    {
+                        addedTestPrep = Math.Round(Math.Round((double)agent.Intelligence / 5 ) * (double)(1 + (rnd.Next(-5, 26) / 100)));
+                    }
+                    //else agent is training on his/her own
+                    else
+                    {
+                        addedTestPrep = Math.Round(Math.Round((double)agent.Intelligence / 15 )* (double)(1 + (rnd.Next(-25, 10) / 100)));
+                    }
+                    agent.LicenseTestPrep += (int)addedTestPrep;
+                }
+            }
+        }
     }
 }
