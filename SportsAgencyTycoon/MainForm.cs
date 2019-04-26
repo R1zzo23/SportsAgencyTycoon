@@ -88,7 +88,8 @@ namespace SportsAgencyTycoon
             industryInfluenceLabel.Text = agency.IndustryInfluence.ToString() + "/100";
             clientCountLabel.Text = agency.ClientCount.ToString();
             agentCountLabel.Text = agency.AgentCount.ToString();
-            cbAgencyAgentList.SelectedIndex = 0;
+            //cbAgencyAgentList.SelectedIndex = 0;
+            if (agency.Agents[0].LicenseTestPrep == 100) btnTrainAgent.Enabled = false;
         }
         public void UpdateAgentInfo(Agent agent)
         {
@@ -181,14 +182,15 @@ namespace SportsAgencyTycoon
 
         private void cbAvailableLicenses_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
             Licenses selectedLicense;
+            bool hasLicense = false;
+
+            CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent);
 
             if (cbAvailableLicenses.SelectedIndex < 0) selectedLicense = world.AvailableLicenses[0];
             else selectedLicense = world.AvailableLicenses[cbAvailableLicenses.SelectedIndex];
-            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-
-            bool hasLicense = false;
-
+                        
             for (var i = 0; i < selectedAgent.LicensesHeld.Count; i++)
             {
                 if (selectedAgent.LicensesHeld[i].Sport == selectedLicense.Sport) hasLicense = true;
@@ -210,30 +212,46 @@ namespace SportsAgencyTycoon
             licenseRenewalMonthLabel.Text = selectedLicense.MonthOfRenewal.ToString();
         }
 
+        public bool CheckIfAgentHasAlreadyAppliedForALicense(Agent selectedAgent)
+        {
+            
+            if (selectedAgent.HasAppliedForLicense) return true;
+            else return false;
+        }
+
         private void btnAgentApplyForLicense_Click(object sender, EventArgs e)
         {
             Licenses selectedLicense = world.AvailableLicenses[cbAvailableLicenses.SelectedIndex];
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
 
-            // check if agency can afford to license you
-            if (agency.Money >= selectedLicense.ApplicationFee)
+            //check if agent is already applied for a license
+            if (CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent))
             {
-                //agent applies for license
-                selectedAgent.AppliedLicense = selectedLicense;
-                
-                //agency loses money for application fee
-                agency.Money -= selectedLicense.ApplicationFee;
-                selectedAgent.LicenseTestPrep = 0;
-                UpdateAgentInfo(selectedAgent);
-                UpdateAgencyInfo();
-                newsLabel.Text = selectedAgent.First + " " + selectedAgent.Last + " has applied for a license in " + selectedLicense.Sport.ToString().ToLower() + "." + Environment.NewLine + newsLabel.Text;
-
-                IsAgentBeingTrained(selectedAgent);
-                //logic needs to be added so that application only happens during certain months
-                //exams for different sports also happen at different times
-                //passing an exam will be determined based on IQ rating
+                newsLabel.Text = "This agent is already working towards a license and cannot apply again until test is passed." + Environment.NewLine + newsLabel.Text;
             }
-            else newsLabel.Text = "The agency doesn't have enough funds to apply for this license." + Environment.NewLine + newsLabel.Text;
+            else
+            {
+                // check if agency can afford to license you
+                if (agency.Money >= selectedLicense.ApplicationFee)
+                {
+                    //agent applies for license
+                    selectedAgent.AppliedLicense = selectedLicense;
+
+                    //agency loses money for application fee
+                    agency.Money -= selectedLicense.ApplicationFee;
+                    selectedAgent.LicenseTestPrep = 0;
+                    selectedAgent.HasAppliedForLicense = true;
+                    UpdateAgentInfo(selectedAgent);
+                    UpdateAgencyInfo();
+                    newsLabel.Text = selectedAgent.First + " " + selectedAgent.Last + " has applied for a license in " + selectedLicense.Sport.ToString().ToLower() + "." + Environment.NewLine + newsLabel.Text;
+
+                    IsAgentBeingTrained(selectedAgent);
+                    //logic needs to be added so that application only happens during certain months
+                    //exams for different sports also happen at different times
+                    //passing an exam will be determined based on IQ rating
+                }
+                else newsLabel.Text = "The agency doesn't have enough funds to apply for this license." + Environment.NewLine + newsLabel.Text;
+            }
         }
 
         private void cbAgentClientList_SelectedIndexChanged(object sender, EventArgs e)
@@ -278,6 +296,8 @@ namespace SportsAgencyTycoon
             licenseIsAgentLicensedLabel.Text = "";
 
             IsAgentBeingTrained(selectedAgent);
+            if (selectedAgent.LicenseTestPrep == 100) btnTrainAgent.Enabled = false;
+            CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent);
         }
         private void IsAgentBeingTrained(Agent selectedAgent)
         {
@@ -308,6 +328,7 @@ namespace SportsAgencyTycoon
             //check for agents training
             agency.TrainAgentsForTest();
             UpdateAgentInfo(selectedAgent);
+            UpdateAgencyInfo();
         }
         
         private void UpdateWorldCalendar()

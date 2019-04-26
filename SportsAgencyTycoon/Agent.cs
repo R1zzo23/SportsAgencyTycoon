@@ -20,6 +20,7 @@ namespace SportsAgencyTycoon
         public List<Client> ClientList;
         public int ClientCount;
         public List<Licenses> LicensesHeld;
+        public bool HasAppliedForLicense;
         public Licenses AppliedLicense;
         public int LicenseTestPrep;
         public bool BeingTrainedForTest;
@@ -39,6 +40,7 @@ namespace SportsAgencyTycoon
             LicensesHeld = new List<Licenses>();
             BeingTrainedForTest = false;
             AppliedLicense = null;
+            HasAppliedForLicense = false;
         }
 
         public void AddClient(Client client)

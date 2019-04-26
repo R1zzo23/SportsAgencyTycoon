@@ -48,16 +48,19 @@ namespace SportsAgencyTycoon
                     double addedTestPrep = 0;
 
                     //check if agent is being trained by agency
-                    if (agent.BeingTrainedForTest)
+                    if (agent.BeingTrainedForTest && agent.LicenseTestPrep < 100)
                     {
-                        addedTestPrep = Math.Round(Math.Round((double)agent.Intelligence / 5 ) * (double)(1 + (rnd.Next(-5, 26) / 100)));
+                        //intelligence * random percentage from -25% to +50% all divided by 10
+                        addedTestPrep = (int)Math.Round((agent.Intelligence * (((double)rnd.Next(-25, 51) / 100) + 1)) / 10);
                     }
                     //else agent is training on his/her own
                     else
                     {
-                        addedTestPrep = Math.Round(Math.Round((double)agent.Intelligence / 15 )* (double)(1 + (rnd.Next(-25, 10) / 100)));
+                        //intelligence * random percentage from -50% to +15% all divided by 10
+                        addedTestPrep = (int)Math.Round((agent.Intelligence * (((double)rnd.Next(-50, 16) / 100) + 1)) / 10);
                     }
                     agent.LicenseTestPrep += (int)addedTestPrep;
+                    if (agent.LicenseTestPrep > 100) agent.LicenseTestPrep = 100;
                 }
             }
         }
