@@ -24,6 +24,7 @@ namespace SportsAgencyTycoon
         public Licenses AppliedLicense;
         public int LicenseTestPrep;
         public bool BeingTrainedForTest;
+        public bool TestedThisWeek;
 
         public Agent(string firstName, string lastName, int salary, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {
@@ -41,12 +42,44 @@ namespace SportsAgencyTycoon
             BeingTrainedForTest = false;
             AppliedLicense = null;
             HasAppliedForLicense = false;
+            TestedThisWeek = false;
         }
 
         public void AddClient(Client client)
         {
             ClientList.Add(client);
             ClientCount = ClientList.Count();
+        }
+
+        public string TakeTest()
+        {
+            string message = "";
+            //agent takes test
+            Random rnd = new Random();
+
+            double agentTestingScore = ((1 + (rnd.Next(-10, 11) / 100)) * Intelligence * 0.5) + ((1 + (rnd.Next(-10, 11) / 100)) * LicenseTestPrep * 0.5);
+            Console.WriteLine("Agent Testing Score: " + agentTestingScore);
+
+            //if agent obtains license
+            if (agentTestingScore >= 75)
+            {
+                LicensesHeld.Add(AppliedLicense);
+                //message into newsLabel
+                message = First + " " + Last + " has earned a license for " + AppliedLicense.Sport.ToString().ToLower() + "!";
+                //reset license information
+                AppliedLicense = null;
+                LicenseTestPrep = 0;
+                HasAppliedForLicense = false;
+                
+            }
+            //agent failed test
+            else
+            {
+                message = First + " " + Last + " failed the test for " + AppliedLicense.Sport.ToString().ToLower() + "! Try again next week!";
+            }
+            TestedThisWeek = true;
+
+            return message;
         }
     }
 

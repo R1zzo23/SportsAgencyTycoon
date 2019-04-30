@@ -60,6 +60,15 @@ namespace SportsAgencyTycoon
             MonthNumber = 0;
             Year++;
         }
+        public bool CheckTestingWindow(Months month, Sports sport)
+        {
+            bool testingWindowOpen = false;
+            if ((int)month == 0 && (sport.ToString() == "Basketball" || sport.ToString() == "Football"))
+            {
+                testingWindowOpen = true;
+            }
+            return testingWindowOpen;
+        }
     }
 
     public enum Months

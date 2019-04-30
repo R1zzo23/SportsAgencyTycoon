@@ -22,10 +22,5 @@ namespace SportsAgencyTycoon
             MonthOfRenewal = monthOfRenewal;
             MonthOfRenewalNumber = monthOfRenewalNumber;
         }
-
-        public void InitializeLicenses()
-        {
-
-        }
     }
 }

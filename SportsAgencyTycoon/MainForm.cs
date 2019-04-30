@@ -21,13 +21,23 @@ namespace SportsAgencyTycoon
             InitializeWorld();
             CreateManagerAndAgency();
         }
+
+        #region Game Start
+
         public void InitializeWorld()
         {
             world = new World();
-            newsLabel.Text = "Welcome to DDS:Sports Agency Tycoon!";
+            newsLabel.Text = "**********************************************************************" + Environment.NewLine + 
+                             "           Welcome to DDS:Sports Agency Tycoon!" + Environment.NewLine + 
+                             "        Before clients become available, you need to " + Environment.NewLine +
+                             "    apply for a new license and pass the respective test." + Environment.NewLine +
+                             "   once a license has been obtained, you'll see potential" + Environment.NewLine + 
+                             "    clients that you can sign to your agency. To ensure" + Environment.NewLine +
+                             "       a better chance at passing the test, have your " + Environment.NewLine + 
+                             "  agency train any agent for the test...if you can afford it!" + Environment.NewLine +
+                             "**********************************************************************";
             UpdateWorldCalendar();
             world.InitializeLicenses();
-            Console.WriteLine("Month Name Int Value: " + (int)world.MonthName);
             PopulateAvailableLicenses();
         }
         public void CreateManagerAndAgency()
@@ -35,20 +45,23 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             agency = new Agency("New Age Agency", 1000000, 1);
             myManager = new Agent("First", "Last", 0, 10, 10, 10, 75, 1, Roles.Manager);
-            Licenses basketballLicense = new Licenses(Sports.Basketball, 250, 1250, Months.July, 7);
-            myManager.LicensesHeld.Add(basketballLicense);
-            Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
+            //Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
-            agency.AddAgent(agent);
-            Client client = new Client("Harry", "Giles", 19, rnd.Next(1, 5), rnd.Next(4, 7), rnd.Next(20, 50), 100, 0, Sports.Basketball);
-            agency.AddClient(client);
-            myManager.AddClient(client);
+            //agency.AddAgent(agent);
+            //Client client = new Client("Harry", "Giles", 19, rnd.Next(1, 5), rnd.Next(4, 7), rnd.Next(20, 50), 100, 0, Sports.Basketball);
+            //agency.AddClient(client);
+            //myManager.AddClient(client);
             PopulateAgentClientList(myManager);
             PopulateAgencyAgentList();
             UpdateAgencyInfo();
             UpdateAgentInfo(myManager);
             cbAgencyAgentList.SelectedIndex = 0;
         }
+
+        #endregion
+
+        #region Populate Combo Boxes
+
         private void PopulateAgencyAgentList()
         {
             //store current selected client
@@ -70,59 +83,8 @@ namespace SportsAgencyTycoon
             cbAgencyAgentList.SelectedIndex = currentSelection;
         }
 
-        public Sports RandomlySelectSport()
-        {
-            Random rnd = new Random();
-            int sportNumber = rnd.Next(1, 7);
-            if (sportNumber == 1) return Sports.Basketball;
-            else if (sportNumber == 2) return Sports.Baseball;
-            else if (sportNumber == 3) return Sports.Football;
-            else if (sportNumber == 4) return Sports.Hockey;
-            else if (sportNumber == 5) return Sports.Golf;
-            else return Sports.Tennis;
-        }
-        public void UpdateAgencyInfo()
-        {
-            agencyNameLabel.Text = agency.Name;
-            moneyLabel.Text = agency.Money.ToString("C0");
-            industryInfluenceLabel.Text = agency.IndustryInfluence.ToString() + "/100";
-            clientCountLabel.Text = agency.ClientCount.ToString();
-            agentCountLabel.Text = agency.AgentCount.ToString();
-            //cbAgencyAgentList.SelectedIndex = 0;
-            if (agency.Agents[0].LicenseTestPrep == 100) btnTrainAgent.Enabled = false;
-        }
-        public void UpdateAgentInfo(Agent agent)
-        {
-            agentNameLabel.Text = agent.First + " " + agent.Last;
-            greedLabel.Text = agent.Greed.ToString();
-            industryPowerLabel.Text = agent.IndustryPower.ToString();
-            levelLabel.Text = agent.Level.ToString();
-            negotiatingLabel.Text = agent.Negotiating.ToString();
-            iqLabel.Text = agent.Intelligence.ToString();
-            agentBeingTrainedLabel.Text = agent.BeingTrainedForTest.ToString();
-            agentClientCountLabel.Text = agent.ClientCount.ToString();
-            roleLabel.Text = "Role: " + agent.Role.ToString();
-            agentSalaryLabel.Text = agent.Salary.ToString("C0");
-
-            if (agent.AppliedLicense == null)
-            {
-                agentAppliedLicenseLabel.Text = "Applied License: ";
-                licenseTestPrepLabel.Text = "License Test Prep: ";
-            }
-            else
-            {
-                agentAppliedLicenseLabel.Text = "Applied License: " + agent.AppliedLicense.Sport.ToString();
-                licenseTestPrepLabel.Text = "License Test Prep: " + agent.LicenseTestPrep.ToString();
-            }
-            if (agent.LicenseTestPrep >= 60) btnTakeTest.Enabled = true;
-            PopulateAgentClientList(agent);
-        }
-
         public void PopulateAgentClientList(Agent agent)
         {
-            //store current selected client
-            //int currentSelection = cbAgentClientList.SelectedIndex;
-
             //empty combo box to repopulate
             cbAgentClientList.Items.Clear();
 
@@ -160,6 +122,49 @@ namespace SportsAgencyTycoon
             cbAvailableLicenses.SelectedIndex = currentSelection;
         }
 
+        #endregion
+
+        #region Update Agency and Agent Info
+
+        public void UpdateAgencyInfo()
+        {
+            agencyNameLabel.Text = agency.Name;
+            moneyLabel.Text = agency.Money.ToString("C0");
+            industryInfluenceLabel.Text = agency.IndustryInfluence.ToString() + "/100";
+            clientCountLabel.Text = agency.ClientCount.ToString();
+            agentCountLabel.Text = agency.AgentCount.ToString();
+            if (agency.Agents[0].LicenseTestPrep == 100) btnTrainAgent.Enabled = false;
+        }
+        public void UpdateAgentInfo(Agent agent)
+        {
+            agentNameLabel.Text = agent.First + " " + agent.Last;
+            greedLabel.Text = agent.Greed.ToString();
+            industryPowerLabel.Text = agent.IndustryPower.ToString();
+            levelLabel.Text = agent.Level.ToString();
+            negotiatingLabel.Text = agent.Negotiating.ToString();
+            iqLabel.Text = agent.Intelligence.ToString();
+            agentBeingTrainedLabel.Text = agent.BeingTrainedForTest.ToString();
+            agentClientCountLabel.Text = agent.ClientCount.ToString();
+            roleLabel.Text = "Role: " + agent.Role.ToString();
+            agentSalaryLabel.Text = agent.Salary.ToString("C0");
+
+            if (agent.AppliedLicense == null)
+            {
+                agentAppliedLicenseLabel.Text = "Applied License: ";
+                licenseTestPrepLabel.Text = "License Test Prep: ";
+            }
+            else
+            {
+                agentAppliedLicenseLabel.Text = "Applied License: " + agent.AppliedLicense.Sport.ToString();
+                licenseTestPrepLabel.Text = "License Test Prep: " + agent.LicenseTestPrep.ToString();
+            }
+            PopulateAgentClientList(agent);
+        }
+
+        #endregion
+
+        #region Edit Agent and Agency Info
+
         private void editAgentAgencyInfo_Click(object sender, EventArgs e)
         {
             if (managerFirstNameTextBox.Text.Length > 0)
@@ -179,6 +184,9 @@ namespace SportsAgencyTycoon
             PopulateAgencyAgentList();
             UpdateAgentInfo(myManager);
         }
+        #endregion
+
+        #region Licensure
 
         private void cbAvailableLicenses_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -186,7 +194,7 @@ namespace SportsAgencyTycoon
             Licenses selectedLicense;
             bool hasLicense = false;
 
-            CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent);
+            
 
             if (cbAvailableLicenses.SelectedIndex < 0) selectedLicense = world.AvailableLicenses[0];
             else selectedLicense = world.AvailableLicenses[cbAvailableLicenses.SelectedIndex];
@@ -206,6 +214,8 @@ namespace SportsAgencyTycoon
                 licenseIsAgentLicensedLabel.Text = "NO";
                 btnAgentApplyForLicense.Enabled = true;
             }
+
+            if (CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent)) btnAgentApplyForLicense.Enabled = false;
 
             licenseApplicationFeeLabel.Text = selectedLicense.ApplicationFee.ToString("C0");
             licenseYearlyDuesLabel.Text = selectedLicense.YearlyDues.ToString("C0");
@@ -249,11 +259,15 @@ namespace SportsAgencyTycoon
                     //logic needs to be added so that application only happens during certain months
                     //exams for different sports also happen at different times
                     //passing an exam will be determined based on IQ rating
+                    if (CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent)) btnAgentApplyForLicense.Enabled = false;
                 }
                 else newsLabel.Text = "The agency doesn't have enough funds to apply for this license." + Environment.NewLine + newsLabel.Text;
             }
         }
 
+        #endregion
+
+        #region Client Information
         private void cbAgentClientList_SelectedIndexChanged(object sender, EventArgs e)
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
@@ -281,6 +295,8 @@ namespace SportsAgencyTycoon
             }
         }
 
+        #endregion
+
         private void cbAgencyAgentList_SelectedIndexChanged(object sender, EventArgs e)
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
@@ -298,7 +314,13 @@ namespace SportsAgencyTycoon
             IsAgentBeingTrained(selectedAgent);
             if (selectedAgent.LicenseTestPrep == 100) btnTrainAgent.Enabled = false;
             CheckIfAgentHasAlreadyAppliedForALicense(selectedAgent);
+
+            CheckTestingWindow(selectedAgent);
+            if (selectedAgent.TestedThisWeek) btnTakeTest.Enabled = false;
         }
+
+        #region Agent Training
+
         private void IsAgentBeingTrained(Agent selectedAgent)
         {
             //check if agent is being trained to enable/disable button
@@ -310,34 +332,6 @@ namespace SportsAgencyTycoon
             }
         }
 
-        private void btnTakeTest_Click(object sender, EventArgs e)
-        {
-            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            //if agent obtains license
-            selectedAgent.LicensesHeld.Add(selectedAgent.AppliedLicense);
-            //message into newsLabel
-            //reset license information
-            //reset agentInfo
-        }
-
-        private void AdvanceWeekBtn_Click(object sender, EventArgs e)
-        {
-            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            world.HandleCalendar();
-            UpdateWorldCalendar();
-            //check for agents training
-            agency.TrainAgentsForTest();
-            UpdateAgentInfo(selectedAgent);
-            UpdateAgencyInfo();
-        }
-        
-        private void UpdateWorldCalendar()
-        {
-            yearLabel.Text = world.Year.ToString();
-            monthLabel.Text = world.MonthName.ToString();
-            weekLabel.Text = world.WeekNumber.ToString();
-        }
-        
         private void btnTrainAgent_Click(object sender, EventArgs e)
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
@@ -354,5 +348,61 @@ namespace SportsAgencyTycoon
                 IsAgentBeingTrained(selectedAgent);
             }
         }
+
+        #endregion
+
+        #region Testing
+        private void btnTakeTest_Click(object sender, EventArgs e)
+        {
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+
+            newsLabel.Text = selectedAgent.TakeTest() + Environment.NewLine + newsLabel.Text;
+
+            //reset agentInfo
+            UpdateAgentInfo(selectedAgent);
+
+            btnTakeTest.Enabled = false;
+        }
+        private void CheckTestingWindow(Agent agent)
+        {
+            //check if testing window for specific sport is open
+            if (agent.AppliedLicense != null)
+            {
+                if (world.CheckTestingWindow(world.MonthName, agent.AppliedLicense.Sport)) btnTakeTest.Enabled = true;
+                else btnTakeTest.Enabled = false;
+            }
+        }
+        #endregion
+
+        #region Calendar
+
+        private void AdvanceWeekBtn_Click(object sender, EventArgs e)
+        {
+            //reset if agent took a test this week
+            foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
+
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            world.HandleCalendar();
+            UpdateWorldCalendar();
+
+            //check if testing window for specific sport is open
+            CheckTestingWindow(selectedAgent);         
+
+            //check for agents training
+            agency.TrainAgentsForTest();
+
+            //update Agency and Agent panels
+            UpdateAgentInfo(selectedAgent);
+            UpdateAgencyInfo();
+        }   
+
+        private void UpdateWorldCalendar()
+        {
+            yearLabel.Text = world.Year.ToString();
+            monthLabel.Text = world.MonthName.ToString();
+            weekLabel.Text = world.WeekNumber.ToString();
+        }
+
+        #endregion
     }
 }
