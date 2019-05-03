@@ -15,6 +15,7 @@ namespace SportsAgencyTycoon
         public int ClientCount;
         public int Money;
         public int IndustryInfluence;
+        public int MonthlyRent;
 
         public Agency(string name, int money, int industryInfluence)
         {
@@ -25,6 +26,7 @@ namespace SportsAgencyTycoon
             Clients = new List<Client>();
             AgentCount = 0;
             ClientCount = 0;
+            MonthlyRent = 5000;
         }
 
         public void AddAgent(Agent agent)
@@ -63,6 +65,10 @@ namespace SportsAgencyTycoon
                     if (agent.LicenseTestPrep > 100) agent.LicenseTestPrep = 100;
                 }
             }
+        }
+        public void DeductMonthlyRent()
+        {
+            Money -= MonthlyRent;
         }
     }
 }

@@ -15,11 +15,13 @@ namespace SportsAgencyTycoon
         public Agency agency;
         public Agent myManager;
         public World world;
+        public int firstNameCount = 200;
+        public int lastNameCount = 214;
         public MainForm()
         {
             InitializeComponent();
-            InitializeWorld();
             CreateManagerAndAgency();
+            InitializeWorld();
         }
 
         #region Game Start
@@ -133,6 +135,7 @@ namespace SportsAgencyTycoon
             industryInfluenceLabel.Text = agency.IndustryInfluence.ToString() + "/100";
             clientCountLabel.Text = agency.ClientCount.ToString();
             agentCountLabel.Text = agency.AgentCount.ToString();
+            monthlyRentLabel.Text = agency.MonthlyRent.ToString("C0");
             if (agency.Agents[0].LicenseTestPrep == 100) btnTrainAgent.Enabled = false;
         }
         public void UpdateAgentInfo(Agent agent)
@@ -401,8 +404,15 @@ namespace SportsAgencyTycoon
             yearLabel.Text = world.Year.ToString();
             monthLabel.Text = world.MonthName.ToString();
             weekLabel.Text = world.WeekNumber.ToString();
+            //beginning of a new month
+            if (world.WeekNumber == 1)
+            {
+                //pay agency rent
+                agency.DeductMonthlyRent();
+            }
         }
 
         #endregion
+
     }
 }

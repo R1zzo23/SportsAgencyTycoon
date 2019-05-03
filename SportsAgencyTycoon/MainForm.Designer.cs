@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTrainAgent = new System.Windows.Forms.Button();
             this.cbAgencyAgentList = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.industryInfluenceLabel = new System.Windows.Forms.Label();
@@ -41,6 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.agencyNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.agentBeingTrainedLabel = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.licenseTestPrepLabel = new System.Windows.Forms.Label();
             this.agentAppliedLicenseLabel = new System.Windows.Forms.Label();
             this.btnTakeTest = new System.Windows.Forms.Button();
@@ -105,9 +108,8 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.btnTrainAgent = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.agentBeingTrainedLabel = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.monthlyRentLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,6 +119,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.monthlyRentLabel);
+            this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.btnTrainAgent);
             this.groupBox1.Controls.Add(this.cbAgencyAgentList);
             this.groupBox1.Controls.Add(this.label13);
@@ -135,6 +139,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agency Information";
+            // 
+            // btnTrainAgent
+            // 
+            this.btnTrainAgent.Enabled = false;
+            this.btnTrainAgent.Location = new System.Drawing.Point(205, 135);
+            this.btnTrainAgent.Name = "btnTrainAgent";
+            this.btnTrainAgent.Size = new System.Drawing.Size(113, 23);
+            this.btnTrainAgent.TabIndex = 15;
+            this.btnTrainAgent.Text = "Train Agent for Test";
+            this.btnTrainAgent.UseVisualStyleBackColor = true;
+            this.btnTrainAgent.Click += new System.EventHandler(this.btnTrainAgent_Click);
             // 
             // cbAgencyAgentList
             // 
@@ -266,6 +281,24 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
+            // 
+            // agentBeingTrainedLabel
+            // 
+            this.agentBeingTrainedLabel.AutoSize = true;
+            this.agentBeingTrainedLabel.Location = new System.Drawing.Point(212, 159);
+            this.agentBeingTrainedLabel.Name = "agentBeingTrainedLabel";
+            this.agentBeingTrainedLabel.Size = new System.Drawing.Size(29, 13);
+            this.agentBeingTrainedLabel.TabIndex = 28;
+            this.agentBeingTrainedLabel.Text = "false";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(137, 159);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(76, 13);
+            this.label25.TabIndex = 27;
+            this.label25.Text = "Being Trained:";
             // 
             // licenseTestPrepLabel
             // 
@@ -881,34 +914,23 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
-            // btnTrainAgent
+            // label26
             // 
-            this.btnTrainAgent.Enabled = false;
-            this.btnTrainAgent.Location = new System.Drawing.Point(205, 135);
-            this.btnTrainAgent.Name = "btnTrainAgent";
-            this.btnTrainAgent.Size = new System.Drawing.Size(113, 23);
-            this.btnTrainAgent.TabIndex = 15;
-            this.btnTrainAgent.Text = "Train Agent for Test";
-            this.btnTrainAgent.UseVisualStyleBackColor = true;
-            this.btnTrainAgent.Click += new System.EventHandler(this.btnTrainAgent_Click);
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 155);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(73, 13);
+            this.label26.TabIndex = 16;
+            this.label26.Text = "Monthly Rent:";
             // 
-            // label25
+            // monthlyRentLabel
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(137, 159);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(76, 13);
-            this.label25.TabIndex = 27;
-            this.label25.Text = "Being Trained:";
-            // 
-            // agentBeingTrainedLabel
-            // 
-            this.agentBeingTrainedLabel.AutoSize = true;
-            this.agentBeingTrainedLabel.Location = new System.Drawing.Point(212, 159);
-            this.agentBeingTrainedLabel.Name = "agentBeingTrainedLabel";
-            this.agentBeingTrainedLabel.Size = new System.Drawing.Size(29, 13);
-            this.agentBeingTrainedLabel.TabIndex = 28;
-            this.agentBeingTrainedLabel.Text = "false";
+            this.monthlyRentLabel.AutoSize = true;
+            this.monthlyRentLabel.Location = new System.Drawing.Point(86, 155);
+            this.monthlyRentLabel.Name = "monthlyRentLabel";
+            this.monthlyRentLabel.Size = new System.Drawing.Size(13, 13);
+            this.monthlyRentLabel.TabIndex = 17;
+            this.monthlyRentLabel.Text = "0";
             // 
             // MainForm
             // 
@@ -1037,6 +1059,8 @@
         private System.Windows.Forms.Button btnTrainAgent;
         private System.Windows.Forms.Label agentBeingTrainedLabel;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label monthlyRentLabel;
+        private System.Windows.Forms.Label label26;
     }
 }
 
