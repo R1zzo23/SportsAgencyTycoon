@@ -51,7 +51,7 @@ namespace SportsAgencyTycoon
             ClientCount = ClientList.Count();
         }
 
-        public string TakeTest()
+        public string TakeTest(World world, Agency agency)
         {
             string message = "";
             //agent takes test
@@ -70,7 +70,7 @@ namespace SportsAgencyTycoon
                 AppliedLicense = null;
                 LicenseTestPrep = 0;
                 HasAppliedForLicense = false;
-                
+                world.CreateNewClients(agency);
             }
             //agent failed test
             else

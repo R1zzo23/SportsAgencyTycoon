@@ -15,8 +15,6 @@ namespace SportsAgencyTycoon
         public Agency agency;
         public Agent myManager;
         public World world;
-        public int firstNameCount = 200;
-        public int lastNameCount = 214;
         public MainForm()
         {
             InitializeComponent();
@@ -45,7 +43,7 @@ namespace SportsAgencyTycoon
         public void CreateManagerAndAgency()
         {
             Random rnd = new Random();
-            agency = new Agency("New Age Agency", 1000000, 1);
+            agency = new Agency("New Age Agency", 1000000, 5);
             myManager = new Agent("First", "Last", 0, 10, 10, 10, 75, 1, Roles.Manager);
             //Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
@@ -359,7 +357,7 @@ namespace SportsAgencyTycoon
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
 
-            newsLabel.Text = selectedAgent.TakeTest() + Environment.NewLine + newsLabel.Text;
+            newsLabel.Text = selectedAgent.TakeTest(world, agency) + Environment.NewLine + newsLabel.Text;
 
             //reset agentInfo
             UpdateAgentInfo(selectedAgent);

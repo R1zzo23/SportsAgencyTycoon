@@ -15,6 +15,8 @@ namespace SportsAgencyTycoon
         public int MonthNumber;
         public Months MonthName;
         public int WeekNumber;
+        public int firstNameCount = 200;
+        public int lastNameCount = 214;
         public World()
         {
             AvailableLicenses = new List<Licenses>();
@@ -33,6 +35,29 @@ namespace SportsAgencyTycoon
             AvailableLicenses.Add(basketballLicense);
             AvailableLicenses.Add(footballLicense);
         }
+        public void CreateNewClients(Agency agency)
+        {
+            Random rnd = new Random();
+            int numberNewClients = HowManyNewClients(agency.IndustryInfluence);
+            for (int i = 0; i < numberNewClients; i++)
+            {
+                //Client client = new Client(randomFirstName(), randomLastName(), rnd.Next(28, 66), )
+            }
+        }
+        public int HowManyNewClients(int influence)
+        {
+            int numberNewClients = 0;
+            if (influence < 10) numberNewClients = 2;
+            else if (influence >= 10 && influence < 25) numberNewClients = 3;
+            else if (influence >= 25 && influence < 50) numberNewClients = 5;
+            else if (influence >= 50 && influence < 65) numberNewClients = 7;
+            else if (influence >= 65 && influence < 80) numberNewClients = 8;
+            else numberNewClients = 10;
+
+            return numberNewClients;
+        }
+
+
         #region Calendar - Set Month/Year
         public void HandleCalendar()
         {
