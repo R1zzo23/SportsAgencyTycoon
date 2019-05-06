@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.monthlyRentLabel = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.btnTrainAgent = new System.Windows.Forms.Button();
             this.cbAgencyAgentList = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -108,13 +110,21 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.label26 = new System.Windows.Forms.Label();
-            this.monthlyRentLabel = new System.Windows.Forms.Label();
+            this.availableClientCurrentSkillLabel = new System.Windows.Forms.Label();
+            this.availableClientPopularityLabel = new System.Windows.Forms.Label();
+            this.availableClientAgeLabel = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.availableClientSportLabel = new System.Windows.Forms.Label();
+            this.availableClientNameLabel = new System.Windows.Forms.Label();
+            this.cbAvailableClients = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -139,6 +149,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agency Information";
+            // 
+            // monthlyRentLabel
+            // 
+            this.monthlyRentLabel.AutoSize = true;
+            this.monthlyRentLabel.Location = new System.Drawing.Point(86, 155);
+            this.monthlyRentLabel.Name = "monthlyRentLabel";
+            this.monthlyRentLabel.Size = new System.Drawing.Size(13, 13);
+            this.monthlyRentLabel.TabIndex = 17;
+            this.monthlyRentLabel.Text = "0";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 155);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(73, 13);
+            this.label26.TabIndex = 16;
+            this.label26.Text = "Monthly Rent:";
             // 
             // btnTrainAgent
             // 
@@ -752,12 +780,21 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.cbAvailableClients);
+            this.groupBox6.Controls.Add(this.availableClientNameLabel);
+            this.groupBox6.Controls.Add(this.availableClientSportLabel);
+            this.groupBox6.Controls.Add(this.availableClientCurrentSkillLabel);
+            this.groupBox6.Controls.Add(this.label38);
+            this.groupBox6.Controls.Add(this.availableClientPopularityLabel);
+            this.groupBox6.Controls.Add(this.label36);
+            this.groupBox6.Controls.Add(this.availableClientAgeLabel);
+            this.groupBox6.Controls.Add(this.label35);
             this.groupBox6.Location = new System.Drawing.Point(764, 297);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(370, 250);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "groupBox6";
+            this.groupBox6.Text = "Available Clients to Sign";
             // 
             // groupBox7
             // 
@@ -914,23 +951,90 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
-            // label26
+            // availableClientCurrentSkillLabel
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(7, 155);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(73, 13);
-            this.label26.TabIndex = 16;
-            this.label26.Text = "Monthly Rent:";
+            this.availableClientCurrentSkillLabel.AutoSize = true;
+            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(168, 87);
+            this.availableClientCurrentSkillLabel.Name = "availableClientCurrentSkillLabel";
+            this.availableClientCurrentSkillLabel.Size = new System.Drawing.Size(13, 13);
+            this.availableClientCurrentSkillLabel.TabIndex = 39;
+            this.availableClientCurrentSkillLabel.Text = "0";
             // 
-            // monthlyRentLabel
+            // availableClientPopularityLabel
             // 
-            this.monthlyRentLabel.AutoSize = true;
-            this.monthlyRentLabel.Location = new System.Drawing.Point(86, 155);
-            this.monthlyRentLabel.Name = "monthlyRentLabel";
-            this.monthlyRentLabel.Size = new System.Drawing.Size(13, 13);
-            this.monthlyRentLabel.TabIndex = 17;
-            this.monthlyRentLabel.Text = "0";
+            this.availableClientPopularityLabel.AutoSize = true;
+            this.availableClientPopularityLabel.Location = new System.Drawing.Point(269, 88);
+            this.availableClientPopularityLabel.Name = "availableClientPopularityLabel";
+            this.availableClientPopularityLabel.Size = new System.Drawing.Size(24, 13);
+            this.availableClientPopularityLabel.TabIndex = 37;
+            this.availableClientPopularityLabel.Text = "text";
+            // 
+            // availableClientAgeLabel
+            // 
+            this.availableClientAgeLabel.AutoSize = true;
+            this.availableClientAgeLabel.Location = new System.Drawing.Point(46, 87);
+            this.availableClientAgeLabel.Name = "availableClientAgeLabel";
+            this.availableClientAgeLabel.Size = new System.Drawing.Size(13, 13);
+            this.availableClientAgeLabel.TabIndex = 36;
+            this.availableClientAgeLabel.Text = "0";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(96, 87);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(66, 13);
+            this.label35.TabIndex = 35;
+            this.label35.Text = "Current Skill:";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(207, 88);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(56, 13);
+            this.label36.TabIndex = 34;
+            this.label36.Text = "Popularity:";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(7, 87);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(29, 13);
+            this.label38.TabIndex = 32;
+            this.label38.Text = "Age:";
+            // 
+            // availableClientSportLabel
+            // 
+            this.availableClientSportLabel.AutoSize = true;
+            this.availableClientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.availableClientSportLabel.Location = new System.Drawing.Point(124, 57);
+            this.availableClientSportLabel.Name = "availableClientSportLabel";
+            this.availableClientSportLabel.Size = new System.Drawing.Size(79, 15);
+            this.availableClientSportLabel.TabIndex = 31;
+            this.availableClientSportLabel.Text = "[Sport Name]";
+            this.availableClientSportLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // availableClientNameLabel
+            // 
+            this.availableClientNameLabel.AutoSize = true;
+            this.availableClientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.availableClientNameLabel.Location = new System.Drawing.Point(92, 20);
+            this.availableClientNameLabel.Name = "availableClientNameLabel";
+            this.availableClientNameLabel.Size = new System.Drawing.Size(204, 37);
+            this.availableClientNameLabel.TabIndex = 30;
+            this.availableClientNameLabel.Text = "Client Name";
+            this.availableClientNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cbAvailableClients
+            // 
+            this.cbAvailableClients.FormattingEnabled = true;
+            this.cbAvailableClients.Location = new System.Drawing.Point(43, 111);
+            this.cbAvailableClients.Name = "cbAvailableClients";
+            this.cbAvailableClients.Size = new System.Drawing.Size(253, 21);
+            this.cbAvailableClients.TabIndex = 40;
+            this.cbAvailableClients.SelectedIndexChanged += new System.EventHandler(this.CbAvailableClients_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -972,6 +1076,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1061,6 +1167,15 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label monthlyRentLabel;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ComboBox cbAvailableClients;
+        private System.Windows.Forms.Label availableClientNameLabel;
+        private System.Windows.Forms.Label availableClientSportLabel;
+        private System.Windows.Forms.Label availableClientCurrentSkillLabel;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label availableClientPopularityLabel;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label availableClientAgeLabel;
+        private System.Windows.Forms.Label label35;
     }
 }
 

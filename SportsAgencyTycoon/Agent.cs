@@ -66,11 +66,13 @@ namespace SportsAgencyTycoon
                 LicensesHeld.Add(AppliedLicense);
                 //message into newsLabel
                 message = First + " " + Last + " has earned a license for " + AppliedLicense.Sport.ToString().ToLower() + "!";
+                
+                world.CreateNewClients(agency, AppliedLicense);
+
                 //reset license information
                 AppliedLicense = null;
                 LicenseTestPrep = 0;
                 HasAppliedForLicense = false;
-                world.CreateNewClients(agency);
             }
             //agent failed test
             else

@@ -35,13 +35,23 @@ namespace SportsAgencyTycoon
             AvailableLicenses.Add(basketballLicense);
             AvailableLicenses.Add(footballLicense);
         }
-        public void CreateNewClients(Agency agency)
+        public void CreateNewClients(Agency agency, Licenses license)
         {
             Random rnd = new Random();
             int numberNewClients = HowManyNewClients(agency.IndustryInfluence);
             for (int i = 0; i < numberNewClients; i++)
             {
-                //Client client = new Client(randomFirstName(), randomLastName(), rnd.Next(28, 66), )
+                Client client = new Client(
+                    randomFirstName(rnd).ToString(),
+                    randomLastName(rnd).ToString(),
+                    rnd.Next(18, 35),
+                    rnd.Next(1, 7),
+                    rnd.Next(7, 9),
+                    rnd.Next(0, 75),
+                    100,
+                    0,
+                    license.Sport);
+                AvailableClients.Add(client);
             }
         }
         public int HowManyNewClients(int influence)
@@ -97,21 +107,19 @@ namespace SportsAgencyTycoon
         }
         #region Create Random First & Last Names
 
-        public FirstName randomFirstName()
+        public FirstName randomFirstName(Random rnd)
         {
             FirstName firstName;
 
-            Random rnd = new Random();
             int firstNameNumber = rnd.Next(0, firstNameCount);
             firstName = (FirstName)firstNameNumber;
 
             return firstName;
         }
-        public LastName randomLastName()
+        public LastName randomLastName(Random rnd)
         {
             LastName lastName;
 
-            Random rnd = new Random();
             int lastNameNumber = rnd.Next(0, lastNameCount);
             lastName = (LastName)lastNameNumber;
 

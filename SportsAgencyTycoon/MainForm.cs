@@ -39,6 +39,7 @@ namespace SportsAgencyTycoon
             UpdateWorldCalendar();
             world.InitializeLicenses();
             PopulateAvailableLicenses();
+            PopulateAvailableClientsList();
         }
         public void CreateManagerAndAgency()
         {
@@ -61,6 +62,23 @@ namespace SportsAgencyTycoon
         #endregion
 
         #region Populate Combo Boxes
+
+        private void PopulateAvailableClientsList()
+        {
+            if (world.AvailableClients.Count > 0)
+            {
+                cbAvailableClients.Items.Clear();
+
+                string nameAndSport;
+
+                foreach (Client client in world.AvailableClients)
+                {
+                    nameAndSport = client.First + " " + client.Last + " - " + client.Sport.ToString();
+                    cbAvailableClients.Items.Add(nameAndSport);
+                }
+            }
+            Console.WriteLine("# of available clients: " + world.AvailableClients.Count);
+        }
 
         private void PopulateAgencyAgentList()
         {
@@ -363,6 +381,7 @@ namespace SportsAgencyTycoon
             UpdateAgentInfo(selectedAgent);
 
             btnTakeTest.Enabled = false;
+            PopulateAvailableClientsList();
         }
         private void CheckTestingWindow(Agent agent)
         {
@@ -412,5 +431,15 @@ namespace SportsAgencyTycoon
 
         #endregion
 
+        private void CbAvailableClients_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Client selectedClient = world.AvailableClients[cbAvailableClients.SelectedIndex];
+
+            availableClientAgeLabel.Text = selectedClient.Age.ToString();
+            availableClientCurrentSkillLabel.Text = selectedClient.CurrentSkill.ToString();
+            availableClientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
+            availableClientSportLabel.Text = selectedClient.Sport.ToString();
+            availableClientPopularityLabel.Text = selectedClient.PopularityDescription;
+        }
     }
 }

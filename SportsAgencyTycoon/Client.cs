@@ -22,6 +22,7 @@
             Age = age;
             CurrentSkill = currentSkill;
             PotentialSkill = potentialSkill;
+            if (PotentialSkill < CurrentSkill) PotentialSkill = CurrentSkill;
             Popularity = popularity;
             PopularityDescription = DescribePopularity(popularity);
             AgencyHappiness = agencyHappiness;
