@@ -84,11 +84,4 @@ namespace SportsAgencyTycoon
             return message;
         }
     }
-
-    public enum Roles
-    {
-        Manager,
-        Agent,
-        Marketer
-    }
 }

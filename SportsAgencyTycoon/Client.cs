@@ -60,14 +60,4 @@
             return description;
         }
     }
-
-    public enum Sports
-    {
-        Basketball,
-        Baseball,
-        Football,
-        Hockey,
-        Golf,
-        Tennis
-    }
 }
