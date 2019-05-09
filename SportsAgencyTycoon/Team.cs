@@ -10,13 +10,15 @@ namespace SportsAgencyTycoon
     {
         public string City;
         public string Mascot;
+        public string Abbreviation;
         public int MarketValue;
         public int TitleConteder;
 
-        public Team (string city, string mascot, int marketValue, int titleContender)
+        public Team (string city, string mascot, string abbreviation, int marketValue, int titleContender)
         {
             City = city;
             Mascot = mascot;
+            Abbreviation = abbreviation;
             MarketValue = marketValue;
             TitleConteder = titleContender;
         }

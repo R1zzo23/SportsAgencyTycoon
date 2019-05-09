@@ -9,6 +9,8 @@ namespace SportsAgencyTycoon
     public class League
     {
         public Sports Sport;
+        public string Name;
+        public string Abbreviation;
         public List<Team> TeamList;
         public int Popularity;
         public Date SeasonStart;
@@ -16,9 +18,11 @@ namespace SportsAgencyTycoon
         public int MaxSalary;
         public int MinSalary;
 
-        public League(Sports sport, int popularity, Date seasonStart, Date seasonEnd, int maxSalary, int minSalary)
+        public League(Sports sport, string name, string abbreviation, int popularity, Date seasonStart, Date seasonEnd, int maxSalary, int minSalary)
         {
             Sport = sport;
+            Name = name;
+            Abbreviation = abbreviation;
             TeamList = new List<Team>();
             Popularity = popularity;
             SeasonStart = seasonStart;

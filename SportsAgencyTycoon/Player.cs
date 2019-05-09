@@ -8,13 +8,15 @@ namespace SportsAgencyTycoon
 {
     public class Player
     {
+        public Sports Sport;
         public FirstName FirstName;
         public LastName LastName;
         public int SkillLevel;
         public int Age;
 
-        public Player(FirstName firstName, LastName lastName, int skillLevel, int age)
+        public Player(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age)
         {
+            Sport = sport;
             FirstName = firstName;
             LastName = lastName;
             SkillLevel = skillLevel;

@@ -14,6 +14,7 @@
         public int TeamHappiness;
         public string TeamHappinessDescription;
         public Sports Sport;
+        public Contract Contract;
 
         public Client(string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport)
         {
