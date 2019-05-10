@@ -13,6 +13,7 @@ namespace SportsAgencyTycoon
         Football,
         Hockey,
         Golf,
-        Tennis
+        Tennis,
+        Soccer
     }
 }
