@@ -14,6 +14,8 @@ namespace SportsAgencyTycoon
         Hockey,
         Golf,
         Tennis,
-        Soccer
+        Soccer,
+        Boxing,
+        MMA
     }
 }
