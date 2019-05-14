@@ -93,6 +93,15 @@
             this.clientSportLabel = new System.Windows.Forms.Label();
             this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cbAvailableClients = new System.Windows.Forms.ComboBox();
+            this.availableClientNameLabel = new System.Windows.Forms.Label();
+            this.availableClientSportLabel = new System.Windows.Forms.Label();
+            this.availableClientCurrentSkillLabel = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.availableClientPopularityLabel = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.availableClientAgeLabel = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -110,21 +119,17 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.availableClientCurrentSkillLabel = new System.Windows.Forms.Label();
-            this.availableClientPopularityLabel = new System.Windows.Forms.Label();
-            this.availableClientAgeLabel = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.availableClientSportLabel = new System.Windows.Forms.Label();
-            this.availableClientNameLabel = new System.Windows.Forms.Label();
-            this.cbAvailableClients = new System.Windows.Forms.ComboBox();
+            this.leagueStandingsPanel = new System.Windows.Forms.Panel();
+            this.leagueStandingsLabel = new System.Windows.Forms.Label();
+            this.cbLeagueStandings = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.leagueStandingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -796,14 +801,101 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Available Clients to Sign";
             // 
+            // cbAvailableClients
+            // 
+            this.cbAvailableClients.FormattingEnabled = true;
+            this.cbAvailableClients.Location = new System.Drawing.Point(43, 111);
+            this.cbAvailableClients.Name = "cbAvailableClients";
+            this.cbAvailableClients.Size = new System.Drawing.Size(253, 21);
+            this.cbAvailableClients.TabIndex = 40;
+            this.cbAvailableClients.SelectedIndexChanged += new System.EventHandler(this.CbAvailableClients_SelectedIndexChanged);
+            // 
+            // availableClientNameLabel
+            // 
+            this.availableClientNameLabel.AutoSize = true;
+            this.availableClientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.availableClientNameLabel.Location = new System.Drawing.Point(92, 20);
+            this.availableClientNameLabel.Name = "availableClientNameLabel";
+            this.availableClientNameLabel.Size = new System.Drawing.Size(204, 37);
+            this.availableClientNameLabel.TabIndex = 30;
+            this.availableClientNameLabel.Text = "Client Name";
+            this.availableClientNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // availableClientSportLabel
+            // 
+            this.availableClientSportLabel.AutoSize = true;
+            this.availableClientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.availableClientSportLabel.Location = new System.Drawing.Point(124, 57);
+            this.availableClientSportLabel.Name = "availableClientSportLabel";
+            this.availableClientSportLabel.Size = new System.Drawing.Size(79, 15);
+            this.availableClientSportLabel.TabIndex = 31;
+            this.availableClientSportLabel.Text = "[Sport Name]";
+            this.availableClientSportLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // availableClientCurrentSkillLabel
+            // 
+            this.availableClientCurrentSkillLabel.AutoSize = true;
+            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(168, 87);
+            this.availableClientCurrentSkillLabel.Name = "availableClientCurrentSkillLabel";
+            this.availableClientCurrentSkillLabel.Size = new System.Drawing.Size(13, 13);
+            this.availableClientCurrentSkillLabel.TabIndex = 39;
+            this.availableClientCurrentSkillLabel.Text = "0";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(7, 87);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(29, 13);
+            this.label38.TabIndex = 32;
+            this.label38.Text = "Age:";
+            // 
+            // availableClientPopularityLabel
+            // 
+            this.availableClientPopularityLabel.AutoSize = true;
+            this.availableClientPopularityLabel.Location = new System.Drawing.Point(269, 88);
+            this.availableClientPopularityLabel.Name = "availableClientPopularityLabel";
+            this.availableClientPopularityLabel.Size = new System.Drawing.Size(24, 13);
+            this.availableClientPopularityLabel.TabIndex = 37;
+            this.availableClientPopularityLabel.Text = "text";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(207, 88);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(56, 13);
+            this.label36.TabIndex = 34;
+            this.label36.Text = "Popularity:";
+            // 
+            // availableClientAgeLabel
+            // 
+            this.availableClientAgeLabel.AutoSize = true;
+            this.availableClientAgeLabel.Location = new System.Drawing.Point(46, 87);
+            this.availableClientAgeLabel.Name = "availableClientAgeLabel";
+            this.availableClientAgeLabel.Size = new System.Drawing.Size(13, 13);
+            this.availableClientAgeLabel.TabIndex = 36;
+            this.availableClientAgeLabel.Text = "0";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(96, 87);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(66, 13);
+            this.label35.TabIndex = 35;
+            this.label35.Text = "Current Skill:";
+            // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.cbLeagueStandings);
+            this.groupBox7.Controls.Add(this.leagueStandingsPanel);
             this.groupBox7.Location = new System.Drawing.Point(12, 553);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(370, 250);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "groupBox7";
+            this.groupBox7.Text = "League Standings";
             // 
             // groupBox8
             // 
@@ -812,7 +904,7 @@
             this.groupBox8.Size = new System.Drawing.Size(370, 250);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "groupBox8";
+            this.groupBox8.Text = "Association Rankings";
             // 
             // groupBox9
             // 
@@ -821,7 +913,7 @@
             this.groupBox9.Size = new System.Drawing.Size(370, 250);
             this.groupBox9.TabIndex = 1;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "groupBox9";
+            this.groupBox9.Text = "unused";
             // 
             // managerFirstNameTextBox
             // 
@@ -951,90 +1043,32 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
-            // availableClientCurrentSkillLabel
+            // leagueStandingsPanel
             // 
-            this.availableClientCurrentSkillLabel.AutoSize = true;
-            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(168, 87);
-            this.availableClientCurrentSkillLabel.Name = "availableClientCurrentSkillLabel";
-            this.availableClientCurrentSkillLabel.Size = new System.Drawing.Size(13, 13);
-            this.availableClientCurrentSkillLabel.TabIndex = 39;
-            this.availableClientCurrentSkillLabel.Text = "0";
+            this.leagueStandingsPanel.AutoScroll = true;
+            this.leagueStandingsPanel.Controls.Add(this.leagueStandingsLabel);
+            this.leagueStandingsPanel.Location = new System.Drawing.Point(7, 47);
+            this.leagueStandingsPanel.Name = "leagueStandingsPanel";
+            this.leagueStandingsPanel.Size = new System.Drawing.Size(357, 193);
+            this.leagueStandingsPanel.TabIndex = 0;
             // 
-            // availableClientPopularityLabel
+            // leagueStandingsLabel
             // 
-            this.availableClientPopularityLabel.AutoSize = true;
-            this.availableClientPopularityLabel.Location = new System.Drawing.Point(269, 88);
-            this.availableClientPopularityLabel.Name = "availableClientPopularityLabel";
-            this.availableClientPopularityLabel.Size = new System.Drawing.Size(24, 13);
-            this.availableClientPopularityLabel.TabIndex = 37;
-            this.availableClientPopularityLabel.Text = "text";
+            this.leagueStandingsLabel.AutoSize = true;
+            this.leagueStandingsLabel.Location = new System.Drawing.Point(5, 4);
+            this.leagueStandingsLabel.Name = "leagueStandingsLabel";
+            this.leagueStandingsLabel.Size = new System.Drawing.Size(41, 13);
+            this.leagueStandingsLabel.TabIndex = 0;
+            this.leagueStandingsLabel.Text = "label28";
             // 
-            // availableClientAgeLabel
+            // cbLeagueStandings
             // 
-            this.availableClientAgeLabel.AutoSize = true;
-            this.availableClientAgeLabel.Location = new System.Drawing.Point(46, 87);
-            this.availableClientAgeLabel.Name = "availableClientAgeLabel";
-            this.availableClientAgeLabel.Size = new System.Drawing.Size(13, 13);
-            this.availableClientAgeLabel.TabIndex = 36;
-            this.availableClientAgeLabel.Text = "0";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(96, 87);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(66, 13);
-            this.label35.TabIndex = 35;
-            this.label35.Text = "Current Skill:";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(207, 88);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(56, 13);
-            this.label36.TabIndex = 34;
-            this.label36.Text = "Popularity:";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(7, 87);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(29, 13);
-            this.label38.TabIndex = 32;
-            this.label38.Text = "Age:";
-            // 
-            // availableClientSportLabel
-            // 
-            this.availableClientSportLabel.AutoSize = true;
-            this.availableClientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableClientSportLabel.Location = new System.Drawing.Point(124, 57);
-            this.availableClientSportLabel.Name = "availableClientSportLabel";
-            this.availableClientSportLabel.Size = new System.Drawing.Size(79, 15);
-            this.availableClientSportLabel.TabIndex = 31;
-            this.availableClientSportLabel.Text = "[Sport Name]";
-            this.availableClientSportLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // availableClientNameLabel
-            // 
-            this.availableClientNameLabel.AutoSize = true;
-            this.availableClientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableClientNameLabel.Location = new System.Drawing.Point(92, 20);
-            this.availableClientNameLabel.Name = "availableClientNameLabel";
-            this.availableClientNameLabel.Size = new System.Drawing.Size(204, 37);
-            this.availableClientNameLabel.TabIndex = 30;
-            this.availableClientNameLabel.Text = "Client Name";
-            this.availableClientNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // cbAvailableClients
-            // 
-            this.cbAvailableClients.FormattingEnabled = true;
-            this.cbAvailableClients.Location = new System.Drawing.Point(43, 111);
-            this.cbAvailableClients.Name = "cbAvailableClients";
-            this.cbAvailableClients.Size = new System.Drawing.Size(253, 21);
-            this.cbAvailableClients.TabIndex = 40;
-            this.cbAvailableClients.SelectedIndexChanged += new System.EventHandler(this.CbAvailableClients_SelectedIndexChanged);
+            this.cbLeagueStandings.FormattingEnabled = true;
+            this.cbLeagueStandings.Location = new System.Drawing.Point(9, 20);
+            this.cbLeagueStandings.Name = "cbLeagueStandings";
+            this.cbLeagueStandings.Size = new System.Drawing.Size(223, 21);
+            this.cbLeagueStandings.TabIndex = 1;
+            this.cbLeagueStandings.SelectedIndexChanged += new System.EventHandler(this.cbLeagueStandings_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -1078,6 +1112,9 @@
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.leagueStandingsPanel.ResumeLayout(false);
+            this.leagueStandingsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1176,6 +1213,9 @@
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label availableClientAgeLabel;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Panel leagueStandingsPanel;
+        private System.Windows.Forms.Label leagueStandingsLabel;
+        private System.Windows.Forms.ComboBox cbLeagueStandings;
     }
 }
 

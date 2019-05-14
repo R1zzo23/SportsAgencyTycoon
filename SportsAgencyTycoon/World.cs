@@ -34,6 +34,7 @@ namespace SportsAgencyTycoon
             AvailableClients = new List<Client>();
             AvailableAgents = new List<Agent>();
             Leagues = new List<League>();
+            Associations = new List<Association>();
             
             Year = 2000;
             MonthNumber = 5;
@@ -80,6 +81,15 @@ namespace SportsAgencyTycoon
             return numberNewClients;
         }
         #region Create Leagues & Associations
+        public void CreateLeaguesAssociationEventsPlayersAndTeams()
+        {
+            CreateLeagues();
+            CreateAssociations();
+            CreateAllEvents();
+            CreateAthletesForAssociations();
+            CreateTeamsForLeagues();
+            AddLeaguesAndAssociationsToWorld();
+        }
         public void CreateLeagues()
         {
             Random rnd = new Random();
@@ -99,6 +109,13 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Create Events for Associations
+        public void CreateAllEvents()
+        {
+            CreatePGAEvents();
+            CreateATPEvents();
+            CreateWBAEvents();
+            CreateUFCEvents();
+        }
         public void CreatePGAEvents()
         {
 
@@ -117,6 +134,13 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Create Athletes for Associations
+        public void CreateAthletesForAssociations()
+        {
+            CreateGolfers();
+            CreateTennisPlayers();
+            CreateBoxers();
+            CreateMMAFighters();
+        }
         public void CreateGolfers()
         {
             Random rnd = new Random();
@@ -151,6 +175,14 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Create Teams for Leagues
+        public void CreateTeamsForLeagues()
+        {
+            CreateNBATeams();
+            CreateMLBTeams();
+            CreateNHLTeams();
+            CreateNFLTeams();
+            CreateMLSTeams();
+        }
         public void CreateNBATeams()
         {
             Random rnd = new Random();

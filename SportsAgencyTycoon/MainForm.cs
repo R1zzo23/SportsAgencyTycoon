@@ -27,6 +27,7 @@ namespace SportsAgencyTycoon
         public void InitializeWorld()
         {
             world = new World();
+            world.CreateLeaguesAssociationEventsPlayersAndTeams();
             newsLabel.Text = "**********************************************************************" + Environment.NewLine + 
                              "           Welcome to DDS:Sports Agency Tycoon!" + Environment.NewLine + 
                              "        Before clients become available, you need to " + Environment.NewLine +
@@ -40,6 +41,7 @@ namespace SportsAgencyTycoon
             world.InitializeLicenses();
             PopulateAvailableLicenses();
             PopulateAvailableClientsList();
+            PopulateLeagues();
         }
         public void CreateManagerAndAgency()
         {
@@ -63,6 +65,22 @@ namespace SportsAgencyTycoon
 
         #region Populate Combo Boxes
 
+        private void PopulateLeagues()
+        {
+            if (world.Leagues.Count > 0)
+            {
+                cbLeagueStandings.Items.Clear();
+
+                string leagueName;
+
+                foreach (League league in world.Leagues)
+                {
+                    leagueName = league.Name;
+                    cbLeagueStandings.Items.Add(leagueName);
+                }
+            }
+        }
+
         private void PopulateAvailableClientsList()
         {
             if (world.AvailableClients.Count > 0)
@@ -77,7 +95,6 @@ namespace SportsAgencyTycoon
                     cbAvailableClients.Items.Add(nameAndSport);
                 }
             }
-            Console.WriteLine("# of available clients: " + world.AvailableClients.Count);
         }
 
         private void PopulateAgencyAgentList()
@@ -440,6 +457,21 @@ namespace SportsAgencyTycoon
             availableClientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
             availableClientSportLabel.Text = selectedClient.Sport.ToString();
             availableClientPopularityLabel.Text = selectedClient.PopularityDescription;
+        }
+
+        private void cbLeagueStandings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            League selectedLeague = world.Leagues[cbLeagueStandings.SelectedIndex];
+
+            leagueStandingsLabel.Text = "";
+
+            List<Team> teamList = selectedLeague.TeamList;
+            teamList = teamList.OrderByDescending(o => o.TitleConteder).ToList();
+            for (int i = 0; i < teamList.Count; i++)
+            {
+                leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].TitleConteder + Environment.NewLine;
+            }
+
         }
     }
 }
