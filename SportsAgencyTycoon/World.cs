@@ -122,7 +122,7 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             for (var i = 0; i < 100; i++)
             {
-                PGA.PlayerList.Add(new Player(Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65));
+                PGA.PlayerList.Add(new Player(Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65)));
             }
         }
         public void CreateTennisPlayers()
@@ -130,7 +130,7 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             for (var i = 0; i < 50; i++)
             {
-                ATP.PlayerList.Add(new Player(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35));
+                ATP.PlayerList.Add(new Player(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35)));
             }
         }
         public void CreateBoxers()
@@ -138,7 +138,7 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             for (var i = 0; i < 40; i++)
             {
-                WBA.PlayerList.Add(new Player(Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34));
+                WBA.PlayerList.Add(new Player(Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34)));
             }
         }
         public void CreateMMAFighters()
@@ -146,7 +146,7 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             for (var i = 0; i < 50; i++)
             {
-                UFC.PlayerList.Add(new Player(Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31));
+                UFC.PlayerList.Add(new Player(Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31)));
             }
         }
         #endregion
