@@ -15,7 +15,7 @@ namespace SportsAgencyTycoon
         public int NumberOfEntrants;
         public Date EventDate;
 
-        public Event(string name, string location, int prizePool, int spotsPaidOut, int numberOfEntrants, Date eventDate)
+        public Event(string name, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
         {
             Name = name;
             Location = location;

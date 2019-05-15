@@ -118,11 +118,23 @@ namespace SportsAgencyTycoon
         }
         public void CreatePGAEvents()
         {
+            PGA.EventList.Add(new Event("World Golf Championships", "Mexico City, MEX", 10250000, 100, 70, new Date(2, Months.February, 3)));
+            PGA.EventList.Add(new Event("THE PLAYERS Championship", "Ponte Vedra Beach,  FL", 6700000, 75, 50, new Date(3, Months.March, 2)));
+            PGA.EventList.Add(new Event("Masters Tournament", "Augusta, GA", 11500000, 60, 50, new Date(4, Months.April, 2)));
+            PGA.EventList.Add(new Event("PGA Championship", "Farmingdale, NY", 11000000, 100, 70, new Date(5, Months.May, 3)));
+            PGA.EventList.Add(new Event("U.S. Open", "Pebble Beach, CA", 12000000, 100, 70, new Date(6, Months.June, 2)));
+            PGA.EventList.Add(new Event("The Open Championship", "Portrush, NIR", 11000000, 85, 60, new Date(7, Months.July, 7)));
+            PGA.EventList.Add(new Event("THE NORTHERN TRUST", "Jersey City, NJ", 9250000, 100, 70, new Date(8, Months.August, 1)));
+            PGA.EventList.Add(new Event("BMW Championship", "Medinah, IL", 9250000, 100, 70, new Date(8, Months.August, 3)));
+            PGA.EventList.Add(new Event("TOUR Championship", "Atlanta, GA", 9000000, 100, 70, new Date(8, Months.August, 4)));
 
         }
         public void CreateATPEvents()
         {
-
+            ATP.EventList.Add(new Event("Australian Open", "Melbourne, AUS", 15000000, 64, 64, new Date(1, Months.January, 3)));
+            ATP.EventList.Add(new Event("French Open", "Paris, FR", 20000000, 64, 64, new Date(5, Months.May, 5)));
+            ATP.EventList.Add(new Event("Wimbledon", "London, EN", 38000000, 100, 100, new Date(6, Months.June, 5)));
+            ATP.EventList.Add(new Event("US Open", "New York City, NY", 40000000, 100, 100, new Date(9, Months.September, 1)));
         }
         public void CreateWBAEvents()
         {
@@ -152,7 +164,7 @@ namespace SportsAgencyTycoon
         public void CreateTennisPlayers()
         {
             Random rnd = new Random();
-            for (var i = 0; i < 50; i++)
+            for (var i = 0; i < 100; i++)
             {
                 ATP.PlayerList.Add(new Player(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35)));
             }
