@@ -132,17 +132,22 @@ namespace SportsAgencyTycoon
         public void CreateATPEvents()
         {
             ATP.EventList.Add(new Event("Australian Open", "Melbourne, AUS", 15000000, 64, 64, new Date(1, Months.January, 3)));
-            ATP.EventList.Add(new Event("French Open", "Paris, FR", 20000000, 64, 64, new Date(5, Months.May, 5)));
+            ATP.EventList.Add(new Event("French Open", "Paris, FR", 20000000, 64, 64, new Date(5, Months.May, 4)));
             ATP.EventList.Add(new Event("Wimbledon", "London, EN", 38000000, 100, 100, new Date(6, Months.June, 5)));
             ATP.EventList.Add(new Event("US Open", "New York City, NY", 40000000, 100, 100, new Date(9, Months.September, 1)));
         }
         public void CreateWBAEvents()
         {
-
+            WBA.EventList.Add(new Event("Up-And-Comers Showcase", "Las Vegas, NV", 15000000, 30, 30, new Date(1, Months.January, 1)));
+            WBA.EventList.Add(new Event("NYC Prize Fights", "New York City, NY", 35000000, 12, 12, new Date(5, Months.May, 2)));
+            WBA.EventList.Add(new Event("Top Rank Boxing Premiere", "Los Angeles, CA", 29000000, 10, 10, new Date(9, Months.September, 3)));
+            WBA.EventList.Add(new Event("King of the Ring", "Las Vegas, NV", 50000000, 40, 40, new Date(11, Months.November, 4)));
         }
         public void CreateUFCEvents()
         {
-
+            UFC.EventList.Add(new Event("Bloodied & Bruised", "Chicago, IL", 2500000, 10, 10, new Date(2, Months.February, 3)));
+            UFC.EventList.Add(new Event("King Kong of the Octagon", "Atlantic City, NJ", 50, 50, 6000000, new Date(6, Months.June, 1)));
+            UFC.EventList.Add(new Event("Elite Title Showdown", "Las Vegas, NV", 8, 8, 3250000, new Date(10, Months.October, 2)));
         }
         #endregion
         #region Create Athletes for Associations
