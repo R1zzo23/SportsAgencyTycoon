@@ -104,7 +104,7 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             PGA = new Association(Sports.Golf, "Professional Golf Association", "PGA", rnd.Next(40, 80));
             ATP = new Association(Sports.Tennis, "Association of Tennis Professionals", "ATP", rnd.Next(20, 50));
-            WBA = new Association(Sports.Boxing, "World Boxing Assocition", "WBA", rnd.Next(10, 40));
+            WBA = new Association(Sports.Boxing, "World Boxing Association", "WBA", rnd.Next(10, 40));
             UFC = new Association(Sports.MMA, "Ultimate Fighting Championship", "UFC", rnd.Next(30, 60));
         }
         #endregion

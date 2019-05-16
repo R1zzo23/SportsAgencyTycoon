@@ -42,6 +42,7 @@ namespace SportsAgencyTycoon
             PopulateAvailableLicenses();
             PopulateAvailableClientsList();
             PopulateLeagues();
+            PopulateAssociations();
         }
         public void CreateManagerAndAgency()
         {
@@ -64,7 +65,21 @@ namespace SportsAgencyTycoon
         #endregion
 
         #region Populate Combo Boxes
+        private void PopulateAssociations()
+        {
+            if (world.Associations.Count > 0)
+            {
+                cbAssociationRankings.Items.Clear();
 
+                string associationName;
+
+                foreach (Association assoc in world.Associations)
+                {
+                    associationName = assoc.Name;
+                    cbAssociationRankings.Items.Add(associationName);
+                }
+            }
+        }
         private void PopulateLeagues()
         {
             if (world.Leagues.Count > 0)
@@ -472,6 +487,20 @@ namespace SportsAgencyTycoon
                 leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].TitleConteder + Environment.NewLine;
             }
 
+        }
+
+        private void CbAssociationRankings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Association selectedAssociation = world.Associations[cbAssociationRankings.SelectedIndex];
+
+            worldRankingsLabel.Text = "";
+
+            List<Player> playerList = selectedAssociation.PlayerList;
+            playerList = playerList.OrderByDescending(o => o.SkillLevel).ToList();
+            for (int i = 0; i < playerList.Count; i++)
+            {
+                worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + playerList[i].SkillLevel + Environment.NewLine;
+            }
         }
     }
 }

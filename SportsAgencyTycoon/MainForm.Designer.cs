@@ -103,6 +103,9 @@
             this.availableClientAgeLabel = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.cbLeagueStandings = new System.Windows.Forms.ComboBox();
+            this.leagueStandingsPanel = new System.Windows.Forms.Panel();
+            this.leagueStandingsLabel = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.managerFirstNameTextBox = new System.Windows.Forms.TextBox();
@@ -119,9 +122,9 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.leagueStandingsPanel = new System.Windows.Forms.Panel();
-            this.leagueStandingsLabel = new System.Windows.Forms.Label();
-            this.cbLeagueStandings = new System.Windows.Forms.ComboBox();
+            this.worldRankingsLabel = new System.Windows.Forms.Label();
+            this.cbAssociationRankings = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -130,6 +133,8 @@
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.leagueStandingsPanel.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -897,8 +902,37 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "League Standings";
             // 
+            // cbLeagueStandings
+            // 
+            this.cbLeagueStandings.FormattingEnabled = true;
+            this.cbLeagueStandings.Location = new System.Drawing.Point(9, 20);
+            this.cbLeagueStandings.Name = "cbLeagueStandings";
+            this.cbLeagueStandings.Size = new System.Drawing.Size(223, 21);
+            this.cbLeagueStandings.TabIndex = 1;
+            this.cbLeagueStandings.SelectedIndexChanged += new System.EventHandler(this.cbLeagueStandings_SelectedIndexChanged);
+            // 
+            // leagueStandingsPanel
+            // 
+            this.leagueStandingsPanel.AutoScroll = true;
+            this.leagueStandingsPanel.Controls.Add(this.leagueStandingsLabel);
+            this.leagueStandingsPanel.Location = new System.Drawing.Point(7, 47);
+            this.leagueStandingsPanel.Name = "leagueStandingsPanel";
+            this.leagueStandingsPanel.Size = new System.Drawing.Size(357, 193);
+            this.leagueStandingsPanel.TabIndex = 0;
+            // 
+            // leagueStandingsLabel
+            // 
+            this.leagueStandingsLabel.AutoSize = true;
+            this.leagueStandingsLabel.Location = new System.Drawing.Point(5, 4);
+            this.leagueStandingsLabel.Name = "leagueStandingsLabel";
+            this.leagueStandingsLabel.Size = new System.Drawing.Size(41, 13);
+            this.leagueStandingsLabel.TabIndex = 0;
+            this.leagueStandingsLabel.Text = "label28";
+            // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.cbAssociationRankings);
+            this.groupBox8.Controls.Add(this.panel1);
             this.groupBox8.Location = new System.Drawing.Point(388, 553);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(370, 250);
@@ -1043,32 +1077,32 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
-            // leagueStandingsPanel
+            // worldRankingsLabel
             // 
-            this.leagueStandingsPanel.AutoScroll = true;
-            this.leagueStandingsPanel.Controls.Add(this.leagueStandingsLabel);
-            this.leagueStandingsPanel.Location = new System.Drawing.Point(7, 47);
-            this.leagueStandingsPanel.Name = "leagueStandingsPanel";
-            this.leagueStandingsPanel.Size = new System.Drawing.Size(357, 193);
-            this.leagueStandingsPanel.TabIndex = 0;
+            this.worldRankingsLabel.AutoSize = true;
+            this.worldRankingsLabel.Location = new System.Drawing.Point(5, 4);
+            this.worldRankingsLabel.Name = "worldRankingsLabel";
+            this.worldRankingsLabel.Size = new System.Drawing.Size(41, 13);
+            this.worldRankingsLabel.TabIndex = 0;
+            this.worldRankingsLabel.Text = "label28";
             // 
-            // leagueStandingsLabel
+            // cbAssociationRankings
             // 
-            this.leagueStandingsLabel.AutoSize = true;
-            this.leagueStandingsLabel.Location = new System.Drawing.Point(5, 4);
-            this.leagueStandingsLabel.Name = "leagueStandingsLabel";
-            this.leagueStandingsLabel.Size = new System.Drawing.Size(41, 13);
-            this.leagueStandingsLabel.TabIndex = 0;
-            this.leagueStandingsLabel.Text = "label28";
+            this.cbAssociationRankings.FormattingEnabled = true;
+            this.cbAssociationRankings.Location = new System.Drawing.Point(8, 20);
+            this.cbAssociationRankings.Name = "cbAssociationRankings";
+            this.cbAssociationRankings.Size = new System.Drawing.Size(223, 21);
+            this.cbAssociationRankings.TabIndex = 3;
+            this.cbAssociationRankings.SelectedIndexChanged += new System.EventHandler(this.CbAssociationRankings_SelectedIndexChanged);
             // 
-            // cbLeagueStandings
+            // panel1
             // 
-            this.cbLeagueStandings.FormattingEnabled = true;
-            this.cbLeagueStandings.Location = new System.Drawing.Point(9, 20);
-            this.cbLeagueStandings.Name = "cbLeagueStandings";
-            this.cbLeagueStandings.Size = new System.Drawing.Size(223, 21);
-            this.cbLeagueStandings.TabIndex = 1;
-            this.cbLeagueStandings.SelectedIndexChanged += new System.EventHandler(this.cbLeagueStandings_SelectedIndexChanged);
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.worldRankingsLabel);
+            this.panel1.Location = new System.Drawing.Point(6, 47);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(357, 193);
+            this.panel1.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -1115,6 +1149,9 @@
             this.groupBox7.ResumeLayout(false);
             this.leagueStandingsPanel.ResumeLayout(false);
             this.leagueStandingsPanel.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1216,6 +1253,9 @@
         private System.Windows.Forms.Panel leagueStandingsPanel;
         private System.Windows.Forms.Label leagueStandingsLabel;
         private System.Windows.Forms.ComboBox cbLeagueStandings;
+        private System.Windows.Forms.ComboBox cbAssociationRankings;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label worldRankingsLabel;
     }
 }
 
