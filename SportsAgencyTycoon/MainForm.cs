@@ -43,6 +43,7 @@ namespace SportsAgencyTycoon
             PopulateAvailableClientsList();
             PopulateLeagues();
             PopulateAssociations();
+            PopulateEventList();
         }
         public void CreateManagerAndAgency()
         {
@@ -80,6 +81,26 @@ namespace SportsAgencyTycoon
                 }
             }
         }
+        private void PopulateEventList()
+        {
+            if (world.Associations.Count > 0)
+            {
+                if (cbAssociationRankings.SelectedIndex >= 0)
+                {
+                    Association selectedAssociation = world.Associations[cbAssociationRankings.SelectedIndex];
+                    cbEventDetails.Items.Clear();
+
+                    string eventName;
+
+                    foreach (Event e in selectedAssociation.EventList)
+                    {
+                        eventName = e.Name;
+                        cbEventDetails.Items.Add(eventName);
+                    }
+                }   
+            }
+        }
+
         private void PopulateLeagues()
         {
             if (world.Leagues.Count > 0)
@@ -501,6 +522,41 @@ namespace SportsAgencyTycoon
             {
                 worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + playerList[i].SkillLevel + Environment.NewLine;
             }
+            PopulateEventList();
+            cbEventDetails.SelectedIndex = -1;
+            ClearEventDetails();
+        }
+
+        private void CbEventDetails_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbAssociationRankings.SelectedIndex >= 0)
+            {
+                Association selectedAssociation = world.Associations[cbAssociationRankings.SelectedIndex];
+                Event selectedEvent = selectedAssociation.EventList[cbEventDetails.SelectedIndex];
+
+                eventNameLabel.Text = selectedEvent.Name;
+                eventLocationLabel.Text = selectedEvent.Location;
+
+                string weekOfEvent = "";
+                if (selectedEvent.EventDate.Week == 1) weekOfEvent = "1st";
+                else if (selectedEvent.EventDate.Week == 2) weekOfEvent = "2nd";
+                else if (selectedEvent.EventDate.Week == 3) weekOfEvent = "3rd";
+                else if (selectedEvent.EventDate.Week == 4) weekOfEvent = "4th";
+                else if (selectedEvent.EventDate.Week == 5) weekOfEvent = "5th";
+
+                eventDateLabel.Text = weekOfEvent + " week of " + selectedEvent.EventDate.MonthName.ToString();
+
+                eventPrizePoolLabel.Text = selectedEvent.PrizePool.ToString("C0");
+                eventNumberOfEntrantsLabel.Text = selectedEvent.NumberOfEntrants.ToString();
+            }
+        }
+        private void ClearEventDetails()
+        {
+            eventNameLabel.Text = "";
+            eventDateLabel.Text = "";
+            eventPrizePoolLabel.Text = "";
+            eventNumberOfEntrantsLabel.Text = "";
+            eventLocationLabel.Text = "";
         }
     }
 }
