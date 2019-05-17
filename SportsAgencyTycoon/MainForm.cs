@@ -524,7 +524,7 @@ namespace SportsAgencyTycoon
                 worldRankingsLabel.Text += "World Ranking - Name - Top Tens - Tournament Wins" + Environment.NewLine;
                 for (int i = 0; i < playerList.Count; i++)
                 {
-                    worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + Environment.NewLine;
+                    worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.Boxing || selectedAssociation.Sport == Sports.MMA)

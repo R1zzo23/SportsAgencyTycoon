@@ -1,12 +1,3 @@
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.exe.config
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.exe
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.pdb
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.csprojAssemblyReference.cache
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.Properties.Resources.resources
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.csproj.GenerateResource.cache
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.csproj.CoreCompileInputs.cache
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.exe
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.pdb
 C:/Users/Adam/Dropbox/Coding/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.exe.config
 C:/Users/Adam/Dropbox/Coding/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.exe
 C:/Users/Adam/Dropbox/Coding/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.pdb
@@ -21,7 +12,6 @@ C:/Users/Adam/Dropbox/Coding/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/Spo
 C:/Users/Adam/Dropbox/Coding/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.AgencyForm.resources
 C:/Users/Adam/Dropbox/Coding/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.MainForm.resources
 =======
-C:/Users/Adam/Documents/Github/SportsAgencyTycoon/SportsAgencyTycoon/obj/Debug/SportsAgencyTycoon.MainForm.resources
 /Users/adamrizzo/Github/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.exe.config
 /Users/adamrizzo/Github/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.exe
 /Users/adamrizzo/Github/SportsAgencyTycoon/SportsAgencyTycoon/bin/Debug/SportsAgencyTycoon.pdb
@@ -42,3 +32,12 @@ T:\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgency
 T:\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.exe
 T:\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.pdb
 T:\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csprojAssemblyReference.cache
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\bin\Debug\SportsAgencyTycoon.exe.config
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\bin\Debug\SportsAgencyTycoon.exe
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\bin\Debug\SportsAgencyTycoon.pdb
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.MainForm.resources
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.Properties.Resources.resources
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csproj.GenerateResource.cache
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csproj.CoreCompileInputs.cache
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.exe
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.pdb
