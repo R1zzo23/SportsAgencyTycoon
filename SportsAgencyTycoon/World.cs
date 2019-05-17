@@ -90,6 +90,7 @@ namespace SportsAgencyTycoon
             CreateAthletesForAssociations(rnd);
             CreateTeamsForLeagues(rnd);
             AddLeaguesAndAssociationsToWorld();
+            CalculateWorldRankings();
         }
         public void CreateLeagues(Random rnd)
         {
@@ -358,6 +359,18 @@ namespace SportsAgencyTycoon
             MLS.TeamList.Add(new Team("Vancouver", "Whitecaps FC", "VAN", 29, rnd.Next(25, 76)));
         }
         #endregion
+
+        public void CalculateWorldRankings()
+        {
+            foreach(Association association in Associations)
+            {
+                List<Player> playerList = association.PlayerList.OrderByDescending(o => o.SkillLevel).ToList();
+                for(int i = 0; i < playerList.Count; i++)
+                {
+                    playerList[i].WorldRanking = i + 1;
+                }
+            }
+        }
         public void AddLeaguesAndAssociationsToWorld()
         {
             //add NBA, NFL, MLB, NHL and MLS to World.Leagues

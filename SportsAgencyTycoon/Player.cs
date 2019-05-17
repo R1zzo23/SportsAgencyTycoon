@@ -14,6 +14,7 @@ namespace SportsAgencyTycoon
         public int SkillLevel;
         public int Age;
         public int CareerEarnings;
+        public int WorldRanking;
 
         public Player(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age)
         {

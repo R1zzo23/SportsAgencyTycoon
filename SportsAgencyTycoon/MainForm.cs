@@ -517,11 +517,25 @@ namespace SportsAgencyTycoon
             worldRankingsLabel.Text = "";
 
             List<Player> playerList = selectedAssociation.PlayerList;
-            playerList = playerList.OrderByDescending(o => o.SkillLevel).ToList();
-            for (int i = 0; i < playerList.Count; i++)
+            playerList = playerList.OrderBy(o => o.WorldRanking).ToList();
+
+            if(selectedAssociation.Sport == Sports.Golf || selectedAssociation.Sport == Sports.Tennis)
             {
-                worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + playerList[i].SkillLevel + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name - Top Tens - Tournament Wins" + Environment.NewLine;
+                for (int i = 0; i < playerList.Count; i++)
+                {
+                    worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + Environment.NewLine;
+                }
             }
+            else if (selectedAssociation.Sport == Sports.Boxing || selectedAssociation.Sport == Sports.MMA)
+            {
+                worldRankingsLabel.Text += "World Ranking - Name (Wins - Losses)" + Environment.NewLine;
+                for (int i = 0; i < playerList.Count; i++)
+                {
+                    worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + Environment.NewLine;
+                }
+            }
+
             PopulateEventList();
             cbEventDetails.SelectedIndex = -1;
             ClearEventDetails();
