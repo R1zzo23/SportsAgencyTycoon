@@ -13,6 +13,7 @@ namespace SportsAgencyTycoon
         public LastName LastName;
         public int SkillLevel;
         public int Age;
+        public int CareerEarnings;
 
         public Player(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age)
         {
@@ -21,6 +22,7 @@ namespace SportsAgencyTycoon
             LastName = lastName;
             SkillLevel = skillLevel;
             Age = age;
+            CareerEarnings = 0;
         }
     }
 }

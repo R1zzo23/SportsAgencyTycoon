@@ -546,8 +546,8 @@ namespace SportsAgencyTycoon
 
                 eventDateLabel.Text = weekOfEvent + " week of " + selectedEvent.EventDate.MonthName.ToString();
 
-                eventPrizePoolLabel.Text = selectedEvent.PrizePool.ToString("C0");
-                eventNumberOfEntrantsLabel.Text = selectedEvent.NumberOfEntrants.ToString();
+                eventPrizePoolLabel.Text = "Total Purse: " + selectedEvent.PrizePool.ToString("C0");
+                eventNumberOfEntrantsLabel.Text = "# of Entratnts: " + selectedEvent.NumberOfEntrants.ToString();
             }
         }
         private void ClearEventDetails()

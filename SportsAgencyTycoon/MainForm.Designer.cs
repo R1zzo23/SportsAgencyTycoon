@@ -111,6 +111,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.worldRankingsLabel = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.eventDateLabel = new System.Windows.Forms.Label();
+            this.eventNumberOfEntrantsLabel = new System.Windows.Forms.Label();
+            this.eventPrizePoolLabel = new System.Windows.Forms.Label();
+            this.eventLocationLabel = new System.Windows.Forms.Label();
+            this.eventNameLabel = new System.Windows.Forms.Label();
+            this.cbEventDetails = new System.Windows.Forms.ComboBox();
             this.managerFirstNameTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.managerLastNameTextBox = new System.Windows.Forms.TextBox();
@@ -125,15 +132,6 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.eventNameLabel = new System.Windows.Forms.Label();
-            this.cbEventDetails = new System.Windows.Forms.ComboBox();
-            this.eventLocationLabel = new System.Windows.Forms.Label();
-            this.eventPrizePoolLabel = new System.Windows.Forms.Label();
-            this.eventNumberOfEntrantsLabel = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.eventDateLabel = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -989,6 +987,74 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Event Details";
             // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.eventDateLabel);
+            this.panel2.Controls.Add(this.eventNumberOfEntrantsLabel);
+            this.panel2.Controls.Add(this.eventPrizePoolLabel);
+            this.panel2.Controls.Add(this.eventLocationLabel);
+            this.panel2.Controls.Add(this.eventNameLabel);
+            this.panel2.Location = new System.Drawing.Point(6, 47);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(357, 193);
+            this.panel2.TabIndex = 4;
+            // 
+            // eventDateLabel
+            // 
+            this.eventDateLabel.AutoSize = true;
+            this.eventDateLabel.Location = new System.Drawing.Point(184, 37);
+            this.eventDateLabel.Name = "eventDateLabel";
+            this.eventDateLabel.Size = new System.Drawing.Size(41, 13);
+            this.eventDateLabel.TabIndex = 5;
+            this.eventDateLabel.Text = "label30";
+            // 
+            // eventNumberOfEntrantsLabel
+            // 
+            this.eventNumberOfEntrantsLabel.AutoSize = true;
+            this.eventNumberOfEntrantsLabel.Location = new System.Drawing.Point(34, 103);
+            this.eventNumberOfEntrantsLabel.Name = "eventNumberOfEntrantsLabel";
+            this.eventNumberOfEntrantsLabel.Size = new System.Drawing.Size(41, 13);
+            this.eventNumberOfEntrantsLabel.TabIndex = 3;
+            this.eventNumberOfEntrantsLabel.Text = "label28";
+            // 
+            // eventPrizePoolLabel
+            // 
+            this.eventPrizePoolLabel.AutoSize = true;
+            this.eventPrizePoolLabel.Location = new System.Drawing.Point(34, 69);
+            this.eventPrizePoolLabel.Name = "eventPrizePoolLabel";
+            this.eventPrizePoolLabel.Size = new System.Drawing.Size(41, 13);
+            this.eventPrizePoolLabel.TabIndex = 2;
+            this.eventPrizePoolLabel.Text = "label28";
+            // 
+            // eventLocationLabel
+            // 
+            this.eventLocationLabel.AutoSize = true;
+            this.eventLocationLabel.Location = new System.Drawing.Point(34, 37);
+            this.eventLocationLabel.Name = "eventLocationLabel";
+            this.eventLocationLabel.Size = new System.Drawing.Size(41, 13);
+            this.eventLocationLabel.TabIndex = 1;
+            this.eventLocationLabel.Text = "label28";
+            // 
+            // eventNameLabel
+            // 
+            this.eventNameLabel.AutoSize = true;
+            this.eventNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventNameLabel.Location = new System.Drawing.Point(118, 4);
+            this.eventNameLabel.Name = "eventNameLabel";
+            this.eventNameLabel.Size = new System.Drawing.Size(61, 18);
+            this.eventNameLabel.TabIndex = 0;
+            this.eventNameLabel.Text = "label28";
+            // 
+            // cbEventDetails
+            // 
+            this.cbEventDetails.FormattingEnabled = true;
+            this.cbEventDetails.Location = new System.Drawing.Point(8, 20);
+            this.cbEventDetails.Name = "cbEventDetails";
+            this.cbEventDetails.Size = new System.Drawing.Size(223, 21);
+            this.cbEventDetails.TabIndex = 5;
+            this.cbEventDetails.SelectedIndexChanged += new System.EventHandler(this.CbEventDetails_SelectedIndexChanged);
+            // 
             // managerFirstNameTextBox
             // 
             this.managerFirstNameTextBox.Location = new System.Drawing.Point(121, 9);
@@ -1116,94 +1182,6 @@
             this.advanceWeekBtn.Text = "Advance Week";
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.label30);
-            this.panel2.Controls.Add(this.eventDateLabel);
-            this.panel2.Controls.Add(this.label28);
-            this.panel2.Controls.Add(this.eventNumberOfEntrantsLabel);
-            this.panel2.Controls.Add(this.eventPrizePoolLabel);
-            this.panel2.Controls.Add(this.eventLocationLabel);
-            this.panel2.Controls.Add(this.eventNameLabel);
-            this.panel2.Location = new System.Drawing.Point(6, 47);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(357, 193);
-            this.panel2.TabIndex = 4;
-            // 
-            // eventNameLabel
-            // 
-            this.eventNameLabel.AutoSize = true;
-            this.eventNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eventNameLabel.Location = new System.Drawing.Point(118, 4);
-            this.eventNameLabel.Name = "eventNameLabel";
-            this.eventNameLabel.Size = new System.Drawing.Size(61, 18);
-            this.eventNameLabel.TabIndex = 0;
-            this.eventNameLabel.Text = "label28";
-            // 
-            // cbEventDetails
-            // 
-            this.cbEventDetails.FormattingEnabled = true;
-            this.cbEventDetails.Location = new System.Drawing.Point(8, 20);
-            this.cbEventDetails.Name = "cbEventDetails";
-            this.cbEventDetails.Size = new System.Drawing.Size(223, 21);
-            this.cbEventDetails.TabIndex = 5;
-            this.cbEventDetails.SelectedIndexChanged += new System.EventHandler(this.CbEventDetails_SelectedIndexChanged);
-            // 
-            // eventLocationLabel
-            // 
-            this.eventLocationLabel.AutoSize = true;
-            this.eventLocationLabel.Location = new System.Drawing.Point(34, 37);
-            this.eventLocationLabel.Name = "eventLocationLabel";
-            this.eventLocationLabel.Size = new System.Drawing.Size(41, 13);
-            this.eventLocationLabel.TabIndex = 1;
-            this.eventLocationLabel.Text = "label28";
-            // 
-            // eventPrizePoolLabel
-            // 
-            this.eventPrizePoolLabel.AutoSize = true;
-            this.eventPrizePoolLabel.Location = new System.Drawing.Point(111, 68);
-            this.eventPrizePoolLabel.Name = "eventPrizePoolLabel";
-            this.eventPrizePoolLabel.Size = new System.Drawing.Size(41, 13);
-            this.eventPrizePoolLabel.TabIndex = 2;
-            this.eventPrizePoolLabel.Text = "label28";
-            // 
-            // eventNumberOfEntrantsLabel
-            // 
-            this.eventNumberOfEntrantsLabel.AutoSize = true;
-            this.eventNumberOfEntrantsLabel.Location = new System.Drawing.Point(111, 108);
-            this.eventNumberOfEntrantsLabel.Name = "eventNumberOfEntrantsLabel";
-            this.eventNumberOfEntrantsLabel.Size = new System.Drawing.Size(41, 13);
-            this.eventNumberOfEntrantsLabel.TabIndex = 3;
-            this.eventNumberOfEntrantsLabel.Text = "label28";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(34, 108);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(71, 13);
-            this.label28.TabIndex = 4;
-            this.label28.Text = "# of Entrants:";
-            // 
-            // eventDateLabel
-            // 
-            this.eventDateLabel.AutoSize = true;
-            this.eventDateLabel.Location = new System.Drawing.Point(184, 37);
-            this.eventDateLabel.Name = "eventDateLabel";
-            this.eventDateLabel.Size = new System.Drawing.Size(41, 13);
-            this.eventDateLabel.TabIndex = 5;
-            this.eventDateLabel.Text = "label30";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(34, 68);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(64, 13);
-            this.label30.TabIndex = 6;
-            this.label30.Text = "Total Purse:";
             // 
             // MainForm
             // 
@@ -1365,9 +1343,7 @@
         private System.Windows.Forms.ComboBox cbEventDetails;
         private System.Windows.Forms.Label eventPrizePoolLabel;
         private System.Windows.Forms.Label eventLocationLabel;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label eventNumberOfEntrantsLabel;
-        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label eventDateLabel;
     }
 }

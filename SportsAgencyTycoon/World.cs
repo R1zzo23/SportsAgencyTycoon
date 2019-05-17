@@ -83,25 +83,24 @@ namespace SportsAgencyTycoon
         #region Create Leagues & Associations
         public void CreateLeaguesAssociationEventsPlayersAndTeams()
         {
-            CreateLeagues();
-            CreateAssociations();
+            Random rnd = new Random();
+            CreateLeagues(rnd);
+            CreateAssociations(rnd);
             CreateAllEvents();
-            CreateAthletesForAssociations();
-            CreateTeamsForLeagues();
+            CreateAthletesForAssociations(rnd);
+            CreateTeamsForLeagues(rnd);
             AddLeaguesAndAssociationsToWorld();
         }
-        public void CreateLeagues()
+        public void CreateLeagues(Random rnd)
         {
-            Random rnd = new Random();
             NBA = new League(Sports.Basketball, "National Basketball Association", "NBA", rnd.Next(45, 100), new Date(10, Months.October, 4), new Date(6, Months.June, 2), 40000000, 582180);
             MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(4, Months.April, 1), new Date(10, Months.October, 4), 35000000, 555000);
             NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.August, 1), new Date(2, Months.February, 1), 30000000, 495000);
             NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(10, Months.October, 1), new Date(6, Months.June, 2), 9500000, 650000);
             MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(3, Months.March, 2), new Date(12, Months.December, 2), 7000000, 56250);
         }
-        public void CreateAssociations()
+        public void CreateAssociations(Random rnd)
         {
-            Random rnd = new Random();
             PGA = new Association(Sports.Golf, "Professional Golf Association", "PGA", rnd.Next(40, 80));
             ATP = new Association(Sports.Tennis, "Association of Tennis Professionals", "ATP", rnd.Next(20, 50));
             WBA = new Association(Sports.Boxing, "World Boxing Association", "WBA", rnd.Next(10, 40));
@@ -123,7 +122,7 @@ namespace SportsAgencyTycoon
             PGA.EventList.Add(new Event("Masters Tournament", "Augusta, GA", 11500000, 60, 50, new Date(4, Months.April, 2)));
             PGA.EventList.Add(new Event("PGA Championship", "Farmingdale, NY", 11000000, 100, 70, new Date(5, Months.May, 3)));
             PGA.EventList.Add(new Event("U.S. Open", "Pebble Beach, CA", 12000000, 100, 70, new Date(6, Months.June, 2)));
-            PGA.EventList.Add(new Event("The Open Championship", "Portrush, NIR", 11000000, 85, 60, new Date(7, Months.July, 7)));
+            PGA.EventList.Add(new Event("The Open Championship", "Portrush, NIR", 11000000, 85, 60, new Date(7, Months.July, 3)));
             PGA.EventList.Add(new Event("THE NORTHERN TRUST", "Jersey City, NJ", 9250000, 100, 70, new Date(8, Months.August, 1)));
             PGA.EventList.Add(new Event("BMW Championship", "Medinah, IL", 9250000, 100, 70, new Date(8, Months.August, 3)));
             PGA.EventList.Add(new Event("TOUR Championship", "Atlanta, GA", 9000000, 100, 70, new Date(8, Months.August, 4)));
@@ -145,64 +144,59 @@ namespace SportsAgencyTycoon
         }
         public void CreateUFCEvents()
         {
-            UFC.EventList.Add(new Event("Bloodied & Bruised", "Chicago, IL", 2500000, 10, 10, new Date(2, Months.February, 3)));
+            UFC.EventList.Add(new Event("Bloodied and Bruised", "Chicago, IL", 2500000, 10, 10, new Date(2, Months.February, 3)));
             UFC.EventList.Add(new Event("King Kong of the Octagon", "Atlantic City, NJ", 6000000, 50, 50, new Date(6, Months.June, 1)));
             UFC.EventList.Add(new Event("Elite Title Showdown", "Las Vegas, NV", 3250000, 8, 8, new Date(10, Months.October, 2)));
         }
         #endregion
         #region Create Athletes for Associations
-        public void CreateAthletesForAssociations()
+        public void CreateAthletesForAssociations(Random rnd)
         {
-            CreateGolfers();
-            CreateTennisPlayers();
-            CreateBoxers();
-            CreateMMAFighters();
+            CreateGolfers(rnd);
+            CreateTennisPlayers(rnd);
+            CreateBoxers(rnd);
+            CreateMMAFighters(rnd);
         }
-        public void CreateGolfers()
+        public void CreateGolfers(Random rnd)
         {
-            Random rnd = new Random();
             for (var i = 0; i < 100; i++)
             {
-                PGA.PlayerList.Add(new Player(Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65)));
+                PGA.PlayerList.Add(new Golfer(Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65)));
             }
         }
-        public void CreateTennisPlayers()
+        public void CreateTennisPlayers(Random rnd)
         {
-            Random rnd = new Random();
             for (var i = 0; i < 100; i++)
             {
-                ATP.PlayerList.Add(new Player(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35)));
+                ATP.PlayerList.Add(new TennisPlayer(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35)));
             }
         }
-        public void CreateBoxers()
+        public void CreateBoxers(Random rnd)
         {
-            Random rnd = new Random();
             for (var i = 0; i < 40; i++)
             {
-                WBA.PlayerList.Add(new Player(Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34)));
+                WBA.PlayerList.Add(new Boxer(Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34)));
             }
         }
-        public void CreateMMAFighters()
+        public void CreateMMAFighters(Random rnd)
         {
-            Random rnd = new Random();
             for (var i = 0; i < 50; i++)
             {
-                UFC.PlayerList.Add(new Player(Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31)));
+                UFC.PlayerList.Add(new MMAFighter(Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31)));
             }
         }
         #endregion
         #region Create Teams for Leagues
-        public void CreateTeamsForLeagues()
+        public void CreateTeamsForLeagues(Random rnd)
         {
-            CreateNBATeams();
-            CreateMLBTeams();
-            CreateNHLTeams();
-            CreateNFLTeams();
-            CreateMLSTeams();
+            CreateNBATeams(rnd);
+            CreateMLBTeams(rnd);
+            CreateNHLTeams(rnd);
+            CreateNFLTeams(rnd);
+            CreateMLSTeams(rnd);
         }
-        public void CreateNBATeams()
+        public void CreateNBATeams(Random rnd)
         {
-            Random rnd = new Random();
             NBA.TeamList.Add(new Team("Atlanta", "Hawks", "ATL", 40, rnd.Next(25, 76)));
             NBA.TeamList.Add(new Team("Boston", "Celtics", "BOS", 60, rnd.Next(25, 76)));
             NBA.TeamList.Add(new Team("Brooklyn", "Nets", "BKN", 62, rnd.Next(25, 76)));
@@ -234,9 +228,8 @@ namespace SportsAgencyTycoon
             NBA.TeamList.Add(new Team("Utah", "Jazz", "UTA", 38, rnd.Next(25, 76)));
             NBA.TeamList.Add(new Team("Washington", "Wizards", "WAS", 47, rnd.Next(25, 76)));
         }
-        public void CreateMLBTeams()
+        public void CreateMLBTeams(Random rnd)
         {
-            Random rnd = new Random();
             MLB.TeamList.Add(new Team("Arizona", "Diamondbacks", "ARI", 29, rnd.Next(25, 76)));
             MLB.TeamList.Add(new Team("Atlanta", "Braves", "ATL", 40, rnd.Next(25, 76)));
             MLB.TeamList.Add(new Team("Baltimore", "Orioles", "BAL", 45, rnd.Next(25, 76)));
@@ -268,9 +261,8 @@ namespace SportsAgencyTycoon
             MLB.TeamList.Add(new Team("Toronto", "Blue Jays", "TOR", 52, rnd.Next(25, 76)));
             MLB.TeamList.Add(new Team("Washington", "Nationals", "WAS", 47, rnd.Next(25, 76)));
         }
-        public void CreateNHLTeams()
+        public void CreateNHLTeams(Random rnd)
         {
-            Random rnd = new Random();
             NHL.TeamList.Add(new Team("Anaheim", "Ducks", "ANA", 60, rnd.Next(25, 76)));
             NHL.TeamList.Add(new Team("Arizona", "Coyotes", "ARI", 23, rnd.Next(25, 76)));
             NHL.TeamList.Add(new Team("Boston", "Bruins", "BOS", 85, rnd.Next(25, 76)));
@@ -302,11 +294,9 @@ namespace SportsAgencyTycoon
             NHL.TeamList.Add(new Team("Vegas", "Golden Knights", "VEG", 60, rnd.Next(25, 76)));
             NHL.TeamList.Add(new Team("Washington", "Capitals", "WAS", 64, rnd.Next(25, 76)));
             NHL.TeamList.Add(new Team("Winnipeg", "Jets", "WIN", 46, rnd.Next(25, 76)));
-
         }
-        public void CreateNFLTeams()
+        public void CreateNFLTeams(Random rnd)
         {
-            Random rnd = new Random();
             NFL.TeamList.Add(new Team("Arizona", "Cardinals", "ARI", 33, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Atlanta", "Falcons", "ATL", 44, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Baltimore", "Ravens", "BAL", 39, rnd.Next(25, 76)));
@@ -340,9 +330,8 @@ namespace SportsAgencyTycoon
             NFL.TeamList.Add(new Team("Tennessee", "Titans", "TEN", 48, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Washington", "Redskins", "WAS", 47, rnd.Next(25, 76)));
         }
-        public void CreateMLSTeams()
+        public void CreateMLSTeams(Random rnd)
         {
-            Random rnd = new Random();
             MLS.TeamList.Add(new Team("Atlanta", "United FC", "ATL", 55, rnd.Next(25, 76)));
             MLS.TeamList.Add(new Team("Chicago", "Fire", "CHI", 45, rnd.Next(25, 76)));
             MLS.TeamList.Add(new Team("Cincinnati", "FC", "CIN", 33, rnd.Next(25, 76)));
