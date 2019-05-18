@@ -519,20 +519,36 @@ namespace SportsAgencyTycoon
             List<Player> playerList = selectedAssociation.PlayerList;
             playerList = playerList.OrderBy(o => o.WorldRanking).ToList();
 
-            if(selectedAssociation.Sport == Sports.Golf || selectedAssociation.Sport == Sports.Tennis)
+            if(selectedAssociation.Sport == Sports.Golf)
             {
-                worldRankingsLabel.Text += "World Ranking - Name - Top Tens - Tournament Wins" + Environment.NewLine;
-                for (int i = 0; i < playerList.Count; i++)
+                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | Top Tens | Tournament Wins" + Environment.NewLine;
+                foreach (Golfer golfer in playerList)
                 {
-                    worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + Environment.NewLine;
+                    worldRankingsLabel.Text += golfer.WorldRanking + ") " + golfer.FirstName + " " + golfer.LastName + ": " + golfer.CareerEarnings.ToString("C0") + " | " + golfer.TopTenFinishes + " | " + golfer.TournamentWins +  Environment.NewLine;
                 }
             }
-            else if (selectedAssociation.Sport == Sports.Boxing || selectedAssociation.Sport == Sports.MMA)
+            else if (selectedAssociation.Sport == Sports.Tennis)
             {
-                worldRankingsLabel.Text += "World Ranking - Name (Wins - Losses)" + Environment.NewLine;
-                for (int i = 0; i < playerList.Count; i++)
+                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | Top Tens | Tournament Wins" + Environment.NewLine;
+                foreach (TennisPlayer tp in playerList)
                 {
-                    worldRankingsLabel.Text += (i + 1) + ") " + playerList[i].FirstName + " " + playerList[i].LastName + " " + Environment.NewLine;
+                    worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FirstName + " " + tp.LastName + ": " + tp.CareerEarnings.ToString("C0") + " | " + tp.TopTenFinishes + " | " + tp.TournamentWins + Environment.NewLine;
+                }
+            }
+            else if (selectedAssociation.Sport == Sports.Boxing)
+            {
+                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | (Wins - Losses)" + Environment.NewLine;
+                foreach (Boxer boxer in playerList)
+                {
+                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FirstName + " " + boxer.LastName + ": " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
+                }
+            }
+            else if (selectedAssociation.Sport == Sports.MMA)
+            {
+                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | (Wins - Losses)" + Environment.NewLine;
+                foreach (MMAFighter mma in playerList)
+                {
+                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FirstName + " " + mma.LastName + ": " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
                 }
             }
 
