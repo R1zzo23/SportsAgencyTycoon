@@ -471,6 +471,7 @@ namespace SportsAgencyTycoon
             UpdateAgencyInfo();
             world.CheckForEventsThisWeek();
             if (world.EventsThisWeek.Count > 0) DisplayEventsThisWeek();
+            RunEventsThisWeek();
         }   
 
         private void UpdateWorldCalendar()
@@ -602,6 +603,51 @@ namespace SportsAgencyTycoon
                 output += e.Name + Environment.NewLine;
             }
             newsLabel.Text = output + newsLabel.Text;
+        }
+        private void RunEventsThisWeek()
+        {
+            foreach (Event e in world.EventsThisWeek)
+            {
+                if (e.Sport == Sports.Tennis)
+                {
+                    RunTennisTournament(e);
+                }
+            }
+        }
+        private void RunTennisTournament(Event e)
+        {
+            List<Player> playerList = world.ATP.PlayerList.OrderBy(o => o.WorldRanking).ToList();
+            List<TennisPlayer> listOfTennisPlayers = new List<TennisPlayer>();
+            foreach (TennisPlayer t in playerList) listOfTennisPlayers.Add(t);
+
+            //add players to event
+            for (int i = 0; i < e.NumberOfEntrants; i++)
+            {
+                e.EntrantList.Add(listOfTennisPlayers[i]);
+            }
+            //if (e.NumberOfEntrants < 128 && e.NumberOfEntrants > 64)
+            //{
+            //    //get field down to 64
+            //    int firstRoundPlayers = (e.NumberOfEntrants - 64) * 2;
+            //    List<Player> playingThisRound = new List<Player>();
+            //    for (int j = e.NumberOfEntrants;  j > (e.NumberOfEntrants - firstRoundPlayers - 1); j--)
+            //    {
+            //        //add player to front of playingThisRound
+            //        playingThisRound.Insert(0, e.EntrantList[j]);
+            //        //remove from EntrantList
+            //        e.EntrantList.RemoveAt(j);
+            //    }
+            //}
+            for (int x = 0; x < (e.EntrantList.Count / 2); x++)
+            {
+                PlayTennisMatch(e.EntrantList[x], e.EntrantList[e.EntrantList.Count - x - 1]);
+            }
+        }
+        private void PlayTennisMatch(Player p1, Player p2)
+        {
+            TennisPlayer t1 = (TennisPlayer)p1;
+            TennisPlayer t2 = (TennisPlayer)p2;
+            Console.WriteLine(t1.FirstName + " " + t1.LastName + t1.SkillLevel + " vs. " + t2.FirstName + " " + t2.LastName + t2.SkillLevel);
         }
     }
 }

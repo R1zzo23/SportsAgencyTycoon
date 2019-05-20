@@ -119,35 +119,35 @@ namespace SportsAgencyTycoon
         }
         public void CreatePGAEvents()
         {
-            PGA.EventList.Add(new Event(Year, "World Golf Championships", "Mexico City, MEX", 10250000, 100, 70, new Date(2, Months.February, 3)));
-            PGA.EventList.Add(new Event(Year, "THE PLAYERS Championship", "Ponte Vedra Beach,  FL", 6700000, 75, 50, new Date(3, Months.March, 2)));
-            PGA.EventList.Add(new Event(Year, "Masters Tournament", "Augusta, GA", 11500000, 60, 50, new Date(4, Months.April, 2)));
-            PGA.EventList.Add(new Event(Year, "PGA Championship", "Farmingdale, NY", 11000000, 100, 70, new Date(5, Months.May, 3)));
-            PGA.EventList.Add(new Event(Year, "U.S. Open", "Pebble Beach, CA", 12000000, 100, 70, new Date(6, Months.June, 2)));
-            PGA.EventList.Add(new Event(Year, "The Open Championship", "Portrush, NIR", 11000000, 85, 60, new Date(7, Months.July, 3)));
-            PGA.EventList.Add(new Event(Year, "THE NORTHERN TRUST", "Jersey City, NJ", 9250000, 100, 70, new Date(8, Months.August, 1)));
-            PGA.EventList.Add(new Event(Year, "BMW Championship", "Medinah, IL", 9250000, 100, 70, new Date(8, Months.August, 3)));
-            PGA.EventList.Add(new Event(Year, "TOUR Championship", "Atlanta, GA", 9000000, 100, 70, new Date(8, Months.August, 4)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "World Golf Championships", "Mexico City, MEX", 10250000, 100, 70, new Date(2, Months.February, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "THE PLAYERS Championship", "Ponte Vedra Beach,  FL", 6700000, 75, 50, new Date(3, Months.March, 2)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "Masters Tournament", "Augusta, GA", 11500000, 60, 50, new Date(4, Months.April, 2)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "PGA Championship", "Farmingdale, NY", 11000000, 100, 70, new Date(5, Months.May, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "U.S. Open", "Pebble Beach, CA", 12000000, 100, 70, new Date(6, Months.June, 2)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "The Open Championship", "Portrush, NIR", 11000000, 85, 60, new Date(7, Months.July, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "THE NORTHERN TRUST", "Jersey City, NJ", 9250000, 100, 70, new Date(8, Months.August, 1)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "BMW Championship", "Medinah, IL", 9250000, 100, 70, new Date(8, Months.August, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "TOUR Championship", "Atlanta, GA", 9000000, 100, 70, new Date(8, Months.August, 4)));
         }
         public void CreateATPEvents()
         {
-            ATP.EventList.Add(new Event(Year, "Australian Open", "Melbourne, AUS", 15000000, 64, 64, new Date(1, Months.January, 3)));
-            ATP.EventList.Add(new Event(Year, "French Open", "Paris, FR", 20000000, 64, 64, new Date(5, Months.May, 4)));
-            ATP.EventList.Add(new Event(Year, "Wimbledon", "London, EN", 38000000, 100, 100, new Date(6, Months.June, 5)));
-            ATP.EventList.Add(new Event(Year, "US Open", "New York City, NY", 40000000, 100, 100, new Date(9, Months.September, 1)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Australian Open", "Melbourne, AUS", 15000000, 128, 128, new Date(1, Months.January, 3)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "French Open", "Paris, FR", 20000000, 128, 128, new Date(5, Months.May, 4)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Wimbledon", "London, EN", 38000000, 128, 128, new Date(6, Months.June, 5)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "US Open", "New York City, NY", 40000000, 128, 128, new Date(9, Months.September, 1)));
         }
         public void CreateWBAEvents()
         {
-            WBA.EventList.Add(new Event(Year, "Up-And-Comers Showcase", "Las Vegas, NV", 15000000, 30, 30, new Date(1, Months.January, 1)));
-            WBA.EventList.Add(new Event(Year, "NYC Prize Fights", "New York City, NY", 35000000, 12, 12, new Date(5, Months.May, 2)));
-            WBA.EventList.Add(new Event(Year, "Top Rank Boxing Premiere", "Los Angeles, CA", 29000000, 10, 10, new Date(9, Months.September, 3)));
-            WBA.EventList.Add(new Event(Year, "King of the Ring", "Las Vegas, NV", 50000000, 40, 40, new Date(11, Months.November, 4)));
+            WBA.EventList.Add(new Event(Sports.Boxing, Year, "Up-And-Comers Showcase", "Las Vegas, NV", 15000000, 30, 30, new Date(1, Months.January, 1)));
+            WBA.EventList.Add(new Event(Sports.Boxing, Year, "NYC Prize Fights", "New York City, NY", 35000000, 12, 12, new Date(5, Months.May, 2)));
+            WBA.EventList.Add(new Event(Sports.Boxing, Year, "Top Rank Boxing Premiere", "Los Angeles, CA", 29000000, 10, 10, new Date(9, Months.September, 3)));
+            WBA.EventList.Add(new Event(Sports.Boxing, Year, "King of the Ring", "Las Vegas, NV", 50000000, 40, 40, new Date(11, Months.November, 4)));
         }
         public void CreateUFCEvents()
         {
-            UFC.EventList.Add(new Event(Year, "Bloodied and Bruised", "Chicago, IL", 2500000, 10, 10, new Date(2, Months.February, 3)));
-            UFC.EventList.Add(new Event(Year, "King Kong of the Octagon", "Atlantic City, NJ", 6000000, 50, 50, new Date(6, Months.June, 1)));
-            UFC.EventList.Add(new Event(Year, "Elite Title Showdown", "Las Vegas, NV", 3250000, 8, 8, new Date(10, Months.October, 2)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "Bloodied and Bruised", "Chicago, IL", 2500000, 10, 10, new Date(2, Months.February, 3)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "King Kong of the Octagon", "Atlantic City, NJ", 6000000, 50, 50, new Date(6, Months.June, 1)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "Elite Title Showdown", "Las Vegas, NV", 3250000, 8, 8, new Date(10, Months.October, 2)));
         }
         #endregion
         #region Create Athletes for Associations
@@ -167,7 +167,7 @@ namespace SportsAgencyTycoon
         }
         public void CreateTennisPlayers(Random rnd)
         {
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 128; i++)
             {
                 ATP.PlayerList.Add(new TennisPlayer(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35)));
             }
