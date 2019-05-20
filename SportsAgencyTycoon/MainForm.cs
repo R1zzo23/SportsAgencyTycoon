@@ -90,12 +90,14 @@ namespace SportsAgencyTycoon
                     Association selectedAssociation = world.Associations[cbAssociationRankings.SelectedIndex];
                     cbEventDetails.Items.Clear();
 
+                    int eventYear;
                     string eventName;
 
                     foreach (Event e in selectedAssociation.EventList)
                     {
+                        eventYear = e.Year;
                         eventName = e.Name;
-                        cbEventDetails.Items.Add(eventName);
+                        cbEventDetails.Items.Add(eventYear.ToString() + " " + eventName);
                     }
                 }   
             }
@@ -467,6 +469,8 @@ namespace SportsAgencyTycoon
             //update Agency and Agent panels
             UpdateAgentInfo(selectedAgent);
             UpdateAgencyInfo();
+            world.CheckForEventsThisWeek();
+            if (world.EventsThisWeek.Count > 0) DisplayEventsThisWeek();
         }   
 
         private void UpdateWorldCalendar()
@@ -521,7 +525,7 @@ namespace SportsAgencyTycoon
 
             if(selectedAssociation.Sport == Sports.Golf)
             {
-                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | Top Tens | Tournament Wins" + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name | Earnings | Top Tens | Tourney Wins" + Environment.NewLine;
                 foreach (Golfer golfer in playerList)
                 {
                     worldRankingsLabel.Text += golfer.WorldRanking + ") " + golfer.FirstName + " " + golfer.LastName + ": " + golfer.CareerEarnings.ToString("C0") + " | " + golfer.TopTenFinishes + " | " + golfer.TournamentWins +  Environment.NewLine;
@@ -529,7 +533,7 @@ namespace SportsAgencyTycoon
             }
             else if (selectedAssociation.Sport == Sports.Tennis)
             {
-                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | Top Tens | Tournament Wins" + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name | Earnings | Top Tens | Tourney Wins" + Environment.NewLine;
                 foreach (TennisPlayer tp in playerList)
                 {
                     worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FirstName + " " + tp.LastName + ": " + tp.CareerEarnings.ToString("C0") + " | " + tp.TopTenFinishes + " | " + tp.TournamentWins + Environment.NewLine;
@@ -537,7 +541,7 @@ namespace SportsAgencyTycoon
             }
             else if (selectedAssociation.Sport == Sports.Boxing)
             {
-                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | (Wins - Losses)" + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name: Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (Boxer boxer in playerList)
                 {
                     worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FirstName + " " + boxer.LastName + ": " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
@@ -545,7 +549,7 @@ namespace SportsAgencyTycoon
             }
             else if (selectedAssociation.Sport == Sports.MMA)
             {
-                worldRankingsLabel.Text += "World Ranking - Name: Career Earnings | (Wins - Losses)" + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name: Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (MMAFighter mma in playerList)
                 {
                     worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FirstName + " " + mma.LastName + ": " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
@@ -587,6 +591,17 @@ namespace SportsAgencyTycoon
             eventPrizePoolLabel.Text = "";
             eventNumberOfEntrantsLabel.Text = "";
             eventLocationLabel.Text = "";
+        }
+
+        private void DisplayEventsThisWeek()
+        {
+            string output;
+            output = "Events this week:" + Environment.NewLine;
+            foreach (Event e in world.EventsThisWeek)
+            {
+                output += e.Name + Environment.NewLine;
+            }
+            newsLabel.Text = output + newsLabel.Text;
         }
     }
 }
