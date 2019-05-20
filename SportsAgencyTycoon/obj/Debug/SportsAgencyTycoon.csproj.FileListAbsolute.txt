@@ -41,3 +41,4 @@ C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\S
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csproj.CoreCompileInputs.cache
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.exe
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.pdb
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csprojAssemblyReference.cache

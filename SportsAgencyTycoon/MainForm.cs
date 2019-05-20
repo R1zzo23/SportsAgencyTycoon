@@ -617,6 +617,9 @@ namespace SportsAgencyTycoon
         private void RunTennisTournament(Event e)
         {
             Random rnd = new Random();
+            List<Player> loserList = new List<Player>();
+            List<Player> tempList = new List<Player>();
+            List<Player> winnerList = new List<Player>();
             List<Player> playerList = world.ATP.PlayerList.OrderBy(o => o.WorldRanking).ToList();
             List<TennisPlayer> listOfTennisPlayers = new List<TennisPlayer>();
             foreach (TennisPlayer t in playerList) listOfTennisPlayers.Add(t);
@@ -638,13 +641,28 @@ namespace SportsAgencyTycoon
             //        e.EntrantList.RemoveAt(j);
             //    }
             //}
-            for (int x = 0; x < (e.EntrantList.Count / 2); x++)
+            while (loserList.Count < e.EntrantList.Count - 1)
             {
-                PlayTennisMatch(e.EntrantList[x], e.EntrantList[e.EntrantList.Count - x - 1], rnd);
+                for (int x = 0; x < (e.EntrantList.Count / 2); x++)
+                {
+                    int result;
+                    result = PlayTennisMatch(e.EntrantList[x], e.EntrantList[e.EntrantList.Count - x - 1], rnd);
+                    if (result == 1)
+                    {
+                        winnerList.Add(e.EntrantList[x]);
+                        loserList.Insert(0, e.EntrantList[e.EntrantList.Count - x - 1]);
+                    }
+                    else if (result == 2)
+                    {
+                        winnerList.Add(e.EntrantList[e.EntrantList.Count - x - 1]);
+                        loserList.Insert(0, e.EntrantList[x]);
+                    }
+                }
             }
         }
-        private void PlayTennisMatch(Player p1, Player p2, Random rnd)
+        private int PlayTennisMatch(Player p1, Player p2, Random rnd)
         {
+            int winningPlayer = 0;
             TennisPlayer t1 = (TennisPlayer)p1;
             TennisPlayer t2 = (TennisPlayer)p2;
             Console.WriteLine("{0} {1} ({2}) vs. {3} {4} ({5}).", t1.FirstName, t1.LastName, t1.SkillLevel, t2.FirstName, t2.LastName, t2.SkillLevel);
@@ -660,8 +678,17 @@ namespace SportsAgencyTycoon
                 if (luckyNumber <= t1.SkillLevel) t1SetsWon++;
                 else t2SetsWon++;
             }
-            if (t1SetsWon == 4) Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t1.FirstName, t1.LastName, t2.FirstName, t2.LastName, t1SetsWon, t2SetsWon);
-            else if (t2SetsWon == 4) Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t2.FirstName, t2.LastName, t1.FirstName, t1.LastName, t2SetsWon, t1SetsWon);
+            if (t1SetsWon == 4)
+            {
+                Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t1.FirstName, t1.LastName, t2.FirstName, t2.LastName, t1SetsWon, t2SetsWon);
+                winningPlayer = 1;
+            }
+            else if (t2SetsWon == 4)
+            {
+                Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t2.FirstName, t2.LastName, t1.FirstName, t1.LastName, t2SetsWon, t1SetsWon);
+                winningPlayer = 2;
+            }
+            return winningPlayer;
         }
     }
 }
