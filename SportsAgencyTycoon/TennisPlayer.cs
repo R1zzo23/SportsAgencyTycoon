@@ -9,13 +9,17 @@ namespace SportsAgencyTycoon
     public class TennisPlayer : Player
     {
         public int TournamentWins;
-        public int TopTenFinishes;
+        public int QuarterFinals;
+        public int GrandSlams;
+        public int TourPoints;
 
         public TennisPlayer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age)
             : base(sport, firstName, lastName, skillLevel, age)
         {
             TournamentWins = 0;
-            TopTenFinishes = 0;
+            QuarterFinals = 0;
+            GrandSlams = 0;
+            TourPoints = 0;
         }
     }
 }

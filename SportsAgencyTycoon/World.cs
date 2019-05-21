@@ -132,9 +132,9 @@ namespace SportsAgencyTycoon
         public void CreateATPEvents()
         {
             ATP.EventList.Add(new Event(Sports.Tennis, Year, "Australian Open", "Melbourne, AUS", 15000000, 128, 128, new Date(1, Months.January, 3)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "French Open", "Paris, FR", 20000000, 128, 128, new Date(5, Months.May, 4)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Wimbledon", "London, EN", 38000000, 128, 128, new Date(6, Months.June, 5)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "US Open", "New York City, NY", 40000000, 128, 128, new Date(9, Months.September, 1)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "French Open", "Paris, FR", 16500000, 128, 128, new Date(5, Months.May, 4)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Wimbledon", "London, EN", 20000000, 128, 128, new Date(6, Months.June, 5)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "US Open", "New York City, NY", 17500000, 128, 128, new Date(9, Months.September, 1)));
         }
         public void CreateWBAEvents()
         {
