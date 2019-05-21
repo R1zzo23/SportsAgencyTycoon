@@ -617,6 +617,7 @@ namespace SportsAgencyTycoon
         private void RunTennisTournament(Event e)
         {
             Random rnd = new Random();
+            int x = 0;
             List<Player> loserList = new List<Player>();
             List<Player> tempList = new List<Player>();
             List<Player> winnerList = new List<Player>();
@@ -628,36 +629,38 @@ namespace SportsAgencyTycoon
             {
                 e.EntrantList.Add(listOfTennisPlayers[i]);
             }
-            //if (e.NumberOfEntrants < 128 && e.NumberOfEntrants > 64)
-            //{
-            //    //get field down to 64
-            //    int firstRoundPlayers = (e.NumberOfEntrants - 64) * 2;
-            //    List<Player> playingThisRound = new List<Player>();
-            //    for (int j = e.NumberOfEntrants;  j > (e.NumberOfEntrants - firstRoundPlayers - 1); j--)
-            //    {
-            //        //add player to front of playingThisRound
-            //        playingThisRound.Insert(0, e.EntrantList[j]);
-            //        //remove from EntrantList
-            //        e.EntrantList.RemoveAt(j);
-            //    }
-            //}
-            while (loserList.Count < e.EntrantList.Count - 1)
+
+            foreach (Player p in e.EntrantList) tempList.Add(p);
+
+            //tempList = e.EntrantList;
+            //winnerList = e.EntrantList;
+
+            while (loserList.Count < e.NumberOfEntrants - 1)
             {
-                for (int x = 0; x < (e.EntrantList.Count / 2); x++)
+                winnerList.Clear();
+                for (x = 0; x < (tempList.Count / 2); x++)
                 {
                     int result;
-                    result = PlayTennisMatch(e.EntrantList[x], e.EntrantList[e.EntrantList.Count - x - 1], rnd);
+                    result = PlayTennisMatch(tempList[x], tempList[tempList.Count - x - 1], rnd);
                     if (result == 1)
                     {
-                        winnerList.Add(e.EntrantList[x]);
-                        loserList.Insert(0, e.EntrantList[e.EntrantList.Count - x - 1]);
+                        winnerList.Add(tempList[x]);
+                        loserList.Insert(0, tempList[tempList.Count - x - 1]);
                     }
                     else if (result == 2)
                     {
-                        winnerList.Add(e.EntrantList[e.EntrantList.Count - x - 1]);
-                        loserList.Insert(0, e.EntrantList[x]);
+                        winnerList.Add(tempList[tempList.Count - x - 1]);
+                        loserList.Insert(0, tempList[x]);
                     }
                 }
+                tempList.Clear();
+                foreach (Player p in winnerList) tempList.Add(p);
+            }
+            Console.WriteLine("{0} {1} is the {2} {3} champion!!!", winnerList[0].FirstName, winnerList[0].LastName, e.Year, e.Name);
+            Console.WriteLine("Here is the rest of the top-10 finishers:");
+            for (var i = 0; i < 9; i++)
+            {
+                Console.WriteLine(i + 2 + ") {0} {1}", loserList[i].FirstName, loserList[i].LastName);
             }
         }
         private int PlayTennisMatch(Player p1, Player p2, Random rnd)
