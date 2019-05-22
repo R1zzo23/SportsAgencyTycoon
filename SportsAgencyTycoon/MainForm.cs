@@ -618,7 +618,7 @@ namespace SportsAgencyTycoon
         {
             Random rnd = new Random();
             int x = 0;
-            List<Player> loserList = new List<Player>();
+            List<Player> resultsList = new List<Player>();
             List<Player> tempList = new List<Player>();
             List<Player> winnerList = new List<Player>();
             List<Player> playerList = world.ATP.PlayerList.OrderBy(o => o.WorldRanking).ToList();
@@ -632,7 +632,7 @@ namespace SportsAgencyTycoon
 
             foreach (Player p in e.EntrantList) tempList.Add(p);
 
-            while (loserList.Count < e.NumberOfEntrants - 1)
+            while (resultsList.Count < e.NumberOfEntrants - 1)
             {
                 winnerList.Clear();
                 for (x = 0; x < (tempList.Count / 2); x++)
@@ -642,26 +642,25 @@ namespace SportsAgencyTycoon
                     if (result == 1)
                     {
                         winnerList.Add(tempList[x]);
-                        loserList.Insert(0, tempList[tempList.Count - x - 1]);
+                        resultsList.Insert(0, tempList[tempList.Count - x - 1]);
                     }
                     else if (result == 2)
                     {
                         winnerList.Add(tempList[tempList.Count - x - 1]);
-                        loserList.Insert(0, tempList[x]);
+                        resultsList.Insert(0, tempList[x]);
                     }
                 }
                 tempList.Clear();
                 foreach (Player p in winnerList) tempList.Add(p);
             }
-            loserList.Insert(0, winnerList[0]);
-            Console.WriteLine("{0} {1} is the {2} {3} champion!!!", loserList[0].FirstName, loserList[0].LastName, e.Year, e.Name);
+            resultsList.Insert(0, winnerList[0]);
+            Console.WriteLine("{0} {1} is the {2} {3} champion!!!", resultsList[0].FirstName, resultsList[0].LastName, e.Year, e.Name);
             Console.WriteLine("Here is the rest of the top-10 finishers:");
             for (var i = 0; i < 9; i++)
             {
-                Console.WriteLine(i + 1 + ") {0} {1}", loserList[i].FirstName, loserList[i].LastName);
+                Console.WriteLine(i + 1 + ") {0} {1}", resultsList[i].FirstName, resultsList[i].LastName);
             }
-            AwardTennisPayouts(e, loserList);
-            AwardTennisTourPoints();
+            AwardTennisPayoutsAndTourPoints(e, resultsList);
         }
         private int PlayTennisMatch(Player p1, Player p2, Random rnd)
         {
@@ -694,16 +693,36 @@ namespace SportsAgencyTycoon
             return winningPlayer;
         }
 
-        private void AwardTennisPayouts(Event e, List<Player> list)
+        private void AwardTennisPayoutsAndTourPoints(Event e, List<Player> list)
         {
             int purse = e.PrizePool;
+            int[] GrandSlamPoints = new int[] { 2000, 1200, 720, 360, 180, 90, 45, 10 };
+            int[] Masters1000Points = new int[] { 1000, 600, 360, 180, 90, 45, 22, 5 };
+            int[] AwardedPoints;
 
-            for (var i = 0; i < list.Count; i++)
+            List <TennisPlayer> tennisPlayers = new List<TennisPlayer>();
+            foreach (TennisPlayer p in list) tennisPlayers.Add(p);
+
+            if (e.MajorOrGrandSlam) AwardedPoints = GrandSlamPoints;
+            else AwardedPoints = Masters1000Points;
+
+            for (var i = 0; i < tennisPlayers.Count; i++)
             {
                 //champ gets 17.06%
-                if (i < 1) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .1706));
+                if (i < 1)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .1706));
+                    tennisPlayers[i].TourPoints += AwardedPoints[0];
+                    tennisPlayers[i].TournamentWins++;
+                    tennisPlayers[i].QuarterFinals++;
+                }
                 //runner-up: 9.21%
-                else if (i < 2) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0921));
+                else if (i < 2)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0921));
+                    tennisPlayers[i].TourPoints += AwardedPoints[1];
+                    tennisPlayers[i].QuarterFinals++;
+                }
                 //Semi-Finalists Losers: 4.66%
                 else if (i < 4) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0466));
                 //Quarter-Finalists Losers: 2.56%

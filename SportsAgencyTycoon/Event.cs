@@ -17,8 +17,9 @@ namespace SportsAgencyTycoon
         public int NumberOfEntrants;
         public Date EventDate;
         public List<Player> EntrantList;
+        public bool MajorOrGrandSlam;
 
-        public Event(Sports sport, int year, string name, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
+        public Event(Sports sport, int year, string name, bool majorOrGrandSlam, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
         {
             Sport = sport;
             Year = year;
