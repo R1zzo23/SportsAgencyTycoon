@@ -24,6 +24,7 @@ namespace SportsAgencyTycoon
             Sport = sport;
             Year = year;
             Name = name;
+            MajorOrGrandSlam = majorOrGrandSlam;
             Location = location;
             PrizePool = prizePool;
             SpotsPaidOut = spotsPaidOut;

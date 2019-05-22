@@ -699,6 +699,7 @@ namespace SportsAgencyTycoon
             int[] GrandSlamPoints = new int[] { 2000, 1200, 720, 360, 180, 90, 45, 10 };
             int[] Masters1000Points = new int[] { 1000, 600, 360, 180, 90, 45, 22, 5 };
             int[] AwardedPoints;
+            bool GrandSlam = e.MajorOrGrandSlam;
 
             List <TennisPlayer> tennisPlayers = new List<TennisPlayer>();
             foreach (TennisPlayer p in list) tennisPlayers.Add(p);
@@ -711,6 +712,7 @@ namespace SportsAgencyTycoon
                 //champ gets 17.06%
                 if (i < 1)
                 {
+                    if (GrandSlam) tennisPlayers[i].GrandSlams++;
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .1706));
                     tennisPlayers[i].TourPoints += AwardedPoints[0];
                     tennisPlayers[i].TournamentWins++;
@@ -724,22 +726,60 @@ namespace SportsAgencyTycoon
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //Semi-Finalists Losers: 4.66%
-                else if (i < 4) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0466));
+                else if (i < 4)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0466));
+                    tennisPlayers[i].TourPoints += AwardedPoints[2];
+                    tennisPlayers[i].QuarterFinals++;
+                }
                 //Quarter-Finalists Losers: 2.56%
-                else if (i < 8) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0256));
+                else if (i < 8)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0256));
+                    tennisPlayers[i].TourPoints += AwardedPoints[3];
+                    tennisPlayers[i].QuarterFinals++;
+                }
                 //4th Round Losers: 1.40%
-                else if (i < 16) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0140));
+                else if (i < 16)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0140));
+                    tennisPlayers[i].TourPoints += AwardedPoints[4];
+                }
                 //3rd Round Losers: 0.79%
-                else if (i < 32) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0079));
+                else if (i < 32)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0079));
+                    tennisPlayers[i].TourPoints += AwardedPoints[5];
+                }
                 //2nd Round Losers: 0.46%
-                else if (i < 64) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0046));
+                else if (i < 64)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0046));
+                    tennisPlayers[i].TourPoints += AwardedPoints[6];
+                }
                 //1st Round Losers: 0.25%
-                else if (i < 128) list[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0025));
+                else if (i < 128)
+                {
+                    tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0025));
+                    tennisPlayers[i].TourPoints += AwardedPoints[7];
+                }
             }
+            UpdateATPPlayerList(tennisPlayers);
         }
-        private void AwardTennisTourPoints()
+        private void UpdateATPPlayerList(List<TennisPlayer> resultList)
         {
-            // GrandSlamPoints = [2000, 1200, 720, 360, 180, 90, 45, 10]
+            resultList = resultList.OrderByDescending(o => o.TourPoints).ToList();
+            for (var j = 0; j < resultList.Count; j++)
+            {
+                resultList[j].WorldRanking = j + 1;
+                for (var i = 0; i < world.ATP.PlayerList.Count; i++)
+                {
+                    if (resultList[j].FirstName == world.ATP.PlayerList[i].FirstName && resultList[j].LastName == world.ATP.PlayerList[i].LastName && resultList[j].Age == world.ATP.PlayerList[i].Age)
+                    {
+                        world.ATP.PlayerList[i] = resultList[j];
+                    }
+                }
+            }
         }
     }
 }
