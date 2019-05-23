@@ -17,14 +17,14 @@ namespace SportsAgencyTycoon
         public int NumberOfEntrants;
         public Date EventDate;
         public List<Player> EntrantList;
-        public bool MajorOrGrandSlam;
+        public EventType TypeOfEvent;
 
-        public Event(Sports sport, int year, string name, bool majorOrGrandSlam, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
+        public Event(Sports sport, int year, string name, EventType typeOfEvent, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
         {
             Sport = sport;
             Year = year;
             Name = name;
-            MajorOrGrandSlam = majorOrGrandSlam;
+            TypeOfEvent = typeOfEvent;
             Location = location;
             PrizePool = prizePool;
             SpotsPaidOut = spotsPaidOut;
@@ -32,5 +32,13 @@ namespace SportsAgencyTycoon
             EventDate = eventDate;
             EntrantList = new List<Player>();
         }
+    }
+
+    public enum EventType
+    {
+        Major,
+        GrandSlam,
+        Masters1000,
+        Normal
     }
 }

@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public int QuarterFinals;
         public int GrandSlams;
         public int TourPoints;
+        public List<int> TourPointsList;
 
         public TennisPlayer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age)
             : base(sport, firstName, lastName, skillLevel, age)
@@ -20,6 +21,8 @@ namespace SportsAgencyTycoon
             QuarterFinals = 0;
             GrandSlams = 0;
             TourPoints = 0;
+            //array should be as large as the number of tennis events on the schedule
+            TourPointsList = new List<int>();
         }
     }
 }

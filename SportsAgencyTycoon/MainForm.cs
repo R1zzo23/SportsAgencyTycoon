@@ -534,10 +534,10 @@ namespace SportsAgencyTycoon
             }
             else if (selectedAssociation.Sport == Sports.Tennis)
             {
-                worldRankingsLabel.Text += "World Ranking - Name | Earnings | Quarters | Tourney Wins | Grand Slams" + Environment.NewLine;
+                worldRankingsLabel.Text += "#) - Name | Points | $$$ | QFIN APP | TITLES | Slams" + Environment.NewLine;
                 foreach (TennisPlayer tp in playerList)
                 {
-                    worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FirstName + " " + tp.LastName + ": " + tp.CareerEarnings.ToString("C0") + " | " + tp.QuarterFinals + " | " + tp.TournamentWins + " | " + tp.GrandSlams + Environment.NewLine;
+                    worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FirstName + " " + tp.LastName + ": " + tp.TourPoints.ToString() + " | " + tp.CareerEarnings.ToString("C0") + " | " + tp.QuarterFinals + " | " + tp.TournamentWins + " | " + tp.GrandSlams + Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.Boxing)
@@ -699,12 +699,12 @@ namespace SportsAgencyTycoon
             int[] GrandSlamPoints = new int[] { 2000, 1200, 720, 360, 180, 90, 45, 10 };
             int[] Masters1000Points = new int[] { 1000, 600, 360, 180, 90, 45, 22, 5 };
             int[] AwardedPoints;
-            bool GrandSlam = e.MajorOrGrandSlam;
+            EventType eventType = e.TypeOfEvent;
 
             List <TennisPlayer> tennisPlayers = new List<TennisPlayer>();
             foreach (TennisPlayer p in list) tennisPlayers.Add(p);
 
-            if (e.MajorOrGrandSlam) AwardedPoints = GrandSlamPoints;
+            if (eventType == EventType.GrandSlam) AwardedPoints = GrandSlamPoints;
             else AwardedPoints = Masters1000Points;
 
             for (var i = 0; i < tennisPlayers.Count; i++)
@@ -712,9 +712,10 @@ namespace SportsAgencyTycoon
                 //champ gets 17.06%
                 if (i < 1)
                 {
-                    if (GrandSlam) tennisPlayers[i].GrandSlams++;
+                    if (eventType == EventType.GrandSlam) tennisPlayers[i].GrandSlams++;
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .1706));
-                    tennisPlayers[i].TourPoints += AwardedPoints[0];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[0]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                     tennisPlayers[i].TournamentWins++;
                     tennisPlayers[i].QuarterFinals++;
                 }
@@ -722,50 +723,67 @@ namespace SportsAgencyTycoon
                 else if (i < 2)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0921));
-                    tennisPlayers[i].TourPoints += AwardedPoints[1];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[1]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //Semi-Finalists Losers: 4.66%
                 else if (i < 4)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0466));
-                    tennisPlayers[i].TourPoints += AwardedPoints[2];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[2]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //Quarter-Finalists Losers: 2.56%
                 else if (i < 8)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0256));
-                    tennisPlayers[i].TourPoints += AwardedPoints[3];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[3]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //4th Round Losers: 1.40%
                 else if (i < 16)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0140));
-                    tennisPlayers[i].TourPoints += AwardedPoints[4];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[4]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                 }
                 //3rd Round Losers: 0.79%
                 else if (i < 32)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0079));
-                    tennisPlayers[i].TourPoints += AwardedPoints[5];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[5]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                 }
                 //2nd Round Losers: 0.46%
                 else if (i < 64)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0046));
-                    tennisPlayers[i].TourPoints += AwardedPoints[6];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[6]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                 }
                 //1st Round Losers: 0.25%
                 else if (i < 128)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0025));
-                    tennisPlayers[i].TourPoints += AwardedPoints[7];
+                    tennisPlayers[i].TourPointsList.Add(AwardedPoints[7]);
+                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
                 }
             }
             UpdateATPPlayerList(tennisPlayers);
         }
+        public int CalculateTennisPlayerTourPoints(TennisPlayer p)
+        {
+            int tourPoints = 0;
+            if (p.TourPointsList.Count > world.ATP.EventList.Count) p.TourPointsList.RemoveAt(0);
+
+            foreach (int i in p.TourPointsList) tourPoints += i;
+
+            return tourPoints;
+        }
+
         private void UpdateATPPlayerList(List<TennisPlayer> resultList)
         {
             resultList = resultList.OrderByDescending(o => o.TourPoints).ToList();
