@@ -97,7 +97,8 @@ namespace SportsAgencyTycoon
                     {
                         eventYear = e.Year;
                         eventName = e.Name;
-                        cbEventDetails.Items.Add(eventYear.ToString() + " " + eventName);
+                        if (e.Year == world.Year)
+                            cbEventDetails.Items.Add(eventYear.ToString() + " " + eventName);
                     }
                 }   
             }
@@ -582,7 +583,7 @@ namespace SportsAgencyTycoon
                 eventDateLabel.Text = weekOfEvent + " week of " + selectedEvent.EventDate.MonthName.ToString();
 
                 eventPrizePoolLabel.Text = "Total Purse: " + selectedEvent.PrizePool.ToString("C0");
-                eventNumberOfEntrantsLabel.Text = "# of Entratnts: " + selectedEvent.NumberOfEntrants.ToString();
+                eventNumberOfEntrantsLabel.Text = "# of Entrants: " + selectedEvent.NumberOfEntrants.ToString();
             }
         }
         private void ClearEventDetails()
@@ -654,12 +655,15 @@ namespace SportsAgencyTycoon
                 foreach (Player p in winnerList) tempList.Add(p);
             }
             resultsList.Insert(0, winnerList[0]);
-            Console.WriteLine("{0} {1} is the {2} {3} champion!!!", resultsList[0].FirstName, resultsList[0].LastName, e.Year, e.Name);
-            Console.WriteLine("Here is the rest of the top-10 finishers:");
-            for (var i = 0; i < 9; i++)
+            string tournamentResults = "";
+            for (var i = 1; i < 8; i++)
             {
-                Console.WriteLine(i + 1 + ") {0} {1}", resultsList[i].FirstName, resultsList[i].LastName);
+                tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + Environment.NewLine;
             }
+            newsLabel.Text = resultsList[0].FirstName + " " + resultsList[0].LastName 
+                + " is the " + e.Year.ToString() + " " + e.Name.ToString() + " champion!" 
+                + Environment.NewLine + "Here are the rest of the quarterfinalists:" 
+                + Environment.NewLine + tournamentResults + Environment.NewLine + newsLabel.Text;
             AwardTennisPayoutsAndTourPoints(e, resultsList);
         }
         private int PlayTennisMatch(Player p1, Player p2, Random rnd)

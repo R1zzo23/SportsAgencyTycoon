@@ -38,8 +38,8 @@ namespace SportsAgencyTycoon
             Associations = new List<Association>();
             
             Year = 2000;
-            MonthNumber = 5;
-            MonthName = Months.June;
+            MonthNumber = 1;
+            MonthName = Months.January;
             WeekNumber = 1;
         }
 
@@ -421,6 +421,19 @@ namespace SportsAgencyTycoon
         {
             MonthNumber = 0;
             Year++;
+            CreateAllEvents();
+            IncreasePrizePool();
+        }
+        private void IncreasePrizePool()
+        {
+            foreach (Association a in Associations)
+            {
+                foreach (Event e in a.EventList)
+                {
+                    double inflationPercentage = (Year - 2000) * .0375;
+                    e.PrizePool = (int)Math.Floor(e.PrizePool * (1 + inflationPercentage));
+                }
+            }
         }
         #endregion
         public bool CheckTestingWindow(Months month, Sports sport)
@@ -462,7 +475,7 @@ namespace SportsAgencyTycoon
             {
                 foreach (Event e in a.EventList)
                 {
-                    if (e.EventDate.Week == WeekNumber && e.EventDate.MonthName == MonthName)
+                    if (e.EventDate.Week == WeekNumber && e.EventDate.MonthName == MonthName && e.Year == Year)
                     {
                         EventsThisWeek.Add(e);
                     }
