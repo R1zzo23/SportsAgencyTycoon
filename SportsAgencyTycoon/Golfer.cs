@@ -12,8 +12,8 @@ namespace SportsAgencyTycoon
         public int TopTenFinishes;
         public int TourPoints;
 
-        public Golfer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age) 
-            : base(sport, firstName, lastName, skillLevel, age)
+        public Golfer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek) 
+            : base(sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
         {
             TournamentWins = 0;
             TopTenFinishes = 0;

@@ -11,8 +11,8 @@ namespace SportsAgencyTycoon
         public int Wins;
         public int Losses;
 
-        public Boxer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age)
-            : base(sport, firstName, lastName, skillLevel, age)
+        public Boxer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
+            : base(sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
         {
             Wins = 0;
             Losses = 0;
