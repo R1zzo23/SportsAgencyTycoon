@@ -9,6 +9,7 @@ namespace SportsAgencyTycoon
     {
         public string RunTournament(Event e, World world)
         {
+            //string to print out results to user in newsLabel
             string results = "";
             Random rnd = new Random();
             int x = 0;
