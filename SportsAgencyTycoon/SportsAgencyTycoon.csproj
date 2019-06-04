@@ -101,6 +101,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Tennis.cs" />
+    <Compile Include="Golf.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

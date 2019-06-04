@@ -132,17 +132,17 @@ namespace SportsAgencyTycoon
         public void CreateATPEvents()
         {
             ATP.EventList.Add(new Event(Sports.Tennis, Year, "Australian Open", EventType.GrandSlam, "Melbourne, AUS", 15000000, 128, 128, new Date(1, Months.January, 3)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "BNP Paribas Open", EventType.Masters1000, "Indiand Wells, CA", 4230000, 64, 64, new Date(3, Months.March, 2)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Miami Open", EventType.Masters1000, "Miami, FL", 4500000, 64, 64, new Date(3, Months.March, 4)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Rolex Monte-Carlo Masters", EventType.Masters1000, "Monte Carlo, MON", 3000000, 64, 64, new Date(4, Months.April, 2)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Mutua Madrid Open", EventType.Masters1000, "Madrid, ESP", 3750000, 64, 64, new Date(5, Months.May, 1)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Internazionali BNL d'Italia", EventType.Masters1000, "Rome, ITA", 2900000, 64, 64, new Date(5, Months.May, 3)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "BNP Paribas Open", EventType.Masters1000, "Indiand Wells, CA", 4230000, 128, 128, new Date(3, Months.March, 2)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Miami Open", EventType.Masters1000, "Miami, FL", 4500000, 128, 128, new Date(3, Months.March, 4)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Rolex Monte-Carlo Masters", EventType.Masters1000, "Monte Carlo, MON", 3000000, 128, 128, new Date(4, Months.April, 2)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Mutua Madrid Open", EventType.Masters1000, "Madrid, ESP", 3750000, 128, 128, new Date(5, Months.May, 1)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Internazionali BNL d'Italia", EventType.Masters1000, "Rome, ITA", 2900000, 128, 128, new Date(5, Months.May, 3)));
             ATP.EventList.Add(new Event(Sports.Tennis, Year, "French Open", EventType.GrandSlam, "Paris, FR", 16500000, 128, 128, new Date(5, Months.May, 4)));
             ATP.EventList.Add(new Event(Sports.Tennis, Year, "Wimbledon", EventType.GrandSlam, "London, EN", 20000000, 128, 128, new Date(6, Months.June, 5)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Coupe Rogers", EventType.Masters1000, "Montreal, CAN", 3100000, 64, 64, new Date(8, Months.August, 1)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Western and Southern Open", EventType.Masters1000, "Cincinnati, OH", 3250000, 64, 64, new Date(8, Months.August, 2)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Coupe Rogers", EventType.Masters1000, "Montreal, CAN", 3100000, 128, 128, new Date(8, Months.August, 1)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Western and Southern Open", EventType.Masters1000, "Cincinnati, OH", 3250000, 128, 128, new Date(8, Months.August, 2)));
             ATP.EventList.Add(new Event(Sports.Tennis, Year, "US Open", EventType.GrandSlam, "New York City, NY", 17500000, 128, 128, new Date(9, Months.September, 1)));
-            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Rolex Shanghai Masters", EventType.Masters1000, "Shanghai, CHN", 4230000, 64, 64, new Date(10, Months.October, 1)));
+            ATP.EventList.Add(new Event(Sports.Tennis, Year, "Rolex Shanghai Masters", EventType.Masters1000, "Shanghai, CHN", 4230000, 128, 128, new Date(10, Months.October, 1)));
             ATP.EventList.Add(new Event(Sports.Tennis, Year, "Rolex Paris Masters", EventType.GrandSlam, "Paris, FRA", 3800000, 128, 128, new Date(10, Months.October, 4)));
         }
         public void CreateWBAEvents()

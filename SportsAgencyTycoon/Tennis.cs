@@ -58,7 +58,7 @@ namespace SportsAgencyTycoon
                 + " is the " + e.Year.ToString() + " " + e.Name.ToString() + " champion!"
                 + Environment.NewLine + "Here are the rest of the quarterfinalists:"
                 + Environment.NewLine + tournamentResults + Environment.NewLine;
-            AwardTennisPayoutsAndTourPoints(e, resultsList);
+            AwardPayoutsAndTourPoints(e, resultsList, world);
 
             return results;
         }
@@ -93,7 +93,7 @@ namespace SportsAgencyTycoon
             return winningPlayer;
         }
 
-        private void AwardTennisPayoutsAndTourPoints(Event e, List<Player> list)
+        private void AwardPayoutsAndTourPoints(Event e, List<Player> list, World world)
         {
             int purse = e.PrizePool;
             int[] GrandSlamPoints = new int[] { 2000, 1200, 720, 360, 180, 90, 45, 10 };
@@ -115,7 +115,7 @@ namespace SportsAgencyTycoon
                     if (eventType == EventType.GrandSlam) tennisPlayers[i].GrandSlams++;
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .1706));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[0]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].TournamentWins++;
                     tennisPlayers[i].QuarterFinals++;
                 }
@@ -124,7 +124,7 @@ namespace SportsAgencyTycoon
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0921));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[1]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //Semi-Finalists Losers: 4.66%
@@ -132,7 +132,7 @@ namespace SportsAgencyTycoon
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0466));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[2]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //Quarter-Finalists Losers: 2.56%
@@ -140,7 +140,7 @@ namespace SportsAgencyTycoon
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0256));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[3]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].QuarterFinals++;
                 }
                 //4th Round Losers: 1.40%
@@ -148,33 +148,33 @@ namespace SportsAgencyTycoon
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0140));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[4]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
                 //3rd Round Losers: 0.79%
                 else if (i < 32)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0079));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[5]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
                 //2nd Round Losers: 0.46%
                 else if (i < 64)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0046));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[6]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
                 //1st Round Losers: 0.25%
                 else if (i < 128)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0025));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[7]);
-                    tennisPlayers[i].TourPoints = CalculateTennisPlayerTourPoints(tennisPlayers[i]);
+                    tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
             }
-            UpdateATPPlayerList(tennisPlayers);
+            UpdateATPPlayerList(tennisPlayers, world);
         }
-        public int CalculateTennisPlayerTourPoints(TennisPlayer p)
+        public int CalculatePlayerTourPoints(TennisPlayer p, World world)
         {
             int tourPoints = 0;
             if (p.TourPointsList.Count > world.ATP.EventList.Count) p.TourPointsList.RemoveAt(0);
@@ -184,7 +184,7 @@ namespace SportsAgencyTycoon
             return tourPoints;
         }
 
-        private void UpdateATPPlayerList(List<TennisPlayer> resultList)
+        private void UpdateATPPlayerList(List<TennisPlayer> resultList, World world)
         {
             resultList = resultList.OrderByDescending(o => o.TourPoints).ToList();
             for (var j = 0; j < resultList.Count; j++)
