@@ -12,13 +12,13 @@ namespace SportsAgencyTycoon
             //string to print out results to user in newsLabel
             string results = "";
             Random rnd = new Random();
-            int x = 0;
 
             //lists to run tournament 
             List<Golfer> resultsList = new List<Golfer>();
             List<Golfer> tempList = new List<Golfer>();
             List<Golfer> madeCutList = new List<Golfer>();
             List<Golfer> listOfGolfers = new List<Golfer>();
+            List<Golfer> playoffList = new List<Golfer>();
 
             //grab list of golfers from world.PGA
             List<Player> playerList = world.PGA.PlayerList.OrderBy(o => o.WorldRanking).ToList();
@@ -30,6 +30,8 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < e.NumberOfEntrants; i++)
             {
                 listOfGolfers[i].CurrentTournamentScores.Clear();
+                listOfGolfers[i].MadeCut = false;
+                listOfGolfers[i].MadePlayoff = false;
                 e.EntrantList.Add(listOfGolfers[i]);
             }
 
@@ -61,8 +63,18 @@ namespace SportsAgencyTycoon
             //remove golfers that didn't meet cut score
             foreach (Golfer p in tempList)
             {
-                if (p.CurrentScore > cutLine) resultsList.Add(p);
-                else madeCutList.Add(p);
+                if (p.CurrentScore > cutLine)
+                {
+                    p.MadeCut = false;
+                    p.MadePlayoff = false;
+                    p.PlayoffHoles = 0;
+                    resultsList.Add(p);
+                }
+                else
+                {
+                    p.MadeCut = true;
+                    madeCutList.Add(p);
+                }
             }
             //sort resultsList from best to worst for standings sake
             resultsList = resultsList.OrderBy(o => o.CurrentScore).ToList();
@@ -77,23 +89,37 @@ namespace SportsAgencyTycoon
 
             //sort madeCutList by score
             madeCutList = madeCutList.OrderBy(o => o.CurrentScore).ToList();
-
+            tempList.Clear();
+            foreach (Golfer g in madeCutList) tempList.Add(g);
+            
             //check for tie
-            if (IsThereATie(madeCutList))
+            while (IsThereATie(tempList))
             {
-                List<Golfer> playoffList = new List<Golfer>();
+                tempList = tempList.OrderBy(o => o.CurrentScore).ToList();
                 //find the top score in the tournament
-                int bestScore = madeCutList[0].CurrentScore;
+                int bestScore = tempList[0].CurrentScore;
                 //add all golfers with matching score to playoffList
-                foreach (Golfer g in madeCutList)
+                for (int i = tempList.Count - 1; i > 0; i--)
+                //foreach (Golfer g in tempList)
                 {
-                    if (g.CurrentScore == bestScore) playoffList.Add(g);
+                    //add Golfer to playoffList to keep playing
+                    if (tempList[i].CurrentScore == bestScore)
+                    {
+                        tempList[i].MadePlayoff = true;
+                        playoffList.Add(tempList[i]);
+                    }
+                    else resultsList.Insert(0, tempList[i]);
+                    
                 }
                 //all golfers in playoffList play 1 hole at a time until someone wins
                 foreach (Golfer g in playoffList)
                 {
+                    g.PlayoffHoles++;
                     g.CurrentScore += PlayHole(g, rnd);
                 }
+                playoffList = playoffList.OrderBy(o => o.CurrentScore).ToList();
+                tempList.Clear();
+                foreach (Golfer g in playoffList) tempList.Add(g);
             }
 
             return results;

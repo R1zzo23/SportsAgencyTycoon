@@ -14,6 +14,9 @@ namespace SportsAgencyTycoon
         public List<int> TourPointsList;
         public List<int> CurrentTournamentScores;
         public int CurrentScore;
+        public bool MadeCut;
+        public bool MadePlayoff;
+        public int PlayoffHoles;
 
         public Golfer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek) 
             : base(sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
