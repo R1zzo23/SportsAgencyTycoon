@@ -95,6 +95,7 @@ namespace SportsAgencyTycoon
             //check for tie
             while (IsThereATie(tempList))
             {
+                playoffList.Clear();
                 tempList = tempList.OrderBy(o => o.CurrentScore).ToList();
                 //find the top score in the tournament
                 int bestScore = tempList[0].CurrentScore;
@@ -108,6 +109,7 @@ namespace SportsAgencyTycoon
                         tempList[i].MadePlayoff = true;
                         playoffList.Add(tempList[i]);
                     }
+                    //or add them to resultsList because they are out
                     else resultsList.Insert(0, tempList[i]);
                     
                 }
@@ -121,6 +123,17 @@ namespace SportsAgencyTycoon
                 tempList.Clear();
                 foreach (Golfer g in playoffList) tempList.Add(g);
             }
+
+            string tournamentResults = "";
+            for (var i = 1; i < 10; i++)
+            {
+                tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + Environment.NewLine;
+            }
+            results = resultsList[0].FirstName + " " + resultsList[0].LastName
+                + " is the " + e.Year.ToString() + " " + e.Name.ToString() + " champion!"
+                + Environment.NewLine + "Here are the rest of the top-10 finishers:"
+                + Environment.NewLine + tournamentResults + Environment.NewLine;
+            AwardPayoutsAndTourPoints(e, resultsList, world);
 
             return results;
         }
@@ -185,9 +198,20 @@ namespace SportsAgencyTycoon
             else return false;
         }
 
-        private void AwardPayoutsAndTourPoints(Event e, List<Player> list, World world)
+        private void AwardPayoutsAndTourPoints(Event e, List<Golfer> list, World world)
         {
+            int purse = e.PrizePool;
+            double[] MajorPoints = new double[] { 600, 330, 210, 150, 120, 110, 100, 94, 88, 82, 77, 72, 68, 64, 61, 59, 57, 55, 53, 51, 48.73, 46.47, 44.2, 41.93, 40.23, 38.53, 36.83, 35.13, 33.43, 31.73, 30.03, 28.33, 26.63, 24.93, 23.8, 22.67, 21.53, 20.4, 19.27, 18.13, 17, 15.87, 14.73, 13.6, 12.47, 11.9, 11.33, 10.77, 10.2, 9.63, 9.07, 8.5, 7.93, 7.37, 6.8, 6.57, 6.35, 6.12, 5.89, 5.67, 5.44, 5.21, 4.99, 4.76, 4.53, 4.31, 4.08, 3.85, 3.63, 3.4, 3.29, 3.17, 3.06, 2.95, 2.83, 2.72, 2.61, 2.49, 2.38, 2.27, 2.15, 2.04, 1.93, 1.81, 1.7 };
+            double[] PGATourEventPoints = new double[] { 500, 300, 190, 135, 110, 100, 90, 85, 80, 75, 70, 65, 60, 57, 55, 53, 51, 49, 47, 45, 43, 41, 39, 37, 35.5, 34, 32.5, 31, 29.5, 28, 26.5, 25, 23.5, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10.5, 10, 9.5, 9, 8.5, 8, 7.5, 7, 6.5, 6, 5.8, 5.6, 5.4, 5.2, 5, 4.8, 4.6, 4.4, 4.2, 4, 3.8, 3.6, 3.4, 3.2, 3, 2.9, 2.8, 2.7, 2.6, 2.5, 2.4, 2.3, 2.2, 2.1, 2, 1.9, 1.8, 1.7, 1.6, 1.5 };
+            double[] PayoutPercentages = new double[] { .18, 10.8, 6.8, 4.8, 4, 3.6, 3.35, 3.1, 2.9, 2.7, 2.5, 2.3, 2.1, 1.9, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.2, 1.112, 1.04, 0.96, 0.88, 0.8, 0.77, 0.74, 0.71, 0.68, 0.65, 0.59, 0.565, 0.54, 0.515, 0.49, 0.47, 0.45, 0.43, 0.41, 0.39, 0.37, 0.35, 0.33, 0.31, 0.29, 0.274, 0.26, 0.252, 0.246, 0.24, 0.236, 0.232, 0.23, 0.228, 0.226, 0.224, 0.222, 0.22, 0.218, 0.216, 0.214, 0.212, 0.21, 0.208, 0.206, 0.204, 0.202, 0.2 };
+            double[] AwardedPoints;
+            EventType eventType = e.TypeOfEvent;
 
+            List<Golfer> golfers = new List<Golfer>();
+            foreach (Golfer g in list) golfers.Add(g);
+
+            if (eventType == EventType.Major) AwardedPoints = MajorPoints;
+            else AwardedPoints = PGATourEventPoints;
         }
 
         public int CalculatePlayerTourPoints(Golfer g, World world)

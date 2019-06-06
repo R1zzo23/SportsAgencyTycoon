@@ -33,12 +33,4 @@ namespace SportsAgencyTycoon
             EntrantList = new List<Player>();
         }
     }
-
-    public enum EventType
-    {
-        Major,
-        GrandSlam,
-        Masters1000,
-        Normal
-    }
 }

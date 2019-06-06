@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="Tennis.cs" />
     <Compile Include="Golf.cs" />
+    <Compile Include="EventType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -10,7 +10,7 @@ namespace SportsAgencyTycoon
     {
         public int TournamentWins;
         public int TopTenFinishes;
-        public int TourPoints;
+        public double TourPoints;
         public List<int> TourPointsList;
         public List<int> CurrentTournamentScores;
         public int CurrentScore;
