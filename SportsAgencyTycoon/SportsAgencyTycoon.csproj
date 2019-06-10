@@ -103,6 +103,8 @@
     <Compile Include="Tennis.cs" />
     <Compile Include="Golf.cs" />
     <Compile Include="EventType.cs" />
+    <Compile Include="Boxing.cs" />
+    <Compile Include="MMA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

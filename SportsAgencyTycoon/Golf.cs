@@ -38,15 +38,6 @@ namespace SportsAgencyTycoon
             //populate the EntrantList for the event
             foreach (Golfer p in e.EntrantList) tempList.Add(p);
 
-            /*
-             *  - sort winners
-             *  - if tied, play sudden death hole
-             *  - AwardPayoutsAndTourPoints();
-             *  - CalculatePlayerTourPoints();
-             *  - UpdatePGAPlayerList();            
-             * 
-             */
-
             // every player in the tournament plays 2 rounds
             // scores get added to List<int> CurrentTournamentScores 
             // then added together for CurrentScore
@@ -135,7 +126,7 @@ namespace SportsAgencyTycoon
                 tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + Environment.NewLine;
             }
             results = resultsList[0].FirstName + " " + resultsList[0].LastName
-                + " is the " + e.Year.ToString() + " " + e.Name.ToString() + " champion!"
+                + " is the " + e.Year.ToString() + " " + e.Name + " champion!"
                 + Environment.NewLine + "Here are the rest of the top-10 finishers:"
                 + Environment.NewLine + tournamentResults + Environment.NewLine;
             AwardPayoutsAndTourPoints(e, resultsList, world);

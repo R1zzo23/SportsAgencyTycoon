@@ -16,6 +16,9 @@ namespace SportsAgencyTycoon
         public Agent myManager;
         public World world;
         public Tennis Tennis = new Tennis();
+        public Golf Golf = new Golf();
+        public Boxing Boxing = new Boxing();
+        public MMA MMA = new MMA();
         public MainForm()
         {
             InitializeComponent();
@@ -613,6 +616,18 @@ namespace SportsAgencyTycoon
                 if (e.Sport == Sports.Tennis)
                 {
                     newsLabel.Text = Tennis.RunTournament(e, world) + newsLabel.Text;
+                }
+                else if (e.Sport == Sports.Golf)
+                {
+                    newsLabel.Text = Golf.RunTournament(e, world) + newsLabel.Text;
+                }
+                else if (e.Sport == Sports.MMA)
+                {
+                    // run UFC
+                }
+                else if (e.Sport == Sports.Boxing)
+                {
+                    // run Boxing
                 }
             }
         }
