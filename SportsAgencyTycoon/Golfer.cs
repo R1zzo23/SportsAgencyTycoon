@@ -10,8 +10,10 @@ namespace SportsAgencyTycoon
     {
         public int TournamentWins;
         public int TopTenFinishes;
+        public int EventsPlayed;
+        public int CutsMade;
         public double TourPoints;
-        public List<int> TourPointsList;
+        public List<double> TourPointsList;
         public List<int> CurrentTournamentScores;
         public int CurrentScore;
         public bool MadeCut;
@@ -24,7 +26,7 @@ namespace SportsAgencyTycoon
             TournamentWins = 0;
             TopTenFinishes = 0;
             TourPoints = 0;
-            TourPointsList = new List<int>();
+            TourPointsList = new List<double>();
             CurrentTournamentScores = new List<int>();
             CurrentScore = 0;
         }

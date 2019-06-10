@@ -123,6 +123,11 @@ namespace SportsAgencyTycoon
                 tempList.Clear();
                 foreach (Golfer g in playoffList) tempList.Add(g);
             }
+            //add all remaining golfers from tempList to resultsList
+            for (int i = tempList.Count - 1; i > 0; i--) resultsList.Insert(0, tempList[i]);
+
+            // Order list: Playoff Holes - Made Playoffs - Made Cut - Current Score
+            resultsList.OrderBy(o => o.PlayoffHoles).ThenBy(o => o.MadePlayoff).ThenBy(o => o.MadeCut).ThenBy(o => o.CurrentScore);
 
             string tournamentResults = "";
             for (var i = 1; i < 10; i++)
@@ -166,9 +171,10 @@ namespace SportsAgencyTycoon
             else
             {
                 //bad hole
-                int meltDown = rnd.Next(0, 30);
-                if (meltDown >= 23) score += 2; //double bogey
-                else score++; //bogey
+                int meltDown = rnd.Next(0, 50);
+                if (meltDown <= 37) score++; //bogey
+                else if (meltDown <= 48) score += 2; //double bogey
+                else score += 3; //tripe bogey
             }
 
             return score;
@@ -212,6 +218,21 @@ namespace SportsAgencyTycoon
 
             if (eventType == EventType.Major) AwardedPoints = MajorPoints;
             else AwardedPoints = PGATourEventPoints;
+
+            for (var i = 0; i < golfers.Count; i++)
+            {
+                if (i == 0) golfers[i].TournamentWins++;
+                if (i <= 9) golfers[i].TopTenFinishes++;
+                if (golfers[i].MadeCut)
+                {
+                    golfers[i].CutsMade++;
+                    golfers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * PayoutPercentages[i]));
+                }
+                golfers[i].EventsPlayed++;
+                golfers[i].TourPointsList.Add(AwardedPoints[i]);
+                golfers[i].TourPoints = CalculatePlayerTourPoints(golfers[i], world);
+            }
+            UpdatePGAPlayerList(golfers, world);
         }
 
         public int CalculatePlayerTourPoints(Golfer g, World world)
