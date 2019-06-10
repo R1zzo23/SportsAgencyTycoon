@@ -67,7 +67,7 @@ namespace SportsAgencyTycoon
             int winningPlayer = 0;
             TennisPlayer t1 = (TennisPlayer)p1;
             TennisPlayer t2 = (TennisPlayer)p2;
-            Console.WriteLine("{0} {1} ({2}) vs. {3} {4} ({5}).", t1.FirstName, t1.LastName, t1.SkillLevel, t2.FirstName, t2.LastName, t2.SkillLevel);
+            //Console.WriteLine("{0} {1} ({2}) vs. {3} {4} ({5}).", t1.FirstName, t1.LastName, t1.SkillLevel, t2.FirstName, t2.LastName, t2.SkillLevel);
 
             int t1SetsWon = 0;
             int t2SetsWon = 0;
@@ -82,12 +82,12 @@ namespace SportsAgencyTycoon
             }
             if (t1SetsWon == 4)
             {
-                Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t1.FirstName, t1.LastName, t2.FirstName, t2.LastName, t1SetsWon, t2SetsWon);
+                //Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t1.FirstName, t1.LastName, t2.FirstName, t2.LastName, t1SetsWon, t2SetsWon);
                 winningPlayer = 1;
             }
             else if (t2SetsWon == 4)
             {
-                Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t2.FirstName, t2.LastName, t1.FirstName, t1.LastName, t2SetsWon, t1SetsWon);
+                //Console.WriteLine("{0} {1} defeats {2} {3} {4} sets to {5}.", t2.FirstName, t2.LastName, t1.FirstName, t1.LastName, t2SetsWon, t1SetsWon);
                 winningPlayer = 2;
             }
             return winningPlayer;

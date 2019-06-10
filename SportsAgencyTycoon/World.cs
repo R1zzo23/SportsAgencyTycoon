@@ -38,7 +38,7 @@ namespace SportsAgencyTycoon
             Associations = new List<Association>();
             
             Year = 2000;
-            MonthNumber = 1;
+            MonthNumber = 0;
             MonthName = Months.January;
             WeekNumber = 1;
         }
