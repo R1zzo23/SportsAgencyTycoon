@@ -531,15 +531,15 @@ namespace SportsAgencyTycoon
 
             if(selectedAssociation.Sport == Sports.Golf)
             {
-                worldRankingsLabel.Text += "World Ranking - Name | Earnings | Top Tens | Tourney Wins" + Environment.NewLine;
+                worldRankingsLabel.Text += "#) - NAME | PTS | $$$ | TOP-10s | TITLES | MAJROS" + Environment.NewLine;
                 foreach (Golfer golfer in playerList)
                 {
-                    worldRankingsLabel.Text += golfer.WorldRanking + ") " + golfer.FirstName + " " + golfer.LastName + ": " + golfer.CareerEarnings.ToString("C0") + " | " + golfer.TopTenFinishes + " | " + golfer.TournamentWins +  Environment.NewLine;
+                    worldRankingsLabel.Text += golfer.WorldRanking + ") " + golfer.FirstName + " " + golfer.LastName + ": " + golfer.TourPoints.ToString() + " | " + golfer.CareerEarnings.ToString("C0") + " | " + golfer.TopTenFinishes + " | " + golfer.TournamentWins + " | " + golfer.Majors +  Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.Tennis)
             {
-                worldRankingsLabel.Text += "#) - Name | Points | $$$ | QFIN APP | TITLES | Slams" + Environment.NewLine;
+                worldRankingsLabel.Text += "#) - NAME | PTS | $$$ | QFIN APP | TITLES | SLAMS" + Environment.NewLine;
                 foreach (TennisPlayer tp in playerList)
                 {
                     worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FirstName + " " + tp.LastName + ": " + tp.TourPoints.ToString() + " | " + tp.CareerEarnings.ToString("C0") + " | " + tp.QuarterFinals + " | " + tp.TournamentWins + " | " + tp.GrandSlams + Environment.NewLine;

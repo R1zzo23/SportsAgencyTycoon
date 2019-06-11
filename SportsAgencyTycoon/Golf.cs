@@ -220,7 +220,12 @@ namespace SportsAgencyTycoon
                 int p = i;
                 if (i > (AwardedPoints.Length - 1)) p = AwardedPoints.Length - 1;
 
-                if (i == 0) golfers[i].TournamentWins++;
+                if (i == 0)
+                {
+                    golfers[i].TournamentWins++;
+                    if (e.TypeOfEvent == EventType.Major) golfers[i].Majors++;
+                }
+
                 if (i <= 9) golfers[i].TopTenFinishes++;
                 if (golfers[i].MadeCut)
                 {

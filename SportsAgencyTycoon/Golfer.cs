@@ -19,6 +19,7 @@ namespace SportsAgencyTycoon
         public bool MadeCut;
         public bool MadePlayoff;
         public int PlayoffHoles;
+        public int Majors;
 
         public Golfer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek) 
             : base(sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
@@ -29,6 +30,7 @@ namespace SportsAgencyTycoon
             TourPointsList = new List<double>();
             CurrentTournamentScores = new List<int>();
             CurrentScore = 0;
+            Majors = 0;
         }
     }
 }
