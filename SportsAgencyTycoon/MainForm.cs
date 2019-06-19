@@ -627,7 +627,7 @@ namespace SportsAgencyTycoon
                 }
                 else if (e.Sport == Sports.Boxing)
                 {
-                    // run Boxing
+                    newsLabel.Text = Boxing.RunBoxingEvent(e, world) + newsLabel.Text;
                 }
             }
         }

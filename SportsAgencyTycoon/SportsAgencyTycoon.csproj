@@ -58,6 +58,12 @@
     <Compile Include="Date.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FirstName.cs" />
+    <Compile Include="HireAgentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HireAgentForm.Designer.cs">
+      <DependentUpon>HireAgentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Golfer.cs" />
     <Compile Include="LastName.cs" />
     <Compile Include="League.cs" />
@@ -79,6 +85,9 @@
     <Compile Include="Team.cs" />
     <Compile Include="TennisPlayer.cs" />
     <Compile Include="World.cs" />
+    <EmbeddedResource Include="HireAgentForm.resx">
+      <DependentUpon>HireAgentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

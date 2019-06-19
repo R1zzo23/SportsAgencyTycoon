@@ -10,12 +10,14 @@ namespace SportsAgencyTycoon
     {
         public int Wins;
         public int Losses;
+        public bool KnockedOut;
 
         public Boxer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
             : base(sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
         {
             Wins = 0;
             Losses = 0;
+            KnockedOut = false;
         }
     }
 }
