@@ -235,7 +235,7 @@ namespace SportsAgencyTycoon
                 golfers[i].EventsPlayed++;
                 golfers[i].TourPointsList.Add(AwardedPoints[p]);
                 golfers[i].TourPoints = CalculatePlayerTourPoints(golfers[i], world);
-                Console.WriteLine(golfers[i].FirstName + " " + golfers[i].LastName + " " + golfers[i].CurrentScore); 
+                //Console.WriteLine(golfers[i].FirstName + " " + golfers[i].LastName + " " + golfers[i].CurrentScore); 
             }
             UpdatePGAPlayerList(golfers, world);
         }

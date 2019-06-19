@@ -154,9 +154,10 @@ namespace SportsAgencyTycoon
         }
         public void CreateUFCEvents()
         {
-            UFC.EventList.Add(new Event(Sports.MMA, Year, "Bloodied and Bruised", EventType.Normal, "Chicago, IL", 2500000, 10, 10, new Date(2, Months.February, 3)));
-            UFC.EventList.Add(new Event(Sports.MMA, Year, "King Kong of the Octagon", EventType.Normal, "Atlantic City, NJ", 6000000, 50, 50, new Date(6, Months.June, 1)));
-            UFC.EventList.Add(new Event(Sports.MMA, Year, "Elite Title Showdown", EventType.Normal, "Las Vegas, NV", 3250000, 8, 8, new Date(10, Months.October, 2)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "King Kong of the Octagon", EventType.Normal, "Atlantic City, NJ", 12000000, 50, 50, new Date(2, Months.February, 3)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "Fully Loaded", EventType.Normal, "Boston, MA", 3750000, 20, 20, new Date(4, Months.April, 2)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "Bloodied and Bruised", EventType.Normal, "Chicago, IL", 2500000, 20, 20, new Date(6, Months.June, 1)));
+            UFC.EventList.Add(new Event(Sports.MMA, Year, "Elite Title Showdown", EventType.Normal, "Las Vegas, NV", 5000000, 10, 10, new Date(10, Months.October, 2)));
         }
         #endregion
         #region Create Athletes for Associations

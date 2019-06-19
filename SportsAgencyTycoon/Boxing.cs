@@ -46,13 +46,13 @@ namespace SportsAgencyTycoon
                 {
                     winnerList.Add(entrantList[x * 2]);
                     loserList.Add(entrantList[x * 2 + 1]);
-                    Console.WriteLine(entrantList[x * 2].FirstName + " " + entrantList[x * 2].LastName + " defeats " + entrantList[x * 2 + 1].FirstName + " " + entrantList[x * 2 + 1].LastName);
+                    //Console.WriteLine(entrantList[x * 2].FirstName + " " + entrantList[x * 2].LastName + " defeats " + entrantList[x * 2 + 1].FirstName + " " + entrantList[x * 2 + 1].LastName);
                 }
                 else if (winner == 2)
                 {
                     winnerList.Add(entrantList[x * 2 + 1]);
                     loserList.Add(entrantList[x * 2]);
-                    Console.WriteLine(entrantList[x * 2 + 1].FirstName + " " + entrantList[x * 2 + 1].LastName + " defeats " + entrantList[x * 2].FirstName + " " + entrantList[x * 2].LastName);
+                    //Console.WriteLine(entrantList[x * 2 + 1].FirstName + " " + entrantList[x * 2 + 1].LastName + " defeats " + entrantList[x * 2].FirstName + " " + entrantList[x * 2].LastName);
                 }
             }
             results = "Results written in console.";
@@ -167,6 +167,25 @@ namespace SportsAgencyTycoon
                     {
                         world.WBA.PlayerList[j] = resultList[i];
                     }
+                }
+            }
+        }
+        public void CalculateWorldRankings(World world)
+        {
+            List<Boxer> boxers = new List<Boxer>();
+            foreach (Boxer b in world.WBA.PlayerList) boxers.Add(b);
+
+            //resultsList.OrderBy(o => o.PlayoffHoles).ThenBy(o => o.MadePlayoff).ThenBy(o => o.MadeCut).ThenBy(o => o.CurrentScore);
+            //boxers = boxers.OrderBy(o => o.Losses).OrderByDescending(o => o.Wins).OrderByDescending(o => o.SkillLevel).ToList();
+            boxers = boxers.OrderByDescending(o => o.SkillLevel).ThenBy(o => o.Wins).OrderBy(o => o.Losses).ToList();
+
+            for (int i = 0; i < boxers.Count; i++)
+            {
+                boxers[i].WorldRanking = i + 1;
+                for (int j = 0; j < world.WBA.PlayerList.Count - 1; j++)
+                {
+                    if (boxers[i].FirstName == world.WBA.PlayerList[j].FirstName && boxers[i].LastName == world.WBA.PlayerList[j].LastName && boxers[i].Age == world.WBA.PlayerList[j].Age)
+                        world.WBA.PlayerList[j] = boxers[i];
                 }
             }
         }

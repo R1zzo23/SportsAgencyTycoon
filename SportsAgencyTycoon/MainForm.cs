@@ -477,6 +477,18 @@ namespace SportsAgencyTycoon
             world.CheckForEventsThisWeek();
             if (world.EventsThisWeek.Count > 0) DisplayEventsThisWeek();
             RunEventsThisWeek();
+
+
+            //create new WBA world rankings before AND after King of the Ring event
+            if ((world.WeekNumber == 4 && world.MonthName == Months.September) || (world.WeekNumber == 1 && world.MonthName == Months.December))
+            {
+                Boxing.CalculateWorldRankings(world);
+            }
+            //create new UFC world rankings before AND after King Kong of the Octagon event
+            if ((world.WeekNumber == 4 && world.MonthName == Months.February) || (world.WeekNumber == 3 && world.MonthName == Months.October))
+            {
+                MMA.CalculateWorldRankings(world);
+            }
         }   
 
         private void UpdateWorldCalendar()
@@ -547,10 +559,10 @@ namespace SportsAgencyTycoon
             }
             else if (selectedAssociation.Sport == Sports.Boxing)
             {
-                worldRankingsLabel.Text += "World Ranking - Name: Earnings | (Wins - Losses)" + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name (Skill): Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (Boxer boxer in playerList)
                 {
-                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FirstName + " " + boxer.LastName + ": " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
+                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FirstName + " " + boxer.LastName + " (" + boxer.SkillLevel + "): " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.MMA)
@@ -558,7 +570,7 @@ namespace SportsAgencyTycoon
                 worldRankingsLabel.Text += "World Ranking - Name: Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (MMAFighter mma in playerList)
                 {
-                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FirstName + " " + mma.LastName + ": " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
+                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FirstName + " " + mma.LastName + " (" + mma.SkillLevel + "): " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
                 }
             }
 
@@ -623,7 +635,7 @@ namespace SportsAgencyTycoon
                 }
                 else if (e.Sport == Sports.MMA)
                 {
-                    // run UFC
+                    newsLabel.Text = MMA.RunMMAEvent(e, world) + newsLabel.Text;
                 }
                 else if (e.Sport == Sports.Boxing)
                 {
