@@ -13,10 +13,12 @@
         public string AgencyHappinessDescription;
         public int TeamHappiness;
         public string TeamHappinessDescription;
+        public Months BirthMonth;
+        public int BirthWeek;
         public Sports Sport;
         public Contract Contract;
 
-        public Client(string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport)
+        public Client(string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport, Months birthMonth, int birthWeek)
         {
             First = firstName;
             Last = lastName;
@@ -31,6 +33,9 @@
             TeamHappiness = teamHappiness;
             TeamHappinessDescription = DescribeHappiness(teamHappiness);
             Sport = sport;
+            BirthMonth = birthMonth;
+            BirthWeek = birthWeek;
+
         }
 
         public string DescribePopularity(int pop)

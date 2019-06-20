@@ -48,6 +48,19 @@ namespace SportsAgencyTycoon
             PopulateLeagues();
             PopulateAssociations();
             PopulateEventList();
+
+            Player p = world.PGA.PlayerList[0];
+            Client c = new Client(p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.SkillLevel, p.PotentialSkill, 25, 100, 0, Sports.Golf, p.BirthMonth, p.BirthWeek);
+            Player b = world.WBA.PlayerList[0];
+            Client d = new Client(b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.SkillLevel, b.PotentialSkill, 25, 100, 0, Sports.Golf, b.BirthMonth, b.BirthWeek);
+            agency.Clients.Add(c);
+            agency.ClientCount++;
+            agency.Agents[0].ClientList.Add(c);
+            agency.Agents[0].ClientCount++;
+            agency.Clients.Add(d);
+            agency.ClientCount++;
+            agency.Agents[0].ClientList.Add(d);
+            agency.Agents[0].ClientCount++;
         }
         public void CreateManagerAndAgency()
         {
@@ -352,7 +365,7 @@ namespace SportsAgencyTycoon
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
             if (selectedAgent.ClientList.Count > 0)
             {
-                Client selectedClient = selectedAgent.ClientList[0];
+                Client selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
 
                 clientSportLabel.Text = selectedClient.Sport.ToString();
                 clientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
@@ -361,6 +374,8 @@ namespace SportsAgencyTycoon
                 clientAgencyHappinessLabel.Text = selectedClient.AgencyHappinessDescription;
                 clientSkillLabel.Text = selectedClient.CurrentSkill.ToString() + "/" + selectedClient.PotentialSkill.ToString();
                 clientAgeLabel.Text = selectedClient.Age.ToString();
+                lblBirthMonth.Text = selectedClient.BirthMonth.ToString();
+                lblBirthWeek.Text = selectedClient.BirthWeek.ToString();
             }
             else
             {
@@ -462,7 +477,7 @@ namespace SportsAgencyTycoon
             foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
 
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            world.HandleCalendar();
+            world.HandleCalendar(agency);
             UpdateWorldCalendar();
 
             //check if testing window for specific sport is open
@@ -641,6 +656,28 @@ namespace SportsAgencyTycoon
                 {
                     newsLabel.Text = Boxing.RunBoxingEvent(e, world) + newsLabel.Text;
                 }
+            }
+        }
+
+        private void btnHireAgent_Click(object sender, EventArgs e)
+        {
+            AgentSearch newAgentSearch = new AgentSearch();
+            //newAgentSearch.MdiParent = this;
+            newAgentSearch.BringToFront();
+            newAgentSearch.ShowDialog();
+
+            int fundsSpent = newAgentSearch.FundsSpent;
+            string agentType = newAgentSearch.AgentType;
+            Console.WriteLine(fundsSpent);
+            Console.WriteLine(agentType);
+            agency.Money -= fundsSpent;
+            UpdateAgencyInfo();
+
+            if (fundsSpent != 0)
+            {
+                //if fundsSpent == 25000, only create 2 potential agents
+                //else create 3
+                //use agentType to customize agent skills
             }
         }
     }

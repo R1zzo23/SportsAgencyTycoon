@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public FirstName FirstName;
         public LastName LastName;
         public int SkillLevel;
+        public int PotentialSkill;
         public int Age;
         public Months BirthMonth;
         public int BirthWeek;
@@ -24,6 +25,7 @@ namespace SportsAgencyTycoon
             FirstName = firstName;
             LastName = lastName;
             SkillLevel = skillLevel;
+            PotentialSkill = AssignPotential(age, skillLevel);
             Age = age;
             BirthMonth = birthMonth;
             if (birthWeek == 5)
@@ -31,7 +33,24 @@ namespace SportsAgencyTycoon
                 if (((int)BirthMonth + 1) % 3 == 0) BirthWeek = 5;
                 else BirthWeek = 4;
             }
+            else BirthWeek = birthWeek;
             CareerEarnings = 0;
+        }
+
+        public int AssignPotential(int age, int skillLevel)
+        {
+            Random rnd = new Random();
+            int potentialSkill = 0;
+            int potential = 0;
+
+            if (age <= 20) potential = rnd.Next(15, 41);
+            else if (age <= 25) potential = rnd.Next(10, 36);
+            else if (age <= 30) potential = rnd.Next(5, 26);
+            else if (age <= 35) potential = rnd.Next(0, 7);
+
+            potentialSkill = skillLevel + potential;
+
+            return potentialSkill;
         }
     }
 }

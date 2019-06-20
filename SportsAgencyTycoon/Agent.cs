@@ -67,7 +67,7 @@ namespace SportsAgencyTycoon
                 //message into newsLabel
                 message = First + " " + Last + " has earned a license for " + AppliedLicense.Sport.ToString().ToLower() + "!";
                 
-                world.CreateNewClients(agency, AppliedLicense);
+                //world.CreateNewClients(agency, AppliedLicense);
 
                 //reset license information
                 AppliedLicense = null;

@@ -51,6 +51,12 @@
   <ItemGroup>
     <Compile Include="Agency.cs" />
     <Compile Include="Agent.cs" />
+    <Compile Include="AgentSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgentSearch.Designer.cs">
+      <DependentUpon>AgentSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Association.cs" />
     <Compile Include="Boxer.cs" />
     <Compile Include="Client.cs" />
@@ -85,6 +91,9 @@
     <Compile Include="Team.cs" />
     <Compile Include="TennisPlayer.cs" />
     <Compile Include="World.cs" />
+    <EmbeddedResource Include="AgentSearch.resx">
+      <DependentUpon>AgentSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HireAgentForm.resx">
       <DependentUpon>HireAgentForm.cs</DependentUpon>
     </EmbeddedResource>

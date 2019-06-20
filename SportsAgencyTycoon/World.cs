@@ -50,7 +50,7 @@ namespace SportsAgencyTycoon
             AvailableLicenses.Add(basketballLicense);
             AvailableLicenses.Add(footballLicense);
         }
-        public void CreateNewClients(Agency agency, Licenses license)
+        /*public void CreateNewClients(Agency agency, Licenses license)
         {
             Random rnd = new Random();
             int numberNewClients = HowManyNewClients(agency.IndustryInfluence);
@@ -68,7 +68,7 @@ namespace SportsAgencyTycoon
                     license.Sport);
                 AvailableClients.Add(client);
             }
-        }
+        }*/
         public int HowManyNewClients(int influence)
         {
             int numberNewClients = 0;
@@ -397,7 +397,7 @@ namespace SportsAgencyTycoon
         }
 
         #region Calendar - Set Month/Year
-        public void HandleCalendar()
+        public void HandleCalendar(Agency agency)
         {
             //add 1 to week number
             WeekNumber++;
@@ -406,6 +406,19 @@ namespace SportsAgencyTycoon
             if (((WeekNumber == 5) && ((MonthNumber + 1) % 3 != 0)) || ((WeekNumber == 6) && ((MonthNumber + 1) % 3 == 0)))
             {
                 SetNewMonth();
+            }
+
+            //check for birthdays
+            foreach (Association a in Associations)
+            {
+                foreach (Player p in a.PlayerList)
+                {
+                    if (p.BirthMonth == MonthName && p.BirthWeek == WeekNumber) p.Age++;
+                }
+            }
+            foreach (Client c in agency.Clients)
+            {
+                if (c.BirthMonth == MonthName && c.BirthWeek == WeekNumber) c.Age++;
             }
         }
         private void SetNewMonth()

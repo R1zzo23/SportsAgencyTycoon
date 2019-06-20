@@ -44,7 +44,7 @@ namespace SportsAgencyTycoon
             foreach (Agent agent in Agents)
             {
                 //check if agent has applied for a new license
-                if (agent.AppliedLicense != null)
+                if (agent.AppliedLicense != null && agent.LicenseTestPrep < 100)
                 {
                     Random rnd = new Random();
                     double addedTestPrep = 0;
@@ -64,6 +64,7 @@ namespace SportsAgencyTycoon
                     agent.LicenseTestPrep += (int)addedTestPrep;
                     if (agent.LicenseTestPrep > 100) agent.LicenseTestPrep = 100;
                 }
+                if (agent.LicenseTestPrep == 100 && agent.BeingTrainedForTest) agent.BeingTrainedForTest = false;
             }
         }
         public void DeductMonthlyRent()

@@ -132,6 +132,9 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
+            this.lblBirthMonth = new System.Windows.Forms.Label();
+            this.lblBirthWeek = new System.Windows.Forms.Label();
+            this.btnHireAgent = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -148,6 +151,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnHireAgent);
             this.groupBox1.Controls.Add(this.monthlyRentLabel);
             this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.btnTrainAgent);
@@ -162,9 +166,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.agencyNameLabel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 41);
+            this.groupBox1.Location = new System.Drawing.Point(263, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 250);
+            this.groupBox1.Size = new System.Drawing.Size(372, 250);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agency Information";
@@ -172,7 +176,7 @@
             // monthlyRentLabel
             // 
             this.monthlyRentLabel.AutoSize = true;
-            this.monthlyRentLabel.Location = new System.Drawing.Point(86, 155);
+            this.monthlyRentLabel.Location = new System.Drawing.Point(106, 155);
             this.monthlyRentLabel.Name = "monthlyRentLabel";
             this.monthlyRentLabel.Size = new System.Drawing.Size(13, 13);
             this.monthlyRentLabel.TabIndex = 17;
@@ -183,9 +187,9 @@
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(7, 155);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(73, 13);
+            this.label26.Size = new System.Drawing.Size(97, 13);
             this.label26.TabIndex = 16;
-            this.label26.Text = "Monthly Rent:";
+            this.label26.Text = "Monthly Overhead:";
             // 
             // btnTrainAgent
             // 
@@ -322,9 +326,9 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.agentNameLabel);
-            this.groupBox2.Location = new System.Drawing.Point(388, 41);
+            this.groupBox2.Location = new System.Drawing.Point(639, 41);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(370, 250);
+            this.groupBox2.Size = new System.Drawing.Size(372, 250);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
@@ -528,9 +532,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.newsLabel);
-            this.groupBox3.Location = new System.Drawing.Point(764, 41);
+            this.groupBox3.Location = new System.Drawing.Point(1015, 41);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(370, 250);
+            this.groupBox3.Size = new System.Drawing.Size(372, 250);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "News Briefing";
@@ -557,9 +561,9 @@
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.cbAvailableLicenses);
             this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Location = new System.Drawing.Point(12, 297);
+            this.groupBox4.Location = new System.Drawing.Point(263, 297);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(370, 250);
+            this.groupBox4.Size = new System.Drawing.Size(372, 250);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Licensure";
@@ -666,6 +670,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.lblBirthWeek);
+            this.groupBox5.Controls.Add(this.lblBirthMonth);
             this.groupBox5.Controls.Add(this.clientTeamHappinessLabel);
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Controls.Add(this.clientSkillLabel);
@@ -678,9 +684,9 @@
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Controls.Add(this.clientSportLabel);
             this.groupBox5.Controls.Add(this.clientNameLabel);
-            this.groupBox5.Location = new System.Drawing.Point(388, 297);
+            this.groupBox5.Location = new System.Drawing.Point(639, 297);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(370, 250);
+            this.groupBox5.Size = new System.Drawing.Size(372, 250);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Client Information";
@@ -808,9 +814,9 @@
             this.groupBox6.Controls.Add(this.label36);
             this.groupBox6.Controls.Add(this.availableClientAgeLabel);
             this.groupBox6.Controls.Add(this.label35);
-            this.groupBox6.Location = new System.Drawing.Point(764, 297);
+            this.groupBox6.Location = new System.Drawing.Point(1015, 297);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(370, 250);
+            this.groupBox6.Size = new System.Drawing.Size(372, 250);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Available Clients to Sign";
@@ -904,9 +910,9 @@
             // 
             this.groupBox7.Controls.Add(this.cbLeagueStandings);
             this.groupBox7.Controls.Add(this.leagueStandingsPanel);
-            this.groupBox7.Location = new System.Drawing.Point(12, 553);
+            this.groupBox7.Location = new System.Drawing.Point(263, 553);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(370, 250);
+            this.groupBox7.Size = new System.Drawing.Size(372, 250);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "League Standings";
@@ -942,9 +948,9 @@
             // 
             this.groupBox8.Controls.Add(this.cbAssociationRankings);
             this.groupBox8.Controls.Add(this.panel1);
-            this.groupBox8.Location = new System.Drawing.Point(388, 553);
+            this.groupBox8.Location = new System.Drawing.Point(639, 553);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(370, 250);
+            this.groupBox8.Size = new System.Drawing.Size(372, 250);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Association Rankings";
@@ -980,9 +986,9 @@
             // 
             this.groupBox9.Controls.Add(this.panel2);
             this.groupBox9.Controls.Add(this.cbEventDetails);
-            this.groupBox9.Location = new System.Drawing.Point(764, 553);
+            this.groupBox9.Location = new System.Drawing.Point(1015, 553);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(370, 250);
+            this.groupBox9.Size = new System.Drawing.Size(372, 250);
             this.groupBox9.TabIndex = 1;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Event Details";
@@ -1057,15 +1063,15 @@
             // 
             // managerFirstNameTextBox
             // 
-            this.managerFirstNameTextBox.Location = new System.Drawing.Point(121, 9);
+            this.managerFirstNameTextBox.Location = new System.Drawing.Point(372, 9);
             this.managerFirstNameTextBox.Name = "managerFirstNameTextBox";
-            this.managerFirstNameTextBox.Size = new System.Drawing.Size(177, 20);
+            this.managerFirstNameTextBox.Size = new System.Drawing.Size(179, 20);
             this.managerFirstNameTextBox.TabIndex = 5;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 9);
+            this.label8.Location = new System.Drawing.Point(262, 9);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(105, 13);
             this.label8.TabIndex = 4;
@@ -1073,15 +1079,15 @@
             // 
             // managerLastNameTextBox
             // 
-            this.managerLastNameTextBox.Location = new System.Drawing.Point(418, 6);
+            this.managerLastNameTextBox.Location = new System.Drawing.Point(669, 9);
             this.managerLastNameTextBox.Name = "managerLastNameTextBox";
-            this.managerLastNameTextBox.Size = new System.Drawing.Size(177, 20);
+            this.managerLastNameTextBox.Size = new System.Drawing.Size(179, 20);
             this.managerLastNameTextBox.TabIndex = 7;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(306, 9);
+            this.label9.Location = new System.Drawing.Point(557, 9);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 13);
             this.label9.TabIndex = 6;
@@ -1089,15 +1095,15 @@
             // 
             // agencyNameTextBox
             // 
-            this.agencyNameTextBox.Location = new System.Drawing.Point(687, 6);
+            this.agencyNameTextBox.Location = new System.Drawing.Point(938, 9);
             this.agencyNameTextBox.Name = "agencyNameTextBox";
-            this.agencyNameTextBox.Size = new System.Drawing.Size(208, 20);
+            this.agencyNameTextBox.Size = new System.Drawing.Size(210, 20);
             this.agencyNameTextBox.TabIndex = 9;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(604, 9);
+            this.label10.Location = new System.Drawing.Point(855, 9);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(77, 13);
             this.label10.TabIndex = 8;
@@ -1105,9 +1111,9 @@
             // 
             // editAgentAgencyInfo
             // 
-            this.editAgentAgencyInfo.Location = new System.Drawing.Point(911, 4);
+            this.editAgentAgencyInfo.Location = new System.Drawing.Point(1162, 4);
             this.editAgentAgencyInfo.Name = "editAgentAgencyInfo";
-            this.editAgentAgencyInfo.Size = new System.Drawing.Size(149, 23);
+            this.editAgentAgencyInfo.Size = new System.Drawing.Size(151, 23);
             this.editAgentAgencyInfo.TabIndex = 10;
             this.editAgentAgencyInfo.Text = "Edit Agent and Agency Info";
             this.editAgentAgencyInfo.UseVisualStyleBackColor = true;
@@ -1117,7 +1123,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(1140, 50);
+            this.label24.Location = new System.Drawing.Point(1391, 50);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(65, 24);
             this.label24.TabIndex = 11;
@@ -1127,7 +1133,7 @@
             // 
             this.yearLabel.AutoSize = true;
             this.yearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yearLabel.Location = new System.Drawing.Point(1159, 85);
+            this.yearLabel.Location = new System.Drawing.Point(1410, 85);
             this.yearLabel.Name = "yearLabel";
             this.yearLabel.Size = new System.Drawing.Size(17, 17);
             this.yearLabel.TabIndex = 12;
@@ -1137,7 +1143,7 @@
             // 
             this.monthLabel.AutoSize = true;
             this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(1159, 150);
+            this.monthLabel.Location = new System.Drawing.Point(1410, 150);
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.Size = new System.Drawing.Size(17, 17);
             this.monthLabel.TabIndex = 13;
@@ -1147,7 +1153,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(1140, 120);
+            this.label27.Location = new System.Drawing.Point(1391, 120);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(86, 24);
             this.label27.TabIndex = 14;
@@ -1157,7 +1163,7 @@
             // 
             this.weekLabel.AutoSize = true;
             this.weekLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.weekLabel.Location = new System.Drawing.Point(1159, 224);
+            this.weekLabel.Location = new System.Drawing.Point(1410, 224);
             this.weekLabel.Name = "weekLabel";
             this.weekLabel.Size = new System.Drawing.Size(17, 17);
             this.weekLabel.TabIndex = 15;
@@ -1167,7 +1173,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(1140, 190);
+            this.label29.Location = new System.Drawing.Point(1391, 190);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(70, 24);
             this.label29.TabIndex = 16;
@@ -1175,19 +1181,47 @@
             // 
             // advanceWeekBtn
             // 
-            this.advanceWeekBtn.Location = new System.Drawing.Point(1127, 9);
+            this.advanceWeekBtn.Location = new System.Drawing.Point(1378, 9);
             this.advanceWeekBtn.Name = "advanceWeekBtn";
-            this.advanceWeekBtn.Size = new System.Drawing.Size(94, 23);
+            this.advanceWeekBtn.Size = new System.Drawing.Size(96, 23);
             this.advanceWeekBtn.TabIndex = 17;
             this.advanceWeekBtn.Text = "Advance Week";
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
+            // lblBirthMonth
+            // 
+            this.lblBirthMonth.AutoSize = true;
+            this.lblBirthMonth.Location = new System.Drawing.Point(294, 63);
+            this.lblBirthMonth.Name = "lblBirthMonth";
+            this.lblBirthMonth.Size = new System.Drawing.Size(65, 13);
+            this.lblBirthMonth.TabIndex = 30;
+            this.lblBirthMonth.Text = "MonthName";
+            // 
+            // lblBirthWeek
+            // 
+            this.lblBirthWeek.AutoSize = true;
+            this.lblBirthWeek.Location = new System.Drawing.Point(299, 82);
+            this.lblBirthWeek.Name = "lblBirthWeek";
+            this.lblBirthWeek.Size = new System.Drawing.Size(60, 13);
+            this.lblBirthWeek.TabIndex = 31;
+            this.lblBirthWeek.Text = "Birth Week";
+            // 
+            // btnHireAgent
+            // 
+            this.btnHireAgent.Location = new System.Drawing.Point(9, 221);
+            this.btnHireAgent.Name = "btnHireAgent";
+            this.btnHireAgent.Size = new System.Drawing.Size(75, 23);
+            this.btnHireAgent.TabIndex = 18;
+            this.btnHireAgent.Text = "Hire Agent";
+            this.btnHireAgent.UseVisualStyleBackColor = true;
+            this.btnHireAgent.Click += new System.EventHandler(this.btnHireAgent_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1233, 805);
+            this.ClientSize = new System.Drawing.Size(1484, 861);
             this.Controls.Add(this.advanceWeekBtn);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.weekLabel);
@@ -1211,6 +1245,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
+            this.IsMdiContainer = true;
             this.Name = "MainForm";
             this.Text = "Sports Agency Tycoon";
             this.groupBox1.ResumeLayout(false);
@@ -1345,6 +1380,9 @@
         private System.Windows.Forms.Label eventLocationLabel;
         private System.Windows.Forms.Label eventNumberOfEntrantsLabel;
         private System.Windows.Forms.Label eventDateLabel;
+        private System.Windows.Forms.Label lblBirthWeek;
+        private System.Windows.Forms.Label lblBirthMonth;
+        private System.Windows.Forms.Button btnHireAgent;
     }
 }
 
