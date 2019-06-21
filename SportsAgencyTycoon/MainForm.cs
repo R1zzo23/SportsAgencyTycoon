@@ -19,6 +19,7 @@ namespace SportsAgencyTycoon
         public Golf Golf = new Golf();
         public Boxing Boxing = new Boxing();
         public MMA MMA = new MMA();
+        public Random rnd = new Random();
         public MainForm()
         {
             InitializeComponent();
@@ -66,7 +67,7 @@ namespace SportsAgencyTycoon
         {
             Random rnd = new Random();
             agency = new Agency("New Age Agency", 1000000, 5);
-            myManager = new Agent("First", "Last", 0, 10, 10, 10, 75, 1, Roles.Manager);
+            myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 1, Roles.Manager);
             //Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
             //agency.AddAgent(agent);
@@ -678,6 +679,12 @@ namespace SportsAgencyTycoon
                 //if fundsSpent == 25000, only create 2 potential agents
                 //else create 3
                 //use agentType to customize agent skills
+                HireAgentForm hireAgentForm = new HireAgentForm();
+                hireAgentForm.SetFundsSpent(fundsSpent, agentType);
+                hireAgentForm.CreateApplicants(world, rnd);
+                hireAgentForm.BringToFront();
+                hireAgentForm.ShowDialog();
+                
             }
         }
     }
