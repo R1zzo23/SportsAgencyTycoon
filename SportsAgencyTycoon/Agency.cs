@@ -16,6 +16,8 @@ namespace SportsAgencyTycoon
         public int Money;
         public int IndustryInfluence;
         public int MonthlyRent;
+        public Date LoanPaybackDate;
+        public int LoanPaybackAmount;
 
         public Agency(string name, int money, int industryInfluence)
         {
@@ -67,9 +69,35 @@ namespace SportsAgencyTycoon
                 if (agent.LicenseTestPrep == 100 && agent.BeingTrainedForTest) agent.BeingTrainedForTest = false;
             }
         }
-        public void DeductMonthlyRent()
+        public void DeductMonthlyCosts(World world)
         {
-            Money -= MonthlyRent;
+            Money -= CalculateMonthlyCosts();
+            if (Money < 0)
+            {
+                if (LoanPaybackAmount == 0)
+                {
+                    BankruptcyForm bankruptcyForm = new BankruptcyForm(this);
+                    bankruptcyForm.DisplayInformation();
+                    bankruptcyForm.BringToFront();
+                    bankruptcyForm.ShowDialog();
+
+                    if (bankruptcyForm.AcceptedLoan)
+                    {
+                        Money += 200000;
+                        LoanPaybackDate = new Date(world.MonthNumber, world.MonthName, world.WeekNumber);
+                        LoanPaybackAmount = 350000;
+                        Console.WriteLine(LoanPaybackAmount + " is due by " + LoanPaybackDate.MonthName + " Week #" + LoanPaybackDate.Week);
+                    }
+                }
+                //else Game Over
+            }
+        }
+        public int CalculateMonthlyCosts()
+        {
+            int monthlyCosts = 0;
+            monthlyCosts += MonthlyRent;
+            foreach (Agent a in Agents) monthlyCosts += a.Salary;
+            return monthlyCosts;
         }
     }
 }

@@ -66,7 +66,7 @@ namespace SportsAgencyTycoon
         public void CreateManagerAndAgency()
         {
             Random rnd = new Random();
-            agency = new Agency("New Age Agency", 1000000, 5);
+            agency = new Agency("New Age Agency", 100000, 5);
             myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 1, Roles.Manager);
             //Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
@@ -516,7 +516,7 @@ namespace SportsAgencyTycoon
             if (world.WeekNumber == 1)
             {
                 //pay agency rent
-                agency.DeductMonthlyRent();
+                agency.DeductMonthlyCosts(world);
             }
         }
 
@@ -662,8 +662,8 @@ namespace SportsAgencyTycoon
 
         private void btnHireAgent_Click(object sender, EventArgs e)
         {
-            AgentSearch newAgentSearch = new AgentSearch();
-            //newAgentSearch.MdiParent = this;
+            Agent hiredAgent = null;
+            AgentSearch newAgentSearch = new AgentSearch(agency);
             newAgentSearch.BringToFront();
             newAgentSearch.ShowDialog();
 
@@ -676,15 +676,20 @@ namespace SportsAgencyTycoon
 
             if (fundsSpent != 0)
             {
-                //if fundsSpent == 25000, only create 2 potential agents
-                //else create 3
-                //use agentType to customize agent skills
-                HireAgentForm hireAgentForm = new HireAgentForm();
-                hireAgentForm.SetFundsSpent(fundsSpent, agentType);
+                HireAgentForm hireAgentForm = new HireAgentForm(fundsSpent, agentType);
+                hireAgentForm.HowManyAgents();
                 hireAgentForm.CreateApplicants(world, rnd);
                 hireAgentForm.BringToFront();
                 hireAgentForm.ShowDialog();
-                
+
+                hiredAgent = hireAgentForm.HiredAgent;
+                if (hiredAgent != null)
+                {
+                    agency.Agents.Add(hiredAgent);
+                    agency.AgentCount++;
+                    UpdateAgencyInfo();
+                    PopulateAgencyAgentList();
+                }
             }
         }
     }

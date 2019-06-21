@@ -15,6 +15,11 @@ namespace SportsAgencyTycoon
         private int _AgentApplicants;
         private int _AgentLevel;
         private List<Agent> agents = new List<Agent>();
+        private Agent _HiredAgent;
+        public Agent HiredAgent
+        {
+            get { return _HiredAgent; }
+        }
         private int _FundsSpent;
         public int FundsSpent
         {
@@ -26,14 +31,11 @@ namespace SportsAgencyTycoon
             get { return _AgentType; }
         }
 
-        public HireAgentForm()
+        public HireAgentForm(int i, string s)
         {
             InitializeComponent();
-        }
-        public void SetFundsSpent(int i, string s)
-        {
             _FundsSpent = i;
-            HowManyAgents();
+            _AgentType = s;
         }
         public void HowManyAgents()
         {
@@ -57,7 +59,16 @@ namespace SportsAgencyTycoon
         {
             for (int i = 0; i < _AgentApplicants; i++)
             {
-                agents.Add(new Agent(world.randomFirstName(rnd).ToString(), world.randomLastName(rnd).ToString(), DetermineSalary(_AgentLevel, _AgentType, rnd), 0, 0, 0, 0, _AgentLevel, Roles.Agent));
+                agents.Add(new Agent(
+                    world.randomFirstName(rnd).ToString(), 
+                    world.randomLastName(rnd).ToString(), 
+                    DetermineSalary(_AgentLevel, _AgentType, rnd), 
+                    DetermineNegotiating(_AgentType, rnd),
+                    DetermineGreed(_AgentType, rnd), 
+                    DeterminePower(_AgentType, rnd), 
+                    DetermineIntelligence(_AgentType, rnd), 
+                    _AgentLevel, 
+                    Roles.Agent));
             }
             DisplayApplicantInformation();
         }
@@ -73,6 +84,75 @@ namespace SportsAgencyTycoon
             salary = rnd.Next(5, 13) * multiplier * 1000;
 
             return salary;
+        }
+        public int DetermineRating(bool agentSpecialty, Random rnd)
+        {
+            int rating = 0;
+
+            rating = rnd.Next(10, 19);
+            if (_AgentLevel == 1)
+            {
+                if (agentSpecialty) rating += 5;
+            }
+            else if (_AgentLevel == 2)
+            {
+                if (agentSpecialty) rating += 12;
+                else rating += 7;
+            }
+            else if (_AgentLevel == 3)
+            {
+                if (agentSpecialty) rating += 17;
+                else rating += 11;
+            }
+            return rating;
+        }
+        public int DetermineNegotiating(string agentType, Random rnd)
+        {
+            int rating = 0;
+            bool agentSpecialty;
+
+            if (agentType == "SmoothTalker" || agentType == "SportsShark") agentSpecialty = true;
+            else agentSpecialty = false;
+
+            rating = DetermineRating(agentSpecialty, rnd);
+
+            return rating;
+        }
+        public int DetermineGreed(string agentType, Random rnd)
+        {
+            int rating = 0;
+            bool agentSpecialty;
+
+            if (agentType == "SportsShark") agentSpecialty = true;
+            else agentSpecialty = false;
+
+            rating = DetermineRating(agentSpecialty, rnd);
+
+            return rating;
+        }
+        public int DeterminePower(string agentType, Random rnd)
+        {
+            int rating = 0;
+            bool agentSpecialty;
+
+            if (agentType == "IndustryBuff" || agentType == "SportsShark") agentSpecialty = true;
+            else agentSpecialty = false;
+
+            rating = DetermineRating(agentSpecialty, rnd);
+
+            return rating;
+        }
+        public int DetermineIntelligence(string agentType, Random rnd)
+        {
+            int rating = 0;
+            bool agentSpecialty;
+
+            if (agentType == "IndustryBuff" || agentType == "SmoothTalker") agentSpecialty = true;
+            else agentSpecialty = false;
+
+            rating = DetermineRating(agentSpecialty, rnd);
+
+            return rating;
         }
         private void DisplayApplicantInformation()
         {
@@ -92,8 +172,33 @@ namespace SportsAgencyTycoon
             {
                 Agent a3 = agents[2];
                 radioApplicant3.Text = a3.First + " " + a3.Last + " (LVL " + _AgentLevel + ")";
-                lblAgent3.Text = "Applicant #3's Info";
+                lblAgent3.Text = a3.Salary.ToString("C0") + "/month | NEG: " + a3.Negotiating.ToString() + " | GRD: " + a3.Greed.ToString() + " | POW: " + a3.IndustryPower.ToString() + " | IQ: " + a3.Intelligence.ToString();
             }
+        }
+
+        private void btnPassOnHiring_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnHireSelected_Click(object sender, EventArgs e)
+        {
+            if (radioApplicant1.Checked)
+            {
+                _HiredAgent = agents[0];
+                this.Close();
+            }
+            else if (radioApplicant2.Checked)
+            {
+                _HiredAgent = agents[1];
+                this.Close();
+            }
+            else if (radioApplicant3.Checked)
+            {
+                _HiredAgent = agents[2];
+                this.Close();
+            }
+            else MessageBox.Show("You must select one of the applicants before hiring.");
         }
     }
 }

@@ -31,12 +31,12 @@
             this.btnHireSelected = new System.Windows.Forms.Button();
             this.btnPassOnHiring = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioApplicant1 = new System.Windows.Forms.RadioButton();
-            this.radioApplicant2 = new System.Windows.Forms.RadioButton();
-            this.radioApplicant3 = new System.Windows.Forms.RadioButton();
-            this.lblAgent1 = new System.Windows.Forms.Label();
-            this.lblAgent2 = new System.Windows.Forms.Label();
             this.lblAgent3 = new System.Windows.Forms.Label();
+            this.lblAgent2 = new System.Windows.Forms.Label();
+            this.lblAgent1 = new System.Windows.Forms.Label();
+            this.radioApplicant3 = new System.Windows.Forms.RadioButton();
+            this.radioApplicant2 = new System.Windows.Forms.RadioButton();
+            this.radioApplicant1 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +48,7 @@
             this.btnHireSelected.TabIndex = 1;
             this.btnHireSelected.Text = "Hire Selected";
             this.btnHireSelected.UseVisualStyleBackColor = true;
+            this.btnHireSelected.Click += new System.EventHandler(this.btnHireSelected_Click);
             // 
             // btnPassOnHiring
             // 
@@ -58,6 +59,7 @@
             this.btnPassOnHiring.TabIndex = 2;
             this.btnPassOnHiring.Text = "Pass On Hiring";
             this.btnPassOnHiring.UseVisualStyleBackColor = true;
+            this.btnPassOnHiring.Click += new System.EventHandler(this.btnPassOnHiring_Click);
             // 
             // groupBox1
             // 
@@ -74,27 +76,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Applicants";
             // 
-            // radioApplicant1
+            // lblAgent3
             // 
-            this.radioApplicant1.AutoSize = true;
-            this.radioApplicant1.Location = new System.Drawing.Point(8, 20);
-            this.radioApplicant1.Name = "radioApplicant1";
-            this.radioApplicant1.Size = new System.Drawing.Size(85, 17);
-            this.radioApplicant1.TabIndex = 0;
-            this.radioApplicant1.TabStop = true;
-            this.radioApplicant1.Text = "radioButton1";
-            this.radioApplicant1.UseVisualStyleBackColor = true;
+            this.lblAgent3.AutoSize = true;
+            this.lblAgent3.Location = new System.Drawing.Point(8, 164);
+            this.lblAgent3.Name = "lblAgent3";
+            this.lblAgent3.Size = new System.Drawing.Size(35, 13);
+            this.lblAgent3.TabIndex = 5;
+            this.lblAgent3.Text = "label3";
             // 
-            // radioApplicant2
+            // lblAgent2
             // 
-            this.radioApplicant2.AutoSize = true;
-            this.radioApplicant2.Location = new System.Drawing.Point(8, 80);
-            this.radioApplicant2.Name = "radioApplicant2";
-            this.radioApplicant2.Size = new System.Drawing.Size(85, 17);
-            this.radioApplicant2.TabIndex = 1;
-            this.radioApplicant2.TabStop = true;
-            this.radioApplicant2.Text = "radioButton2";
-            this.radioApplicant2.UseVisualStyleBackColor = true;
+            this.lblAgent2.AutoSize = true;
+            this.lblAgent2.Location = new System.Drawing.Point(10, 104);
+            this.lblAgent2.Name = "lblAgent2";
+            this.lblAgent2.Size = new System.Drawing.Size(35, 13);
+            this.lblAgent2.TabIndex = 4;
+            this.lblAgent2.Text = "label2";
+            // 
+            // lblAgent1
+            // 
+            this.lblAgent1.AutoSize = true;
+            this.lblAgent1.Location = new System.Drawing.Point(7, 44);
+            this.lblAgent1.Name = "lblAgent1";
+            this.lblAgent1.Size = new System.Drawing.Size(35, 13);
+            this.lblAgent1.TabIndex = 3;
+            this.lblAgent1.Text = "label1";
             // 
             // radioApplicant3
             // 
@@ -107,32 +114,27 @@
             this.radioApplicant3.Text = "radioButton3";
             this.radioApplicant3.UseVisualStyleBackColor = true;
             // 
-            // lblAgent1
+            // radioApplicant2
             // 
-            this.lblAgent1.AutoSize = true;
-            this.lblAgent1.Location = new System.Drawing.Point(7, 44);
-            this.lblAgent1.Name = "lblAgent1";
-            this.lblAgent1.Size = new System.Drawing.Size(35, 13);
-            this.lblAgent1.TabIndex = 3;
-            this.lblAgent1.Text = "label1";
+            this.radioApplicant2.AutoSize = true;
+            this.radioApplicant2.Location = new System.Drawing.Point(8, 80);
+            this.radioApplicant2.Name = "radioApplicant2";
+            this.radioApplicant2.Size = new System.Drawing.Size(85, 17);
+            this.radioApplicant2.TabIndex = 1;
+            this.radioApplicant2.TabStop = true;
+            this.radioApplicant2.Text = "radioButton2";
+            this.radioApplicant2.UseVisualStyleBackColor = true;
             // 
-            // lblAgent2
+            // radioApplicant1
             // 
-            this.lblAgent2.AutoSize = true;
-            this.lblAgent2.Location = new System.Drawing.Point(10, 104);
-            this.lblAgent2.Name = "lblAgent2";
-            this.lblAgent2.Size = new System.Drawing.Size(35, 13);
-            this.lblAgent2.TabIndex = 4;
-            this.lblAgent2.Text = "label2";
-            // 
-            // lblAgent3
-            // 
-            this.lblAgent3.AutoSize = true;
-            this.lblAgent3.Location = new System.Drawing.Point(8, 164);
-            this.lblAgent3.Name = "lblAgent3";
-            this.lblAgent3.Size = new System.Drawing.Size(35, 13);
-            this.lblAgent3.TabIndex = 5;
-            this.lblAgent3.Text = "label3";
+            this.radioApplicant1.AutoSize = true;
+            this.radioApplicant1.Location = new System.Drawing.Point(8, 20);
+            this.radioApplicant1.Name = "radioApplicant1";
+            this.radioApplicant1.Size = new System.Drawing.Size(85, 17);
+            this.radioApplicant1.TabIndex = 0;
+            this.radioApplicant1.TabStop = true;
+            this.radioApplicant1.Text = "radioButton1";
+            this.radioApplicant1.UseVisualStyleBackColor = true;
             // 
             // HireAgentForm
             // 
