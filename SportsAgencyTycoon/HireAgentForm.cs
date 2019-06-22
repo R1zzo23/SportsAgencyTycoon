@@ -75,35 +75,48 @@ namespace SportsAgencyTycoon
         public int DetermineSalary(int level, string type, Random rnd)
         {
             int salary = 0;
-            int multiplier = 0;
+            double multiplier = 0;
 
-            if (_AgentType != "PlayersAgent") multiplier = 2;
+            if (_AgentType != "PlayersAgent") multiplier = 0.2;
 
             multiplier += _AgentLevel;
 
-            salary = rnd.Next(5, 13) * multiplier * 1000;
+            salary = (int)Math.Round(rnd.Next(6, 10) * multiplier * 1000);
 
             return salary;
         }
-        public int DetermineRating(bool agentSpecialty, Random rnd)
+        public int DetermineRating(string agentType, bool agentSpecialty, Random rnd)
         {
             int rating = 0;
 
-            rating = rnd.Next(10, 19);
-            if (_AgentLevel == 1)
+            rating = rnd.Next(15, 22);
+
+            // agentyType of PlayersAgent gets small boost in all categories
+            if (agentType == "PlayersAgent")
             {
-                if (agentSpecialty) rating += 5;
+                rating += 2;
             }
-            else if (_AgentLevel == 2)
+            // agentTypes other than PlayersAgent gets larger boost in their 
+            // main category and small nerf in all other categories
+            else
             {
-                if (agentSpecialty) rating += 12;
-                else rating += 7;
+                if (_AgentLevel == 1)
+                {
+                    if (agentSpecialty) rating += 5;
+                    else rating -= 2;
+                }
+                else if (_AgentLevel == 2)
+                {
+                    if (agentSpecialty) rating += 7;
+                    else rating += 1;
+                }
+                else if (_AgentLevel == 3)
+                {
+                    if (agentSpecialty) rating += 12;
+                    else rating += 5;
+                }
             }
-            else if (_AgentLevel == 3)
-            {
-                if (agentSpecialty) rating += 17;
-                else rating += 11;
-            }
+            
             return rating;
         }
         public int DetermineNegotiating(string agentType, Random rnd)
@@ -114,7 +127,7 @@ namespace SportsAgencyTycoon
             if (agentType == "SmoothTalker" || agentType == "SportsShark") agentSpecialty = true;
             else agentSpecialty = false;
 
-            rating = DetermineRating(agentSpecialty, rnd);
+            rating = DetermineRating(agentType, agentSpecialty, rnd);
 
             return rating;
         }
@@ -126,7 +139,7 @@ namespace SportsAgencyTycoon
             if (agentType == "SportsShark") agentSpecialty = true;
             else agentSpecialty = false;
 
-            rating = DetermineRating(agentSpecialty, rnd);
+            rating = DetermineRating(agentType, agentSpecialty, rnd);
 
             return rating;
         }
@@ -138,7 +151,7 @@ namespace SportsAgencyTycoon
             if (agentType == "IndustryBuff" || agentType == "SportsShark") agentSpecialty = true;
             else agentSpecialty = false;
 
-            rating = DetermineRating(agentSpecialty, rnd);
+            rating = DetermineRating(agentType, agentSpecialty, rnd);
 
             return rating;
         }
@@ -150,7 +163,7 @@ namespace SportsAgencyTycoon
             if (agentType == "IndustryBuff" || agentType == "SmoothTalker") agentSpecialty = true;
             else agentSpecialty = false;
 
-            rating = DetermineRating(agentSpecialty, rnd);
+            rating = DetermineRating(agentType, agentSpecialty, rnd);
 
             return rating;
         }

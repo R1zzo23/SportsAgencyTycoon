@@ -66,7 +66,7 @@ namespace SportsAgencyTycoon
         public void CreateManagerAndAgency()
         {
             Random rnd = new Random();
-            agency = new Agency("New Age Agency", 100000, 5);
+            agency = new Agency("New Age Agency", 1000000, 5);
             myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 1, Roles.Manager);
             //Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
