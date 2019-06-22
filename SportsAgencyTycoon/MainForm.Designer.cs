@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnHireAgent = new System.Windows.Forms.Button();
             this.monthlyRentLabel = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.btnTrainAgent = new System.Windows.Forms.Button();
@@ -80,6 +81,8 @@
             this.cbAvailableLicenses = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblBirthWeek = new System.Windows.Forms.Label();
+            this.lblBirthMonth = new System.Windows.Forms.Label();
             this.clientTeamHappinessLabel = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.clientSkillLabel = new System.Windows.Forms.Label();
@@ -132,9 +135,6 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.lblBirthMonth = new System.Windows.Forms.Label();
-            this.lblBirthWeek = new System.Windows.Forms.Label();
-            this.btnHireAgent = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -172,6 +172,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agency Information";
+            // 
+            // btnHireAgent
+            // 
+            this.btnHireAgent.Location = new System.Drawing.Point(9, 221);
+            this.btnHireAgent.Name = "btnHireAgent";
+            this.btnHireAgent.Size = new System.Drawing.Size(75, 23);
+            this.btnHireAgent.TabIndex = 18;
+            this.btnHireAgent.Text = "Hire Agent";
+            this.btnHireAgent.UseVisualStyleBackColor = true;
+            this.btnHireAgent.Click += new System.EventHandler(this.btnHireAgent_Click);
             // 
             // monthlyRentLabel
             // 
@@ -691,6 +701,24 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Client Information";
             // 
+            // lblBirthWeek
+            // 
+            this.lblBirthWeek.AutoSize = true;
+            this.lblBirthWeek.Location = new System.Drawing.Point(299, 82);
+            this.lblBirthWeek.Name = "lblBirthWeek";
+            this.lblBirthWeek.Size = new System.Drawing.Size(60, 13);
+            this.lblBirthWeek.TabIndex = 31;
+            this.lblBirthWeek.Text = "Birth Week";
+            // 
+            // lblBirthMonth
+            // 
+            this.lblBirthMonth.AutoSize = true;
+            this.lblBirthMonth.Location = new System.Drawing.Point(294, 63);
+            this.lblBirthMonth.Name = "lblBirthMonth";
+            this.lblBirthMonth.Size = new System.Drawing.Size(65, 13);
+            this.lblBirthMonth.TabIndex = 30;
+            this.lblBirthMonth.Text = "MonthName";
+            // 
             // clientTeamHappinessLabel
             // 
             this.clientTeamHappinessLabel.AutoSize = true;
@@ -796,7 +824,8 @@
             // 
             this.clientNameLabel.AutoSize = true;
             this.clientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientNameLabel.Location = new System.Drawing.Point(94, 16);
+            this.clientNameLabel.Location = new System.Drawing.Point(9, 16);
+            this.clientNameLabel.MaximumSize = new System.Drawing.Size(350, 0);
             this.clientNameLabel.Name = "clientNameLabel";
             this.clientNameLabel.Size = new System.Drawing.Size(204, 37);
             this.clientNameLabel.TabIndex = 2;
@@ -1188,34 +1217,6 @@
             this.advanceWeekBtn.Text = "Advance Week";
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
-            // 
-            // lblBirthMonth
-            // 
-            this.lblBirthMonth.AutoSize = true;
-            this.lblBirthMonth.Location = new System.Drawing.Point(294, 63);
-            this.lblBirthMonth.Name = "lblBirthMonth";
-            this.lblBirthMonth.Size = new System.Drawing.Size(65, 13);
-            this.lblBirthMonth.TabIndex = 30;
-            this.lblBirthMonth.Text = "MonthName";
-            // 
-            // lblBirthWeek
-            // 
-            this.lblBirthWeek.AutoSize = true;
-            this.lblBirthWeek.Location = new System.Drawing.Point(299, 82);
-            this.lblBirthWeek.Name = "lblBirthWeek";
-            this.lblBirthWeek.Size = new System.Drawing.Size(60, 13);
-            this.lblBirthWeek.TabIndex = 31;
-            this.lblBirthWeek.Text = "Birth Week";
-            // 
-            // btnHireAgent
-            // 
-            this.btnHireAgent.Location = new System.Drawing.Point(9, 221);
-            this.btnHireAgent.Name = "btnHireAgent";
-            this.btnHireAgent.Size = new System.Drawing.Size(75, 23);
-            this.btnHireAgent.TabIndex = 18;
-            this.btnHireAgent.Text = "Hire Agent";
-            this.btnHireAgent.UseVisualStyleBackColor = true;
-            this.btnHireAgent.Click += new System.EventHandler(this.btnHireAgent_Click);
             // 
             // MainForm
             // 

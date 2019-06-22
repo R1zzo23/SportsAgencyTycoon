@@ -50,18 +50,16 @@ namespace SportsAgencyTycoon
             PopulateAssociations();
             PopulateEventList();
 
+            // added to test functionality
+            // needs to be deleted once everything is working correctly.
             Player p = world.PGA.PlayerList[0];
-            Client c = new Client(p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.SkillLevel, p.PotentialSkill, 25, 100, 0, Sports.Golf, p.BirthMonth, p.BirthWeek);
+            Client c = new Client(p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.SkillLevel, p.PotentialSkill, 25, 100, 0, p.Sport, p.BirthMonth, p.BirthWeek);
             Player b = world.WBA.PlayerList[0];
-            Client d = new Client(b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.SkillLevel, b.PotentialSkill, 25, 100, 0, Sports.Golf, b.BirthMonth, b.BirthWeek);
-            agency.Clients.Add(c);
-            agency.ClientCount++;
-            agency.Agents[0].ClientList.Add(c);
-            agency.Agents[0].ClientCount++;
-            agency.Clients.Add(d);
-            agency.ClientCount++;
-            agency.Agents[0].ClientList.Add(d);
-            agency.Agents[0].ClientCount++;
+            Client d = new Client(b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.SkillLevel, b.PotentialSkill, 25, 100, 0, b.Sport, b.BirthMonth, b.BirthWeek);
+            agency.AddClient(c);
+            agency.Agents[0].AddClient(c);
+            agency.AddClient(d);
+            agency.Agents[0].AddClient(d);
         }
         public void CreateManagerAndAgency()
         {

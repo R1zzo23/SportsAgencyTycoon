@@ -57,31 +57,43 @@ namespace SportsAgencyTycoon
         }
         public void CreateApplicants(World world, Random rnd)
         {
+            List<int> ratings = new List<int>();
+
             for (int i = 0; i < _AgentApplicants; i++)
             {
+                ratings.Clear();
+                ratings.Add(DetermineNegotiating(_AgentType, rnd));
+                ratings.Add(DetermineGreed(_AgentType, rnd));
+                ratings.Add(DeterminePower(_AgentType, rnd));
+                ratings.Add(DetermineIntelligence(_AgentType, rnd));
+                ratings.Add(DetermineSalary(_AgentLevel, _AgentType, rnd, ratings));
                 agents.Add(new Agent(
                     world.randomFirstName(rnd).ToString(), 
                     world.randomLastName(rnd).ToString(), 
-                    DetermineSalary(_AgentLevel, _AgentType, rnd), 
-                    DetermineNegotiating(_AgentType, rnd),
-                    DetermineGreed(_AgentType, rnd), 
-                    DeterminePower(_AgentType, rnd), 
-                    DetermineIntelligence(_AgentType, rnd), 
+                    ratings[4],
+                    ratings[0],
+                    ratings[1],
+                    ratings[2],
+                    ratings[3],
                     _AgentLevel, 
                     Roles.Agent));
             }
             DisplayApplicantInformation();
         }
-        public int DetermineSalary(int level, string type, Random rnd)
+        public int DetermineSalary(int level, string type, Random rnd, List<int> ratings)
         {
-            int salary = 0;
+            int salary = 8000;
             double multiplier = 0;
+
+            int sum = 0;
+            foreach (int i in ratings) sum += i;
+
+            int ratingsDifference = sum - 80;
+            salary += ratingsDifference * 500;
 
             if (_AgentType != "PlayersAgent") multiplier = 0.2;
 
-            multiplier += _AgentLevel;
-
-            salary = (int)Math.Round(rnd.Next(6, 10) * multiplier * 1000);
+            salary = (int)(salary * (1 + multiplier));
 
             return salary;
         }
