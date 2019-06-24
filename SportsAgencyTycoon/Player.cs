@@ -8,6 +8,7 @@ namespace SportsAgencyTycoon
 {
     public class Player
     {
+        public int Id;
         public Sports Sport;
         public FirstName FirstName;
         public LastName LastName;
@@ -18,9 +19,11 @@ namespace SportsAgencyTycoon
         public int BirthWeek;
         public int CareerEarnings;
         public int WorldRanking;
+        public Date Birthday;
 
-        public Player(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
+        public Player(int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
         {
+            Id = id;
             Sport = sport;
             FirstName = firstName;
             LastName = lastName;
@@ -34,6 +37,7 @@ namespace SportsAgencyTycoon
                 else BirthWeek = 4;
             }
             else BirthWeek = birthWeek;
+            Birthday = CreateBirthday(birthMonth, birthWeek);
             CareerEarnings = 0;
         }
 
@@ -51,6 +55,12 @@ namespace SportsAgencyTycoon
             potentialSkill = skillLevel + potential;
 
             return potentialSkill;
+        }
+
+        public Date CreateBirthday(Months month, int week)
+        {
+            Date birthday = new Date((int)month, month, week);
+            return birthday;
         }
     }
 }

@@ -14,8 +14,8 @@ namespace SportsAgencyTycoon
         public int TourPoints;
         public List<int> TourPointsList;
 
-        public TennisPlayer(Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
-            : base(sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
+        public TennisPlayer(int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
+            : base(id, sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
         {
             TournamentWins = 0;
             QuarterFinals = 0;

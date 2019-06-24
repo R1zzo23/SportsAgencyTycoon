@@ -135,6 +135,7 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -147,6 +148,7 @@
             this.panel1.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -541,7 +543,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.newsLabel);
+            this.groupBox3.Controls.Add(this.panel3);
             this.groupBox3.Location = new System.Drawing.Point(1015, 41);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(372, 250);
@@ -552,7 +554,7 @@
             // newsLabel
             // 
             this.newsLabel.AutoSize = true;
-            this.newsLabel.Location = new System.Drawing.Point(7, 20);
+            this.newsLabel.Location = new System.Drawing.Point(3, 6);
             this.newsLabel.Name = "newsLabel";
             this.newsLabel.Size = new System.Drawing.Size(87, 13);
             this.newsLabel.TabIndex = 0;
@@ -1218,6 +1220,15 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
+            // panel3
+            // 
+            this.panel3.AutoScroll = true;
+            this.panel3.Controls.Add(this.newsLabel);
+            this.panel3.Location = new System.Drawing.Point(10, 22);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(353, 222);
+            this.panel3.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1254,7 +1265,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1270,6 +1280,8 @@
             this.groupBox9.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1384,6 +1396,7 @@
         private System.Windows.Forms.Label lblBirthWeek;
         private System.Windows.Forms.Label lblBirthMonth;
         private System.Windows.Forms.Button btnHireAgent;
+        private System.Windows.Forms.Panel panel3;
     }
 }
 

@@ -65,6 +65,9 @@
       <DependentUpon>BankruptcyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Boxer.cs" />
+    <Compile Include="Calendar.cs" />
+    <Compile Include="CalendarEvent.cs" />
+    <Compile Include="CalendarEventType.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Date.cs" />
@@ -135,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_NotesFile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

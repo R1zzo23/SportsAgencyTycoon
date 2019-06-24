@@ -8,6 +8,7 @@ namespace SportsAgencyTycoon
 {
     public class World
     {
+        public MainForm MainForm;
         public List<Licenses> AvailableLicenses;
         public List<Client> AvailableClients;
         public List<Agent> AvailableAgents;
@@ -28,8 +29,9 @@ namespace SportsAgencyTycoon
         public int WeekNumber;
         public int firstNameCount = 200;
         public int lastNameCount = 214;
+        public Calendar Calendar;
         public List<Event> EventsThisWeek = new List<Event>();
-        public World()
+        public World(MainForm form)
         {
             AvailableLicenses = new List<Licenses>();
             AvailableClients = new List<Client>();
@@ -41,6 +43,9 @@ namespace SportsAgencyTycoon
             MonthNumber = 0;
             MonthName = Months.January;
             WeekNumber = 1;
+
+            MainForm = form;
+            Calendar = new Calendar(form);
         }
 
         public void InitializeLicenses()
@@ -116,6 +121,7 @@ namespace SportsAgencyTycoon
             CreateATPEvents();
             CreateWBAEvents();
             CreateUFCEvents();
+            CreateCalendarEventsForAssociationEvents();
         }
         public void CreatePGAEvents()
         {
@@ -159,6 +165,13 @@ namespace SportsAgencyTycoon
             UFC.EventList.Add(new Event(Sports.MMA, Year, "Bloodied and Bruised", EventType.Normal, "Chicago, IL", 2500000, 20, 20, new Date(6, Months.June, 1)));
             UFC.EventList.Add(new Event(Sports.MMA, Year, "Elite Title Showdown", EventType.Normal, "Las Vegas, NV", 5000000, 10, 10, new Date(10, Months.October, 2)));
         }
+        public void CreateCalendarEventsForAssociationEvents()
+        {
+            foreach (Event e in PGA.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
+            foreach (Event e in ATP.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
+            foreach (Event e in WBA.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
+            foreach (Event e in UFC.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
+        }
         #endregion
         #region Create Athletes for Associations
         public void CreateAthletesForAssociations(Random rnd)
@@ -172,29 +185,36 @@ namespace SportsAgencyTycoon
         {
             for (var i = 0; i < 144; i++)
             {
-                PGA.PlayerList.Add(new Golfer(Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65), (Months)rnd.Next(0,12), rnd.Next(1, 6)));
+                PGA.PlayerList.Add(new Golfer(i, Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65), (Months)rnd.Next(0,12), rnd.Next(1, 6)));
             }
         }
         public void CreateTennisPlayers(Random rnd)
         {
             for (var i = 0; i < 128; i++)
             {
-                ATP.PlayerList.Add(new TennisPlayer(Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
+                ATP.PlayerList.Add(new TennisPlayer(i, Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
             }
         }
         public void CreateBoxers(Random rnd)
         {
             for (var i = 0; i < 40; i++)
             {
-                WBA.PlayerList.Add(new Boxer(Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
+                WBA.PlayerList.Add(new Boxer(i, Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
             }
         }
         public void CreateMMAFighters(Random rnd)
         {
             for (var i = 0; i < 50; i++)
             {
-                UFC.PlayerList.Add(new MMAFighter(Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
+                UFC.PlayerList.Add(new MMAFighter(i, Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
             }
+        }
+        public void CreatePlayerBirthdayCalendarEvents()
+        {
+            foreach (Player p in PGA.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
+            foreach (Player p in ATP.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
+            foreach (Player p in WBA.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
+            foreach (Player p in UFC.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
         }
         #endregion
         #region Create Teams for Leagues

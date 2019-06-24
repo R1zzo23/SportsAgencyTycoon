@@ -31,7 +31,7 @@ namespace SportsAgencyTycoon
 
         public void InitializeWorld()
         {
-            world = new World();
+            world = new World(this);
             world.CreateLeaguesAssociationEventsPlayersAndTeams();
             newsLabel.Text = "**********************************************************************" + Environment.NewLine + 
                              "           Welcome to DDS:Sports Agency Tycoon!" + Environment.NewLine + 
@@ -60,6 +60,7 @@ namespace SportsAgencyTycoon
             agency.Agents[0].AddClient(c);
             agency.AddClient(d);
             agency.Agents[0].AddClient(d);
+            // delete above when ready
         }
         public void CreateManagerAndAgency()
         {

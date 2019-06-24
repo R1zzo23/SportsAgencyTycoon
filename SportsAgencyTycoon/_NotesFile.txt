@@ -1,0 +1,14 @@
+﻿Things to work on:
+- Calendar
+  - enum CalendarEvent
+	- PlayerBirthday
+	- LoanRepayment
+	- AssociationEvent
+  - methods
+	- AnyEventsThisWeek
+	- RunEvent
+	  - AgePlayer
+	  - AgeAgent
+	  - RepayLoan
+		- public bool EnoughFunds()
+	  - RunAssociationEvent (already coded)
