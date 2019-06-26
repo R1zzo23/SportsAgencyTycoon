@@ -468,6 +468,8 @@ namespace SportsAgencyTycoon
 
         private void AdvanceWeekBtn_Click(object sender, EventArgs e)
         {
+            RunEventsThisWeek();
+
             //reset if agent took a test this week
             foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
 
@@ -486,9 +488,7 @@ namespace SportsAgencyTycoon
             UpdateAgencyInfo();
             world.CheckForEventsThisWeek();
             if (world.EventsThisWeek.Count > 0) DisplayEventsThisWeek();
-            RunEventsThisWeek();
-
-
+            
             //create new WBA world rankings before AND after King of the Ring event
             if ((world.WeekNumber == 4 && world.MonthName == Months.September) || (world.WeekNumber == 1 && world.MonthName == Months.December))
             {
@@ -625,31 +625,62 @@ namespace SportsAgencyTycoon
         {
             string output;
             output = "Events this week:" + Environment.NewLine;
-            foreach (Event e in world.EventsThisWeek)
+            foreach (CalendarEvent e in world.EventsThisWeek)
             {
-                output += e.Name + Environment.NewLine;
+                output += e.EventName + Environment.NewLine;
             }
             newsLabel.Text = output + newsLabel.Text;
         }
         private void RunEventsThisWeek()
         {
-            foreach (Event e in world.EventsThisWeek)
+            foreach (CalendarEvent e in world.EventsThisWeek)
             {
-                if (e.Sport == Sports.Tennis)
+                if (e.EventType == CalendarEventType.AssociationEvent)
                 {
-                    newsLabel.Text = Tennis.RunTournament(e, world) + newsLabel.Text;
+                    if (e.Sport == Sports.Tennis)
+                    {
+                        int eventIndex = world.ATP.EventList.FindIndex(x => x.Id.Equals(e.EventID));
+                        Event thisEvent = world.ATP.EventList.Find(x => x.Id == e.EventID);
+                        newsLabel.Text = Tennis.RunTournament(world.ATP.EventList[eventIndex], world) + newsLabel.Text;
+                    }
+                    else if (e.Sport == Sports.Golf)
+                    {
+                        Event thisEvent = world.PGA.EventList.Find(x => x.Id == e.EventID);
+                        newsLabel.Text = Golf.RunTournament(thisEvent, world) + newsLabel.Text;
+                    }
+                    else if (e.Sport == Sports.MMA)
+                    {
+                        Event thisEvent = world.UFC.EventList.Find(x => x.Id == e.EventID);
+                        newsLabel.Text = MMA.RunMMAEvent(thisEvent, world) + newsLabel.Text;
+                    }
+                    else if (e.Sport == Sports.Boxing)
+                    {
+                        Event thisEvent = world.WBA.EventList.Find(x => x.Id == e.EventID);
+                        newsLabel.Text = Boxing.RunBoxingEvent(thisEvent, world) + newsLabel.Text;
+                    }
                 }
-                else if (e.Sport == Sports.Golf)
+                else if (e.EventType == CalendarEventType.PlayerBirthday)
                 {
-                    newsLabel.Text = Golf.RunTournament(e, world) + newsLabel.Text;
+                    if (e.Sport == Sports.Tennis)
+                    {
+                        world.ATP.PlayerList.Find(x => x.Id == e.PlayerID).Age++;
+                    }
+                    else if (e.Sport == Sports.Golf)
+                    {
+                        world.PGA.PlayerList.Find(x => x.Id == e.PlayerID).Age++;
+                    }
+                    else if (e.Sport == Sports.MMA)
+                    {
+                        world.UFC.PlayerList.Find(x => x.Id == e.PlayerID).Age++;
+                    }
+                    else if (e.Sport == Sports.Boxing)
+                    {
+                        world.WBA.PlayerList.Find(x => x.Id == e.PlayerID).Age++;
+                    }
                 }
-                else if (e.Sport == Sports.MMA)
+                else if (e.EventType == CalendarEventType.LoanRepayment)
                 {
-                    newsLabel.Text = MMA.RunMMAEvent(e, world) + newsLabel.Text;
-                }
-                else if (e.Sport == Sports.Boxing)
-                {
-                    newsLabel.Text = Boxing.RunBoxingEvent(e, world) + newsLabel.Text;
+                    //repay loan
                 }
             }
         }

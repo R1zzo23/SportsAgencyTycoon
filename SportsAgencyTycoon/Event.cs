@@ -11,6 +11,7 @@ namespace SportsAgencyTycoon
         public Sports Sport;
         public int Year;
         public string Name;
+        public int Id;
         public string Location;
         public int PrizePool;
         public int SpotsPaidOut;
@@ -19,11 +20,12 @@ namespace SportsAgencyTycoon
         public List<Player> EntrantList;
         public EventType TypeOfEvent;
 
-        public Event(Sports sport, int year, string name, EventType typeOfEvent, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
+        public Event(Sports sport, int year, string name, int id, EventType typeOfEvent, string location, int prizePool, int numberOfEntrants, int spotsPaidOut,  Date eventDate)
         {
             Sport = sport;
             Year = year;
             Name = name;
+            Id = id;
             TypeOfEvent = typeOfEvent;
             Location = location;
             PrizePool = prizePool;

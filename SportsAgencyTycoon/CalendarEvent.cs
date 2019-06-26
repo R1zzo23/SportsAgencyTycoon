@@ -12,8 +12,10 @@ namespace SportsAgencyTycoon
         public string EventName;
         public Date EventDate;
         public int PlayerID;
+        public int EventID;
         public Sports Sport;
         public int LoanRepaymentAmount;
+        public int Year;
 
         // constructor method for PlayerBirthdays
         public CalendarEvent(Player player)
@@ -41,6 +43,7 @@ namespace SportsAgencyTycoon
             EventName = e.Year + " " + e.Name;
             EventDate = e.EventDate;
             Sport = e.Sport;
+            EventID = e.Id;
         }
 
         // constructor method for LeagueYearBegins
