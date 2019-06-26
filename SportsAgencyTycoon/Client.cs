@@ -2,8 +2,10 @@
 {
     public class Client
     {
+        public int Id;
         public string First;
         public string Last;
+        public string FullName;
         public int Age;
         public int CurrentSkill;
         public int PotentialSkill;
@@ -15,13 +17,16 @@
         public string TeamHappinessDescription;
         public Months BirthMonth;
         public int BirthWeek;
+        public Date Birthday;
         public Sports Sport;
         public Contract Contract;
 
-        public Client(string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport, Months birthMonth, int birthWeek)
+        public Client(int id, string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport, Months birthMonth, int birthWeek)
         {
+            Id = id;
             First = firstName;
             Last = lastName;
+            FullName = firstName + " " + lastName;
             Age = age;
             CurrentSkill = currentSkill;
             PotentialSkill = potentialSkill;
@@ -35,6 +40,7 @@
             Sport = sport;
             BirthMonth = birthMonth;
             BirthWeek = birthWeek;
+            Birthday = new Date((int)birthMonth, birthMonth, birthWeek);
 
         }
 

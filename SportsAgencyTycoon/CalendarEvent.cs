@@ -10,6 +10,7 @@ namespace SportsAgencyTycoon
     {
         public CalendarEventType EventType;
         public string EventName;
+        public string PlayerName;
         public Date EventDate;
         public int PlayerID;
         public int EventID;
@@ -22,9 +23,21 @@ namespace SportsAgencyTycoon
         {
             EventType = CalendarEventType.PlayerBirthday;
             EventName = player.FullName + "'s Birthday";
+            PlayerName = player.FullName;
             EventDate = player.Birthday;
             PlayerID = player.Id;
             Sport = player.Sport;
+        }
+
+        // constructor method for ClientBirthday
+        public CalendarEvent(Client client)
+        {
+            EventType = CalendarEventType.ClientBirthday;
+            EventName = client.FullName + "'s Birthday";
+            PlayerName = client.FullName;
+            EventDate = client.Birthday;
+            PlayerID = client.Id;
+            Sport = client.Sport;
         }
 
         // constructor method for LoanRepayment

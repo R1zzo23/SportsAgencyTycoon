@@ -9,6 +9,7 @@ namespace SportsAgencyTycoon
     public enum CalendarEventType
     {
         PlayerBirthday,
+        ClientBirthday,
         AgentBirthday,
         LoanRepayment,
         AssociationEvent,

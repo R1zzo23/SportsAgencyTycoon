@@ -53,13 +53,15 @@ namespace SportsAgencyTycoon
             // added to test functionality
             // needs to be deleted once everything is working correctly.
             Player p = world.PGA.PlayerList[0];
-            Client c = new Client(p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.SkillLevel, p.PotentialSkill, 25, 100, 0, p.Sport, p.BirthMonth, p.BirthWeek);
+            Client c = new Client(98, p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.SkillLevel, p.PotentialSkill, 25, 100, 0, p.Sport, p.BirthMonth, p.BirthWeek);
             Player b = world.WBA.PlayerList[0];
-            Client d = new Client(b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.SkillLevel, b.PotentialSkill, 25, 100, 0, b.Sport, b.BirthMonth, b.BirthWeek);
+            Client d = new Client(99, b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.SkillLevel, b.PotentialSkill, 25, 100, 0, b.Sport, b.BirthMonth, b.BirthWeek);
             agency.AddClient(c);
             agency.Agents[0].AddClient(c);
+            world.Calendar.AddCalendarEvent(new CalendarEvent(c));
             agency.AddClient(d);
             agency.Agents[0].AddClient(d);
+            world.Calendar.AddCalendarEvent(new CalendarEvent(d));
             // delete above when ready
         }
         public void CreateManagerAndAgency()
@@ -553,26 +555,26 @@ namespace SportsAgencyTycoon
 
             if(selectedAssociation.Sport == Sports.Golf)
             {
-                worldRankingsLabel.Text += "#) - NAME | PTS | $$$ | TOP-10s | TITLES | MAJROS" + Environment.NewLine;
+                worldRankingsLabel.Text += "#) - NAME (AGE) | PTS | $$$ | TOP-10s | TITLES | MAJROS" + Environment.NewLine;
                 foreach (Golfer golfer in playerList)
                 {
-                    worldRankingsLabel.Text += golfer.WorldRanking + ") " + golfer.FirstName + " " + golfer.LastName + ": " + golfer.TourPoints.ToString() + " | " + golfer.CareerEarnings.ToString("C0") + " | " + golfer.TopTenFinishes + " | " + golfer.TournamentWins + " | " + golfer.Majors +  Environment.NewLine;
+                    worldRankingsLabel.Text += golfer.WorldRanking + ") " + golfer.FullName + " (" + golfer.Age + ") : " + golfer.TourPoints.ToString() + " | " + golfer.CareerEarnings.ToString("C0") + " | " + golfer.TopTenFinishes + " | " + golfer.TournamentWins + " | " + golfer.Majors +  Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.Tennis)
             {
-                worldRankingsLabel.Text += "#) - NAME | PTS | $$$ | QFIN APP | TITLES | SLAMS" + Environment.NewLine;
+                worldRankingsLabel.Text += "#) - NAME (AGE) | PTS | $$$ | QFIN APP | TITLES | SLAMS" + Environment.NewLine;
                 foreach (TennisPlayer tp in playerList)
                 {
-                    worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FirstName + " " + tp.LastName + ": " + tp.TourPoints.ToString() + " | " + tp.CareerEarnings.ToString("C0") + " | " + tp.QuarterFinals + " | " + tp.TournamentWins + " | " + tp.GrandSlams + Environment.NewLine;
+                    worldRankingsLabel.Text += tp.WorldRanking + ") " + tp.FullName + " (" + tp.Age + ") : " + tp.TourPoints.ToString() + " | " + tp.CareerEarnings.ToString("C0") + " | " + tp.QuarterFinals + " | " + tp.TournamentWins + " | " + tp.GrandSlams + Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.Boxing)
             {
-                worldRankingsLabel.Text += "World Ranking - Name (Skill): Earnings | (Wins - Losses)" + Environment.NewLine;
+                worldRankingsLabel.Text += "World Ranking - Name (AG) (Skill): Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (Boxer boxer in playerList)
                 {
-                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FirstName + " " + boxer.LastName + " (" + boxer.SkillLevel + "): " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
+                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FullName + " (" + boxer.Age + ") : (" + boxer.SkillLevel + "): " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.MMA)
@@ -580,7 +582,7 @@ namespace SportsAgencyTycoon
                 worldRankingsLabel.Text += "World Ranking - Name: Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (MMAFighter mma in playerList)
                 {
-                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FirstName + " " + mma.LastName + " (" + mma.SkillLevel + "): " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
+                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FullName + " (" + mma.Age + ") : (" + mma.SkillLevel + "): " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
                 }
             }
 
@@ -624,12 +626,15 @@ namespace SportsAgencyTycoon
         private void DisplayEventsThisWeek()
         {
             string output;
+            string eventList = "";
             output = "Events this week:" + Environment.NewLine;
             foreach (CalendarEvent e in world.EventsThisWeek)
             {
-                output += e.EventName + Environment.NewLine;
+                if (e.EventType != CalendarEventType.PlayerBirthday)
+                    eventList += e.EventName + Environment.NewLine;
             }
-            newsLabel.Text = output + newsLabel.Text;
+            if (eventList != "")
+            newsLabel.Text = output + eventList + Environment.NewLine + newsLabel.Text;
         }
         private void RunEventsThisWeek()
         {
@@ -681,6 +686,11 @@ namespace SportsAgencyTycoon
                 else if (e.EventType == CalendarEventType.LoanRepayment)
                 {
                     //repay loan
+                }
+                else if (e.EventType == CalendarEventType.ClientBirthday)
+                {
+                    int indx = agency.Clients.FindIndex(x => (x.FullName == e.PlayerName) && (x.Sport == e.Sport) && (x.Id == e.PlayerID));
+                    agency.Clients[indx].Age++;
                 }
             }
         }
