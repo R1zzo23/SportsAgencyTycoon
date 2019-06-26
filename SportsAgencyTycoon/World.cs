@@ -96,6 +96,7 @@ namespace SportsAgencyTycoon
             CreateAthletesForAssociations(rnd);
             CreateTeamsForLeagues(rnd);
             AddLeaguesAndAssociationsToWorld();
+            CreateCalendarEventsForLeagueStartAndEnd();
             CalculateWorldRankings();
         }
         public void CreateLeagues(Random rnd)
@@ -105,6 +106,14 @@ namespace SportsAgencyTycoon
             NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.August, 1), new Date(2, Months.February, 1), 30000000, 495000);
             NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(10, Months.October, 1), new Date(6, Months.June, 2), 9500000, 650000);
             MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(3, Months.March, 2), new Date(12, Months.December, 2), 7000000, 56250);
+        }
+        public void CreateCalendarEventsForLeagueStartAndEnd()
+        {
+            foreach (League l in Leagues)
+            {
+                Calendar.AddCalendarEvent(new CalendarEvent(l));
+                Calendar.AddCalendarEvent(new CalendarEvent(l, "end"));
+            }
         }
         public void CreateAssociations(Random rnd)
         {
@@ -180,6 +189,7 @@ namespace SportsAgencyTycoon
             CreateTennisPlayers(rnd);
             CreateBoxers(rnd);
             CreateMMAFighters(rnd);
+            CreatePlayerBirthdayCalendarEvents();
         }
         public void CreateGolfers(Random rnd)
         {

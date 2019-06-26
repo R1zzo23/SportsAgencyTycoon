@@ -1,9 +1,11 @@
 ﻿Things to work on:
 - Calendar
   - enum CalendarEvent
-	- PlayerBirthday
+	- PlayerBirthday (created)
 	- LoanRepayment
-	- AssociationEvent
+	- AssociationEvent (created)
+	- LeagueStart (created)
+	- LeagueEnd (created)
   - methods
 	- AnyEventsThisWeek
 	- RunEvent

@@ -67,6 +67,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.agentNameLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.newsLabel = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnAgentApplyForLicense = new System.Windows.Forms.Button();
@@ -135,10 +136,11 @@
             this.weekLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnViewCalendar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -148,7 +150,6 @@
             this.panel1.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -550,6 +551,15 @@
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "News Briefing";
+            // 
+            // panel3
+            // 
+            this.panel3.AutoScroll = true;
+            this.panel3.Controls.Add(this.newsLabel);
+            this.panel3.Location = new System.Drawing.Point(10, 22);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(353, 222);
+            this.panel3.TabIndex = 1;
             // 
             // newsLabel
             // 
@@ -1220,20 +1230,22 @@
             this.advanceWeekBtn.UseVisualStyleBackColor = true;
             this.advanceWeekBtn.Click += new System.EventHandler(this.AdvanceWeekBtn_Click);
             // 
-            // panel3
+            // btnViewCalendar
             // 
-            this.panel3.AutoScroll = true;
-            this.panel3.Controls.Add(this.newsLabel);
-            this.panel3.Location = new System.Drawing.Point(10, 22);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(353, 222);
-            this.panel3.TabIndex = 1;
+            this.btnViewCalendar.Location = new System.Drawing.Point(1393, 262);
+            this.btnViewCalendar.Name = "btnViewCalendar";
+            this.btnViewCalendar.Size = new System.Drawing.Size(75, 37);
+            this.btnViewCalendar.TabIndex = 19;
+            this.btnViewCalendar.Text = "View Calendar";
+            this.btnViewCalendar.UseVisualStyleBackColor = true;
+            this.btnViewCalendar.Click += new System.EventHandler(this.btnViewCalendar_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1484, 861);
+            this.Controls.Add(this.btnViewCalendar);
             this.Controls.Add(this.advanceWeekBtn);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.weekLabel);
@@ -1265,6 +1277,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1280,8 +1294,6 @@
             this.groupBox9.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1397,6 +1409,7 @@
         private System.Windows.Forms.Label lblBirthMonth;
         private System.Windows.Forms.Button btnHireAgent;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnViewCalendar;
     }
 }
 

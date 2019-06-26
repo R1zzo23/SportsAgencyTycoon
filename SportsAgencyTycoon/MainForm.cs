@@ -67,12 +67,7 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
             agency = new Agency("New Age Agency", 1000000, 5);
             myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 1, Roles.Manager);
-            //Agent agent = new Agent("Tommy", "Twotime", 10000, 20, 20, 20, 50, 3, Roles.Agent);
             agency.AddAgent(myManager);
-            //agency.AddAgent(agent);
-            //Client client = new Client("Harry", "Giles", 19, rnd.Next(1, 5), rnd.Next(4, 7), rnd.Next(20, 50), 100, 0, Sports.Basketball);
-            //agency.AddClient(client);
-            //myManager.AddClient(client);
             PopulateAgentClientList(myManager);
             PopulateAgencyAgentList();
             UpdateAgencyInfo();
@@ -690,6 +685,13 @@ namespace SportsAgencyTycoon
                     PopulateAgencyAgentList();
                 }
             }
+        }
+
+        private void btnViewCalendar_Click(object sender, EventArgs e)
+        {
+            CalendarForm calendarForm = new CalendarForm(world.Calendar);
+            calendarForm.BringToFront();
+            calendarForm.ShowDialog();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public Sports Sport;
         public FirstName FirstName;
         public LastName LastName;
+        public string FullName;
         public int SkillLevel;
         public int PotentialSkill;
         public int Age;
@@ -27,6 +28,7 @@ namespace SportsAgencyTycoon
             Sport = sport;
             FirstName = firstName;
             LastName = lastName;
+            FullName = firstName.ToString() + " " + lastName.ToString();
             SkillLevel = skillLevel;
             PotentialSkill = AssignPotential(age, skillLevel);
             Age = age;
