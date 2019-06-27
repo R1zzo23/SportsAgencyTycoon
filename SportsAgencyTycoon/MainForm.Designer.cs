@@ -137,6 +137,7 @@
             this.label29 = new System.Windows.Forms.Label();
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
+            this.btnViewRosters = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1240,11 +1241,22 @@
             this.btnViewCalendar.UseVisualStyleBackColor = true;
             this.btnViewCalendar.Click += new System.EventHandler(this.btnViewCalendar_Click);
             // 
+            // btnViewRosters
+            // 
+            this.btnViewRosters.Location = new System.Drawing.Point(1393, 307);
+            this.btnViewRosters.Name = "btnViewRosters";
+            this.btnViewRosters.Size = new System.Drawing.Size(75, 43);
+            this.btnViewRosters.TabIndex = 21;
+            this.btnViewRosters.Text = "View Rosters";
+            this.btnViewRosters.UseVisualStyleBackColor = true;
+            this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1484, 861);
+            this.Controls.Add(this.btnViewRosters);
             this.Controls.Add(this.btnViewCalendar);
             this.Controls.Add(this.advanceWeekBtn);
             this.Controls.Add(this.label29);
@@ -1410,6 +1422,7 @@
         private System.Windows.Forms.Button btnHireAgent;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnViewCalendar;
+        private System.Windows.Forms.Button btnViewRosters;
     }
 }
 

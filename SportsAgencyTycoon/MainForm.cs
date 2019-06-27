@@ -734,5 +734,12 @@ namespace SportsAgencyTycoon
             calendarForm.BringToFront();
             calendarForm.ShowDialog();
         }
+
+        private void btnViewRosters_Click(object sender, EventArgs e)
+        {
+            TeamRosterForm teamRosterForm = new TeamRosterForm(world);
+            teamRosterForm.BringToFront();
+            teamRosterForm.ShowDialog();
+        }
     }
 }

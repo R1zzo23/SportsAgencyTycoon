@@ -55,6 +55,7 @@ namespace SportsAgencyTycoon
             else if (age <= 35) potential = rnd.Next(0, 7);
 
             potentialSkill = skillLevel + potential;
+            if (potentialSkill > 100) potentialSkill = 100;
 
             return potentialSkill;
         }
