@@ -17,6 +17,7 @@ namespace SportsAgencyTycoon
         public Date SeasonEnd;
         public int MaxSalary;
         public int MinSalary;
+        public List<Player> FreeAgents = new List<Player>();
 
         public League(Sports sport, string name, string abbreviation, int popularity, Date seasonStart, Date seasonEnd, int maxSalary, int minSalary)
         {

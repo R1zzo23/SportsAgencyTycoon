@@ -13,6 +13,7 @@ namespace SportsAgencyTycoon
         public string Abbreviation;
         public int MarketValue;
         public int TitleConteder;
+        public List<Player> Roster = new List<Player>();
 
         public Team (string city, string mascot, string abbreviation, int marketValue, int titleContender)
         {

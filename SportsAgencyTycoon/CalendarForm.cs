@@ -26,7 +26,7 @@ namespace SportsAgencyTycoon
         }
         public void PopulateLists()
         {
-            c.Events = c.Events.OrderBy(o => o.EventDate.Week).ThenBy(o => o.EventDate.MonthNumber).ToList();
+            c.Events = c.Events.OrderBy(o => o.EventDate.MonthNumber).ThenBy(o => o.EventDate.Week).ToList();
             foreach (CalendarEvent e in c.Events)
             {
                 if (e.EventType == CalendarEventType.PlayerBirthday) PlayerBirthdays.Add(e);
@@ -40,7 +40,7 @@ namespace SportsAgencyTycoon
             string birthdayList = "";
             foreach (CalendarEvent e in PlayerBirthdays)
             {
-                birthdayList += "[" + e.Sport.ToString() + "] " + e.EventName + Environment.NewLine;
+                birthdayList += "[" + e.Sport.ToString() + "] " + e.EventName + ": Month - " + e.EventDate.MonthName.ToString() + ", Week #" + e.EventDate.Week.ToString() + Environment.NewLine;
             }
             lblPlayerBirthdays.Text = birthdayList;
 

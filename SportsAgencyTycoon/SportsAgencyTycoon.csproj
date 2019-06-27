@@ -64,6 +64,8 @@
     <Compile Include="BankruptcyForm.Designer.cs">
       <DependentUpon>BankruptcyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BaseballPlayer.cs" />
+    <Compile Include="BasketballPlayer.cs" />
     <Compile Include="Boxer.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="CalendarEvent.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Date.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FirstName.cs" />
+    <Compile Include="FootballPlayer.cs" />
     <Compile Include="HireAgentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +89,7 @@
       <DependentUpon>HireAgentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Golfer.cs" />
+    <Compile Include="HockeyPlayer.cs" />
     <Compile Include="LastName.cs" />
     <Compile Include="League.cs" />
     <Compile Include="Licenses.cs" />
@@ -99,9 +103,11 @@
     <Compile Include="Months.cs" />
     <Compile Include="PaySchedule.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="SoccerPlayer.cs" />
     <Compile Include="Sports.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="TennisPlayer.cs" />
