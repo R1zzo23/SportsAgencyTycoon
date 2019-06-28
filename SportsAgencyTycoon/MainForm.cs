@@ -25,6 +25,7 @@ namespace SportsAgencyTycoon
             InitializeComponent();
             CreateManagerAndAgency();
             InitializeWorld();
+            PopUpStartGameForm();
         }
 
         #region Game Start
@@ -63,6 +64,35 @@ namespace SportsAgencyTycoon
             agency.Agents[0].AddClient(d);
             world.Calendar.AddCalendarEvent(new CalendarEvent(d));
             // delete above when ready
+        }
+        public void PopUpStartGameForm()
+        {
+            StartGameForm startGameForm = new StartGameForm();
+            startGameForm.BringToFront();
+            startGameForm.ShowDialog();
+
+            string agencyName = startGameForm.AgencyName;
+            string firstName = startGameForm.FirstName;
+            string lastName = startGameForm.LastName;
+            int teamIndex = startGameForm.TeamIndex;
+            int individualIndex = startGameForm.IndividualIndex;
+
+            if (teamIndex == world.TeamSportLicenses.Count) teamIndex = rnd.Next(0, world.TeamSportLicenses.Count);
+            if (individualIndex == world.IndividualSportLicense.Count) individualIndex = rnd.Next(0, world.IndividualSportLicense.Count);
+
+            agency.Name = agencyName;
+            myManager.First = firstName;
+            myManager.Last = lastName;
+            myManager.LicensesHeld.Add(world.TeamSportLicenses[teamIndex]);
+            world.AvailableLicenses.Add(world.TeamSportLicenses[teamIndex]);
+            world.IndividualSportLicense.Remove(world.TeamSportLicenses[teamIndex]);
+            myManager.LicensesHeld.Add(world.IndividualSportLicense[individualIndex]);
+            world.AvailableLicenses.Add(world.IndividualSportLicense[individualIndex]);
+            world.IndividualSportLicense.Remove(world.IndividualSportLicense[individualIndex]);
+            agency.Agents[0] = myManager;
+            UpdateAgencyInfo();
+            UpdateAgentInfo(myManager);
+            PopulateAgencyAgentList();
         }
         public void CreateManagerAndAgency()
         {
@@ -247,6 +277,12 @@ namespace SportsAgencyTycoon
                 agentAppliedLicenseLabel.Text = "Applied License: " + agent.AppliedLicense.Sport.ToString();
                 licenseTestPrepLabel.Text = "License Test Prep: " + agent.LicenseTestPrep.ToString();
             }
+            lblLicensesHeldByAgent.Text = "Licenses Held: ";
+            for (int i = 0; i < agent.LicensesHeld.Count; i++)
+            {
+                lblLicensesHeldByAgent.Text += agent.LicensesHeld[i].Sport.ToString() + ", ";
+            }
+            lblLicensesHeldByAgent.Text = lblLicensesHeldByAgent.Text.Substring(0, lblLicensesHeldByAgent.Text.Length - 2);
             PopulateAgentClientList(agent);
         }
 

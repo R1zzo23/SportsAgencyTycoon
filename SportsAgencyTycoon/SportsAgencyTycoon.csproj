@@ -109,6 +109,12 @@
     <Compile Include="Role.cs" />
     <Compile Include="SoccerPlayer.cs" />
     <Compile Include="Sports.cs" />
+    <Compile Include="StartGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartGameForm.Designer.cs">
+      <DependentUpon>StartGameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Team.cs" />
     <Compile Include="TeamRosterForm.cs">
       <SubType>Form</SubType>
@@ -142,6 +148,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StartGameForm.resx">
+      <DependentUpon>StartGameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TeamRosterForm.resx">
       <DependentUpon>TeamRosterForm.cs</DependentUpon>
     </EmbeddedResource>

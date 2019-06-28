@@ -138,6 +138,7 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
+            this.lblLicensesHeldByAgent = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -319,6 +320,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblLicensesHeldByAgent);
             this.groupBox2.Controls.Add(this.agentBeingTrainedLabel);
             this.groupBox2.Controls.Add(this.label25);
             this.groupBox2.Controls.Add(this.licenseTestPrepLabel);
@@ -1251,6 +1253,15 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
+            // lblLicensesHeldByAgent
+            // 
+            this.lblLicensesHeldByAgent.AutoSize = true;
+            this.lblLicensesHeldByAgent.Location = new System.Drawing.Point(7, 230);
+            this.lblLicensesHeldByAgent.Name = "lblLicensesHeldByAgent";
+            this.lblLicensesHeldByAgent.Size = new System.Drawing.Size(80, 13);
+            this.lblLicensesHeldByAgent.TabIndex = 29;
+            this.lblLicensesHeldByAgent.Text = "Licenses Held: ";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1423,6 +1434,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnViewCalendar;
         private System.Windows.Forms.Button btnViewRosters;
+        private System.Windows.Forms.Label lblLicensesHeldByAgent;
     }
 }
 

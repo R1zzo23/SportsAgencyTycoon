@@ -13,3 +13,4 @@ C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\S
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.BankruptcyForm.resources
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.CalendarForm.resources
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.TeamRosterForm.resources
+C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.StartGameForm.resources

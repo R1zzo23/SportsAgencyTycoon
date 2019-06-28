@@ -9,7 +9,10 @@ namespace SportsAgencyTycoon
     public class World
     {
         public MainForm MainForm;
+        Random rnd = new Random();
         public List<Licenses> AvailableLicenses;
+        public List<Licenses> TeamSportLicenses;
+        public List<Licenses> IndividualSportLicense;
         public List<Client> AvailableClients;
         public List<Agent> AvailableAgents;
         public List<League> Leagues;
@@ -34,6 +37,8 @@ namespace SportsAgencyTycoon
         public World(MainForm form)
         {
             AvailableLicenses = new List<Licenses>();
+            TeamSportLicenses = new List<Licenses>();
+            IndividualSportLicense = new List<Licenses>();
             AvailableClients = new List<Client>();
             AvailableAgents = new List<Agent>();
             Leagues = new List<League>();
@@ -50,10 +55,27 @@ namespace SportsAgencyTycoon
 
         public void InitializeLicenses()
         {
-            Licenses basketballLicense = new Licenses(Sports.Basketball, 250, 1250, Months.July, 7);
-            Licenses footballLicense = new Licenses(Sports.Football, 2500, 1650, Months.January, 1);
-            AvailableLicenses.Add(basketballLicense);
-            AvailableLicenses.Add(footballLicense);
+            Licenses baseballLicense = new Licenses(Sports.Baseball, 400, 1400, Months.March, 2);
+            Licenses basketballLicense = new Licenses(Sports.Basketball, 250, 1250, Months.July, 6);
+            Licenses footballLicense = new Licenses(Sports.Football, 2500, 1650, Months.January, 0);
+            Licenses hockeyLicense = new Licenses(Sports.Hockey, 300, 900, Months.August, 7);
+            Licenses soccerLicense = new Licenses(Sports.Soccer, 250, 750, Months.January, 0);
+
+            TeamSportLicenses.Add(baseballLicense);
+            TeamSportLicenses.Add(basketballLicense);
+            TeamSportLicenses.Add(footballLicense);
+            TeamSportLicenses.Add(hockeyLicense);
+            TeamSportLicenses.Add(soccerLicense);
+
+            Licenses boxingLicense = new Licenses(Sports.Boxing, 500, 600, Months.January, 0);
+            Licenses golfLicense = new Licenses(Sports.Golf, 750, 1150, Months.January, 0);
+            Licenses tennisLicense = new Licenses(Sports.Tennis, 350, 800, Months.January, 0);
+            Licenses ultimateFightingLicense = new Licenses(Sports.MMA, 375, 550, Months.January, 0);
+
+            IndividualSportLicense.Add(boxingLicense);
+            IndividualSportLicense.Add(golfLicense);
+            IndividualSportLicense.Add(tennisLicense);
+            IndividualSportLicense.Add(soccerLicense);
         }
         /*public void CreateNewClients(Agency agency, Licenses license)
         {
@@ -88,8 +110,7 @@ namespace SportsAgencyTycoon
         }
         #region Create Leagues & Associations
         public void CreateLeaguesAssociationEventsPlayersAndTeams()
-        {
-            Random rnd = new Random();
+        {            
             CreateLeagues(rnd);
             CreateAssociations(rnd);
             CreateAllEvents();
