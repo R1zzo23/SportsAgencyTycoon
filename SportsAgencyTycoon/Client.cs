@@ -1,4 +1,6 @@
-﻿namespace SportsAgencyTycoon
+﻿using System.Text.RegularExpressions;
+
+namespace SportsAgencyTycoon
 {
     public class Client
     {
@@ -10,11 +12,14 @@
         public int CurrentSkill;
         public int PotentialSkill;
         public int Popularity;
-        public string PopularityDescription;
+        public PopularityDescription PopularityDescription;
+        public string PopularityString;
         public int AgencyHappiness;
-        public string AgencyHappinessDescription;
+        public HappinessDescription AgencyHappinessDescription;
+        public string AgencyHappinessString;
         public int TeamHappiness;
-        public string TeamHappinessDescription;
+        public HappinessDescription TeamHappinessDescription;
+        public string TeamHappinessString;
         public Months BirthMonth;
         public int BirthWeek;
         public Date Birthday;
@@ -33,10 +38,13 @@
             if (PotentialSkill < CurrentSkill) PotentialSkill = CurrentSkill;
             Popularity = popularity;
             PopularityDescription = DescribePopularity(popularity);
+            PopularityString = EnumToString(PopularityDescription.ToString());
             AgencyHappiness = agencyHappiness;
             AgencyHappinessDescription = DescribeHappiness(agencyHappiness);
+            AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
             TeamHappiness = teamHappiness;
             TeamHappinessDescription = DescribeHappiness(teamHappiness);
+            TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
             Sport = sport;
             BirthMonth = birthMonth;
             BirthWeek = birthWeek;
@@ -44,32 +52,38 @@
 
         }
 
-        public string DescribePopularity(int pop)
+        public PopularityDescription DescribePopularity(int pop)
         {
-            string description = "";
+            PopularityDescription description;
 
-            if (pop <= 10) description = "Unknown";
-            else if (pop <= 25) description = "Relative Unknown";
-            else if (pop <= 40) description = "Neutral";
-            else if (pop <= 60) description = "Local Favorite";
-            else if (pop <= 75) description = "Very Popular";
-            else if (pop <= 90) description = "Extremely Popular";
-            else description = "Superstar";
+            if (pop <= 10) description = PopularityDescription.Unknown;
+            else if (pop <= 25) description = PopularityDescription.RelativeUnknown;
+            else if (pop <= 40) description = PopularityDescription.Neutral;
+            else if (pop <= 60) description = PopularityDescription.LocalFavorite;
+            else if (pop <= 75) description = PopularityDescription.VeryPopular;
+            else if (pop <= 90) description = PopularityDescription.ExtremelyPopular;
+            else description = PopularityDescription.Superstar;
 
             return description;
         }
 
-        public string DescribeHappiness(int happy)
+        public HappinessDescription DescribeHappiness(int happy)
         {
-            string description = "";
+            HappinessDescription description;
 
-            if (happy <= 20) description = "Disgruntled";
-            else if (happy <= 40) description = "Displeased";
-            else if (happy <= 60) description = "Neutral";
-            else if (happy <= 80) description = "Happy";
-            else description = "Ecstatic";
+            if (happy <= 20) description = HappinessDescription.Disgruntled;
+            else if (happy <= 40) description = HappinessDescription.Displeased;
+            else if (happy <= 60) description = HappinessDescription.Neutral;
+            else if (happy <= 80) description = HappinessDescription.Happy;
+            else description = HappinessDescription.Ecstatic;
 
             return description;
+        }
+
+        public string EnumToString(string s)
+        {
+            s = Regex.Replace(s, @"((?<=\p{Ll})\p{Lu})|((?!\A)\p{Lu}(?>\p{Ll}))", " $0");
+            return s;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -402,9 +403,10 @@ namespace SportsAgencyTycoon
 
                 clientSportLabel.Text = selectedClient.Sport.ToString();
                 clientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
-                clientPopularityLabel.Text = selectedClient.PopularityDescription;
-                clientTeamHappinessLabel.Text = selectedClient.TeamHappinessDescription;
-                clientAgencyHappinessLabel.Text = selectedClient.AgencyHappinessDescription;
+                clientPopularityLabel.Text = selectedClient.PopularityString;
+
+                clientTeamHappinessLabel.Text = selectedClient.TeamHappinessString;
+                clientAgencyHappinessLabel.Text = selectedClient.AgencyHappinessString;
                 clientSkillLabel.Text = selectedClient.CurrentSkill.ToString() + "/" + selectedClient.PotentialSkill.ToString();
                 clientAgeLabel.Text = selectedClient.Age.ToString();
                 lblBirthMonth.Text = selectedClient.BirthMonth.ToString();
@@ -562,7 +564,8 @@ namespace SportsAgencyTycoon
             availableClientCurrentSkillLabel.Text = selectedClient.CurrentSkill.ToString();
             availableClientNameLabel.Text = selectedClient.First + " " + selectedClient.Last;
             availableClientSportLabel.Text = selectedClient.Sport.ToString();
-            availableClientPopularityLabel.Text = selectedClient.PopularityDescription;
+
+            availableClientPopularityLabel.Text = selectedClient.PopularityString;
         }
 
         private void cbLeagueStandings_SelectedIndexChanged(object sender, EventArgs e)
