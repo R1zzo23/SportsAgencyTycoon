@@ -52,6 +52,15 @@ namespace SportsAgencyTycoon
 
         }
 
+        public int DeterminePopularity(int currentSkill, int potentialSkill, int age)
+        {
+            int popularity = 0;
+
+
+
+            return popularity;
+        }
+
         public PopularityDescription DescribePopularity(int pop)
         {
             PopularityDescription description;
