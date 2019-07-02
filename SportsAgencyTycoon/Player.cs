@@ -52,7 +52,7 @@ namespace SportsAgencyTycoon
             FullName = firstName.ToString() + " " + lastName.ToString();
 
             CurrentSkill = currentSkill;
-            PotentialSkill = AssignPotential(age, currentSkill);
+            PotentialSkill = AssignPotential(rnd, age, currentSkill);
 
             Age = age;
             BirthMonth = birthMonth;
@@ -64,7 +64,7 @@ namespace SportsAgencyTycoon
             else BirthWeek = birthWeek;
             Birthday = CreateBirthday(birthMonth, birthWeek);
 
-            Popularity = DeterminePopularity(rnd, CurrentSkill, PotentialSkill, Age);
+            Popularity = DeterminePopularity(CurrentSkill, PotentialSkill, Age);
             PopularityDescription = DescribePopularity(Popularity);
             PopularityString = EnumToString(PopularityDescription.ToString());
 
@@ -79,9 +79,8 @@ namespace SportsAgencyTycoon
             CareerEarnings = 0;
         }
 
-        public int AssignPotential(int age, int currentSkill)
+        public int AssignPotential(Random rnd, int age, int currentSkill)
         {
-            Random rnd = new Random();
             int potentialSkill = 0;
             int potential = 0;
 
@@ -102,7 +101,7 @@ namespace SportsAgencyTycoon
             return birthday;
         }
 
-        public int DeterminePopularity(Random rnd, int currentSkill, int potentialSkill, int age)
+        public int DeterminePopularity(int currentSkill, int potentialSkill, int age)
         {
             int popularity = 0;
 
