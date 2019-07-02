@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SportsAgencyTycoon
 {
@@ -26,37 +27,48 @@ namespace SportsAgencyTycoon
         public Sports Sport;
         public Contract Contract;
 
-        public Client(int id, string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport, Months birthMonth, int birthWeek)
+        public Client(Random rnd, int id, string firstName, string lastName, int age, int currentSkill, int potentialSkill, int popularity, int agencyHappiness, int teamHappiness, Sports sport, Months birthMonth, int birthWeek)
         {
             Id = id;
+
             First = firstName;
             Last = lastName;
             FullName = firstName + " " + lastName;
             Age = age;
+
             CurrentSkill = currentSkill;
             PotentialSkill = potentialSkill;
             if (PotentialSkill < CurrentSkill) PotentialSkill = CurrentSkill;
-            Popularity = popularity;
-            PopularityDescription = DescribePopularity(popularity);
+
+            Popularity = DeterminePopularity(rnd, CurrentSkill, PotentialSkill, Age);
+            PopularityDescription = DescribePopularity(Popularity);
             PopularityString = EnumToString(PopularityDescription.ToString());
-            AgencyHappiness = agencyHappiness;
-            AgencyHappinessDescription = DescribeHappiness(agencyHappiness);
-            AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
-            TeamHappiness = teamHappiness;
-            TeamHappinessDescription = DescribeHappiness(teamHappiness);
+
+            TeamHappiness = DetermineTeamHappiness(rnd);
+            TeamHappinessDescription = DescribeHappiness(TeamHappiness);
             TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
+
+            AgencyHappiness = DetermineAgencyHappiness(rnd, TeamHappiness);
+            AgencyHappinessDescription = DescribeHappiness(AgencyHappiness);
+            AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
+
             Sport = sport;
+
             BirthMonth = birthMonth;
             BirthWeek = birthWeek;
             Birthday = new Date((int)birthMonth, birthMonth, birthWeek);
 
         }
 
-        public int DeterminePopularity(int currentSkill, int potentialSkill, int age)
+        public int DeterminePopularity(Random rnd, int currentSkill, int potentialSkill, int age)
         {
             int popularity = 0;
 
-
+            popularity = currentSkill + (potentialSkill - currentSkill);
+            if (age <= 21) popularity += 20;
+            else if (age <= 24) popularity += 15;
+            else if (age <= 27) popularity += 10;
+            else if (age <= 29) popularity += 5;
 
             return popularity;
         }
@@ -65,15 +77,38 @@ namespace SportsAgencyTycoon
         {
             PopularityDescription description;
 
-            if (pop <= 10) description = PopularityDescription.Unknown;
-            else if (pop <= 25) description = PopularityDescription.RelativeUnknown;
-            else if (pop <= 40) description = PopularityDescription.Neutral;
-            else if (pop <= 60) description = PopularityDescription.LocalFavorite;
-            else if (pop <= 75) description = PopularityDescription.VeryPopular;
-            else if (pop <= 90) description = PopularityDescription.ExtremelyPopular;
+            if (pop <= 25) description = PopularityDescription.Unknown;
+            else if (pop <= 35) description = PopularityDescription.RelativeUnknown;
+            else if (pop <= 45) description = PopularityDescription.Neutral;
+            else if (pop <= 55) description = PopularityDescription.LocalFavorite;
+            else if (pop <= 70) description = PopularityDescription.VeryPopular;
+            else if (pop <= 85) description = PopularityDescription.ExtremelyPopular;
             else description = PopularityDescription.Superstar;
 
             return description;
+        }
+
+        //want to rewrite this to use players position on depth chart
+        //and team's titleContender variable 
+        public int DetermineTeamHappiness(Random rnd)
+        {
+            int happiness = 0;
+
+            happiness = rnd.Next(0, 100);
+
+            return happiness;
+        }
+
+        //want to rewrite this to use TeamHappiness, Contract status
+        //and a little randomness
+        public int DetermineAgencyHappiness(Random rnd, int teamHappiness)
+        {
+            int happiness = 0;
+
+            int random = rnd.Next(0, 100);
+            happiness = (random + teamHappiness) / 2;
+
+            return happiness;
         }
 
         public HappinessDescription DescribeHappiness(int happy)
