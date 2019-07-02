@@ -15,8 +15,8 @@ namespace SportsAgencyTycoon
         public int ProBowlTeams;
         public int AllProSelections;
 
-        public FootballPlayer(int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek, Position position)
-            : base(id, sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
+        public FootballPlayer(Random rnd, int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek, Position position)
+            : base(rnd, id, sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
         {
             Position = position;
             PlayoffsMade = 0;

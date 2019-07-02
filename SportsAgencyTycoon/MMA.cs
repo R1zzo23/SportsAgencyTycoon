@@ -86,7 +86,7 @@ namespace SportsAgencyTycoon
         private int SimMMAFight(MMAFighter m1, MMAFighter m2, Random rnd)
         {
             int winningFighter = 0;
-            int totalSkill = m1.SkillLevel + m2.SkillLevel;
+            int totalSkill = m1.CurrentSkill + m2.CurrentSkill;
             int m1ScoreCard = 0;
             int m2ScoreCard = 0;
             int totalRounds = 5;
@@ -98,16 +98,16 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < totalRounds; i++)
             {
                 int luckyNumber = rnd.Next(1, totalSkill + 1);
-                if (luckyNumber <= m1.SkillLevel)
+                if (luckyNumber <= m1.CurrentSkill)
                 {
                     m1ScoreCard += 10;
-                    if (luckyNumber <= Math.Floor(m1.SkillLevel * 0.2)) m2ScoreCard += 8;
+                    if (luckyNumber <= Math.Floor(m1.CurrentSkill * 0.2)) m2ScoreCard += 8;
                     else m2ScoreCard += 9;
                 }
                 else
                 {
                     m2ScoreCard += 10;
-                    if (luckyNumber >= Math.Floor(totalSkill - m2.SkillLevel * 0.2)) m1ScoreCard += 8;
+                    if (luckyNumber >= Math.Floor(totalSkill - m2.CurrentSkill * 0.2)) m1ScoreCard += 8;
                     else m1ScoreCard += 9;
                 }
             }
@@ -118,7 +118,7 @@ namespace SportsAgencyTycoon
             else if (m1ScoreCard == m2ScoreCard)
             {
                 int tieBreaker = rnd.Next(1, totalSkill + 1);
-                if (tieBreaker < m1.SkillLevel) winningFighter = 1;
+                if (tieBreaker < m1.CurrentSkill) winningFighter = 1;
                 else winningFighter = 2;
             }
 
@@ -171,8 +171,8 @@ namespace SportsAgencyTycoon
             foreach (MMAFighter b in world.UFC.PlayerList) fighters.Add(b);
 
             //resultsList.OrderBy(o => o.PlayoffHoles).ThenBy(o => o.MadePlayoff).ThenBy(o => o.MadeCut).ThenBy(o => o.CurrentScore);
-            //fighters = fighters.OrderBy(o => o.Losses).OrderByDescending(o => o.Wins).OrderByDescending(o => o.SkillLevel).ToList();
-            fighters = fighters.OrderByDescending(o => o.SkillLevel).ThenBy(o => o.Wins).OrderBy(o => o.Losses).ToList();
+            //fighters = fighters.OrderBy(o => o.Losses).OrderByDescending(o => o.Wins).OrderByDescending(o => o.CurrentSkill).ToList();
+            fighters = fighters.OrderByDescending(o => o.CurrentSkill).ThenBy(o => o.Wins).OrderBy(o => o.Losses).ToList();
 
             for (int i = 0; i < fighters.Count; i++)
             {

@@ -55,9 +55,9 @@ namespace SportsAgencyTycoon
             // added to test functionality
             // needs to be deleted once everything is working correctly.
             Player p = world.PGA.PlayerList[0];
-            Client c = new Client(98, p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.SkillLevel, p.PotentialSkill, 25, 100, 0, p.Sport, p.BirthMonth, p.BirthWeek);
+            Client c = new Client(rnd, 98, p.FirstName.ToString(), p.LastName.ToString(), p.Age, p.CurrentSkill, p.PotentialSkill, 25, 100, 0, p.Sport, p.BirthMonth, p.BirthWeek);
             Player b = world.WBA.PlayerList[0];
-            Client d = new Client(99, b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.SkillLevel, b.PotentialSkill, 25, 100, 0, b.Sport, b.BirthMonth, b.BirthWeek);
+            Client d = new Client(rnd, 99, b.FirstName.ToString(), b.LastName.ToString(), b.Age, b.CurrentSkill, b.PotentialSkill, 25, 100, 0, b.Sport, b.BirthMonth, b.BirthWeek);
             agency.AddClient(c);
             agency.Agents[0].AddClient(c);
             world.Calendar.AddCalendarEvent(new CalendarEvent(c));
@@ -613,7 +613,7 @@ namespace SportsAgencyTycoon
                 worldRankingsLabel.Text += "World Ranking - Name (AG) (Skill): Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (Boxer boxer in playerList)
                 {
-                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FullName + " (" + boxer.Age + ") : (" + boxer.SkillLevel + "): " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
+                    worldRankingsLabel.Text += boxer.WorldRanking + ") " + boxer.FullName + " (" + boxer.Age + ") : (" + boxer.CurrentSkill + "): " + boxer.CareerEarnings.ToString("C0") + " | (" + boxer.Wins + " - " + boxer.Losses + ")" + Environment.NewLine;
                 }
             }
             else if (selectedAssociation.Sport == Sports.MMA)
@@ -621,7 +621,7 @@ namespace SportsAgencyTycoon
                 worldRankingsLabel.Text += "World Ranking - Name: Earnings | (Wins - Losses)" + Environment.NewLine;
                 foreach (MMAFighter mma in playerList)
                 {
-                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FullName + " (" + mma.Age + ") : (" + mma.SkillLevel + "): " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
+                    worldRankingsLabel.Text += mma.WorldRanking + ") " + mma.FullName + " (" + mma.Age + ") : (" + mma.CurrentSkill + "): " + mma.CareerEarnings.ToString("C0") + " | (" + mma.Wins + " - " + mma.Losses + ")" + Environment.NewLine;
                 }
             }
 

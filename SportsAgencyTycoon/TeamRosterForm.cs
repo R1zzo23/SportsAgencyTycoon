@@ -60,19 +60,19 @@ namespace SportsAgencyTycoon
             Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
             if (selectedLeague.Sport == Sports.Basketball)
                 foreach (BasketballPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.SkillLevel + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;
             else if (selectedLeague.Sport == Sports.Football)
                 foreach (FootballPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.SkillLevel + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
             if (selectedLeague.Sport == Sports.Baseball)
                 foreach (BaseballPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.SkillLevel + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
             if (selectedLeague.Sport == Sports.Hockey)
                 foreach (HockeyPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.SkillLevel + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
             if (selectedLeague.Sport == Sports.Soccer)
                 foreach (SoccerPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.SkillLevel + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
         }
     }
 }

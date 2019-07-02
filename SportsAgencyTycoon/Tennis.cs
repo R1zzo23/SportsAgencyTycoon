@@ -67,17 +67,17 @@ namespace SportsAgencyTycoon
             int winningPlayer = 0;
             TennisPlayer t1 = (TennisPlayer)p1;
             TennisPlayer t2 = (TennisPlayer)p2;
-            //Console.WriteLine("{0} {1} ({2}) vs. {3} {4} ({5}).", t1.FirstName, t1.LastName, t1.SkillLevel, t2.FirstName, t2.LastName, t2.SkillLevel);
+            //Console.WriteLine("{0} {1} ({2}) vs. {3} {4} ({5}).", t1.FirstName, t1.LastName, t1.CurrentSkill, t2.FirstName, t2.LastName, t2.CurrentSkill);
 
             int t1SetsWon = 0;
             int t2SetsWon = 0;
 
-            int totalSkill = t1.SkillLevel + t2.SkillLevel;
+            int totalSkill = t1.CurrentSkill + t2.CurrentSkill;
 
             while (t1SetsWon < 4 && t2SetsWon < 4)
             {
                 int luckyNumber = rnd.Next(0, totalSkill);
-                if (luckyNumber <= t1.SkillLevel) t1SetsWon++;
+                if (luckyNumber <= t1.CurrentSkill) t1SetsWon++;
                 else t2SetsWon++;
             }
             if (t1SetsWon == 4)

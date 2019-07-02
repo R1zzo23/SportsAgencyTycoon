@@ -91,7 +91,7 @@ namespace SportsAgencyTycoon
         private int SimBoxingMatch(Boxer b1, Boxer b2, Random rnd)
         {
             int winningBoxer = 0;
-            int totalSkill = b1.SkillLevel + b2.SkillLevel;
+            int totalSkill = b1.CurrentSkill + b2.CurrentSkill;
             int b1ScoreCard = 0;
             int b2ScoreCard = 0;
             int totalRounds = 12;
@@ -103,16 +103,16 @@ namespace SportsAgencyTycoon
                 for (int i = 0; i < totalRounds; i++)
                 {
                     int luckyNumber = rnd.Next(1, totalSkill + 1);
-                    if (luckyNumber <= b1.SkillLevel)
+                    if (luckyNumber <= b1.CurrentSkill)
                     {
                         b1ScoreCard += 10;
-                        if (luckyNumber <= Math.Floor(b1.SkillLevel * 0.2)) b2ScoreCard += 8;
+                        if (luckyNumber <= Math.Floor(b1.CurrentSkill * 0.2)) b2ScoreCard += 8;
                         else b2ScoreCard += 9;
                     }
                     else
                     {
                         b2ScoreCard += 10;
-                        if (luckyNumber >= Math.Floor(totalSkill - b2.SkillLevel * 0.2)) b1ScoreCard += 8;
+                        if (luckyNumber >= Math.Floor(totalSkill - b2.CurrentSkill * 0.2)) b1ScoreCard += 8;
                         else b1ScoreCard += 9;
                     }
                 }
@@ -123,7 +123,7 @@ namespace SportsAgencyTycoon
             else if (b1ScoreCard == b2ScoreCard)
             {
                 int tieBreaker = rnd.Next(1, totalSkill + 1);
-                if (tieBreaker < b1.SkillLevel) winningBoxer = 1;
+                if (tieBreaker < b1.CurrentSkill) winningBoxer = 1;
                 else winningBoxer = 2;
             }
 
@@ -176,8 +176,8 @@ namespace SportsAgencyTycoon
             foreach (Boxer b in world.WBA.PlayerList) boxers.Add(b);
 
             //resultsList.OrderBy(o => o.PlayoffHoles).ThenBy(o => o.MadePlayoff).ThenBy(o => o.MadeCut).ThenBy(o => o.CurrentScore);
-            //boxers = boxers.OrderBy(o => o.Losses).OrderByDescending(o => o.Wins).OrderByDescending(o => o.SkillLevel).ToList();
-            boxers = boxers.OrderByDescending(o => o.SkillLevel).ThenBy(o => o.Wins).OrderBy(o => o.Losses).ToList();
+            //boxers = boxers.OrderBy(o => o.Losses).OrderByDescending(o => o.Wins).OrderByDescending(o => o.CurrentSkill).ToList();
+            boxers = boxers.OrderByDescending(o => o.CurrentSkill).ThenBy(o => o.Wins).OrderBy(o => o.Losses).ToList();
 
             for (int i = 0; i < boxers.Count; i++)
             {

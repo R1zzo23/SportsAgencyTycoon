@@ -151,7 +151,7 @@ namespace SportsAgencyTycoon
             int score = 0;
             int goodOrBadHole = rnd.Next(1, 101);
 
-            if (goodOrBadHole <= p.SkillLevel)
+            if (goodOrBadHole <= p.CurrentSkill)
             {
                 //good hole
                 int birdieOrBetter = rnd.Next(0, 50);

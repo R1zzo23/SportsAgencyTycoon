@@ -12,8 +12,8 @@ namespace SportsAgencyTycoon
         public int Losses;
         public bool KnockedOut;
 
-        public Boxer(int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
-            : base(id, sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
+        public Boxer(Random rnd, int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
+            : base(rnd ,id, sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
         {
             Wins = 0;
             Losses = 0;

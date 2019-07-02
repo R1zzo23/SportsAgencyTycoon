@@ -225,164 +225,164 @@ namespace SportsAgencyTycoon
         {
             for (int i = 0; i < NBA.TeamList.Count; i++)
             {
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PG));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 1, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PG));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 2, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SG));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 3, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SG));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 4, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SF));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 5, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SF));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 6, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PF));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 7, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PF));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 8, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
-                NBA.TeamList[i].Roster.Add(new BasketballPlayer(i * 10 + 9, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PG));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 1, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PG));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 2, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SG));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 3, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SG));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 4, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SF));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 5, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SF));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 6, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PF));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 7, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PF));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 8, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
+                NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 9, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
             }
         }
         public void CreateFootballPlayers(Random rnd)
         {
             for (int i = 0; i < NFL.TeamList.Count; i++)
             {
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.QB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 1, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.QB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 2, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 3, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 4, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 5, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 6, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 7, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 8, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.TE));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 9, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.TE));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 10, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 11, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 12, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OG));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 13, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OG));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 14, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OT));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 15, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OT));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 16, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 17, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 18, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 19, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 20, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DT));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 21, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DT));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 22, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 23, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 24, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 25, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 26, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 27, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 28, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 29, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 30, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SS));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 31, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SS));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 32, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FS));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 33, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FS));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 34, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.K));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 35, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.P));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 36, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
-                NFL.TeamList[i].Roster.Add(new FootballPlayer(i * 38 + 37, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.QB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 1, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.QB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 2, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 3, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 4, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 5, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 6, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 7, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 8, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.TE));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 9, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.TE));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 10, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 11, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 12, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OG));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 13, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OG));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 14, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OT));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 15, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OT));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 16, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 17, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 18, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 19, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 20, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DT));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 21, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DT));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 22, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 23, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 24, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 25, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 26, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 27, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 28, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 29, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 30, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SS));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 31, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SS));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 32, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FS));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 33, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FS));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 34, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.K));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 35, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.P));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 36, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
+                NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 37, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
             }
         }
         public void CreateHockeyPlayers(Random rnd)
         {
             for (int i = 0; i < NHL.TeamList.Count; i++)
             {
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.G));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 1, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.G));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 2, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 3, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 4, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 5, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 6, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 7, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 8, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 9, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 10, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 11, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 12, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 13, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 14, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 15, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 16, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 17, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
-                NHL.TeamList[i].Roster.Add(new HockeyPlayer(i * 19 + 18, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.G));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 1, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.G));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 2, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 3, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 4, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 5, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 6, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 7, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 8, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 9, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 10, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 11, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 12, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 13, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 14, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 15, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.W));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 16, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 17, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                NHL.TeamList[i].Roster.Add(new HockeyPlayer(rnd, i * 19 + 18, Sports.Hockey, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
             }
         }
         public void CreateBaseballPlayers(Random rnd)
         {
             for (int i = 0; i < MLB.TeamList.Count; i++)
             {
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 1, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 2, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 3, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 4, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 5, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 6, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 7, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 8, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 9, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 10, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 11, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 12, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 13, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 14, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 15, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 16, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 17, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 18, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 19, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 20, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
-                MLB.TeamList[i].Roster.Add(new BaseballPlayer(i * 22 + 21, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 1, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 2, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 3, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 4, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 5, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 6, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 7, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 8, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 9, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.INF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 10, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 11, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 12, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 13, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OF));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 14, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 15, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 16, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 17, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 18, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 19, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 20, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
+                MLB.TeamList[i].Roster.Add(new BaseballPlayer(rnd, i * 22 + 21, Sports.Baseball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 37), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RP));
             }
         }
         public void CreateSoccerPlayers(Random rnd)
         {
             for (int i = 0; i < MLS.TeamList.Count; i++)
             {
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.GK));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 1, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.GK));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 2, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 3, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 4, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 5, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 6, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 7, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 8, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 9, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 10, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 11, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 12, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 13, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 14, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 15, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
-                MLS.TeamList[i].Roster.Add(new SoccerPlayer(i * 17 + 16, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.GK));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 1, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.GK));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 2, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 3, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 4, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 5, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 6, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.D));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 7, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 8, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 9, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 10, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 11, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.MID));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 12, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 13, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 14, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 15, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
+                MLS.TeamList[i].Roster.Add(new SoccerPlayer(rnd, i * 17 + 16, Sports.Soccer, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.F));
             }
         }
         public void CreateGolfers(Random rnd)
         {
             for (var i = 0; i < 144; i++)
             {
-                PGA.PlayerList.Add(new Golfer(i, Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65), (Months)rnd.Next(0,12), rnd.Next(1, 6)));
+                PGA.PlayerList.Add(new Golfer(rnd, i, Sports.Golf, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 65), (Months)rnd.Next(0,12), rnd.Next(1, 6)));
             }
         }
         public void CreateTennisPlayers(Random rnd)
         {
             for (var i = 0; i < 128; i++)
             {
-                ATP.PlayerList.Add(new TennisPlayer(i, Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
+                ATP.PlayerList.Add(new TennisPlayer(rnd, i, Sports.Tennis, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 35), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
             }
         }
         public void CreateBoxers(Random rnd)
         {
             for (var i = 0; i < 40; i++)
             {
-                WBA.PlayerList.Add(new Boxer(i, Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
+                WBA.PlayerList.Add(new Boxer(rnd, i, Sports.Boxing, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(16, 34), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
             }
         }
         public void CreateMMAFighters(Random rnd)
         {
             for (var i = 0; i < 50; i++)
             {
-                UFC.PlayerList.Add(new MMAFighter(i, Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
+                UFC.PlayerList.Add(new MMAFighter(rnd, i, Sports.MMA, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(17, 31), (Months)rnd.Next(0, 12), rnd.Next(1, 6)));
             }
         }
         public void CreatePlayerBirthdayCalendarEvents()
@@ -580,7 +580,7 @@ namespace SportsAgencyTycoon
         {
             foreach(Association association in Associations)
             {
-                List<Player> playerList = association.PlayerList.OrderByDescending(o => o.SkillLevel).ToList();
+                List<Player> playerList = association.PlayerList.OrderByDescending(o => o.CurrentSkill).ToList();
                 for(int i = 0; i < playerList.Count; i++)
                 {
                     playerList[i].WorldRanking = i + 1;

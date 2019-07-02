@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SportsAgencyTycoon
@@ -10,27 +11,49 @@ namespace SportsAgencyTycoon
     {
         public int Id;
         public Sports Sport;
+        public Contract Contract;
+
         public FirstName FirstName;
         public LastName LastName;
         public string FullName;
-        public int SkillLevel;
+
+        public int CurrentSkill;
         public int PotentialSkill;
+
         public int Age;
         public Months BirthMonth;
         public int BirthWeek;
-        public int CareerEarnings;
-        public int WorldRanking;
         public Date Birthday;
 
-        public Player(int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek)
+        public int Popularity;
+        public PopularityDescription PopularityDescription;
+        public string PopularityString;
+
+        public int AgencyHappiness;
+        public HappinessDescription AgencyHappinessDescription;
+        public string AgencyHappinessString;
+
+        public int TeamHappiness;
+        public HappinessDescription TeamHappinessDescription;
+        public string TeamHappinessString;
+
+
+        public int CareerEarnings;
+        public int WorldRanking;
+        
+
+        public Player(Random rnd, int id, Sports sport, FirstName firstName, LastName lastName, int currentSkill, int age, Months birthMonth, int birthWeek)
         {
             Id = id;
             Sport = sport;
+
             FirstName = firstName;
             LastName = lastName;
             FullName = firstName.ToString() + " " + lastName.ToString();
-            SkillLevel = skillLevel;
-            PotentialSkill = AssignPotential(age, skillLevel);
+
+            CurrentSkill = currentSkill;
+            PotentialSkill = AssignPotential(age, currentSkill);
+
             Age = age;
             BirthMonth = birthMonth;
             if (birthWeek == 5)
@@ -40,10 +63,23 @@ namespace SportsAgencyTycoon
             }
             else BirthWeek = birthWeek;
             Birthday = CreateBirthday(birthMonth, birthWeek);
+
+            Popularity = DeterminePopularity(rnd, CurrentSkill, PotentialSkill, Age);
+            PopularityDescription = DescribePopularity(Popularity);
+            PopularityString = EnumToString(PopularityDescription.ToString());
+
+            TeamHappiness = DetermineTeamHappiness(rnd);
+            TeamHappinessDescription = DescribeHappiness(TeamHappiness);
+            TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
+
+            AgencyHappiness = DetermineAgencyHappiness(rnd, TeamHappiness);
+            AgencyHappinessDescription = DescribeHappiness(AgencyHappiness);
+            AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
+
             CareerEarnings = 0;
         }
 
-        public int AssignPotential(int age, int skillLevel)
+        public int AssignPotential(int age, int currentSkill)
         {
             Random rnd = new Random();
             int potentialSkill = 0;
@@ -54,7 +90,7 @@ namespace SportsAgencyTycoon
             else if (age <= 30) potential = rnd.Next(5, 26);
             else if (age <= 35) potential = rnd.Next(0, 7);
 
-            potentialSkill = skillLevel + potential;
+            potentialSkill = currentSkill + potential;
             if (potentialSkill > 100) potentialSkill = 100;
 
             return potentialSkill;
@@ -64,6 +100,76 @@ namespace SportsAgencyTycoon
         {
             Date birthday = new Date((int)month, month, week);
             return birthday;
+        }
+
+        public int DeterminePopularity(Random rnd, int currentSkill, int potentialSkill, int age)
+        {
+            int popularity = 0;
+
+            popularity = currentSkill + (potentialSkill - currentSkill);
+            if (age <= 21) popularity += 20;
+            else if (age <= 24) popularity += 15;
+            else if (age <= 27) popularity += 10;
+            else if (age <= 29) popularity += 5;
+
+            return popularity;
+        }
+
+        public PopularityDescription DescribePopularity(int pop)
+        {
+            PopularityDescription description;
+
+            if (pop <= 25) description = PopularityDescription.Unknown;
+            else if (pop <= 35) description = PopularityDescription.RelativeUnknown;
+            else if (pop <= 45) description = PopularityDescription.Neutral;
+            else if (pop <= 55) description = PopularityDescription.LocalFavorite;
+            else if (pop <= 70) description = PopularityDescription.VeryPopular;
+            else if (pop <= 85) description = PopularityDescription.ExtremelyPopular;
+            else description = PopularityDescription.Superstar;
+
+            return description;
+        }
+
+        //want to rewrite this to use players position on depth chart
+        //and team's titleContender and marketValue variables
+        public int DetermineTeamHappiness(Random rnd)
+        {
+            int happiness = 0;
+
+            happiness = rnd.Next(0, 100);
+
+            return happiness;
+        }
+
+        //want to rewrite this to use TeamHappiness, Contract status
+        //and a little randomness
+        public int DetermineAgencyHappiness(Random rnd, int teamHappiness)
+        {
+            int happiness = 0;
+
+            int random = rnd.Next(0, 100);
+            happiness = (random + teamHappiness) / 2;
+
+            return happiness;
+        }
+
+        public HappinessDescription DescribeHappiness(int happy)
+        {
+            HappinessDescription description;
+
+            if (happy <= 20) description = HappinessDescription.Disgruntled;
+            else if (happy <= 40) description = HappinessDescription.Displeased;
+            else if (happy <= 60) description = HappinessDescription.Neutral;
+            else if (happy <= 80) description = HappinessDescription.Happy;
+            else description = HappinessDescription.Ecstatic;
+
+            return description;
+        }
+
+        public string EnumToString(string s)
+        {
+            s = Regex.Replace(s, @"((?<=\p{Ll})\p{Lu})|((?!\A)\p{Lu}(?>\p{Ll}))", " $0");
+            return s;
         }
     }
 }

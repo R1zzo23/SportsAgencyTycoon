@@ -12,15 +12,19 @@ namespace SportsAgencyTycoon
         public int Age;
         public int CurrentSkill;
         public int PotentialSkill;
+
         public int Popularity;
         public PopularityDescription PopularityDescription;
         public string PopularityString;
+
         public int AgencyHappiness;
         public HappinessDescription AgencyHappinessDescription;
         public string AgencyHappinessString;
+
         public int TeamHappiness;
         public HappinessDescription TeamHappinessDescription;
         public string TeamHappinessString;
+
         public Months BirthMonth;
         public int BirthWeek;
         public Date Birthday;
@@ -89,7 +93,7 @@ namespace SportsAgencyTycoon
         }
 
         //want to rewrite this to use players position on depth chart
-        //and team's titleContender variable 
+        //and team's titleContender and marketValue variables
         public int DetermineTeamHappiness(Random rnd)
         {
             int happiness = 0;
