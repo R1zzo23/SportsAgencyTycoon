@@ -58,6 +58,7 @@ namespace SportsAgencyTycoon
             lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
             Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
+            lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + ": Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
             if (selectedLeague.Sport == Sports.Basketball)
                 foreach (BasketballPlayer p in selectedTeam.Roster)
                     lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;

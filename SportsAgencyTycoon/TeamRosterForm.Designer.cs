@@ -32,6 +32,7 @@
             this.cbTeamList = new System.Windows.Forms.ComboBox();
             this.lblRoster = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTeamInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             // lblRoster
             // 
             this.lblRoster.AutoSize = true;
-            this.lblRoster.Location = new System.Drawing.Point(3, 9);
+            this.lblRoster.Location = new System.Drawing.Point(4, 40);
             this.lblRoster.Name = "lblRoster";
             this.lblRoster.Size = new System.Drawing.Size(35, 13);
             this.lblRoster.TabIndex = 2;
@@ -64,11 +65,21 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblTeamInfo);
             this.panel1.Controls.Add(this.lblRoster);
             this.panel1.Location = new System.Drawing.Point(13, 40);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(486, 519);
             this.panel1.TabIndex = 3;
+            // 
+            // lblTeamInfo
+            // 
+            this.lblTeamInfo.AutoSize = true;
+            this.lblTeamInfo.Location = new System.Drawing.Point(4, 12);
+            this.lblTeamInfo.Name = "lblTeamInfo";
+            this.lblTeamInfo.Size = new System.Drawing.Size(35, 13);
+            this.lblTeamInfo.TabIndex = 3;
+            this.lblTeamInfo.Text = "label1";
             // 
             // TeamRosterForm
             // 
@@ -92,5 +103,6 @@
         private System.Windows.Forms.ComboBox cbTeamList;
         private System.Windows.Forms.Label lblRoster;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblTeamInfo;
     }
 }

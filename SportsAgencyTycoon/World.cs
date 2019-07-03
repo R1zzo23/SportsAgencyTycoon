@@ -77,25 +77,6 @@ namespace SportsAgencyTycoon
             IndividualSportLicense.Add(tennisLicense);
             IndividualSportLicense.Add(soccerLicense);
         }
-        /*public void CreateNewClients(Agency agency, Licenses license)
-        {
-            Random rnd = new Random();
-            int numberNewClients = HowManyNewClients(agency.IndustryInfluence);
-            for (int i = 0; i < numberNewClients; i++)
-            {
-                Client client = new Client(
-                    randomFirstName(rnd).ToString(),
-                    randomLastName(rnd).ToString(),
-                    rnd.Next(18, 35),
-                    rnd.Next(1, 5),
-                    rnd.Next(5, 9),
-                    rnd.Next(0, 75),
-                    100,
-                    0,
-                    license.Sport);
-                AvailableClients.Add(client);
-            }
-        }*/
         public int HowManyNewClients(int influence)
         {
             int numberNewClients = 0;
@@ -121,6 +102,9 @@ namespace SportsAgencyTycoon
             CreateCalendarEventsForLeagueStartAndEnd();
             CreatePlayerBirthdayCalendarEvents();
             CalculateWorldRankings();
+            AssignTeamToPlayersInLeagues();
+            DetermineTitleContenderForTeams();
+            DetermineTeamHappinessForPlayers();
         }
         public void CreateLeagues(Random rnd)
         {
@@ -396,6 +380,7 @@ namespace SportsAgencyTycoon
                     foreach (Player p in t.Roster)
                         Calendar.AddCalendarEvent(new CalendarEvent(p));
         }
+        #endregion
         public void AssignTeamToPlayersInLeagues()
         {
             foreach (League l in Leagues)
@@ -437,6 +422,7 @@ namespace SportsAgencyTycoon
                             IsSoccerStarter(t, p);
                     }
         }
+        #region Is Player A Starter
         public bool IsBasketballStarter(Team t, Player p)
         {
             bool starter = false;
@@ -461,7 +447,7 @@ namespace SportsAgencyTycoon
             Position position = player.Position;
             List<BaseballPlayer> playersAtPosition = new List<BaseballPlayer>();
 
-            foreach (BasketballPlayer b in t.Roster)
+            foreach (BaseballPlayer b in t.Roster)
                 if (b.Position == position) playersAtPosition.Add(b);
 
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
@@ -547,7 +533,7 @@ namespace SportsAgencyTycoon
             Position position = player.Position;
             List<SoccerPlayer> playersAtPosition = new List<SoccerPlayer>();
 
-            foreach (SoccerPlayer b in t.Roster)
+            foreach (SoccerPlayer s in t.Roster)
                 if (s.Position == position) playersAtPosition.Add(s);
 
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
