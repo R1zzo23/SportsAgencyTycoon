@@ -386,7 +386,11 @@ namespace SportsAgencyTycoon
             foreach (League l in Leagues)
                 foreach (Team t in l.TeamList)
                     foreach (Player p in t.Roster)
+                    {
                         p.Team = t;
+                        p.League = l;
+                    }
+                        
         }
         public void DetermineTitleContenderForTeams()
         {

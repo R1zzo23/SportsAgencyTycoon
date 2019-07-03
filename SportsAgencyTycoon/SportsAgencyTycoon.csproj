@@ -79,6 +79,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Date.cs" />
+    <Compile Include="Endorsement.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FirstName.cs" />
     <Compile Include="FootballPlayer.cs" />

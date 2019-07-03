@@ -12,12 +12,7 @@ namespace SportsAgencyTycoon
         public int Id;
         public Sports Sport;
         public Team Team;
-        public Contract Contract;
-
-        //player attributes to determine which teams or contracts a player prefers
-        public int Greed;
-        public int Lifestyle;
-        public int Loyalty;
+        public League League;
 
         //name variables
         public FirstName FirstName;
@@ -27,6 +22,15 @@ namespace SportsAgencyTycoon
         //player skills
         public int CurrentSkill;
         public int PotentialSkill;
+
+        //player attributes to determine which teams or contracts a player prefers
+        public int Greed;
+        public int Lifestyle;
+        public int Loyalty;
+
+        //contract && endorsements
+        public Contract Contract;
+        public Endorsement Endorsement;
 
         //age and birthday
         public int Age;
@@ -64,6 +68,10 @@ namespace SportsAgencyTycoon
 
             CurrentSkill = currentSkill;
             PotentialSkill = AssignPotential(rnd, age, currentSkill);
+
+            //Greed
+            //Lifestyle
+            //Loyalty
 
             Age = age;
             BirthMonth = birthMonth;
@@ -104,6 +112,39 @@ namespace SportsAgencyTycoon
             if (potentialSkill > 100) potentialSkill = 100;
 
             return potentialSkill;
+        }
+
+        public Contract CreatePlayerContract(Random rnd, League league, Sports sport, int age, int currentSkill, int potentialSkill)
+        {
+            int years = rnd.Next(1, 6);
+            int signingBonus;
+            int totalMoney = DetermineTotalMoney();
+
+            if (sport == Sports.Football)
+                signingBonus = DetermineSigningBonus(years, totalMoney);
+            else signingBonus = 0;
+
+            Contract contract = new Contract(years, 250, league.SeasonStart, league.SeasonEnd, 0, PaySchedule.Monthly);
+
+            return contract;
+        }
+
+        public int DetermineTotalMoney()
+        {
+            int totalMoney = 0;
+
+
+
+            return totalMoney;
+        }
+
+        public int DetermineSigningBonus(int years, int totalMoney)
+        {
+            int signingBonus = 0;
+
+
+
+            return signingBonus;
         }
 
         public Date CreateBirthday(Months month, int week)
