@@ -11,32 +11,43 @@ namespace SportsAgencyTycoon
     {
         public int Id;
         public Sports Sport;
+        public Team Team;
         public Contract Contract;
 
+        //player attributes to determine which teams or contracts a player prefers
+        public int Greed;
+        public int Lifestyle;
+        public int Loyalty;
+
+        //name variables
         public FirstName FirstName;
         public LastName LastName;
         public string FullName;
 
+        //player skills
         public int CurrentSkill;
         public int PotentialSkill;
 
+        //age and birthday
         public int Age;
         public Months BirthMonth;
         public int BirthWeek;
         public Date Birthday;
 
+        //popularity by numbers and descriptions
         public int Popularity;
         public PopularityDescription PopularityDescription;
         public string PopularityString;
 
+        //agencyHappiness by numbers and descriptions
         public int AgencyHappiness;
         public HappinessDescription AgencyHappinessDescription;
         public string AgencyHappinessString;
 
+        //teamHappines by numbers and description
         public int TeamHappiness;
         public HappinessDescription TeamHappinessDescription;
         public string TeamHappinessString;
-
 
         public int CareerEarnings;
         public int WorldRanking;

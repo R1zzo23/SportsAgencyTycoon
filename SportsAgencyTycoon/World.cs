@@ -387,20 +387,174 @@ namespace SportsAgencyTycoon
         }
         public void CreatePlayerBirthdayCalendarEvents()
         {
-            foreach (Player p in PGA.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Player p in ATP.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Player p in WBA.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Player p in UFC.PlayerList) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Team t in NBA.TeamList)
-                foreach (Player p in t.Roster) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Team t in NFL.TeamList)
-                foreach (Player p in t.Roster) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Team t in MLB.TeamList)
-                foreach (Player p in t.Roster) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Team t in NHL.TeamList)
-                foreach (Player p in t.Roster) Calendar.AddCalendarEvent(new CalendarEvent(p));
-            foreach (Team t in MLS.TeamList)
-                foreach (Player p in t.Roster) Calendar.AddCalendarEvent(new CalendarEvent(p));
+            foreach (Association a in Associations)
+                foreach (Player p in a.PlayerList)
+                    Calendar.AddCalendarEvent(new CalendarEvent(p));
+
+            foreach (League l in Leagues)
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
+                        Calendar.AddCalendarEvent(new CalendarEvent(p));
+        }
+        public void AssignTeamToPlayersInLeagues()
+        {
+            foreach (League l in Leagues)
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
+                        p.Team = t;
+        }
+        public void DetermineTitleContenderForTeams()
+        {
+            foreach (League l in Leagues)
+                foreach (Team t in l.TeamList)
+                {
+                    int titleContender = 0;
+
+                    for (int i = 0; i < t.Roster.Count; i++)
+                    {
+                        titleContender += t.Roster[i].CurrentSkill;
+                    }
+
+                    titleContender = (int)titleContender / t.Roster.Count;
+                    t.TitleConteder = titleContender;
+                }
+        }
+        public void DetermineTeamHappinessForPlayers()
+        {
+            foreach (League l in Leagues)
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
+                    {
+                        if (p.Sport == Sports.Basketball)
+                            IsBasketballStarter(t, p);
+                        else if (p.Sport == Sports.Baseball)
+                            IsBaseballStarter(t, p);
+                        else if (p.Sport == Sports.Football)
+                            IsFootballStarter(t, p);
+                        else if (p.Sport == Sports.Hockey)
+                            IsHockeyStarter(t, p);
+                        else if (p.Sport == Sports.Soccer)
+                            IsSoccerStarter(t, p);
+                    }
+        }
+        public bool IsBasketballStarter(Team t, Player p)
+        {
+            bool starter = false;
+            BasketballPlayer player = (BasketballPlayer)p;
+            Position position = player.Position;
+            List<BasketballPlayer> playersAtPosition = new List<BasketballPlayer>();
+
+            foreach (BasketballPlayer b in t.Roster)
+                if (b.Position == position) playersAtPosition.Add(b);
+
+            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+            if (player == playersAtPosition[0]) starter = true;
+            else starter = false;
+
+            return starter;
+        }
+        public bool IsBaseballStarter(Team t, Player p)
+        {
+            bool starter = false;
+            int starterCount = 0;
+            BaseballPlayer player = (BaseballPlayer)p;
+            Position position = player.Position;
+            List<BaseballPlayer> playersAtPosition = new List<BaseballPlayer>();
+
+            foreach (BasketballPlayer b in t.Roster)
+                if (b.Position == position) playersAtPosition.Add(b);
+
+            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+
+            if (position == Position.INF) starterCount = 4;
+            else if (position == Position.OF) starterCount = 3;
+            else if (position == Position.SP) starterCount = 3;
+            else if (position == Position.C) starterCount = 1;
+            else if (position == Position.RP) starterCount = 2;
+
+            for (int i = 0; i < starterCount; i++)
+            {
+                if (player == playersAtPosition[i])
+                {
+                    starter = true;
+                    return starter;
+                }
+            }
+
+            return starter;
+        }
+        public bool IsFootballStarter(Team t, Player p)
+        {
+            bool starter = false;
+            int starterCount = 0;
+            FootballPlayer player = (FootballPlayer)p;
+            Position position = player.Position;
+            List<FootballPlayer> playersAtPosition = new List<FootballPlayer>();
+
+            foreach (FootballPlayer f in t.Roster)
+                if (f.Position == position) playersAtPosition.Add(f);
+
+            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+
+            if (position == Position.WR || position == Position.DE || position == Position.DT || position == Position.CB)
+                starterCount = 2;
+            else if (position == Position.LB) starterCount = 4;
+            else starterCount = 1;
+
+            for (int i = 0; i < starterCount; i++)
+            {
+                if (player == playersAtPosition[i])
+                {
+                    starter = true;
+                    return starter;
+                }
+            }
+
+            return starter;
+        }
+        public bool IsHockeyStarter(Team t, Player p)
+        {
+            bool starter = false;
+            int starterCount = 0;
+            HockeyPlayer player = (HockeyPlayer)p;
+            Position position = player.Position;
+            List<HockeyPlayer> playersAtPosition = new List<HockeyPlayer>();
+
+            foreach (HockeyPlayer h in t.Roster)
+                if (h.Position == position) playersAtPosition.Add(h);
+
+            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+
+            if (position == Position.G) starterCount = 1;
+            else if (position == Position.W) starterCount = 3;
+            else starterCount = 2;
+
+            for (int i = 0; i < starterCount; i++)
+            {
+                if (player == playersAtPosition[i])
+                {
+                    starter = true;
+                    return starter;
+                }
+            }
+
+            return starter;
+        }
+        public bool IsSoccerStarter(Team t, Player p)
+        {
+            bool starter = false;
+            SoccerPlayer player = (SoccerPlayer)p;
+            Position position = player.Position;
+            List<SoccerPlayer> playersAtPosition = new List<SoccerPlayer>();
+
+            foreach (SoccerPlayer b in t.Roster)
+                if (s.Position == position) playersAtPosition.Add(s);
+
+            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+            if (player == playersAtPosition[0]) starter = true;
+            else starter = false;
+
+            return starter;
         }
         #endregion
         #region Create Teams for Leagues
