@@ -27,6 +27,7 @@ namespace SportsAgencyTycoon
         public int Greed;
         public int Lifestyle;
         public int Loyalty;
+        public int PlayForTitleContender;
 
         //contract && endorsements
         public Contract Contract;
@@ -69,9 +70,10 @@ namespace SportsAgencyTycoon
             CurrentSkill = currentSkill;
             PotentialSkill = AssignPotential(rnd, age, currentSkill);
 
-            //Greed
-            //Lifestyle
-            //Loyalty
+            Greed = rnd.Next(0, 101);
+            Lifestyle = rnd.Next(0, 101);
+            Loyalty = rnd.Next(0, 101);
+            PlayForTitleContender = rnd.Next(0, 101);
 
             Age = age;
             BirthMonth = birthMonth;
@@ -83,17 +85,19 @@ namespace SportsAgencyTycoon
             else BirthWeek = birthWeek;
             Birthday = CreateBirthday(birthMonth, birthWeek);
 
+            CreatePlayerContract(rnd);
+
             Popularity = DeterminePopularity(CurrentSkill, PotentialSkill, Age);
             PopularityDescription = DescribePopularity(Popularity);
             PopularityString = EnumToString(PopularityDescription.ToString());
 
-            TeamHappiness = DetermineTeamHappiness(rnd);
-            TeamHappinessDescription = DescribeHappiness(TeamHappiness);
-            TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
+            //TeamHappiness = DetermineTeamHappiness(rnd);
+            //TeamHappinessDescription = DescribeHappiness(TeamHappiness);
+            //TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
 
-            AgencyHappiness = DetermineAgencyHappiness(rnd, TeamHappiness);
-            AgencyHappinessDescription = DescribeHappiness(AgencyHappiness);
-            AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
+            //AgencyHappiness = DetermineAgencyHappiness(rnd);
+            //AgencyHappinessDescription = DescribeHappiness(AgencyHappiness);
+            //AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
 
             CareerEarnings = 0;
         }
@@ -114,35 +118,96 @@ namespace SportsAgencyTycoon
             return potentialSkill;
         }
 
-        public Contract CreatePlayerContract(Random rnd, League league, Sports sport, int age, int currentSkill, int potentialSkill)
+        public Contract CreatePlayerContract(Random rnd)
         {
             int years = rnd.Next(1, 6);
             int signingBonus;
-            int totalMoney = DetermineTotalMoney();
+            int yearlySalary = DetermineYearlySalary(rnd);
 
-            if (sport == Sports.Football)
-                signingBonus = DetermineSigningBonus(years, totalMoney);
+            if (Sport == Sports.Football)
+            {
+                // determine signing bonus of contract
+                signingBonus = DetermineSigningBonus(rnd, years, yearlySalary);
+                // calculate total value of contract
+                int totalValueOfContract = years * yearlySalary;
+                // remove signing bonus from total value of contract
+                totalValueOfContract -= signingBonus;
+                // recalculate yearlySalary
+                yearlySalary = totalValueOfContract / years;
+            }
+                
             else signingBonus = 0;
 
-            Contract contract = new Contract(years, 250, league.SeasonStart, league.SeasonEnd, 0, PaySchedule.Monthly);
+            Contract contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DeterminePaySchedule(years));
 
             return contract;
         }
 
-        public int DetermineTotalMoney()
+        public PaySchedule DeterminePaySchedule(int years)
         {
-            int totalMoney = 0;
+            PaySchedule paySchedule;
 
+            if (years == 1) paySchedule = PaySchedule.UpFront;
+            else paySchedule = PaySchedule.Monthly;
 
-
-            return totalMoney;
+            return paySchedule;
         }
 
-        public int DetermineSigningBonus(int years, int totalMoney)
+        public int DetermineYearlySalary(Random rnd)
+        {
+            int YearlySalary = 0;
+            int maxSalary = League.MaxSalary;
+            int minSalary = League.MinSalary;
+            int skillLevel = CurrentSkill;
+            int maxMinDifference;
+
+            if (Age <= 21)
+            {
+                skillLevel = PotentialSkill;
+                maxSalary = maxSalary / 4;
+            }
+            else if (Age <= 25)
+            {
+                skillLevel = (CurrentSkill + PotentialSkill) / 2;
+                maxSalary = maxSalary / 2;
+                minSalary = minSalary * 2;
+            }
+            else if (Age <= 30) minSalary = minSalary * 3;
+            else if (Age > 30) 
+            {
+                CurrentSkill = (int)Math.Round(CurrentSkill * 0.75);
+                minSalary = minSalary * 5;
+            }
+            else
+            {
+                CurrentSkill = (int)Math.Round(CurrentSkill * 0.6);
+                minSalary = minSalary * 5;
+            }
+
+            maxMinDifference = maxSalary - minSalary;
+
+            if (CurrentSkill < 40) YearlySalary = minSalary;
+            else if (CurrentSkill < 50) YearlySalary = rnd.Next(minSalary, (int)(minSalary * 5));
+            else if (CurrentSkill < 60) YearlySalary = rnd.Next((int)(maxSalary * 0.5), maxSalary);
+            else if (CurrentSkill < 70) YearlySalary = rnd.Next((int)(maxSalary * 0.6), maxSalary);
+            else if (CurrentSkill < 80) YearlySalary = rnd.Next((int)(maxSalary * 0.75), maxSalary);
+            else YearlySalary = maxSalary;
+
+            return YearlySalary;
+        }
+
+        public int DetermineSigningBonus(Random rnd, int years, int YearlySalary)
         {
             int signingBonus = 0;
+            double percentage = 0;
 
+            if (years == 5) percentage = rnd.Next(10, 21) / 100;
+            if (years == 4) percentage = rnd.Next(10, 16) / 100;
+            if (years == 3) percentage = rnd.Next(7, 13) / 100;
+            if (years == 2) percentage = rnd.Next(5, 11) / 100;
+            if (years == 1) percentage = rnd.Next(5, 8) / 100;
 
+            signingBonus = (int)((YearlySalary * years) * (percentage / 100));
 
             return signingBonus;
         }
@@ -183,25 +248,57 @@ namespace SportsAgencyTycoon
 
         //want to rewrite this to use players position on depth chart
         //and team's titleContender and marketValue variables
-        public int DetermineTeamHappiness(Random rnd)
+        public void DetermineTeamHappiness(Random rnd, bool isStarter)
         {
             int happiness = 0;
+            int happinessChecks = 0;
+            //bool marketLifestyleMatch = false;
+            //bool starterCurrentSkillMatch = false;
+            //bool teamPlayerTitleContenderMatch = false;
 
-            happiness = rnd.Next(0, 100);
+            //marketValue and lifestyle match?
+            if (Lifestyle >= 60 && Team.MarketValue >= 50) happinessChecks++;
 
-            return happiness;
+            //starter and currentSkill match?
+            if (CurrentSkill >= 50 && isStarter) happinessChecks += 2;
+
+            //team titleContender and PlayForTitleContender match?
+            if (Team.TitleConteder >= 50 && PlayForTitleContender >= 65) happinessChecks++;
+
+            if (happinessChecks == 0)
+                happiness = rnd.Next(0, 50);
+            else if (happinessChecks == 1)
+                happiness = rnd.Next(15, 60);
+            else if (happinessChecks == 2)
+                happiness = rnd.Next(35, 70);
+            else if (happinessChecks == 3)
+                happiness = rnd.Next(50, 80);
+            else if (happinessChecks == 4)
+                happiness = rnd.Next(75, 101);
+
+            TeamHappiness = happiness;
+
+            TeamHappinessDescription = DescribeHappiness(TeamHappiness);
+            TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
         }
 
         //want to rewrite this to use TeamHappiness, Contract status
         //and a little randomness
-        public int DetermineAgencyHappiness(Random rnd, int teamHappiness)
+        public void DetermineAgencyHappiness(Random rnd)
         {
             int happiness = 0;
+            bool contentWithContract = true;
 
-            int random = rnd.Next(0, 100);
-            happiness = (random + teamHappiness) / 2;
+            if (Greed >= 65 && Contract.YearlySalary < (League.MaxSalary * (PotentialSkill / 100))) contentWithContract = false;
 
-            return happiness;
+            if (contentWithContract)
+                happiness = (rnd.Next(41, 100) + TeamHappiness) / 2;
+            else happiness = (rnd.Next(0, 41) + TeamHappiness) / 2;
+
+            AgencyHappiness = happiness;
+
+            AgencyHappinessDescription = DescribeHappiness(AgencyHappiness);
+            AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
         }
 
         public HappinessDescription DescribeHappiness(int happy)

@@ -408,22 +408,26 @@ namespace SportsAgencyTycoon
                     t.TitleConteder = titleContender;
                 }
         }
-        public void DetermineTeamHappinessForPlayers()
+        public void DetermineHappinessForPlayers()
         {
             foreach (League l in Leagues)
                 foreach (Team t in l.TeamList)
                     foreach (Player p in t.Roster)
                     {
-                        if (p.Sport == Sports.Basketball)
-                            IsBasketballStarter(t, p);
-                        else if (p.Sport == Sports.Baseball)
-                            IsBaseballStarter(t, p);
-                        else if (p.Sport == Sports.Football)
-                            IsFootballStarter(t, p);
-                        else if (p.Sport == Sports.Hockey)
-                            IsHockeyStarter(t, p);
-                        else if (p.Sport == Sports.Soccer)
-                            IsSoccerStarter(t, p);
+                        bool isStarter;
+
+                        // determine player TeamHappiness
+                        if (p.Sport == Sports.Basketball) isStarter = IsBasketballStarter(t, p);
+                        else if (p.Sport == Sports.Baseball) isStarter = IsBaseballStarter(t, p);
+                        else if (p.Sport == Sports.Football) isStarter = IsFootballStarter(t, p);
+                        else if (p.Sport == Sports.Hockey) isStarter = IsHockeyStarter(t, p);
+                        else if (p.Sport == Sports.Soccer) isStarter = IsSoccerStarter(t, p);
+                        else isStarter = false;
+
+                        p.DetermineTeamHappiness(rnd, isStarter);
+
+                        // determine player AgencyHappiness
+                        p.DetermineAgencyHappiness(rnd);
                     }
         }
         #region Is Player A Starter
