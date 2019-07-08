@@ -104,7 +104,7 @@ namespace SportsAgencyTycoon
             CalculateWorldRankings();
             AssignTeamToPlayersInLeagues();
             DetermineTitleContenderForTeams();
-            DetermineTeamHappinessForPlayers();
+            DetermineHappinessForPlayers();
         }
         public void CreateLeagues(Random rnd)
         {
@@ -183,10 +183,8 @@ namespace SportsAgencyTycoon
         }
         public void CreateCalendarEventsForAssociationEvents()
         {
-            foreach (Event e in PGA.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
-            foreach (Event e in ATP.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
-            foreach (Event e in WBA.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
-            foreach (Event e in UFC.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
+            foreach (Association a in Associations)
+                foreach (Event e in a.EventList) Calendar.AddCalendarEvent(new CalendarEvent(e));
         }
         #endregion
         #region Create Athletes for Associations and Leagues
@@ -389,6 +387,8 @@ namespace SportsAgencyTycoon
                     {
                         p.Team = t;
                         p.League = l;
+                        p.Contract = p.CreatePlayerContract(rnd);
+                        Console.WriteLine(p.Contract);
                     }
                         
         }
@@ -427,7 +427,7 @@ namespace SportsAgencyTycoon
                         p.DetermineTeamHappiness(rnd, isStarter);
 
                         // determine player AgencyHappiness
-                        p.DetermineAgencyHappiness(rnd);
+                        p.DetermineAgencyHappiness(rnd, p.Contract);
                     }
         }
         #region Is Player A Starter

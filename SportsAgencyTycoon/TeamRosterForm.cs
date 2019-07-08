@@ -48,6 +48,22 @@ namespace SportsAgencyTycoon
             }
         }
 
+        private void FillTeamRosterComboBox()
+        {
+            League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
+            Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
+
+            cbTeamRoster.Items.Clear();
+
+            string playerName;
+
+            foreach(Player p in selectedTeam.Roster)
+            {
+                playerName = p.FullName;
+                cbTeamRoster.Items.Add(playerName);
+            }
+        }
+
         private void cbLeagues_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillTeamComboBox();
@@ -55,6 +71,8 @@ namespace SportsAgencyTycoon
 
         private void cbTeamList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FillTeamRosterComboBox();
+
             lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
             Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
@@ -74,6 +92,54 @@ namespace SportsAgencyTycoon
             if (selectedLeague.Sport == Sports.Soccer)
                 foreach (SoccerPlayer p in selectedTeam.Roster)
                     lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+        }
+
+        private void cbTeamRoster_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
+            Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
+            Player selectedPlayer = selectedTeam.Roster[cbTeamRoster.SelectedIndex];
+
+            if (selectedPlayer.Sport == Sports.Baseball)
+            {
+                BaseballPlayer baseballPlayer = (BaseballPlayer)selectedPlayer;
+                lblPosition.Text = "Position: " + baseballPlayer.Position.ToString();
+            }
+            else if (selectedPlayer.Sport == Sports.Basketball) 
+            {
+                BasketballPlayer basketballPlayer = (BasketballPlayer)selectedPlayer;
+                lblPosition.Text = "Position: " + basketballPlayer.Position.ToString();
+            }
+            else if (selectedPlayer.Sport == Sports.Football)
+            {
+                FootballPlayer footballPlayer = (FootballPlayer)selectedPlayer;
+                lblPosition.Text = "Position: " + footballPlayer.Position.ToString();
+            }
+            else if (selectedPlayer.Sport == Sports.Hockey)
+            {
+                HockeyPlayer hockeyPlayer = (HockeyPlayer)selectedPlayer;
+                lblPosition.Text = "Position: " + hockeyPlayer.Position.ToString();
+            }
+            else if (selectedPlayer.Sport == Sports.Soccer)
+            {
+                SoccerPlayer soccerPlayer = (SoccerPlayer)selectedPlayer;
+                lblPosition.Text = "Position: " + soccerPlayer.Position.ToString();
+            }
+            lblFullName.Text = selectedPlayer.FullName;
+            lblAge.Text = "Age: " + selectedPlayer.Age.ToString();
+            lblSkillLevel.Text = "Skill Level: " + selectedPlayer.CurrentSkill.ToString() + "/" + selectedPlayer.PotentialSkill.ToString();
+
+            lblYearlySalary.Text = "Yearly Salary: " + selectedPlayer.Contract.YearlySalary.ToString("C0");
+            lblYearsLeft.Text = "Years Left: " + selectedPlayer.Contract.Years.ToString();
+            lblAgentPaid.Text = "Agent Paid: " + selectedPlayer.Contract.AgentPaySchedule.ToString();
+
+            lblPopularity.Text = "Popularity: " + selectedPlayer.PopularityString;
+            lblGreed.Text = "Greed: " + selectedPlayer.Greed.ToString();
+            lblLifestyle.Text = "Lifestyle: " + selectedPlayer.Lifestyle.ToString();
+            lblLoyalty.Text = "Loyalty: " + selectedPlayer.Loyalty.ToString();
+            lblPlayForTitle.Text = "Play for Title: " + selectedPlayer.PlayForTitleContender.ToString();
+            lblTeamHappiness.Text = "Team Happiness: " + selectedPlayer.TeamHappinessString;
+            lblAgencyHappiness.Text = "Agency Happiness: " + selectedPlayer.AgencyHappinessString;
         }
     }
 }

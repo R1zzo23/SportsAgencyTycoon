@@ -85,7 +85,7 @@ namespace SportsAgencyTycoon
             else BirthWeek = birthWeek;
             Birthday = CreateBirthday(birthMonth, birthWeek);
 
-            CreatePlayerContract(rnd);
+            //CreatePlayerContract(rnd);
 
             Popularity = DeterminePopularity(CurrentSkill, PotentialSkill, Age);
             PopularityDescription = DescribePopularity(Popularity);
@@ -120,27 +120,38 @@ namespace SportsAgencyTycoon
 
         public Contract CreatePlayerContract(Random rnd)
         {
+            Contract contract;
             int years = rnd.Next(1, 6);
             int signingBonus;
             int yearlySalary = DetermineYearlySalary(rnd);
-
-            if (Sport == Sports.Football)
+            if (Sport == Sports.Baseball || Sport == Sports.Basketball || Sport == Sports.Football || Sport == Sports.Hockey || Sport == Sports.Soccer)
             {
-                // determine signing bonus of contract
-                signingBonus = DetermineSigningBonus(rnd, years, yearlySalary);
-                // calculate total value of contract
-                int totalValueOfContract = years * yearlySalary;
-                // remove signing bonus from total value of contract
-                totalValueOfContract -= signingBonus;
-                // recalculate yearlySalary
-                yearlySalary = totalValueOfContract / years;
+                if (Sport == Sports.Football)
+                {
+                    // determine signing bonus of contract
+                    signingBonus = DetermineSigningBonus(rnd, years, yearlySalary);
+                    // calculate total value of contract
+                    int totalValueOfContract = years * yearlySalary;
+                    // remove signing bonus from total value of contract
+                    totalValueOfContract -= signingBonus;
+                    // recalculate yearlySalary
+                    yearlySalary = totalValueOfContract / years;
+                }
+
+                else signingBonus = 0;
+
+                contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DeterminePaySchedule(years));
+                Console.WriteLine(contract.Years + " " + contract.YearlySalary + " " + contract.SigningBonus + " " + contract.AgentPaySchedule.ToString());
+                return contract;
             }
-                
-            else signingBonus = 0;
+            else //if (Sport == Sports.Boxing || Sport == Sports.Golf || Sport == Sports.MMA || Sport == Sports.Tennis) 
+            {
+                contract = null;
+                Console.WriteLine("No contract for individual sport players!");
+                return contract;
+            }
 
-            Contract contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DeterminePaySchedule(years));
-
-            return contract;
+            //return contract;
         }
 
         public PaySchedule DeterminePaySchedule(int years)
@@ -284,16 +295,21 @@ namespace SportsAgencyTycoon
 
         //want to rewrite this to use TeamHappiness, Contract status
         //and a little randomness
-        public void DetermineAgencyHappiness(Random rnd)
+        public void DetermineAgencyHappiness(Random rnd, Contract contract)
         {
             int happiness = 0;
             bool contentWithContract = true;
 
-            if (Greed >= 65 && Contract.YearlySalary < (League.MaxSalary * (PotentialSkill / 100))) contentWithContract = false;
+            if (Sport == Sports.Baseball || Sport == Sports.Basketball || Sport == Sports.Football || Sport == Sports.Hockey || Sport == Sports.Soccer)
+            {
+                if (Greed >= 65 && contract.YearlySalary < (League.MaxSalary * (PotentialSkill / 100))) contentWithContract = false;
 
-            if (contentWithContract)
-                happiness = (rnd.Next(41, 100) + TeamHappiness) / 2;
-            else happiness = (rnd.Next(0, 41) + TeamHappiness) / 2;
+                if (contentWithContract)
+                    happiness = (rnd.Next(41, 100) + TeamHappiness) / 2;
+                else happiness = (rnd.Next(0, 41) + TeamHappiness) / 2;
+            }
+            else happiness = rnd.Next(0, 100);
+            
 
             AgencyHappiness = happiness;
 
