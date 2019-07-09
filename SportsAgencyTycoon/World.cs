@@ -398,13 +398,38 @@ namespace SportsAgencyTycoon
                 foreach (Team t in l.TeamList)
                 {
                     int titleContender = 0;
+                    int topHalfTotal = 0;
+                    int numberOfStarters = 0;
+                    int numberOfBackups = 0;
+                    int bottomHalfAverage = 0;
+                    int rosterCount = t.Roster.Count();
 
-                    for (int i = 0; i < t.Roster.Count; i++)
+                    if (rosterCount % 2 == 0) numberOfStarters = rosterCount / 2;
+                    else numberOfStarters = (int)((rosterCount / 2) - 0.5);
+
+                    numberOfBackups = rosterCount - numberOfStarters;
+
+                    List<Player> roster = new List<Player>();
+
+                    foreach (Player p in t.Roster) roster.Add(p);
+
+                    roster = roster.OrderByDescending(o => o.CurrentSkill).ToList();
+
+                    // add every player's CurrentSkill from top half of roster
+                    for (int i = 0; i < numberOfStarters; i++)
                     {
-                        titleContender += t.Roster[i].CurrentSkill;
+                        topHalfTotal += roster[i].CurrentSkill;
                     }
 
-                    titleContender = (int)titleContender / t.Roster.Count;
+                    // add average of bottom half of the roster's CurrentSkill
+                    for (int i = numberOfStarters; i < t.Roster.Count; i++)
+                    {
+                        bottomHalfAverage += roster[i].CurrentSkill;
+                    }
+
+                    bottomHalfAverage = bottomHalfAverage / numberOfBackups;
+
+                    titleContender = (int)(topHalfTotal + bottomHalfAverage) / (numberOfStarters + 1);
                     t.TitleConteder = titleContender;
                 }
         }
