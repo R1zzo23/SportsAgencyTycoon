@@ -47,7 +47,7 @@ namespace SportsAgencyTycoon
             UpdateWorldCalendar();
             world.InitializeLicenses();
             PopulateAvailableLicenses();
-            PopulateAvailableClientsList();
+            //PopulateAvailableClientsList();
             PopulateLeagues();
             PopulateAssociations();
             PopulateEventList();
@@ -165,8 +165,88 @@ namespace SportsAgencyTycoon
             }
         }
 
+        //available clients to sign are based on selectedAgent
+        //agent needs to have the necessary license, player needs
+        //to be unhappy with his current agency and player skill
+        //cannot heavily outweigh the agent's abilities
         private void PopulateAvailableClientsList()
         {
+            List<Player> availableClients = new List<Player>();
+            Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            int agentSkills = agent.IndustryPower + agent.Intelligence + agent.Negotiating;
+            League league = null;
+            Association association = null;
+            bool isLeague;
+
+            
+
+            foreach (Licenses l in agent.LicensesHeld)
+            {
+                if (l.Sport == Sports.Baseball)
+                {
+                    league = world.MLB;
+                    isLeague = true;
+                }
+                else if (l.Sport == Sports.Basketball)
+                {
+                    league = world.NBA;
+                    isLeague = true;
+                }
+                else if (l.Sport == Sports.Football)
+                {
+                    league = world.NFL;
+                    isLeague = true;
+                }
+                else if (l.Sport == Sports.Hockey)
+                {
+                    league = world.NHL;
+                    isLeague = true;
+                }
+                else if (l.Sport == Sports.Soccer)
+                {
+                    league = world.MLS;
+                    isLeague = true;
+                }
+                else if (l.Sport == Sports.Boxing)
+                {
+                    association = world.WBA;
+                    isLeague = false;
+                }
+                else if (l.Sport == Sports.Golf)
+                {
+                    association = world.PGA;
+                    isLeague = false;
+                }
+                else if (l.Sport == Sports.MMA)
+                {
+                    association = world.UFC;
+                    isLeague = false;
+                }
+                else if (l.Sport == Sports.Tennis)
+                {
+                    association = world.ATP;
+                    isLeague = false;
+                }
+                else isLeague = false;
+
+                //add all players that are currently disgruntled with their current agency
+                //players currentSkill + potentialSkill needs to be less than the sum
+                //of the agent's IndustryPower, Intelligence and Negotiationg levels
+                if (isLeague)
+                {
+                    foreach (Team t in league.TeamList)
+                        foreach (Player p in t.Roster)
+                            if (p.AgencyHappinessDescription == HappinessDescription.Disgruntled && (p.CurrentSkill + p.PotentialSkill) < agentSkills)
+                                availableClients.Add(p);
+                }
+                else
+                {
+                    foreach (Player p in association.PlayerList)
+                        if (p.AgencyHappinessDescription == HappinessDescription.Disgruntled && (p.CurrentSkill + p.PotentialSkill) < agentSkills)
+                            availableClients.Add(p);
+                }
+            }
+
             if (world.AvailableClients.Count > 0)
             {
                 cbAvailableClients.Items.Clear();
@@ -285,6 +365,7 @@ namespace SportsAgencyTycoon
             }
             lblLicensesHeldByAgent.Text = lblLicensesHeldByAgent.Text.Substring(0, lblLicensesHeldByAgent.Text.Length - 2);
             PopulateAgentClientList(agent);
+            PopulateAvailableClientsList();
         }
 
         #endregion
@@ -446,6 +527,8 @@ namespace SportsAgencyTycoon
 
             CheckTestingWindow(selectedAgent);
             if (selectedAgent.TestedThisWeek) btnTakeTest.Enabled = false;
+
+            PopulateAvailableClientsList();
         }
 
         #region Agent Training
@@ -491,7 +574,7 @@ namespace SportsAgencyTycoon
             UpdateAgentInfo(selectedAgent);
 
             btnTakeTest.Enabled = false;
-            PopulateAvailableClientsList();
+            //PopulateAvailableClientsList();
         }
         private void CheckTestingWindow(Agent agent)
         {

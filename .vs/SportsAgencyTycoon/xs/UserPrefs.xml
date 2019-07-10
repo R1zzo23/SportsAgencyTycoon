@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/World.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/MainForm.cs">
     <Files>
-      <File FileName="SportsAgencyTycoon/World.cs" Line="430" Column="57" />
-      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="1" Column="1" />
-      <File FileName="SportsAgencyTycoon/Player.cs" Line="100" Column="15" />
-      <File FileName="SportsAgencyTycoon/_NotesFile.txt" />
-      <File FileName="SportsAgencyTycoon/Contract.cs" Line="20" Column="27" />
+      <File FileName="SportsAgencyTycoon/World.cs" Line="870" Column="14" />
+      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="368" Column="44" />
+      <File FileName="SportsAgencyTycoon/Player.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/Contract.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/Agent.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="World.cs" selected="True" />
+              <Node name="MainForm.cs" selected="True" />
             </Node>
           </Node>
         </State>

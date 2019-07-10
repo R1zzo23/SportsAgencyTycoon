@@ -868,16 +868,6 @@ namespace SportsAgencyTycoon
             {
                 if (e.EventDate.Week == WeekNumber && e.EventDate.MonthName == MonthName) EventsThisWeek.Add(e);
             }
-            /*foreach (Association a in Associations)
-            {
-                foreach (Event e in a.EventList)
-                {
-                    if (e.EventDate.Week == WeekNumber && e.EventDate.MonthName == MonthName && e.Year == Year)
-                    {
-                        EventsThisWeek.Add(e);
-                    }
-                }
-            }*/
         }
     }
 }
