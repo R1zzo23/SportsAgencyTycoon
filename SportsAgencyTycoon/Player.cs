@@ -141,13 +141,11 @@ namespace SportsAgencyTycoon
                 else signingBonus = 0;
 
                 contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DeterminePaySchedule(years));
-                Console.WriteLine(contract.Years + " " + contract.YearlySalary + " " + contract.SigningBonus + " " + contract.AgentPaySchedule.ToString());
                 return contract;
             }
             else //if (Sport == Sports.Boxing || Sport == Sports.Golf || Sport == Sports.MMA || Sport == Sports.Tennis) 
             {
                 contract = null;
-                Console.WriteLine("No contract for individual sport players!");
                 return contract;
             }
 

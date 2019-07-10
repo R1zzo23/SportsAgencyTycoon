@@ -13,7 +13,7 @@ namespace SportsAgencyTycoon
         public List<Licenses> AvailableLicenses;
         public List<Licenses> TeamSportLicenses;
         public List<Licenses> IndividualSportLicense;
-        public List<Client> AvailableClients;
+        public List<Player> AvailableClients;
         public List<Agent> AvailableAgents;
         public List<League> Leagues;
         public List<Association> Associations;
@@ -39,7 +39,7 @@ namespace SportsAgencyTycoon
             AvailableLicenses = new List<Licenses>();
             TeamSportLicenses = new List<Licenses>();
             IndividualSportLicense = new List<Licenses>();
-            AvailableClients = new List<Client>();
+            AvailableClients = new List<Player>();
             AvailableAgents = new List<Agent>();
             Leagues = new List<League>();
             Associations = new List<Association>();
@@ -388,7 +388,6 @@ namespace SportsAgencyTycoon
                         p.Team = t;
                         p.League = l;
                         p.Contract = p.CreatePlayerContract(rnd);
-                        Console.WriteLine(p.Contract);
                     }
                         
         }
