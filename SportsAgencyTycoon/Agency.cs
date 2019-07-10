@@ -10,7 +10,7 @@ namespace SportsAgencyTycoon
     {
         public string Name;
         public List<Agent> Agents;
-        public List<Client> Clients;
+        public List<Player> Clients;
         public int AgentCount;
         public int ClientCount;
         public int Money;
@@ -25,7 +25,7 @@ namespace SportsAgencyTycoon
             Money = money;
             IndustryInfluence = industryInfluence;
             Agents = new List<Agent>();
-            Clients = new List<Client>();
+            Clients = new List<Player>();
             AgentCount = 0;
             ClientCount = 0;
             MonthlyRent = 5000;
@@ -36,7 +36,7 @@ namespace SportsAgencyTycoon
             Agents.Add(agent);
             AgentCount = Agents.Count;
         }
-        public void AddClient(Client client)
+        public void AddClient(Player client)
         {
             Clients.Add(client);
             ClientCount = Clients.Count;

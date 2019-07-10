@@ -45,6 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.agencyNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblLicensesHeldByAgent = new System.Windows.Forms.Label();
             this.agentBeingTrainedLabel = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.licenseTestPrepLabel = new System.Windows.Forms.Label();
@@ -138,7 +139,7 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
-            this.lblLicensesHeldByAgent = new System.Windows.Forms.Label();
+            this.btnSignClient = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -171,7 +172,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.agencyNameLabel);
-            this.groupBox1.Location = new System.Drawing.Point(263, 41);
+            this.groupBox1.Location = new System.Drawing.Point(12, 37);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(372, 250);
             this.groupBox1.TabIndex = 0;
@@ -342,12 +343,21 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.agentNameLabel);
-            this.groupBox2.Location = new System.Drawing.Point(639, 41);
+            this.groupBox2.Location = new System.Drawing.Point(388, 37);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(372, 250);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
+            // 
+            // lblLicensesHeldByAgent
+            // 
+            this.lblLicensesHeldByAgent.AutoSize = true;
+            this.lblLicensesHeldByAgent.Location = new System.Drawing.Point(7, 230);
+            this.lblLicensesHeldByAgent.Name = "lblLicensesHeldByAgent";
+            this.lblLicensesHeldByAgent.Size = new System.Drawing.Size(80, 13);
+            this.lblLicensesHeldByAgent.TabIndex = 29;
+            this.lblLicensesHeldByAgent.Text = "Licenses Held: ";
             // 
             // agentBeingTrainedLabel
             // 
@@ -548,7 +558,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.panel3);
-            this.groupBox3.Location = new System.Drawing.Point(1015, 41);
+            this.groupBox3.Location = new System.Drawing.Point(764, 37);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(372, 250);
             this.groupBox3.TabIndex = 1;
@@ -586,7 +596,7 @@
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.cbAvailableLicenses);
             this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Location = new System.Drawing.Point(263, 297);
+            this.groupBox4.Location = new System.Drawing.Point(12, 293);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(372, 250);
             this.groupBox4.TabIndex = 1;
@@ -709,7 +719,7 @@
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Controls.Add(this.clientSportLabel);
             this.groupBox5.Controls.Add(this.clientNameLabel);
-            this.groupBox5.Location = new System.Drawing.Point(639, 297);
+            this.groupBox5.Location = new System.Drawing.Point(388, 293);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(372, 250);
             this.groupBox5.TabIndex = 1;
@@ -849,6 +859,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.btnSignClient);
             this.groupBox6.Controls.Add(this.cbAvailableClients);
             this.groupBox6.Controls.Add(this.availableClientNameLabel);
             this.groupBox6.Controls.Add(this.availableClientSportLabel);
@@ -858,7 +869,7 @@
             this.groupBox6.Controls.Add(this.label36);
             this.groupBox6.Controls.Add(this.availableClientAgeLabel);
             this.groupBox6.Controls.Add(this.label35);
-            this.groupBox6.Location = new System.Drawing.Point(1015, 297);
+            this.groupBox6.Location = new System.Drawing.Point(764, 293);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(372, 250);
             this.groupBox6.TabIndex = 2;
@@ -868,7 +879,7 @@
             // cbAvailableClients
             // 
             this.cbAvailableClients.FormattingEnabled = true;
-            this.cbAvailableClients.Location = new System.Drawing.Point(43, 111);
+            this.cbAvailableClients.Location = new System.Drawing.Point(10, 17);
             this.cbAvailableClients.Name = "cbAvailableClients";
             this.cbAvailableClients.Size = new System.Drawing.Size(253, 21);
             this.cbAvailableClients.TabIndex = 40;
@@ -878,7 +889,7 @@
             // 
             this.availableClientNameLabel.AutoSize = true;
             this.availableClientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableClientNameLabel.Location = new System.Drawing.Point(92, 20);
+            this.availableClientNameLabel.Location = new System.Drawing.Point(9, 41);
             this.availableClientNameLabel.Name = "availableClientNameLabel";
             this.availableClientNameLabel.Size = new System.Drawing.Size(204, 37);
             this.availableClientNameLabel.TabIndex = 30;
@@ -889,7 +900,7 @@
             // 
             this.availableClientSportLabel.AutoSize = true;
             this.availableClientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableClientSportLabel.Location = new System.Drawing.Point(124, 57);
+            this.availableClientSportLabel.Location = new System.Drawing.Point(13, 86);
             this.availableClientSportLabel.Name = "availableClientSportLabel";
             this.availableClientSportLabel.Size = new System.Drawing.Size(79, 15);
             this.availableClientSportLabel.TabIndex = 31;
@@ -899,7 +910,7 @@
             // availableClientCurrentSkillLabel
             // 
             this.availableClientCurrentSkillLabel.AutoSize = true;
-            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(168, 87);
+            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(79, 152);
             this.availableClientCurrentSkillLabel.Name = "availableClientCurrentSkillLabel";
             this.availableClientCurrentSkillLabel.Size = new System.Drawing.Size(13, 13);
             this.availableClientCurrentSkillLabel.TabIndex = 39;
@@ -908,7 +919,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(7, 87);
+            this.label38.Location = new System.Drawing.Point(7, 130);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(29, 13);
             this.label38.TabIndex = 32;
@@ -917,7 +928,7 @@
             // availableClientPopularityLabel
             // 
             this.availableClientPopularityLabel.AutoSize = true;
-            this.availableClientPopularityLabel.Location = new System.Drawing.Point(269, 88);
+            this.availableClientPopularityLabel.Location = new System.Drawing.Point(69, 171);
             this.availableClientPopularityLabel.Name = "availableClientPopularityLabel";
             this.availableClientPopularityLabel.Size = new System.Drawing.Size(24, 13);
             this.availableClientPopularityLabel.TabIndex = 37;
@@ -926,7 +937,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(207, 88);
+            this.label36.Location = new System.Drawing.Point(7, 171);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(56, 13);
             this.label36.TabIndex = 34;
@@ -935,7 +946,7 @@
             // availableClientAgeLabel
             // 
             this.availableClientAgeLabel.AutoSize = true;
-            this.availableClientAgeLabel.Location = new System.Drawing.Point(46, 87);
+            this.availableClientAgeLabel.Location = new System.Drawing.Point(46, 130);
             this.availableClientAgeLabel.Name = "availableClientAgeLabel";
             this.availableClientAgeLabel.Size = new System.Drawing.Size(13, 13);
             this.availableClientAgeLabel.TabIndex = 36;
@@ -944,7 +955,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(96, 87);
+            this.label35.Location = new System.Drawing.Point(7, 152);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(66, 13);
             this.label35.TabIndex = 35;
@@ -954,7 +965,7 @@
             // 
             this.groupBox7.Controls.Add(this.cbLeagueStandings);
             this.groupBox7.Controls.Add(this.leagueStandingsPanel);
-            this.groupBox7.Location = new System.Drawing.Point(263, 553);
+            this.groupBox7.Location = new System.Drawing.Point(12, 549);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(372, 250);
             this.groupBox7.TabIndex = 3;
@@ -992,7 +1003,7 @@
             // 
             this.groupBox8.Controls.Add(this.cbAssociationRankings);
             this.groupBox8.Controls.Add(this.panel1);
-            this.groupBox8.Location = new System.Drawing.Point(639, 553);
+            this.groupBox8.Location = new System.Drawing.Point(388, 549);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(372, 250);
             this.groupBox8.TabIndex = 1;
@@ -1030,7 +1041,7 @@
             // 
             this.groupBox9.Controls.Add(this.panel2);
             this.groupBox9.Controls.Add(this.cbEventDetails);
-            this.groupBox9.Location = new System.Drawing.Point(1015, 553);
+            this.groupBox9.Location = new System.Drawing.Point(764, 549);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(372, 250);
             this.groupBox9.TabIndex = 1;
@@ -1107,7 +1118,7 @@
             // 
             // managerFirstNameTextBox
             // 
-            this.managerFirstNameTextBox.Location = new System.Drawing.Point(372, 9);
+            this.managerFirstNameTextBox.Location = new System.Drawing.Point(121, 5);
             this.managerFirstNameTextBox.Name = "managerFirstNameTextBox";
             this.managerFirstNameTextBox.Size = new System.Drawing.Size(179, 20);
             this.managerFirstNameTextBox.TabIndex = 5;
@@ -1115,7 +1126,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(262, 9);
+            this.label8.Location = new System.Drawing.Point(11, 5);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(105, 13);
             this.label8.TabIndex = 4;
@@ -1123,7 +1134,7 @@
             // 
             // managerLastNameTextBox
             // 
-            this.managerLastNameTextBox.Location = new System.Drawing.Point(669, 9);
+            this.managerLastNameTextBox.Location = new System.Drawing.Point(418, 5);
             this.managerLastNameTextBox.Name = "managerLastNameTextBox";
             this.managerLastNameTextBox.Size = new System.Drawing.Size(179, 20);
             this.managerLastNameTextBox.TabIndex = 7;
@@ -1131,7 +1142,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(557, 9);
+            this.label9.Location = new System.Drawing.Point(306, 5);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 13);
             this.label9.TabIndex = 6;
@@ -1139,7 +1150,7 @@
             // 
             // agencyNameTextBox
             // 
-            this.agencyNameTextBox.Location = new System.Drawing.Point(938, 9);
+            this.agencyNameTextBox.Location = new System.Drawing.Point(687, 5);
             this.agencyNameTextBox.Name = "agencyNameTextBox";
             this.agencyNameTextBox.Size = new System.Drawing.Size(210, 20);
             this.agencyNameTextBox.TabIndex = 9;
@@ -1147,7 +1158,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(855, 9);
+            this.label10.Location = new System.Drawing.Point(604, 5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(77, 13);
             this.label10.TabIndex = 8;
@@ -1155,7 +1166,7 @@
             // 
             // editAgentAgencyInfo
             // 
-            this.editAgentAgencyInfo.Location = new System.Drawing.Point(1162, 4);
+            this.editAgentAgencyInfo.Location = new System.Drawing.Point(903, 3);
             this.editAgentAgencyInfo.Name = "editAgentAgencyInfo";
             this.editAgentAgencyInfo.Size = new System.Drawing.Size(151, 23);
             this.editAgentAgencyInfo.TabIndex = 10;
@@ -1167,7 +1178,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(1391, 50);
+            this.label24.Location = new System.Drawing.Point(1140, 46);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(65, 24);
             this.label24.TabIndex = 11;
@@ -1177,7 +1188,7 @@
             // 
             this.yearLabel.AutoSize = true;
             this.yearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yearLabel.Location = new System.Drawing.Point(1410, 85);
+            this.yearLabel.Location = new System.Drawing.Point(1159, 81);
             this.yearLabel.Name = "yearLabel";
             this.yearLabel.Size = new System.Drawing.Size(17, 17);
             this.yearLabel.TabIndex = 12;
@@ -1187,7 +1198,7 @@
             // 
             this.monthLabel.AutoSize = true;
             this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(1410, 150);
+            this.monthLabel.Location = new System.Drawing.Point(1159, 146);
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.Size = new System.Drawing.Size(17, 17);
             this.monthLabel.TabIndex = 13;
@@ -1197,7 +1208,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(1391, 120);
+            this.label27.Location = new System.Drawing.Point(1140, 116);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(86, 24);
             this.label27.TabIndex = 14;
@@ -1207,7 +1218,7 @@
             // 
             this.weekLabel.AutoSize = true;
             this.weekLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.weekLabel.Location = new System.Drawing.Point(1410, 224);
+            this.weekLabel.Location = new System.Drawing.Point(1159, 220);
             this.weekLabel.Name = "weekLabel";
             this.weekLabel.Size = new System.Drawing.Size(17, 17);
             this.weekLabel.TabIndex = 15;
@@ -1217,7 +1228,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(1391, 190);
+            this.label29.Location = new System.Drawing.Point(1140, 186);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(70, 24);
             this.label29.TabIndex = 16;
@@ -1225,7 +1236,7 @@
             // 
             // advanceWeekBtn
             // 
-            this.advanceWeekBtn.Location = new System.Drawing.Point(1378, 9);
+            this.advanceWeekBtn.Location = new System.Drawing.Point(1060, 5);
             this.advanceWeekBtn.Name = "advanceWeekBtn";
             this.advanceWeekBtn.Size = new System.Drawing.Size(96, 23);
             this.advanceWeekBtn.TabIndex = 17;
@@ -1235,7 +1246,7 @@
             // 
             // btnViewCalendar
             // 
-            this.btnViewCalendar.Location = new System.Drawing.Point(1393, 262);
+            this.btnViewCalendar.Location = new System.Drawing.Point(1142, 258);
             this.btnViewCalendar.Name = "btnViewCalendar";
             this.btnViewCalendar.Size = new System.Drawing.Size(75, 37);
             this.btnViewCalendar.TabIndex = 19;
@@ -1245,7 +1256,7 @@
             // 
             // btnViewRosters
             // 
-            this.btnViewRosters.Location = new System.Drawing.Point(1393, 307);
+            this.btnViewRosters.Location = new System.Drawing.Point(1142, 303);
             this.btnViewRosters.Name = "btnViewRosters";
             this.btnViewRosters.Size = new System.Drawing.Size(75, 43);
             this.btnViewRosters.TabIndex = 21;
@@ -1253,14 +1264,15 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
-            // lblLicensesHeldByAgent
+            // btnSignClient
             // 
-            this.lblLicensesHeldByAgent.AutoSize = true;
-            this.lblLicensesHeldByAgent.Location = new System.Drawing.Point(7, 230);
-            this.lblLicensesHeldByAgent.Name = "lblLicensesHeldByAgent";
-            this.lblLicensesHeldByAgent.Size = new System.Drawing.Size(80, 13);
-            this.lblLicensesHeldByAgent.TabIndex = 29;
-            this.lblLicensesHeldByAgent.Text = "Licenses Held: ";
+            this.btnSignClient.Location = new System.Drawing.Point(8, 189);
+            this.btnSignClient.Name = "btnSignClient";
+            this.btnSignClient.Size = new System.Drawing.Size(75, 23);
+            this.btnSignClient.TabIndex = 41;
+            this.btnSignClient.Text = "Sign Client";
+            this.btnSignClient.UseVisualStyleBackColor = true;
+            this.btnSignClient.Click += new System.EventHandler(this.btnSignClient_Click);
             // 
             // MainForm
             // 
@@ -1435,6 +1447,7 @@
         private System.Windows.Forms.Button btnViewCalendar;
         private System.Windows.Forms.Button btnViewRosters;
         private System.Windows.Forms.Label lblLicensesHeldByAgent;
+        private System.Windows.Forms.Button btnSignClient;
     }
 }
 

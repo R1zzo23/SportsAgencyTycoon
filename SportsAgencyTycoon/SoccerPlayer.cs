@@ -8,7 +8,7 @@ namespace SportsAgencyTycoon
 {
     public class SoccerPlayer : Player
     {
-        public Position Position;
+        //public Position Position;
         public int PlayoffsMade;
         public int SeasonsPlayed;
         public int TitlesWon;

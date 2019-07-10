@@ -75,7 +75,7 @@ namespace SportsAgencyTycoon
             IndividualSportLicense.Add(boxingLicense);
             IndividualSportLicense.Add(golfLicense);
             IndividualSportLicense.Add(tennisLicense);
-            IndividualSportLicense.Add(soccerLicense);
+            IndividualSportLicense.Add(ultimateFightingLicense);
         }
         public int HowManyNewClients(int influence)
         {

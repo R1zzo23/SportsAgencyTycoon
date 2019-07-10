@@ -17,7 +17,7 @@ namespace SportsAgencyTycoon
         public int Intelligence;
         public int Level;
         public Roles Role;
-        public List<Client> ClientList;
+        public List<Player> ClientList;
         public int ClientCount;
         public List<Licenses> LicensesHeld;
         public bool HasAppliedForLicense;
@@ -37,7 +37,7 @@ namespace SportsAgencyTycoon
             Intelligence = intelligence;
             Level = levelRating;
             Role = role;
-            ClientList = new List<Client>();
+            ClientList = new List<Player>();
             LicensesHeld = new List<Licenses>();
             BeingTrainedForTest = false;
             AppliedLicense = null;
@@ -45,7 +45,7 @@ namespace SportsAgencyTycoon
             TestedThisWeek = false;
         }
 
-        public void AddClient(Client client)
+        public void AddClient(Player client)
         {
             ClientList.Add(client);
             ClientCount = ClientList.Count();

@@ -13,6 +13,7 @@ namespace SportsAgencyTycoon
         public Sports Sport;
         public Team Team;
         public League League;
+        public Position Position;
 
         //name variables
         public FirstName FirstName;
