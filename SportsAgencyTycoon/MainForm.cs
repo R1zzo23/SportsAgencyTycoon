@@ -231,7 +231,7 @@ namespace SportsAgencyTycoon
                     else
                     {
                         foreach (Player p in association.PlayerList)
-                            if (p.AgencyHappinessDescription == HappinessDescription.Disgruntled && (p.CurrentSkill + p.PotentialSkill) < agentSkills)
+                            if ((p.AgencyHappinessDescription == HappinessDescription.Disgruntled || p.AgencyHappinessDescription == HappinessDescription.Displeased) && (p.CurrentSkill/* + p.PotentialSkill*/) < agentSkills)
                                 availableClients.Add(p);
                     }
                 }
@@ -890,7 +890,7 @@ namespace SportsAgencyTycoon
         {
             Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
             Player client = world.AvailableClients[cbAvailableClients.SelectedIndex];
-            NegotiatePercentageForm negotiatePercentageForm = new NegotiatePercentageForm(agent, client);
+            NegotiatePercentageForm negotiatePercentageForm = new NegotiatePercentageForm(rnd, agent, client);
             negotiatePercentageForm.BringToFront();
             negotiatePercentageForm.ShowDialog();
         }

@@ -310,7 +310,7 @@ namespace SportsAgencyTycoon
         //and a little randomness
         public void DetermineAgencyHappiness(Random rnd, Contract contract)
         {
-            int happiness = 0;
+            int happiness;
             bool contentWithContract = true;
 
             if (Sport == Sports.Baseball || Sport == Sports.Basketball || Sport == Sports.Football || Sport == Sports.Hockey || Sport == Sports.Soccer)
@@ -321,6 +321,8 @@ namespace SportsAgencyTycoon
                     happiness = (rnd.Next(41, 100) + TeamHappiness) / 2;
                 else happiness = (rnd.Next(0, 41) + TeamHappiness) / 2;
             }
+            else if (Sport == Sports.Boxing || Sport == Sports.Golf || Sport == Sports.MMA || Sport == Sports.Tennis)
+                happiness = rnd.Next(0, 100);
             else happiness = rnd.Next(0, 100);
             
 

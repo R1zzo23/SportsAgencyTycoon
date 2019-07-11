@@ -453,6 +453,9 @@ namespace SportsAgencyTycoon
                         // determine player AgencyHappiness
                         p.DetermineAgencyHappiness(rnd, p.Contract);
                     }
+            foreach (Association a in Associations)
+                foreach (Player p in a.PlayerList)
+                    p.DetermineAgencyHappiness(rnd, p.Contract);
         }
         #region Is Player A Starter
         public bool IsBasketballStarter(Team t, Player p)
