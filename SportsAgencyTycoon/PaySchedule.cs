@@ -10,6 +10,7 @@ namespace SportsAgencyTycoon
     {
         UpFront,
         Monthly,
-        Annually
+        Annually,
+        Winnings
     }
 }

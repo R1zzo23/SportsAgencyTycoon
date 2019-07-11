@@ -77,7 +77,6 @@ namespace SportsAgencyTycoon
             myManager.LicensesHeld.Add(world.IndividualSportLicense[individualIndex]);
             world.AvailableLicenses.Add(world.IndividualSportLicense[individualIndex]);
             world.IndividualSportLicense.Remove(world.IndividualSportLicense[individualIndex]);
-            myManager.AddClient(world.PGA.PlayerList[0]);
             agency.Agents[0] = myManager;
             UpdateAgencyInfo();
             UpdateAgentInfo(myManager);
@@ -648,8 +647,19 @@ namespace SportsAgencyTycoon
                 availableClientCurrentSkillLabel.Text = selectedClient.CurrentSkill.ToString();
                 availableClientNameLabel.Text = selectedClient.FullName;
                 availableClientSportLabel.Text = selectedClient.Sport.ToString();
-
                 availableClientPopularityLabel.Text = selectedClient.PopularityString;
+                if (selectedClient.League != null)
+                {
+                    lblClientSalary.Text = selectedClient.Contract.YearlySalary.ToString("C0");
+                    lblClientAgentPercent.Text = selectedClient.Contract.AgentPercentage.ToString() + "%";
+                }
+                    
+                else
+                {
+                    lblClientSalary.Text = "";
+                    lblClientAgentPercent.Text = "";
+                }                   
+                
             }
             else
             {
@@ -658,6 +668,8 @@ namespace SportsAgencyTycoon
                 availableClientNameLabel.Text = "";
                 availableClientSportLabel.Text = "";
                 availableClientPopularityLabel.Text = "";
+                lblClientSalary.Text = "";
+                lblClientAgentPercent.Text = "";
             }
         }
 
@@ -874,6 +886,15 @@ namespace SportsAgencyTycoon
             teamRosterForm.ShowDialog();
         }
 
+        private void btnNegotiatePercent_Click(object sender, EventArgs e)
+        {
+            Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            Player client = world.AvailableClients[cbAvailableClients.SelectedIndex];
+            NegotiatePercentageForm negotiatePercentageForm = new NegotiatePercentageForm(agent, client);
+            negotiatePercentageForm.BringToFront();
+            negotiatePercentageForm.ShowDialog();
+        }
+
         private void btnSignClient_Click(object sender, EventArgs e)
         {
             Player client = world.AvailableClients[cbAvailableClients.SelectedIndex];
@@ -929,5 +950,7 @@ namespace SportsAgencyTycoon
             cbAvailableClients.SelectedIndex = -1;
             btnSignClient.Enabled = false;
         }
+
+        
     }
 }

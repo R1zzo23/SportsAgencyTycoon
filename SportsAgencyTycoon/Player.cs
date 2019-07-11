@@ -141,7 +141,7 @@ namespace SportsAgencyTycoon
 
                 else signingBonus = 0;
 
-                contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DeterminePaySchedule(years));
+                contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DetermineAgentPercentage(rnd), DeterminePaySchedule(years));
                 return contract;
             }
             else //if (Sport == Sports.Boxing || Sport == Sports.Golf || Sport == Sports.MMA || Sport == Sports.Tennis) 
@@ -151,6 +151,20 @@ namespace SportsAgencyTycoon
             }
 
             //return contract;
+        }
+
+        public double DetermineAgentPercentage(Random rnd)
+        {
+            double percentage = 0.00;
+            int max = 1000;
+            int min = 250;
+
+            if (Sport == Sports.Basketball || Sport == Sports.Football) max = 300;
+            else if (Sport == Sports.Baseball || Sport == Sports.Hockey || Sport == Sports.Soccer) max = 500;
+
+            percentage = (double)rnd.Next(min, max + 1) / 100;
+
+            return percentage;
         }
 
         public PaySchedule DeterminePaySchedule(int years)

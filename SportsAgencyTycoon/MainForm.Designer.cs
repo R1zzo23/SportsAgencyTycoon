@@ -83,6 +83,8 @@
             this.cbAvailableLicenses = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.lblCareerEarnings = new System.Windows.Forms.Label();
             this.lblBirthWeek = new System.Windows.Forms.Label();
             this.lblBirthMonth = new System.Windows.Forms.Label();
             this.clientTeamHappinessLabel = new System.Windows.Forms.Label();
@@ -140,8 +142,11 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
-            this.lblCareerEarnings = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.lblClientAgentPercent = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.lblClientSalary = new System.Windows.Forms.Label();
+            this.btnNegotiatePercent = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -730,6 +735,24 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Client Information";
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(10, 215);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(85, 13);
+            this.label28.TabIndex = 33;
+            this.label28.Text = "Career Earnings:";
+            // 
+            // lblCareerEarnings
+            // 
+            this.lblCareerEarnings.AutoSize = true;
+            this.lblCareerEarnings.Location = new System.Drawing.Point(101, 215);
+            this.lblCareerEarnings.Name = "lblCareerEarnings";
+            this.lblCareerEarnings.Size = new System.Drawing.Size(41, 13);
+            this.lblCareerEarnings.TabIndex = 32;
+            this.lblCareerEarnings.Text = "label28";
+            // 
             // lblBirthWeek
             // 
             this.lblBirthWeek.AutoSize = true;
@@ -863,6 +886,11 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.btnNegotiatePercent);
+            this.groupBox6.Controls.Add(this.lblClientSalary);
+            this.groupBox6.Controls.Add(this.label32);
+            this.groupBox6.Controls.Add(this.lblClientAgentPercent);
+            this.groupBox6.Controls.Add(this.label30);
             this.groupBox6.Controls.Add(this.btnSignClient);
             this.groupBox6.Controls.Add(this.cbAvailableClients);
             this.groupBox6.Controls.Add(this.availableClientNameLabel);
@@ -1279,23 +1307,51 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
-            // lblCareerEarnings
+            // label30
             // 
-            this.lblCareerEarnings.AutoSize = true;
-            this.lblCareerEarnings.Location = new System.Drawing.Point(101, 215);
-            this.lblCareerEarnings.Name = "lblCareerEarnings";
-            this.lblCareerEarnings.Size = new System.Drawing.Size(41, 13);
-            this.lblCareerEarnings.TabIndex = 32;
-            this.lblCareerEarnings.Text = "label28";
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(90, 198);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(71, 13);
+            this.label30.TabIndex = 42;
+            this.label30.Text = "Yearly Salary:";
             // 
-            // label28
+            // lblClientAgentPercent
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(10, 215);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(85, 13);
-            this.label28.TabIndex = 33;
-            this.label28.Text = "Career Earnings:";
+            this.lblClientAgentPercent.AutoSize = true;
+            this.lblClientAgentPercent.Location = new System.Drawing.Point(145, 225);
+            this.lblClientAgentPercent.Name = "lblClientAgentPercent";
+            this.lblClientAgentPercent.Size = new System.Drawing.Size(71, 13);
+            this.lblClientAgentPercent.TabIndex = 43;
+            this.lblClientAgentPercent.Text = "Yearly Salary:";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(90, 225);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(49, 13);
+            this.label32.TabIndex = 44;
+            this.label32.Text = "Agent %:";
+            // 
+            // lblClientSalary
+            // 
+            this.lblClientSalary.AutoSize = true;
+            this.lblClientSalary.Location = new System.Drawing.Point(167, 198);
+            this.lblClientSalary.Name = "lblClientSalary";
+            this.lblClientSalary.Size = new System.Drawing.Size(71, 13);
+            this.lblClientSalary.TabIndex = 45;
+            this.lblClientSalary.Text = "Yearly Salary:";
+            // 
+            // btnNegotiatePercent
+            // 
+            this.btnNegotiatePercent.Location = new System.Drawing.Point(10, 220);
+            this.btnNegotiatePercent.Name = "btnNegotiatePercent";
+            this.btnNegotiatePercent.Size = new System.Drawing.Size(75, 23);
+            this.btnNegotiatePercent.TabIndex = 46;
+            this.btnNegotiatePercent.Text = "Negotiate %";
+            this.btnNegotiatePercent.UseVisualStyleBackColor = true;
+            this.btnNegotiatePercent.Click += new System.EventHandler(this.btnNegotiatePercent_Click);
             // 
             // MainForm
             // 
@@ -1473,6 +1529,11 @@
         private System.Windows.Forms.Button btnSignClient;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label lblCareerEarnings;
+        private System.Windows.Forms.Label lblClientSalary;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label lblClientAgentPercent;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Button btnNegotiatePercent;
     }
 }
 
