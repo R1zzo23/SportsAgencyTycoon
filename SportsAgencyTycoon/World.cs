@@ -98,6 +98,7 @@ namespace SportsAgencyTycoon
             CreateAthletesForAssociations(rnd);
             CreateTeamsForLeagues(rnd);
             AddLeaguesAndAssociationsToWorld();
+            CreateCalendarEventsForAssociationEvents();
             CreatePlayersForTeams(rnd);
             CreateCalendarEventsForLeagueStartAndEnd();
             CreatePlayerBirthdayCalendarEvents();
@@ -137,7 +138,6 @@ namespace SportsAgencyTycoon
             CreateATPEvents();
             CreateWBAEvents();
             CreateUFCEvents();
-            CreateCalendarEventsForAssociationEvents();
         }
         public void CreatePGAEvents()
         {

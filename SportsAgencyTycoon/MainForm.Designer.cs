@@ -98,6 +98,7 @@
             this.clientSportLabel = new System.Windows.Forms.Label();
             this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnSignClient = new System.Windows.Forms.Button();
             this.cbAvailableClients = new System.Windows.Forms.ComboBox();
             this.availableClientNameLabel = new System.Windows.Forms.Label();
             this.availableClientSportLabel = new System.Windows.Forms.Label();
@@ -139,7 +140,8 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
-            this.btnSignClient = new System.Windows.Forms.Button();
+            this.lblCareerEarnings = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -705,6 +707,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label28);
+            this.groupBox5.Controls.Add(this.lblCareerEarnings);
             this.groupBox5.Controls.Add(this.lblBirthWeek);
             this.groupBox5.Controls.Add(this.lblBirthMonth);
             this.groupBox5.Controls.Add(this.clientTeamHappinessLabel);
@@ -875,6 +879,17 @@
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Available Clients to Sign";
+            // 
+            // btnSignClient
+            // 
+            this.btnSignClient.Enabled = false;
+            this.btnSignClient.Location = new System.Drawing.Point(8, 189);
+            this.btnSignClient.Name = "btnSignClient";
+            this.btnSignClient.Size = new System.Drawing.Size(75, 23);
+            this.btnSignClient.TabIndex = 41;
+            this.btnSignClient.Text = "Sign Client";
+            this.btnSignClient.UseVisualStyleBackColor = true;
+            this.btnSignClient.Click += new System.EventHandler(this.btnSignClient_Click);
             // 
             // cbAvailableClients
             // 
@@ -1264,15 +1279,23 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
-            // btnSignClient
+            // lblCareerEarnings
             // 
-            this.btnSignClient.Location = new System.Drawing.Point(8, 189);
-            this.btnSignClient.Name = "btnSignClient";
-            this.btnSignClient.Size = new System.Drawing.Size(75, 23);
-            this.btnSignClient.TabIndex = 41;
-            this.btnSignClient.Text = "Sign Client";
-            this.btnSignClient.UseVisualStyleBackColor = true;
-            this.btnSignClient.Click += new System.EventHandler(this.btnSignClient_Click);
+            this.lblCareerEarnings.AutoSize = true;
+            this.lblCareerEarnings.Location = new System.Drawing.Point(101, 215);
+            this.lblCareerEarnings.Name = "lblCareerEarnings";
+            this.lblCareerEarnings.Size = new System.Drawing.Size(41, 13);
+            this.lblCareerEarnings.TabIndex = 32;
+            this.lblCareerEarnings.Text = "label28";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(10, 215);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(85, 13);
+            this.label28.TabIndex = 33;
+            this.label28.Text = "Career Earnings:";
             // 
             // MainForm
             // 
@@ -1448,6 +1471,8 @@
         private System.Windows.Forms.Button btnViewRosters;
         private System.Windows.Forms.Label lblLicensesHeldByAgent;
         private System.Windows.Forms.Button btnSignClient;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label lblCareerEarnings;
     }
 }
 
