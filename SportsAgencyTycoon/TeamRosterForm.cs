@@ -132,6 +132,7 @@ namespace SportsAgencyTycoon
             lblYearlySalary.Text = "Yearly Salary: " + selectedPlayer.Contract.YearlySalary.ToString("C0");
             lblYearsLeft.Text = "Years Left: " + selectedPlayer.Contract.Years.ToString();
             lblAgentPaid.Text = "Agent Paid: " + selectedPlayer.Contract.AgentPaySchedule.ToString();
+            lblAgentPercent.Text = "Agent Percentage: " + selectedPlayer.Contract.AgentPercentage.ToString() + "%";
 
             lblPopularity.Text = "Popularity: " + selectedPlayer.PopularityString;
             lblGreed.Text = "Greed: " + selectedPlayer.Greed.ToString();

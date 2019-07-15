@@ -33,6 +33,7 @@ namespace SportsAgencyTycoon
         //contract && endorsements
         public Contract Contract;
         public Endorsement Endorsement;
+        public bool WillingToNegotiate;
 
         //age and birthday
         public int Age;
@@ -75,6 +76,8 @@ namespace SportsAgencyTycoon
             Lifestyle = rnd.Next(0, 101);
             Loyalty = rnd.Next(0, 101);
             PlayForTitleContender = rnd.Next(0, 101);
+
+            WillingToNegotiate = true;
 
             Age = age;
             BirthMonth = birthMonth;

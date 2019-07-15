@@ -162,7 +162,7 @@ namespace SportsAgencyTycoon
             League league = null;
             Association association = null;
             bool isLeague;
-
+            cbAvailableClients.SelectedIndex = -1;
             if (cbAgencyAgentList.SelectedIndex >= 0)
             {
                 Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
@@ -225,13 +225,13 @@ namespace SportsAgencyTycoon
                     {
                         foreach (Team t in league.TeamList)
                             foreach (Player p in t.Roster)
-                                if ((p.AgencyHappinessDescription == HappinessDescription.Disgruntled || p.AgencyHappinessDescription == HappinessDescription.Displeased) && (p.CurrentSkill + p.PotentialSkill) < agentSkills)
+                                if ((p.WillingToNegotiate) && (p.AgencyHappinessDescription == HappinessDescription.Disgruntled || p.AgencyHappinessDescription == HappinessDescription.Displeased) && (p.CurrentSkill + p.PotentialSkill) < agentSkills)
                                     availableClients.Add(p);
                     }
                     else
                     {
                         foreach (Player p in association.PlayerList)
-                            if ((p.AgencyHappinessDescription == HappinessDescription.Disgruntled || p.AgencyHappinessDescription == HappinessDescription.Displeased) && (p.CurrentSkill/* + p.PotentialSkill*/) < agentSkills)
+                            if ((p.WillingToNegotiate) && (p.AgencyHappinessDescription == HappinessDescription.Disgruntled || p.AgencyHappinessDescription == HappinessDescription.Displeased) && (p.CurrentSkill/* + p.PotentialSkill*/) < agentSkills)
                                 availableClients.Add(p);
                     }
                 }
@@ -360,7 +360,7 @@ namespace SportsAgencyTycoon
             lblLicensesHeldByAgent.Text = lblLicensesHeldByAgent.Text.Substring(0, lblLicensesHeldByAgent.Text.Length - 2);
             PopulateAgentClientList(agent);
             PopulateAvailableClientsList();
-            if (agent.ClientCount < agent.Level) btnSignClient.Enabled = true;
+            if (agent.ClientCount < agent.Level * 2) btnSignClient.Enabled = true;
             else btnSignClient.Enabled = false;
         }
 
@@ -893,11 +893,79 @@ namespace SportsAgencyTycoon
             NegotiatePercentageForm negotiatePercentageForm = new NegotiatePercentageForm(rnd, agent, client);
             negotiatePercentageForm.BringToFront();
             negotiatePercentageForm.ShowDialog();
+
+            Player player = FindPlayer(client);
+
+            if (negotiatePercentageForm.Percentage > 0)
+            {
+                if (player.League != null)
+                    player.Contract.AgentPercentage = negotiatePercentageForm.Percentage;
+                else player.Contract = new Contract(50, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
+
+                SignClient(player);
+            }
+            else if (negotiatePercentageForm.Percentage == 0)
+            {
+                player.WillingToNegotiate = false;
+                PopulateAvailableClientsList();
+            }
+                
+
         }
 
-        private void btnSignClient_Click(object sender, EventArgs e)
+        private void SignClient(Player player)
         {
-            Player client = world.AvailableClients[cbAvailableClients.SelectedIndex];
+            /*Player player;
+            //find player and change AgencyHappiness
+            if (client.League != null)
+            {
+                int leagueIndex = -1;
+                for (int i = 0; i < world.Leagues.Count; i++)
+                    if (client.League.Name == world.Leagues[i].Name) leagueIndex = i;
+                int teamIndex = -1;
+                for (int i = 0; i < world.Leagues[leagueIndex].TeamList.Count; i++)
+                    if (client.Team.Mascot == world.Leagues[leagueIndex].TeamList[i].Mascot) teamIndex = i;
+                int playerIndex = -1;
+                for (int i = 0; i < world.Leagues[leagueIndex].TeamList[teamIndex].Roster.Count; i++)
+                    if (client.FullName == world.Leagues[leagueIndex].TeamList[teamIndex].Roster[i].FullName) playerIndex = i;
+
+                world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].AgencyHappiness = 50;
+                world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].AgencyHappinessDescription = world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].DescribeHappiness(world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].AgencyHappiness);
+                world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].AgencyHappinessString = world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].EnumToString(world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex].AgencyHappinessDescription.ToString());
+
+                player = world.Leagues[leagueIndex].TeamList[teamIndex].Roster[playerIndex];
+            }
+            else
+            {
+                int associationIndex = -1;
+                for (int i = 0; i < world.Associations.Count; i++)
+                    if (client.Sport == world.Associations[i].Sport) associationIndex = i;
+                int playerIndex = -1;
+                for (int i = 0; i < world.Associations[associationIndex].PlayerList.Count; i++)
+                    if (client.FullName == world.Associations[associationIndex].PlayerList[i].FullName) playerIndex = i;
+
+                world.Associations[associationIndex].PlayerList[playerIndex].AgencyHappiness = 50;
+                world.Associations[associationIndex].PlayerList[playerIndex].AgencyHappinessDescription = world.Associations[associationIndex].PlayerList[playerIndex].DescribeHappiness(world.Associations[associationIndex].PlayerList[playerIndex].AgencyHappiness);
+                world.Associations[associationIndex].PlayerList[playerIndex].AgencyHappinessString = world.Associations[associationIndex].PlayerList[playerIndex].EnumToString(world.Associations[associationIndex].PlayerList[playerIndex].AgencyHappinessDescription.ToString());
+
+                player = world.Associations[associationIndex].PlayerList[playerIndex];
+            }*/
+
+            agency.AddClient(player);
+            Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            agent.AddClient(player);
+
+            UpdateAgencyInfo();
+            UpdateAgentInfo(agent);
+            PopulateAvailableClientsList();
+
+            cbAvailableClients.Text = "";
+            cbAvailableClients.SelectedIndex = -1;
+            btnSignClient.Enabled = false;
+        }
+
+        private Player FindPlayer(Player client)
+        {
             Player player;
             //find player and change AgencyHappiness
             if (client.League != null)
@@ -933,22 +1001,13 @@ namespace SportsAgencyTycoon
 
                 player = world.Associations[associationIndex].PlayerList[playerIndex];
             }
-            //client.AgencyHappiness = 50;
 
-            //client.AgencyHappinessDescription = client.DescribeHappiness(client.AgencyHappiness);
-            //client.AgencyHappinessString = client.EnumToString(client.AgencyHappinessDescription.ToString());
+            return player;
+        }
 
-            agency.AddClient(player);
-            Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            agent.AddClient(client);
-
-            UpdateAgencyInfo();
-            UpdateAgentInfo(agent);
-            PopulateAvailableClientsList();
-
-            cbAvailableClients.Text = "";
-            cbAvailableClients.SelectedIndex = -1;
-            btnSignClient.Enabled = false;
+        private void btnSignClient_Click(object sender, EventArgs e)
+        {
+            
         }
 
         

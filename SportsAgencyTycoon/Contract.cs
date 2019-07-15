@@ -16,10 +16,10 @@ namespace SportsAgencyTycoon
         public double AgentPercentage;
         public PaySchedule AgentPaySchedule;
 
-        public Contract(int years, int yearlSalary, Date startDate, Date endDate, int signingBonus, double agentPercentage, PaySchedule agentPaySchedule)
+        public Contract(int years, int yearlySalary, Date startDate, Date endDate, int signingBonus, double agentPercentage, PaySchedule agentPaySchedule)
         {
             Years = years;
-            YearlySalary = yearlSalary;
+            YearlySalary = yearlySalary;
             StartDate = startDate;
             EndDate = endDate;
             SigningBonus = signingBonus;

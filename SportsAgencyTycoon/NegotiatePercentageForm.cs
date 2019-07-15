@@ -78,45 +78,74 @@ namespace SportsAgencyTycoon
             return acceptance;
         }
 
-        private double ClientAsksFor(Random rnd, double min, double accepted, int _ClientMood)
+        private double ClientAsksFor(Random rnd, double min, double accepted)
         {
             double askingPrice = min;
-
+            //if (accepted < min) accepted = min;
             askingPrice = (double)rnd.Next((int)(min * 100), (int)(accepted * 100)) / 100;
+            ClientAsk = askingPrice;
 
             return askingPrice;
         }
 
         private void ClientConsidersOffer(double d)
         {
-            double agentDifference = d - ClientAsk;
+            double agentDifference = d - _ClientsAcceptancePercent;
             double clientDifference = _ClientsAcceptancePercent - ClientAsk;
-            if (d <= _ClientsAcceptancePercent) MessageBox.Show("You have yourself a deal!");
+            Console.WriteLine("agentDifference: " + agentDifference);
+            Console.WriteLine("clientDifference: " + clientDifference);
+            Console.WriteLine("clientAsk: " + ClientAsk);
+            Console.WriteLine("ClientAcceptancePercent: " + _ClientsAcceptancePercent);
+            
+            if (d <= _ClientsAcceptancePercent)
+            {
+                MessageBox.Show("You have yourself a deal!");
+                _Percentage = d;
+                this.Close();
+            }
+                
             else
             {
-                if (_ClientsAcceptancePercent > d * 2)
+                if (_ClientMood <= 0)
                 {
-                    MessageBox.Show("You've got to do MUCH better than that! Take a look at my counter offer.");
-                    NumberOfCounterOffers += 2;
+                    MessageBox.Show("These negotiations are done! I will not be signing with your agency!");
+                    _Percentage = 0;
+                    this.Close();
                 }
-                else
+                else if (_ClientMood < 20)
                 {
-                    MessageBox.Show("That's more value than I'm willing to part with. How about this?");
-                    NumberOfCounterOffers++;
+                    MessageBox.Show("I'm not happy with how these negotiations are going. This is the percentage that will get the deal done.");
+                    NumberOfCounterOffers += 3;
+                    _ClientsAcceptancePercent = ClientAsk;
+                    txtYourAskingPercent.Text = ClientAsk.ToString();
+                    _ClientMood = 0;
                 }
-                CalculateNewMood(agentDifference, clientDifference);
+                else 
+                {
+                    if (clientDifference < agentDifference / 2)
+                    {
+                        MessageBox.Show("You've got to do MUCH better than that! Take a look at my counter offer.");
+                        NumberOfCounterOffers += 2;
+                    }
+                    else
+                    {
+                        MessageBox.Show("That's more value than I'm willing to part with. How about this?");
+                        NumberOfCounterOffers++;
+                    }
+                    CalculateNewMood(agentDifference, clientDifference, NumberOfCounterOffers);
+                    txtYourAskingPercent.Text = ClientAsksFor(rnd, ClientAsk, _ClientsAcceptancePercent).ToString();
+                    if (_ClientMood <= 0) _ClientMood = 1;
+                }
+                                
+                lblClientMood.Text = _ClientMood.ToString();
                 
-            }                
+            }        
         }
 
-        private int CalculateNewMood(double agentDifference, double clientDifference)
+        private void CalculateNewMood(double agentDifference, double clientDifference, int counterOffers)
         {
-            int newMood = 0;
-
-
-
-
-            return newMood;
+            if (agentDifference < clientDifference) _ClientMood += rnd.Next(-7, 1) * counterOffers;
+            else _ClientMood += rnd.Next(-20, 1) * counterOffers;
         }
 
         //only accept decimals in the text box
@@ -137,6 +166,12 @@ namespace SportsAgencyTycoon
         private void btnMakeOffer_Click(object sender, EventArgs e)
         {
             ClientConsidersOffer(Convert.ToDouble(txtYourAskingPercent.Text));
+        }
+
+        private void btnEndNegotiations_Click(object sender, EventArgs e)
+        {
+            _Percentage = -1;
+            this.Close();
         }
     }
 }

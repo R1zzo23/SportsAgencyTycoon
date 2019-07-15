@@ -36,21 +36,22 @@
             this.cbTeamRoster = new System.Windows.Forms.ComboBox();
             this.lblYearlySalary = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblYearsLeft = new System.Windows.Forms.Label();
             this.lblAgentPaid = new System.Windows.Forms.Label();
+            this.lblYearsLeft = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblPosition = new System.Windows.Forms.Label();
             this.lblSkillLevel = new System.Windows.Forms.Label();
             this.lblAge = new System.Windows.Forms.Label();
             this.lblFullName = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblAgencyHappiness = new System.Windows.Forms.Label();
+            this.lblTeamHappiness = new System.Windows.Forms.Label();
+            this.lblPlayForTitle = new System.Windows.Forms.Label();
+            this.lblLoyalty = new System.Windows.Forms.Label();
             this.lblLifestyle = new System.Windows.Forms.Label();
             this.lblGreed = new System.Windows.Forms.Label();
             this.lblPopularity = new System.Windows.Forms.Label();
-            this.lblPlayForTitle = new System.Windows.Forms.Label();
-            this.lblLoyalty = new System.Windows.Forms.Label();
-            this.lblAgencyHappiness = new System.Windows.Forms.Label();
-            this.lblTeamHappiness = new System.Windows.Forms.Label();
-            this.lblPosition = new System.Windows.Forms.Label();
+            this.lblAgentPercent = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -122,24 +123,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblAgentPercent);
             this.groupBox1.Controls.Add(this.lblAgentPaid);
             this.groupBox1.Controls.Add(this.lblYearsLeft);
             this.groupBox1.Controls.Add(this.lblYearlySalary);
             this.groupBox1.Location = new System.Drawing.Point(505, 169);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(240, 101);
+            this.groupBox1.Size = new System.Drawing.Size(240, 125);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contract Info";
-            // 
-            // lblYearsLeft
-            // 
-            this.lblYearsLeft.AutoSize = true;
-            this.lblYearsLeft.Location = new System.Drawing.Point(6, 46);
-            this.lblYearsLeft.Name = "lblYearsLeft";
-            this.lblYearsLeft.Size = new System.Drawing.Size(58, 13);
-            this.lblYearsLeft.TabIndex = 5;
-            this.lblYearsLeft.Text = "Years Left:";
             // 
             // lblAgentPaid
             // 
@@ -149,6 +142,15 @@
             this.lblAgentPaid.Size = new System.Drawing.Size(65, 13);
             this.lblAgentPaid.TabIndex = 6;
             this.lblAgentPaid.Text = "Agent Paid: ";
+            // 
+            // lblYearsLeft
+            // 
+            this.lblYearsLeft.AutoSize = true;
+            this.lblYearsLeft.Location = new System.Drawing.Point(6, 46);
+            this.lblYearsLeft.Name = "lblYearsLeft";
+            this.lblYearsLeft.Size = new System.Drawing.Size(58, 13);
+            this.lblYearsLeft.TabIndex = 5;
+            this.lblYearsLeft.Text = "Years Left:";
             // 
             // groupBox2
             // 
@@ -162,6 +164,15 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Player Info";
+            // 
+            // lblPosition
+            // 
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Location = new System.Drawing.Point(6, 16);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(47, 13);
+            this.lblPosition.TabIndex = 10;
+            this.lblPosition.Text = "Position:";
             // 
             // lblSkillLevel
             // 
@@ -199,12 +210,48 @@
             this.groupBox3.Controls.Add(this.lblLifestyle);
             this.groupBox3.Controls.Add(this.lblGreed);
             this.groupBox3.Controls.Add(this.lblPopularity);
-            this.groupBox3.Location = new System.Drawing.Point(505, 275);
+            this.groupBox3.Location = new System.Drawing.Point(505, 300);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(240, 201);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Player Emotions";
+            // 
+            // lblAgencyHappiness
+            // 
+            this.lblAgencyHappiness.AutoSize = true;
+            this.lblAgencyHappiness.Location = new System.Drawing.Point(6, 173);
+            this.lblAgencyHappiness.Name = "lblAgencyHappiness";
+            this.lblAgencyHappiness.Size = new System.Drawing.Size(99, 13);
+            this.lblAgencyHappiness.TabIndex = 10;
+            this.lblAgencyHappiness.Text = "Agency Happiness:";
+            // 
+            // lblTeamHappiness
+            // 
+            this.lblTeamHappiness.AutoSize = true;
+            this.lblTeamHappiness.Location = new System.Drawing.Point(6, 148);
+            this.lblTeamHappiness.Name = "lblTeamHappiness";
+            this.lblTeamHappiness.Size = new System.Drawing.Size(90, 13);
+            this.lblTeamHappiness.TabIndex = 9;
+            this.lblTeamHappiness.Text = "Team Happiness:";
+            // 
+            // lblPlayForTitle
+            // 
+            this.lblPlayForTitle.AutoSize = true;
+            this.lblPlayForTitle.Location = new System.Drawing.Point(6, 124);
+            this.lblPlayForTitle.Name = "lblPlayForTitle";
+            this.lblPlayForTitle.Size = new System.Drawing.Size(68, 13);
+            this.lblPlayForTitle.TabIndex = 8;
+            this.lblPlayForTitle.Text = "Play for Title:";
+            // 
+            // lblLoyalty
+            // 
+            this.lblLoyalty.AutoSize = true;
+            this.lblLoyalty.Location = new System.Drawing.Point(6, 99);
+            this.lblLoyalty.Name = "lblLoyalty";
+            this.lblLoyalty.Size = new System.Drawing.Size(43, 13);
+            this.lblLoyalty.TabIndex = 7;
+            this.lblLoyalty.Text = "Loyalty:";
             // 
             // lblLifestyle
             // 
@@ -233,50 +280,14 @@
             this.lblPopularity.TabIndex = 4;
             this.lblPopularity.Text = "Popularity:";
             // 
-            // lblPlayForTitle
+            // lblAgentPercent
             // 
-            this.lblPlayForTitle.AutoSize = true;
-            this.lblPlayForTitle.Location = new System.Drawing.Point(6, 124);
-            this.lblPlayForTitle.Name = "lblPlayForTitle";
-            this.lblPlayForTitle.Size = new System.Drawing.Size(68, 13);
-            this.lblPlayForTitle.TabIndex = 8;
-            this.lblPlayForTitle.Text = "Play for Title:";
-            // 
-            // lblLoyalty
-            // 
-            this.lblLoyalty.AutoSize = true;
-            this.lblLoyalty.Location = new System.Drawing.Point(6, 99);
-            this.lblLoyalty.Name = "lblLoyalty";
-            this.lblLoyalty.Size = new System.Drawing.Size(43, 13);
-            this.lblLoyalty.TabIndex = 7;
-            this.lblLoyalty.Text = "Loyalty:";
-            // 
-            // lblAgencyHappiness
-            // 
-            this.lblAgencyHappiness.AutoSize = true;
-            this.lblAgencyHappiness.Location = new System.Drawing.Point(6, 173);
-            this.lblAgencyHappiness.Name = "lblAgencyHappiness";
-            this.lblAgencyHappiness.Size = new System.Drawing.Size(99, 13);
-            this.lblAgencyHappiness.TabIndex = 10;
-            this.lblAgencyHappiness.Text = "Agency Happiness:";
-            // 
-            // lblTeamHappiness
-            // 
-            this.lblTeamHappiness.AutoSize = true;
-            this.lblTeamHappiness.Location = new System.Drawing.Point(6, 148);
-            this.lblTeamHappiness.Name = "lblTeamHappiness";
-            this.lblTeamHappiness.Size = new System.Drawing.Size(90, 13);
-            this.lblTeamHappiness.TabIndex = 9;
-            this.lblTeamHappiness.Text = "Team Happiness:";
-            // 
-            // lblPosition
-            // 
-            this.lblPosition.AutoSize = true;
-            this.lblPosition.Location = new System.Drawing.Point(6, 16);
-            this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(47, 13);
-            this.lblPosition.TabIndex = 10;
-            this.lblPosition.Text = "Position:";
+            this.lblAgentPercent.AutoSize = true;
+            this.lblAgentPercent.Location = new System.Drawing.Point(6, 94);
+            this.lblAgentPercent.Name = "lblAgentPercent";
+            this.lblAgentPercent.Size = new System.Drawing.Size(96, 13);
+            this.lblAgentPercent.TabIndex = 7;
+            this.lblAgentPercent.Text = "Agent Percentage:";
             // 
             // TeamRosterForm
             // 
@@ -329,5 +340,6 @@
         private System.Windows.Forms.Label lblAgencyHappiness;
         private System.Windows.Forms.Label lblTeamHappiness;
         private System.Windows.Forms.Label lblPosition;
+        private System.Windows.Forms.Label lblAgentPercent;
     }
 }

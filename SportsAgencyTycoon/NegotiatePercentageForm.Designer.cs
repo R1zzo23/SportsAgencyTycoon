@@ -43,6 +43,7 @@
             this.lblMaxPercent = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lblMinPercent = new System.Windows.Forms.Label();
+            this.btnEndNegotiations = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtYourAskingPercent
@@ -177,11 +178,23 @@
             this.lblMinPercent.TabIndex = 14;
             this.lblMinPercent.Text = "Minimum:";
             // 
+            // btnEndNegotiations
+            // 
+            this.btnEndNegotiations.Location = new System.Drawing.Point(76, 265);
+            this.btnEndNegotiations.Name = "btnEndNegotiations";
+            this.btnEndNegotiations.Size = new System.Drawing.Size(96, 23);
+            this.btnEndNegotiations.TabIndex = 15;
+            this.btnEndNegotiations.Text = "End Negotiations";
+            this.btnEndNegotiations.UseVisualStyleBackColor = true;
+            this.btnEndNegotiations.Click += new System.EventHandler(this.btnEndNegotiations_Click);
+            // 
             // NegotiatePercentageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 300);
+            this.ClientSize = new System.Drawing.Size(270, 300);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnEndNegotiations);
             this.Controls.Add(this.lblMinPercent);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lblMaxPercent);
@@ -223,5 +236,6 @@
         private System.Windows.Forms.Label lblMaxPercent;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblMinPercent;
+        private System.Windows.Forms.Button btnEndNegotiations;
     }
 }
