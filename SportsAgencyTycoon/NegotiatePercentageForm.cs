@@ -20,6 +20,8 @@ namespace SportsAgencyTycoon
         private double _ClientsAcceptancePercent;
         private int MaxPercent;
         private int MinPercent = 2;
+        private double ClientAsk;
+        private int NumberOfCounterOffers = 0;
         private double _Percentage;
         public Double Percentage
         {
@@ -36,8 +38,8 @@ namespace SportsAgencyTycoon
             if(_Client.Contract != null)
                 _ClientsCurrentAgentPercent = _Client.Contract.AgentPercentage;
             DetermineMaxPercent();
-            FillLabels();
             _ClientsAcceptancePercent = ClientsAcceptanceNumber();
+            FillLabels();
         }
 
         private void DetermineMaxPercent()
@@ -53,8 +55,9 @@ namespace SportsAgencyTycoon
             lblAgentNegotiating.Text = _Agent.Negotiating.ToString();
             lblClientGreed.Text = _Client.Greed.ToString();
             lblClientMood.Text = _ClientMood.ToString();
-            lblMinPercent.Text = MinPercent.ToString("P") + "%";
-            lblMaxPercent.Text = MaxPercent.ToString("P") + "%";
+            lblMinPercent.Text = ((double)MinPercent / 100).ToString("P");
+            lblMaxPercent.Text = ((double)MaxPercent / 100).ToString("P");
+            txtYourAskingPercent.Text = ClientAsksFor(rnd, MinPercent, _ClientsAcceptancePercent).ToString();
         }
 
         private double ClientsAcceptanceNumber()
@@ -75,10 +78,45 @@ namespace SportsAgencyTycoon
             return acceptance;
         }
 
+        private double ClientAsksFor(Random rnd, double min, double accepted, int _ClientMood)
+        {
+            double askingPrice = min;
+
+            askingPrice = (double)rnd.Next((int)(min * 100), (int)(accepted * 100)) / 100;
+
+            return askingPrice;
+        }
+
         private void ClientConsidersOffer(double d)
         {
+            double agentDifference = d - ClientAsk;
+            double clientDifference = _ClientsAcceptancePercent - ClientAsk;
             if (d <= _ClientsAcceptancePercent) MessageBox.Show("You have yourself a deal!");
-            else MessageBox.Show("You've got to do better than that!");
+            else
+            {
+                if (_ClientsAcceptancePercent > d * 2)
+                {
+                    MessageBox.Show("You've got to do MUCH better than that! Take a look at my counter offer.");
+                    NumberOfCounterOffers += 2;
+                }
+                else
+                {
+                    MessageBox.Show("That's more value than I'm willing to part with. How about this?");
+                    NumberOfCounterOffers++;
+                }
+                CalculateNewMood(agentDifference, clientDifference);
+                
+            }                
+        }
+
+        private int CalculateNewMood(double agentDifference, double clientDifference)
+        {
+            int newMood = 0;
+
+
+
+
+            return newMood;
         }
 
         //only accept decimals in the text box

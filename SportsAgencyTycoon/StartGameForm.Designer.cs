@@ -293,10 +293,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 362);
+            this.ControlBox = false;
             this.Controls.Add(this.btnCreateAgencyAndAgent);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtAgencyName);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StartGameForm";
             this.Text = "#BuildYourDynasty";
             this.groupBox1.ResumeLayout(false);
