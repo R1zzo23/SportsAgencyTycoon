@@ -7,6 +7,13 @@ namespace SportsAgencyTycoon
 {
     public class MMA
     {
+        Agency myAgency;
+
+        public MMA(Agency agency)
+        {
+            myAgency = agency;
+        }
+
         public string RunMMAEvent (Event e, World world)
         {
             //string to print out results to user in newsLabel
@@ -136,14 +143,34 @@ namespace SportsAgencyTycoon
 
             for (int i = 0; i < winnerList.Count; i++)
             {
-                if (i == 0) winnerList[i].CareerEarnings += topWinnerCash;
-                else winnerList[i].CareerEarnings += (int)(remainingWinnerCash / (winnerList.Count - 1));
+                if (i == 0)
+                {
+                    winnerList[i].CareerEarnings += topWinnerCash;
+                    if (winnerList[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(topWinnerCash * (winnerList[i].Contract.AgentPercentage / 100));
+                }
+
+                else
+                {
+                    winnerList[i].CareerEarnings += (int)(remainingWinnerCash / (winnerList.Count - 1));
+                    if (winnerList[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(((int)(remainingWinnerCash / (winnerList.Count - 1))) * (winnerList[i].Contract.AgentPercentage / 100));
+                }
+
                 winnerList[i].Wins++;
             }
             for (int j = 0; j < loserList.Count; j++)
             {
-                if (j == 0) loserList[j].CareerEarnings += topLoserCash;
-                else loserList[j].CareerEarnings += (int)(remainingLoserCash / (loserList.Count - 1));
+                if (j == 0)
+                {
+                    loserList[j].CareerEarnings += topLoserCash;
+                    if (loserList[j].MemberOfAgency) myAgency.Money += Convert.ToInt32(topLoserCash * (loserList[j].Contract.AgentPercentage / 100));
+                }
+
+                else
+                {
+                    loserList[j].CareerEarnings += (int)(remainingLoserCash / (loserList.Count - 1));
+                    if (loserList[j].MemberOfAgency) myAgency.Money += Convert.ToInt32(((int)(remainingLoserCash / (loserList.Count - 1))) * (loserList[j].Contract.AgentPercentage / 100));
+                }
+
                 loserList[j].Losses++;
             }
             UpdateUFCPlayerList(winnerList, loserList, world);

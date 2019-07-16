@@ -7,6 +7,13 @@ namespace SportsAgencyTycoon
 {
     public class Tennis
     {
+        Agency myAgency;
+
+        public Tennis (Agency agency)
+        {
+            myAgency = agency;
+        }
+
         public string RunTournament(Event e, World world)
         {
             //string to print out results to user in newsLabel
@@ -114,6 +121,7 @@ namespace SportsAgencyTycoon
                 {
                     if (eventType == EventType.GrandSlam) tennisPlayers[i].GrandSlams++;
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .1706));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .1706) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[0]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].TournamentWins++;
@@ -123,6 +131,7 @@ namespace SportsAgencyTycoon
                 else if (i < 2)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0921));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0921) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[1]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].QuarterFinals++;
@@ -131,6 +140,7 @@ namespace SportsAgencyTycoon
                 else if (i < 4)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0466));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0466) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[2]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].QuarterFinals++;
@@ -139,6 +149,7 @@ namespace SportsAgencyTycoon
                 else if (i < 8)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0256));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0256) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[3]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                     tennisPlayers[i].QuarterFinals++;
@@ -147,6 +158,7 @@ namespace SportsAgencyTycoon
                 else if (i < 16)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0140));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0140) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[4]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
@@ -154,6 +166,7 @@ namespace SportsAgencyTycoon
                 else if (i < 32)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0079));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0079) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[5]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
@@ -161,6 +174,7 @@ namespace SportsAgencyTycoon
                 else if (i < 64)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0046));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0046) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[6]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }
@@ -168,6 +182,7 @@ namespace SportsAgencyTycoon
                 else if (i < 128)
                 {
                     tennisPlayers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * .0025));
+                    if (tennisPlayers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * .0025) * (tennisPlayers[i].Contract.AgentPercentage / 100));
                     tennisPlayers[i].TourPointsList.Add(AwardedPoints[7]);
                     tennisPlayers[i].TourPoints = CalculatePlayerTourPoints(tennisPlayers[i], world);
                 }

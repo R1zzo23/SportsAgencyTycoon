@@ -7,6 +7,13 @@ namespace SportsAgencyTycoon
 {
     public class Golf
     {
+        Agency myAgency;
+
+        public Golf (Agency agency)
+        {
+            myAgency = agency;
+        }
+
         public string RunTournament(Event e, World world)
         {
             //string to print out results to user in newsLabel
@@ -231,6 +238,9 @@ namespace SportsAgencyTycoon
                 {
                     golfers[i].CutsMade++;
                     golfers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[i] / 100)));
+
+                    // if golfer is member of agency, add % of winnings to agency.Money
+                    if (golfers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[i] / 100)) * (golfers[i].Contract.AgentPercentage / 100));
                 }
                 golfers[i].EventsPlayed++;
                 golfers[i].TourPointsList.Add(AwardedPoints[p]);

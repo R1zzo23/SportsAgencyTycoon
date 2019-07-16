@@ -16,10 +16,10 @@ namespace SportsAgencyTycoon
         public Agency agency;
         public Agent myManager;
         public World world;
-        public Tennis Tennis = new Tennis();
-        public Golf Golf = new Golf();
-        public Boxing Boxing = new Boxing();
-        public MMA MMA = new MMA();
+        public Tennis Tennis;
+        public Golf Golf;
+        public Boxing Boxing;
+        public MMA MMA;
         public Random rnd = new Random();
         public MainForm()
         {
@@ -27,6 +27,10 @@ namespace SportsAgencyTycoon
             CreateManagerAndAgency();
             InitializeWorld();
             PopUpStartGameForm();
+            Golf = new Golf(agency);
+            Boxing = new Boxing(agency);
+            MMA = new MMA(agency);
+            Tennis = new Tennis(agency);
         }
 
         #region Game Start
@@ -332,6 +336,7 @@ namespace SportsAgencyTycoon
         public void UpdateAgentInfo(Agent agent)
         {
             agentNameLabel.Text = agent.First + " " + agent.Last;
+            lblAgentCareerEarnings.Text = agent.CareerEarnings.ToString("C0");
             greedLabel.Text = agent.Greed.ToString();
             industryPowerLabel.Text = agent.IndustryPower.ToString();
             levelLabel.Text = agent.Level.ToString();
@@ -931,6 +936,8 @@ namespace SportsAgencyTycoon
                 if (player.League != null)
                     player.Contract.AgentPercentage = negotiatePercentageForm.Percentage;
                 else player.Contract = new Contract(50, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
+
+                player.MemberOfAgency = true;
 
                 SignClient(player);
             }

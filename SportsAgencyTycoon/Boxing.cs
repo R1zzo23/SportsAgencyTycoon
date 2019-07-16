@@ -7,11 +7,12 @@ namespace SportsAgencyTycoon
 {
     public class Boxing
     {
-        /*WBA.EventList.Add(new Event(Sports.Boxing, Year, "Up-And-Comers Showcase", EventType.Normal, "Las Vegas, NV", 15000000, 18, 18, new Date(1, Months.January, 1)));
-          WBA.EventList.Add(new Event(Sports.Boxing, Year, "NYC Prize Fights", EventType.Normal, "New York City, NY", 35000000, 12, 12, new Date(5, Months.May, 2)));
-          WBA.EventList.Add(new Event(Sports.Boxing, Year, "Top Rank Boxing Premiere", EventType.Normal, "Los Angeles, CA", 29000000, 10, 10, new Date(9, Months.September, 3)));
-          WBA.EventList.Add(new Event(Sports.Boxing, Year, "King of the Ring", EventType.Normal, "Las Vegas, NV", 50000000, 40, 40, new Date(11, Months.November, 4)));*/
+        Agency myAgency;
 
+        public Boxing(Agency agency)
+        {
+            myAgency = agency;
+        }
         public string RunBoxingEvent(Event e, World world)
         {
             //string to print out results to user in newsLabel
@@ -141,14 +142,34 @@ namespace SportsAgencyTycoon
 
             for (int i = 0; i < winnerList.Count; i++)
             {
-                if (i == 0) winnerList[i].CareerEarnings += topWinnerCash;
-                else winnerList[i].CareerEarnings += (int)(remainingWinnerCash / (winnerList.Count - 1));
+                if (i == 0)
+                {
+                    winnerList[i].CareerEarnings += topWinnerCash;
+                    if (winnerList[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(topWinnerCash * (winnerList[i].Contract.AgentPercentage / 100));
+                }
+                    
+                else
+                {
+                    winnerList[i].CareerEarnings += (int)(remainingWinnerCash / (winnerList.Count - 1));
+                    if (winnerList[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(((int)(remainingWinnerCash / (winnerList.Count - 1))) * (winnerList[i].Contract.AgentPercentage / 100));
+                }
+                    
                 winnerList[i].Wins++;
             }
             for (int j = 0; j < loserList.Count; j++)
             {
-                if (j == 0) loserList[j].CareerEarnings += topLoserCash;
-                else loserList[j].CareerEarnings += (int)(remainingLoserCash / (loserList.Count - 1));
+                if (j == 0)
+                {
+                    loserList[j].CareerEarnings += topLoserCash;
+                    if (loserList[j].MemberOfAgency) myAgency.Money += Convert.ToInt32(topLoserCash * (loserList[j].Contract.AgentPercentage / 100));
+                }
+                    
+                else
+                {
+                    loserList[j].CareerEarnings += (int)(remainingLoserCash / (loserList.Count - 1));
+                    if (loserList[j].MemberOfAgency) myAgency.Money += Convert.ToInt32(((int)(remainingLoserCash / (loserList.Count - 1))) * (loserList[j].Contract.AgentPercentage / 100));
+                }
+                    
                 loserList[j].Losses++;
             }
             UpdateWBAPlayerList(winnerList, loserList, world);

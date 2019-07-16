@@ -146,6 +146,8 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
+            this.label31 = new System.Windows.Forms.Label();
+            this.lblAgentCareerEarnings = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -327,6 +329,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblAgentCareerEarnings);
+            this.groupBox2.Controls.Add(this.label31);
             this.groupBox2.Controls.Add(this.lblLicensesHeldByAgent);
             this.groupBox2.Controls.Add(this.agentBeingTrainedLabel);
             this.groupBox2.Controls.Add(this.label25);
@@ -1340,6 +1344,24 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(7, 211);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(85, 13);
+            this.label31.TabIndex = 30;
+            this.label31.Text = "Career Earnings:";
+            // 
+            // lblAgentCareerEarnings
+            // 
+            this.lblAgentCareerEarnings.AutoSize = true;
+            this.lblAgentCareerEarnings.Location = new System.Drawing.Point(98, 211);
+            this.lblAgentCareerEarnings.Name = "lblAgentCareerEarnings";
+            this.lblAgentCareerEarnings.Size = new System.Drawing.Size(13, 13);
+            this.lblAgentCareerEarnings.TabIndex = 31;
+            this.lblAgentCareerEarnings.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1520,6 +1542,8 @@
         private System.Windows.Forms.Label lblClientAgentPercent;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Button btnNegotiatePercent;
+        private System.Windows.Forms.Label lblAgentCareerEarnings;
+        private System.Windows.Forms.Label label31;
     }
 }
 

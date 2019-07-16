@@ -11,6 +11,7 @@ namespace SportsAgencyTycoon
         public string First;
         public string Last;
         public int Salary;
+        public int CareerEarnings;
         public int Negotiating;
         public int Greed;
         public int IndustryPower;
@@ -31,6 +32,7 @@ namespace SportsAgencyTycoon
             First = firstName;
             Last = lastName;
             Salary = salary;
+            CareerEarnings = 0;
             Negotiating = negotiatingRating;
             Greed = greedRating;
             IndustryPower = industryPowerRating;
