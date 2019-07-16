@@ -100,7 +100,11 @@
             this.clientSportLabel = new System.Windows.Forms.Label();
             this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnSignClient = new System.Windows.Forms.Button();
+            this.btnNegotiatePercent = new System.Windows.Forms.Button();
+            this.lblClientSalary = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.lblClientAgentPercent = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
             this.cbAvailableClients = new System.Windows.Forms.ComboBox();
             this.availableClientNameLabel = new System.Windows.Forms.Label();
             this.availableClientSportLabel = new System.Windows.Forms.Label();
@@ -142,11 +146,6 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
-            this.label30 = new System.Windows.Forms.Label();
-            this.lblClientAgentPercent = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.lblClientSalary = new System.Windows.Forms.Label();
-            this.btnNegotiatePercent = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -891,7 +890,6 @@
             this.groupBox6.Controls.Add(this.label32);
             this.groupBox6.Controls.Add(this.lblClientAgentPercent);
             this.groupBox6.Controls.Add(this.label30);
-            this.groupBox6.Controls.Add(this.btnSignClient);
             this.groupBox6.Controls.Add(this.cbAvailableClients);
             this.groupBox6.Controls.Add(this.availableClientNameLabel);
             this.groupBox6.Controls.Add(this.availableClientSportLabel);
@@ -908,16 +906,51 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Available Clients to Sign";
             // 
-            // btnSignClient
+            // btnNegotiatePercent
             // 
-            this.btnSignClient.Enabled = false;
-            this.btnSignClient.Location = new System.Drawing.Point(8, 189);
-            this.btnSignClient.Name = "btnSignClient";
-            this.btnSignClient.Size = new System.Drawing.Size(75, 23);
-            this.btnSignClient.TabIndex = 41;
-            this.btnSignClient.Text = "Sign Client";
-            this.btnSignClient.UseVisualStyleBackColor = true;
-            this.btnSignClient.Click += new System.EventHandler(this.btnSignClient_Click);
+            this.btnNegotiatePercent.Location = new System.Drawing.Point(10, 220);
+            this.btnNegotiatePercent.Name = "btnNegotiatePercent";
+            this.btnNegotiatePercent.Size = new System.Drawing.Size(75, 23);
+            this.btnNegotiatePercent.TabIndex = 46;
+            this.btnNegotiatePercent.Text = "Negotiate %";
+            this.btnNegotiatePercent.UseVisualStyleBackColor = true;
+            this.btnNegotiatePercent.Click += new System.EventHandler(this.btnNegotiatePercent_Click);
+            // 
+            // lblClientSalary
+            // 
+            this.lblClientSalary.AutoSize = true;
+            this.lblClientSalary.Location = new System.Drawing.Point(167, 198);
+            this.lblClientSalary.Name = "lblClientSalary";
+            this.lblClientSalary.Size = new System.Drawing.Size(71, 13);
+            this.lblClientSalary.TabIndex = 45;
+            this.lblClientSalary.Text = "Yearly Salary:";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(90, 225);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(49, 13);
+            this.label32.TabIndex = 44;
+            this.label32.Text = "Agent %:";
+            // 
+            // lblClientAgentPercent
+            // 
+            this.lblClientAgentPercent.AutoSize = true;
+            this.lblClientAgentPercent.Location = new System.Drawing.Point(145, 225);
+            this.lblClientAgentPercent.Name = "lblClientAgentPercent";
+            this.lblClientAgentPercent.Size = new System.Drawing.Size(71, 13);
+            this.lblClientAgentPercent.TabIndex = 43;
+            this.lblClientAgentPercent.Text = "Yearly Salary:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(90, 198);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(71, 13);
+            this.label30.TabIndex = 42;
+            this.label30.Text = "Yearly Salary:";
             // 
             // cbAvailableClients
             // 
@@ -1307,52 +1340,6 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(90, 198);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(71, 13);
-            this.label30.TabIndex = 42;
-            this.label30.Text = "Yearly Salary:";
-            // 
-            // lblClientAgentPercent
-            // 
-            this.lblClientAgentPercent.AutoSize = true;
-            this.lblClientAgentPercent.Location = new System.Drawing.Point(145, 225);
-            this.lblClientAgentPercent.Name = "lblClientAgentPercent";
-            this.lblClientAgentPercent.Size = new System.Drawing.Size(71, 13);
-            this.lblClientAgentPercent.TabIndex = 43;
-            this.lblClientAgentPercent.Text = "Yearly Salary:";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(90, 225);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(49, 13);
-            this.label32.TabIndex = 44;
-            this.label32.Text = "Agent %:";
-            // 
-            // lblClientSalary
-            // 
-            this.lblClientSalary.AutoSize = true;
-            this.lblClientSalary.Location = new System.Drawing.Point(167, 198);
-            this.lblClientSalary.Name = "lblClientSalary";
-            this.lblClientSalary.Size = new System.Drawing.Size(71, 13);
-            this.lblClientSalary.TabIndex = 45;
-            this.lblClientSalary.Text = "Yearly Salary:";
-            // 
-            // btnNegotiatePercent
-            // 
-            this.btnNegotiatePercent.Location = new System.Drawing.Point(10, 220);
-            this.btnNegotiatePercent.Name = "btnNegotiatePercent";
-            this.btnNegotiatePercent.Size = new System.Drawing.Size(75, 23);
-            this.btnNegotiatePercent.TabIndex = 46;
-            this.btnNegotiatePercent.Text = "Negotiate %";
-            this.btnNegotiatePercent.UseVisualStyleBackColor = true;
-            this.btnNegotiatePercent.Click += new System.EventHandler(this.btnNegotiatePercent_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1526,7 +1513,6 @@
         private System.Windows.Forms.Button btnViewCalendar;
         private System.Windows.Forms.Button btnViewRosters;
         private System.Windows.Forms.Label lblLicensesHeldByAgent;
-        private System.Windows.Forms.Button btnSignClient;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label lblCareerEarnings;
         private System.Windows.Forms.Label lblClientSalary;

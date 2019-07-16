@@ -11,6 +11,7 @@ namespace SportsAgencyTycoon
     {
         public int Id;
         public Sports Sport;
+        public PlayerType PlayerType;
         public Team Team;
         public League League;
         public Position Position;
@@ -64,6 +65,7 @@ namespace SportsAgencyTycoon
         {
             Id = id;
             Sport = sport;
+            PlayerType = DeterminePlayerType(Sport);
 
             FirstName = firstName;
             LastName = lastName;
@@ -104,6 +106,12 @@ namespace SportsAgencyTycoon
             //AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
 
             CareerEarnings = 0;
+        }
+
+        public PlayerType DeterminePlayerType(Sports s)
+        {
+            if (s == Sports.Boxing || s == Sports.Golf || s == Sports.MMA || s == Sports.Tennis) return PlayerType.Individual;
+            else return PlayerType.Team;
         }
 
         public int AssignPotential(Random rnd, int age, int currentSkill)

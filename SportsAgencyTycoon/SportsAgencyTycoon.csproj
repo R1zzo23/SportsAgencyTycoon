@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="PaySchedule.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerType.cs" />
     <Compile Include="PopularityDescription.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />

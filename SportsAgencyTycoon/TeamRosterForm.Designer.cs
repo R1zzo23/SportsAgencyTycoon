@@ -36,6 +36,7 @@
             this.cbTeamRoster = new System.Windows.Forms.ComboBox();
             this.lblYearlySalary = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblAgentPercent = new System.Windows.Forms.Label();
             this.lblAgentPaid = new System.Windows.Forms.Label();
             this.lblYearsLeft = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -51,7 +52,6 @@
             this.lblLifestyle = new System.Windows.Forms.Label();
             this.lblGreed = new System.Windows.Forms.Label();
             this.lblPopularity = new System.Windows.Forms.Label();
-            this.lblAgentPercent = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -133,6 +133,15 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contract Info";
+            // 
+            // lblAgentPercent
+            // 
+            this.lblAgentPercent.AutoSize = true;
+            this.lblAgentPercent.Location = new System.Drawing.Point(6, 94);
+            this.lblAgentPercent.Name = "lblAgentPercent";
+            this.lblAgentPercent.Size = new System.Drawing.Size(96, 13);
+            this.lblAgentPercent.TabIndex = 7;
+            this.lblAgentPercent.Text = "Agent Percentage:";
             // 
             // lblAgentPaid
             // 
@@ -280,20 +289,11 @@
             this.lblPopularity.TabIndex = 4;
             this.lblPopularity.Text = "Popularity:";
             // 
-            // lblAgentPercent
-            // 
-            this.lblAgentPercent.AutoSize = true;
-            this.lblAgentPercent.Location = new System.Drawing.Point(6, 94);
-            this.lblAgentPercent.Name = "lblAgentPercent";
-            this.lblAgentPercent.Size = new System.Drawing.Size(96, 13);
-            this.lblAgentPercent.TabIndex = 7;
-            this.lblAgentPercent.Text = "Agent Percentage:";
-            // 
             // TeamRosterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 632);
+            this.ClientSize = new System.Drawing.Size(755, 632);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -301,6 +301,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cbTeamList);
             this.Controls.Add(this.cbLeagues);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "TeamRosterForm";
             this.Text = "Team Rosters";
             this.panel1.ResumeLayout(false);
