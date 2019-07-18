@@ -45,6 +45,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.agencyNameLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblAgentCareerEarnings = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.lblLicensesHeldByAgent = new System.Windows.Forms.Label();
             this.agentBeingTrainedLabel = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -146,8 +148,17 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.lblAgentCareerEarnings = new System.Windows.Forms.Label();
+            this.lblClientMonthlySalary = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.lblBaseballSeason = new System.Windows.Forms.Label();
+            this.lblSoccerSeason = new System.Windows.Forms.Label();
+            this.lblHockeySeason = new System.Windows.Forms.Label();
+            this.lblFootballSeason = new System.Windows.Forms.Label();
+            this.lblBasketballSeason = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -359,6 +370,24 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manager Information";
+            // 
+            // lblAgentCareerEarnings
+            // 
+            this.lblAgentCareerEarnings.AutoSize = true;
+            this.lblAgentCareerEarnings.Location = new System.Drawing.Point(98, 211);
+            this.lblAgentCareerEarnings.Name = "lblAgentCareerEarnings";
+            this.lblAgentCareerEarnings.Size = new System.Drawing.Size(13, 13);
+            this.lblAgentCareerEarnings.TabIndex = 31;
+            this.lblAgentCareerEarnings.Text = "0";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(7, 211);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(85, 13);
+            this.label31.TabIndex = 30;
+            this.label31.Text = "Career Earnings:";
             // 
             // lblLicensesHeldByAgent
             // 
@@ -889,6 +918,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.lblClientMonthlySalary);
             this.groupBox6.Controls.Add(this.btnNegotiatePercent);
             this.groupBox6.Controls.Add(this.lblClientSalary);
             this.groupBox6.Controls.Add(this.label32);
@@ -1344,29 +1374,120 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
-            // label31
+            // lblClientMonthlySalary
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(7, 211);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(85, 13);
-            this.label31.TabIndex = 30;
-            this.label31.Text = "Career Earnings:";
+            this.lblClientMonthlySalary.AutoSize = true;
+            this.lblClientMonthlySalary.Location = new System.Drawing.Point(170, 171);
+            this.lblClientMonthlySalary.Name = "lblClientMonthlySalary";
+            this.lblClientMonthlySalary.Size = new System.Drawing.Size(82, 13);
+            this.lblClientMonthlySalary.TabIndex = 47;
+            this.lblClientMonthlySalary.Text = "Monthly Salary: ";
             // 
-            // lblAgentCareerEarnings
+            // label33
             // 
-            this.lblAgentCareerEarnings.AutoSize = true;
-            this.lblAgentCareerEarnings.Location = new System.Drawing.Point(98, 211);
-            this.lblAgentCareerEarnings.Name = "lblAgentCareerEarnings";
-            this.lblAgentCareerEarnings.Size = new System.Drawing.Size(13, 13);
-            this.lblAgentCareerEarnings.TabIndex = 31;
-            this.lblAgentCareerEarnings.Text = "0";
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(1144, 357);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(92, 13);
+            this.label33.TabIndex = 23;
+            this.label33.Text = "Baseball Season?";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(1141, 454);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(86, 13);
+            this.label34.TabIndex = 24;
+            this.label34.Text = "Soccer Season?";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(1144, 430);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(89, 13);
+            this.label37.TabIndex = 25;
+            this.label37.Text = "Hockey Season?";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(1144, 404);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(89, 13);
+            this.label39.TabIndex = 26;
+            this.label39.Text = "Football Season?";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(1144, 381);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(101, 13);
+            this.label40.TabIndex = 27;
+            this.label40.Text = "Basketball Season?";
+            // 
+            // lblBaseballSeason
+            // 
+            this.lblBaseballSeason.AutoSize = true;
+            this.lblBaseballSeason.Location = new System.Drawing.Point(1253, 358);
+            this.lblBaseballSeason.Name = "lblBaseballSeason";
+            this.lblBaseballSeason.Size = new System.Drawing.Size(41, 13);
+            this.lblBaseballSeason.TabIndex = 28;
+            this.lblBaseballSeason.Text = "label41";
+            // 
+            // lblSoccerSeason
+            // 
+            this.lblSoccerSeason.AutoSize = true;
+            this.lblSoccerSeason.Location = new System.Drawing.Point(1253, 454);
+            this.lblSoccerSeason.Name = "lblSoccerSeason";
+            this.lblSoccerSeason.Size = new System.Drawing.Size(41, 13);
+            this.lblSoccerSeason.TabIndex = 29;
+            this.lblSoccerSeason.Text = "label42";
+            // 
+            // lblHockeySeason
+            // 
+            this.lblHockeySeason.AutoSize = true;
+            this.lblHockeySeason.Location = new System.Drawing.Point(1253, 430);
+            this.lblHockeySeason.Name = "lblHockeySeason";
+            this.lblHockeySeason.Size = new System.Drawing.Size(41, 13);
+            this.lblHockeySeason.TabIndex = 30;
+            this.lblHockeySeason.Text = "label43";
+            // 
+            // lblFootballSeason
+            // 
+            this.lblFootballSeason.AutoSize = true;
+            this.lblFootballSeason.Location = new System.Drawing.Point(1253, 404);
+            this.lblFootballSeason.Name = "lblFootballSeason";
+            this.lblFootballSeason.Size = new System.Drawing.Size(41, 13);
+            this.lblFootballSeason.TabIndex = 31;
+            this.lblFootballSeason.Text = "label44";
+            // 
+            // lblBasketballSeason
+            // 
+            this.lblBasketballSeason.AutoSize = true;
+            this.lblBasketballSeason.Location = new System.Drawing.Point(1253, 381);
+            this.lblBasketballSeason.Name = "lblBasketballSeason";
+            this.lblBasketballSeason.Size = new System.Drawing.Size(41, 13);
+            this.lblBasketballSeason.TabIndex = 32;
+            this.lblBasketballSeason.Text = "label45";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1484, 861);
+            this.Controls.Add(this.lblBasketballSeason);
+            this.Controls.Add(this.lblFootballSeason);
+            this.Controls.Add(this.lblHockeySeason);
+            this.Controls.Add(this.lblSoccerSeason);
+            this.Controls.Add(this.lblBaseballSeason);
+            this.Controls.Add(this.label40);
+            this.Controls.Add(this.label39);
+            this.Controls.Add(this.label37);
+            this.Controls.Add(this.label34);
+            this.Controls.Add(this.label33);
             this.Controls.Add(this.btnViewRosters);
             this.Controls.Add(this.btnViewCalendar);
             this.Controls.Add(this.advanceWeekBtn);
@@ -1544,6 +1665,17 @@
         private System.Windows.Forms.Button btnNegotiatePercent;
         private System.Windows.Forms.Label lblAgentCareerEarnings;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label lblClientMonthlySalary;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label lblBaseballSeason;
+        private System.Windows.Forms.Label lblSoccerSeason;
+        private System.Windows.Forms.Label lblHockeySeason;
+        private System.Windows.Forms.Label lblFootballSeason;
+        private System.Windows.Forms.Label lblBasketballSeason;
     }
 }
 

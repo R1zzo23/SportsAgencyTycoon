@@ -15,11 +15,13 @@ namespace SportsAgencyTycoon
         public int Popularity;
         public Date SeasonStart;
         public Date SeasonEnd;
+        public int MonthsInSeason;
         public int MaxSalary;
         public int MinSalary;
         public List<Player> FreeAgents = new List<Player>();
+        public bool InSeason;
 
-        public League(Sports sport, string name, string abbreviation, int popularity, Date seasonStart, Date seasonEnd, int maxSalary, int minSalary)
+        public League(Sports sport, string name, string abbreviation, int popularity, Date seasonStart, Date seasonEnd, int monthsInSeason, int maxSalary, int minSalary)
         {
             Sport = sport;
             Name = name;
@@ -28,6 +30,7 @@ namespace SportsAgencyTycoon
             Popularity = popularity;
             SeasonStart = seasonStart;
             SeasonEnd = seasonEnd;
+            MonthsInSeason = monthsInSeason;
             MaxSalary = maxSalary;
             MinSalary = minSalary;
         }

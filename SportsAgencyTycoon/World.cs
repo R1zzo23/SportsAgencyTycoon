@@ -109,11 +109,17 @@ namespace SportsAgencyTycoon
         }
         public void CreateLeagues(Random rnd)
         {
-            NBA = new League(Sports.Basketball, "National Basketball Association", "NBA", rnd.Next(45, 100), new Date(10, Months.October, 4), new Date(6, Months.June, 2), 40000000, 582180);
-            MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(4, Months.April, 1), new Date(10, Months.October, 4), 35000000, 555000);
-            NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.August, 1), new Date(2, Months.February, 1), 30000000, 495000);
-            NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(10, Months.October, 1), new Date(6, Months.June, 2), 9500000, 650000);
-            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(3, Months.March, 2), new Date(12, Months.December, 2), 7000000, 56250);
+            NBA = new League(Sports.Basketball, "National Basketball Association", "NBA", rnd.Next(45, 100), new Date(10, Months.October, 4), new Date(6, Months.June, 2), 8, 40000000, 582180);
+            MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(4, Months.April, 1), new Date(10, Months.October, 4), 6, 35000000, 555000);
+            NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.August, 1), new Date(2, Months.February, 1), 6, 30000000, 495000);
+            NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(10, Months.October, 1), new Date(6, Months.June, 2), 8, 9500000, 650000);
+            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(3, Months.March, 2), new Date(12, Months.December, 2), 9, 7000000, 56250);
+
+            NBA.InSeason = true;
+            MLB.InSeason = false;
+            NFL.InSeason = true;
+            NHL.InSeason = true;
+            MLS.InSeason = false;
         }
         public void CreateCalendarEventsForLeagueStartAndEnd()
         {
@@ -787,20 +793,8 @@ namespace SportsAgencyTycoon
             if (((WeekNumber == 5) && ((MonthNumber + 1) % 3 != 0)) || ((WeekNumber == 6) && ((MonthNumber + 1) % 3 == 0)))
             {
                 SetNewMonth();
+                PayPlayersMonthlySalary();
             }
-
-            //check for birthdays
-            /*foreach (Association a in Associations)
-            {
-                foreach (Player p in a.PlayerList)
-                {
-                    if (p.BirthMonth == MonthName && p.BirthWeek == WeekNumber) p.Age++;
-                }
-            }
-            foreach (Client c in agency.Clients)
-            {
-                if (c.BirthMonth == MonthName && c.BirthWeek == WeekNumber) c.Age++;
-            }*/
         }
         private void SetNewMonth()
         {
@@ -818,6 +812,21 @@ namespace SportsAgencyTycoon
             Year++;
             CreateAllEvents();
             IncreasePrizePool();
+        }
+        private void PayPlayersMonthlySalary()
+        {
+            foreach (League l in Leagues)
+                if (l.InSeason)
+                    foreach (Team t in l.TeamList)
+                        foreach (Player p in t.Roster)
+                        {
+                            // all players getting paid monthly get their money
+                            if (p.Contract.AgentPaySchedule == PaySchedule.Monthly)
+                                p.CareerEarnings += p.Contract.MonthlySalary;
+                            // if player is member of agency, agency gets paid too
+                            if (p.MemberOfAgency)
+                                MainForm.agency.Money += Convert.ToInt32((double)p.Contract.MonthlySalary * (double)(p.Contract.AgentPercentage / 100));
+                        }               
         }
         private void IncreasePrizePool()
         {

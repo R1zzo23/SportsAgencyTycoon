@@ -55,8 +55,27 @@ namespace SportsAgencyTycoon
             PopulateLeagues();
             PopulateAssociations();
             PopulateEventList();
-
+            DetermineSeasons();
         }
+
+        public void DetermineSeasons()
+        {
+            if (world.MLB.InSeason) lblBaseballSeason.Text = "YES";
+            else lblBaseballSeason.Text = "NO";
+
+            if (world.NBA.InSeason) lblBasketballSeason.Text = "YES";
+            else lblBasketballSeason.Text = "NO";
+
+            if (world.NFL.InSeason) lblFootballSeason.Text = "YES";
+            else lblFootballSeason.Text = "NO";
+
+            if (world.NHL.InSeason) lblHockeySeason.Text = "YES";
+            else lblHockeySeason.Text = "NO";
+
+            if (world.MLS.InSeason) lblSoccerSeason.Text = "YES";
+            else lblSoccerSeason.Text = "NO";
+        }
+
         public void PopUpStartGameForm()
         {
             StartGameForm startGameForm = new StartGameForm();
@@ -656,12 +675,14 @@ namespace SportsAgencyTycoon
                 if (selectedClient.League != null)
                 {
                     lblClientSalary.Text = selectedClient.Contract.YearlySalary.ToString("C0");
+                    lblClientMonthlySalary.Text = selectedClient.Contract.MonthlySalary.ToString("C0");
                     lblClientAgentPercent.Text = selectedClient.Contract.AgentPercentage.ToString() + "%";
                 }
                     
                 else
                 {
                     lblClientSalary.Text = "";
+                    lblClientMonthlySalary.Text = "";
                     lblClientAgentPercent.Text = "";
                 }                   
                 
@@ -871,6 +892,24 @@ namespace SportsAgencyTycoon
                     int indx = agency.Clients.FindIndex(x => (x.FullName == e.PlayerName) && (x.Sport == e.Sport) && (x.Id == e.PlayerID));
                     agency.Clients[indx].Age++;
                 }
+                else if (e.EventType == CalendarEventType.LeagueYearBegins)
+                {
+                    if (e.Sport == Sports.Baseball) world.MLB.InSeason= true;
+                    else if (e.Sport == Sports.Basketball) world.NBA.InSeason= true;
+                    else if (e.Sport == Sports.Football) world.NFL.InSeason = true;
+                    else if (e.Sport == Sports.Hockey) world.NHL.InSeason = true;
+                    else if (e.Sport == Sports.Soccer) world.MLS.InSeason= true;
+                    DetermineSeasons();
+                }
+                else if (e.EventType == CalendarEventType.LeagueYearEnds)
+                {
+                    if (e.Sport == Sports.Baseball) world.MLS.InSeason = false;
+                    else if (e.Sport == Sports.Basketball) world.NBA.InSeason = false;
+                    else if (e.Sport == Sports.Football) world.NFL.InSeason = false;
+                    else if (e.Sport == Sports.Hockey) world.NHL.InSeason = false;
+                    else if (e.Sport == Sports.Soccer) world.MLS.InSeason = false;
+                    DetermineSeasons();
+                }
             }
         }
 
@@ -935,7 +974,7 @@ namespace SportsAgencyTycoon
             {
                 if (player.League != null)
                     player.Contract.AgentPercentage = negotiatePercentageForm.Percentage;
-                else player.Contract = new Contract(50, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
+                else player.Contract = new Contract(50, 0, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
 
                 player.MemberOfAgency = true;
 

@@ -138,7 +138,7 @@ namespace SportsAgencyTycoon
             int years = rnd.Next(1, 6);
             int signingBonus;
             int yearlySalary = DetermineYearlySalary(rnd);
-            if (Sport == Sports.Baseball || Sport == Sports.Basketball || Sport == Sports.Football || Sport == Sports.Hockey || Sport == Sports.Soccer)
+            if (PlayerType == PlayerType.Team)
             {
                 if (Sport == Sports.Football)
                 {
@@ -154,10 +154,12 @@ namespace SportsAgencyTycoon
 
                 else signingBonus = 0;
 
-                contract = new Contract(years, yearlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DetermineAgentPercentage(rnd), DeterminePaySchedule(years));
+                int monthlySalary = Convert.ToInt32((double)yearlySalary / (double)League.MonthsInSeason);
+
+                contract = new Contract(years, yearlySalary, monthlySalary, League.SeasonStart, League.SeasonEnd, signingBonus, DetermineAgentPercentage(rnd), DeterminePaySchedule(years));
                 return contract;
             }
-            else //if (Sport == Sports.Boxing || Sport == Sports.Golf || Sport == Sports.MMA || Sport == Sports.Tennis) 
+            else 
             {
                 contract = null;
                 return contract;
