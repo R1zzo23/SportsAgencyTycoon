@@ -224,6 +224,15 @@ namespace SportsAgencyTycoon
                 NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 8, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
                 NBA.TeamList[i].Roster.Add(new BasketballPlayer(rnd, i * 10 + 9, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
             }
+            // Create Free Agents
+            for (int j = 0; j < 7; j++)
+            {
+                NBA.FreeAgents.Add(new BasketballPlayer(rnd, j * 5 + 300, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PG));
+                NBA.FreeAgents.Add(new BasketballPlayer(rnd, j * 5 + 301, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SG));
+                NBA.FreeAgents.Add(new BasketballPlayer(rnd, j * 5 + 302, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SF));
+                NBA.FreeAgents.Add(new BasketballPlayer(rnd, j * 5 + 303, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.PF));
+                NBA.FreeAgents.Add(new BasketballPlayer(rnd, j * 5 + 304, Sports.Basketball, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CE));
+            }
         }
         public void CreateFootballPlayers(Random rnd)
         {
@@ -267,6 +276,26 @@ namespace SportsAgencyTycoon
                 NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 35, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.P));
                 NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 36, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
                 NFL.TeamList[i].Roster.Add(new FootballPlayer(rnd, i * 38 + 37, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 76), rnd.Next(21, 33), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
+            }
+            // Create Free Agents
+            for (int j = 0; j < 7; j++)
+            {
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1216, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.QB));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1217, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.RB));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1218, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FB));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1219, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.WR));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1220, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.TE));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1221, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.C));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1222, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OG));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1223, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.OT));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1224, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DE));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1225, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.DT));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1226, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.LB));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1227, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.CB));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1228, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.SS));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1229, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.FS));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1230, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.K));
+                NFL.FreeAgents.Add(new FootballPlayer(rnd, j * 16 + 1231, Sports.Football, randomFirstName(rnd), randomLastName(rnd), rnd.Next(25, 41), rnd.Next(18, 38), (Months)rnd.Next(0, 12), rnd.Next(1, 6), Position.P));
             }
         }
         public void CreateHockeyPlayers(Random rnd)

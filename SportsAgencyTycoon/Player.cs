@@ -36,6 +36,7 @@ namespace SportsAgencyTycoon
         public Endorsement Endorsement;
         public bool WillingToNegotiate;
         public bool MemberOfAgency;
+        public bool FreeAgent;
 
         //age and birthday
         public int Age;
@@ -93,20 +94,10 @@ namespace SportsAgencyTycoon
             else BirthWeek = birthWeek;
             Birthday = CreateBirthday(birthMonth, birthWeek);
 
-            //CreatePlayerContract(rnd);
-
             Popularity = DeterminePopularity(CurrentSkill, PotentialSkill, Age);
             PopularityDescription = DescribePopularity(Popularity);
             PopularityString = EnumToString(PopularityDescription.ToString());
-
-            //TeamHappiness = DetermineTeamHappiness(rnd);
-            //TeamHappinessDescription = DescribeHappiness(TeamHappiness);
-            //TeamHappinessString = EnumToString(TeamHappinessDescription.ToString());
-
-            //AgencyHappiness = DetermineAgencyHappiness(rnd);
-            //AgencyHappinessDescription = DescribeHappiness(AgencyHappiness);
-            //AgencyHappinessString = EnumToString(AgencyHappinessDescription.ToString());
-
+            
             CareerEarnings = 0;
         }
 

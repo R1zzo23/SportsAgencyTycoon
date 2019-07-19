@@ -27,6 +27,7 @@ namespace SportsAgencyTycoon
             Name = name;
             Abbreviation = abbreviation;
             TeamList = new List<Team>();
+            FreeAgents = new List<Player>();
             Popularity = popularity;
             SeasonStart = seasonStart;
             SeasonEnd = seasonEnd;
