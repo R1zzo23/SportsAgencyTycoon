@@ -826,7 +826,19 @@ namespace SportsAgencyTycoon
                                 p.CareerEarnings += p.Contract.MonthlySalary;
                                 // if player is member of agency, agency gets paid too
                                 if (p.MemberOfAgency)
+                                {
                                     MainForm.agency.Money += Convert.ToInt32((double)p.Contract.MonthlySalary * (double)(p.Contract.AgentPercentage / 100));
+                                    //find which Agent represents this client and give money to Agent
+                                    MainForm.agency.FindAgent(p).CareerEarnings += Convert.ToInt32((double)p.Contract.MonthlySalary * (double)(p.Contract.AgentPercentage / 100));
+
+
+                                    /*for (int i = 0; i < MainForm.agency.Agents.Count; i++)
+                                    {
+                                        int index = MainForm.agency.Agents[i].ClientList.FindIndex(o => (o.FullName == p.FullName) && (o.Id == p.Id) && (o.Sport == p.Sport));
+                                        if (index >= 0) MainForm.agency.Agents[i].CareerEarnings += Convert.ToInt32((double)p.Contract.MonthlySalary * (double)(p.Contract.AgentPercentage / 100));
+                                    }*/
+                                }
+                                    
                             }
                         }               
         }
@@ -841,7 +853,11 @@ namespace SportsAgencyTycoon
                         p.CareerEarnings += p.Contract.YearlySalary;
                         // if player is member of agency, agency gets paid too
                         if (p.MemberOfAgency)
+                        {
                             MainForm.agency.Money += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
+                            //find which Agent represents this client and give money to Agent
+                            MainForm.agency.FindAgent(p).CareerEarnings += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
+                        }
                     }
                 }
             l.InSeason = false;

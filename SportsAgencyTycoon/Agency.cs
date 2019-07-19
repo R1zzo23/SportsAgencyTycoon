@@ -99,5 +99,15 @@ namespace SportsAgencyTycoon
             foreach (Agent a in Agents) monthlyCosts += a.Salary;
             return monthlyCosts;
         }
+
+        public Agent FindAgent(Player player)
+        {
+            for (int i = 0; i < Agents.Count; i++)
+            {
+                int index = Agents[i].ClientList.FindIndex(o => (o.FullName == player.FullName) && (o.Id == player.Id) && (o.Sport == player.Sport));
+                if (index >= 0) return Agents[i];
+            }
+            return null;
+        }
     }
 }
