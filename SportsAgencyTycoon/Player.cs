@@ -186,7 +186,7 @@ namespace SportsAgencyTycoon
         {
             PaySchedule paySchedule;
 
-            if (years == 1) paySchedule = PaySchedule.UpFront;
+            if (years == 1) paySchedule = PaySchedule.Annually;
             else paySchedule = PaySchedule.Monthly;
 
             return paySchedule;

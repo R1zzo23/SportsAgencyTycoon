@@ -822,11 +822,29 @@ namespace SportsAgencyTycoon
                         {
                             // all players getting paid monthly get their money
                             if (p.Contract.AgentPaySchedule == PaySchedule.Monthly)
+                            {
                                 p.CareerEarnings += p.Contract.MonthlySalary;
-                            // if player is member of agency, agency gets paid too
-                            if (p.MemberOfAgency)
-                                MainForm.agency.Money += Convert.ToInt32((double)p.Contract.MonthlySalary * (double)(p.Contract.AgentPercentage / 100));
+                                // if player is member of agency, agency gets paid too
+                                if (p.MemberOfAgency)
+                                    MainForm.agency.Money += Convert.ToInt32((double)p.Contract.MonthlySalary * (double)(p.Contract.AgentPercentage / 100));
+                            }
                         }               
+        }
+        public void PayPlayersAnnualSalary(League l)
+        {
+            foreach (Team t in l.TeamList)
+                foreach (Player p in t.Roster)
+                {
+                    // all players getting paid annually get their money
+                    if (p.Contract.AgentPaySchedule == PaySchedule.Annually)
+                    {
+                        p.CareerEarnings += p.Contract.YearlySalary;
+                        // if player is member of agency, agency gets paid too
+                        if (p.MemberOfAgency)
+                            MainForm.agency.Money += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
+                    }
+                }
+            l.InSeason = false;
         }
         private void IncreasePrizePool()
         {

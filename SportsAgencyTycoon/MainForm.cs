@@ -903,11 +903,11 @@ namespace SportsAgencyTycoon
                 }
                 else if (e.EventType == CalendarEventType.LeagueYearEnds)
                 {
-                    if (e.Sport == Sports.Baseball) world.MLS.InSeason = false;
-                    else if (e.Sport == Sports.Basketball) world.NBA.InSeason = false;
-                    else if (e.Sport == Sports.Football) world.NFL.InSeason = false;
-                    else if (e.Sport == Sports.Hockey) world.NHL.InSeason = false;
-                    else if (e.Sport == Sports.Soccer) world.MLS.InSeason = false;
+                    if (e.Sport == Sports.Baseball) world.PayPlayersAnnualSalary(world.MLB);
+                    else if (e.Sport == Sports.Basketball) world.PayPlayersAnnualSalary(world.NBA);
+                    else if (e.Sport == Sports.Football) world.PayPlayersAnnualSalary(world.NFL);
+                    else if (e.Sport == Sports.Hockey) world.PayPlayersAnnualSalary(world.NHL);
+                    else if (e.Sport == Sports.Soccer) world.PayPlayersAnnualSalary(world.MLS);
                     DetermineSeasons();
                 }
             }
