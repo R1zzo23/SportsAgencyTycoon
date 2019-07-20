@@ -518,6 +518,9 @@ namespace SportsAgencyTycoon
             {
                 Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
 
+                if (selectedClient.FreeAgent) btnClientCallTeams.Enabled = true;
+                else if (!selectedClient.FreeAgent || selectedClient.PlayerType == PlayerType.Individual) btnClientCallTeams.Enabled = false;
+
                 clientSportLabel.Text = selectedClient.Sport.ToString();
                 clientNameLabel.Text = selectedClient.FullName;
                 clientPopularityLabel.Text = selectedClient.PopularityString;
@@ -1079,6 +1082,13 @@ namespace SportsAgencyTycoon
             }
 
             return player;
+        }
+
+        private void btnClientCallTeams_Click(object sender, EventArgs e)
+        {
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
+            selectedAgent.CallTeamsForClient(world, selectedClient);
         }
     }
 }

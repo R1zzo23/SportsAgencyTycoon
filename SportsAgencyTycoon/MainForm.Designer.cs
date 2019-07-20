@@ -102,6 +102,7 @@
             this.clientSportLabel = new System.Windows.Forms.Label();
             this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblClientMonthlySalary = new System.Windows.Forms.Label();
             this.btnNegotiatePercent = new System.Windows.Forms.Button();
             this.lblClientSalary = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
@@ -148,7 +149,6 @@
             this.advanceWeekBtn = new System.Windows.Forms.Button();
             this.btnViewCalendar = new System.Windows.Forms.Button();
             this.btnViewRosters = new System.Windows.Forms.Button();
-            this.lblClientMonthlySalary = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -159,6 +159,7 @@
             this.lblHockeySeason = new System.Windows.Forms.Label();
             this.lblFootballSeason = new System.Windows.Forms.Label();
             this.lblBasketballSeason = new System.Windows.Forms.Label();
+            this.btnClientCallTeams = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -744,6 +745,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.btnClientCallTeams);
             this.groupBox5.Controls.Add(this.label28);
             this.groupBox5.Controls.Add(this.lblCareerEarnings);
             this.groupBox5.Controls.Add(this.lblBirthWeek);
@@ -939,6 +941,15 @@
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Available Clients to Sign";
+            // 
+            // lblClientMonthlySalary
+            // 
+            this.lblClientMonthlySalary.AutoSize = true;
+            this.lblClientMonthlySalary.Location = new System.Drawing.Point(170, 171);
+            this.lblClientMonthlySalary.Name = "lblClientMonthlySalary";
+            this.lblClientMonthlySalary.Size = new System.Drawing.Size(82, 13);
+            this.lblClientMonthlySalary.TabIndex = 47;
+            this.lblClientMonthlySalary.Text = "Monthly Salary: ";
             // 
             // btnNegotiatePercent
             // 
@@ -1374,15 +1385,6 @@
             this.btnViewRosters.UseVisualStyleBackColor = true;
             this.btnViewRosters.Click += new System.EventHandler(this.btnViewRosters_Click);
             // 
-            // lblClientMonthlySalary
-            // 
-            this.lblClientMonthlySalary.AutoSize = true;
-            this.lblClientMonthlySalary.Location = new System.Drawing.Point(170, 171);
-            this.lblClientMonthlySalary.Name = "lblClientMonthlySalary";
-            this.lblClientMonthlySalary.Size = new System.Drawing.Size(82, 13);
-            this.lblClientMonthlySalary.TabIndex = 47;
-            this.lblClientMonthlySalary.Text = "Monthly Salary: ";
-            // 
             // label33
             // 
             this.label33.AutoSize = true;
@@ -1472,6 +1474,17 @@
             this.lblBasketballSeason.Size = new System.Drawing.Size(41, 13);
             this.lblBasketballSeason.TabIndex = 32;
             this.lblBasketballSeason.Text = "label45";
+            // 
+            // btnClientCallTeams
+            // 
+            this.btnClientCallTeams.Enabled = false;
+            this.btnClientCallTeams.Location = new System.Drawing.Point(284, 210);
+            this.btnClientCallTeams.Name = "btnClientCallTeams";
+            this.btnClientCallTeams.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCallTeams.TabIndex = 34;
+            this.btnClientCallTeams.Text = "Call Teams";
+            this.btnClientCallTeams.UseVisualStyleBackColor = true;
+            this.btnClientCallTeams.Click += new System.EventHandler(this.btnClientCallTeams_Click);
             // 
             // MainForm
             // 
@@ -1676,6 +1689,7 @@
         private System.Windows.Forms.Label lblHockeySeason;
         private System.Windows.Forms.Label lblFootballSeason;
         private System.Windows.Forms.Label lblBasketballSeason;
+        private System.Windows.Forms.Button btnClientCallTeams;
     }
 }
 
