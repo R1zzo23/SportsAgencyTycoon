@@ -63,18 +63,18 @@ namespace SportsAgencyTycoon
         public int WorldRanking;
         
 
-        public Player(Random rnd, int id, Sports sport, FirstName firstName, LastName lastName, int currentSkill, int age, Months birthMonth, int birthWeek)
+        public Player(Random rnd, int id, Sports sport, int age)
         {
             Id = id;
             Sport = sport;
             PlayerType = DeterminePlayerType(Sport);
 
-            FirstName = firstName;
-            LastName = lastName;
-            FullName = firstName.ToString() + " " + lastName.ToString();
+            FirstName = randomFirstName(rnd);
+            LastName = randomLastName(rnd);
+            FullName = FirstName.ToString() + " " + LastName.ToString();
 
-            CurrentSkill = currentSkill;
-            PotentialSkill = AssignPotential(rnd, age, currentSkill);
+            CurrentSkill = rnd.Next(25, 76);
+            PotentialSkill = AssignPotential(rnd, age, CurrentSkill);
 
             Greed = rnd.Next(0, 101);
             Lifestyle = rnd.Next(0, 101);
@@ -85,14 +85,16 @@ namespace SportsAgencyTycoon
             MemberOfAgency = false;
 
             Age = age;
-            BirthMonth = birthMonth;
-            if (birthWeek == 5)
+            BirthMonth = (Months)rnd.Next(0, 12);
+
+            BirthWeek = rnd.Next(1, 6);
+            if (BirthWeek == 5)
             {
                 if (((int)BirthMonth + 1) % 3 == 0) BirthWeek = 5;
                 else BirthWeek = 4;
             }
-            else BirthWeek = birthWeek;
-            Birthday = CreateBirthday(birthMonth, birthWeek);
+
+            Birthday = CreateBirthday(BirthMonth, BirthWeek);
 
             Popularity = DeterminePopularity(CurrentSkill, PotentialSkill, Age);
             PopularityDescription = DescribePopularity(Popularity);
@@ -356,5 +358,28 @@ namespace SportsAgencyTycoon
             s = Regex.Replace(s, @"((?<=\p{Ll})\p{Lu})|((?!\A)\p{Lu}(?>\p{Ll}))", " $0");
             return s;
         }
+
+        #region Create Random First & Last Names
+
+        public FirstName randomFirstName(Random rnd)
+        {
+            FirstName firstName;
+
+            int firstNameNumber = rnd.Next(0, Enum.GetNames(typeof(FirstName)).Length);
+            firstName = (FirstName)firstNameNumber;
+
+            return firstName;
+        }
+        public LastName randomLastName(Random rnd)
+        {
+            LastName lastName;
+
+            int lastNameNumber = rnd.Next(0, Enum.GetNames(typeof(FirstName)).Length);
+            lastName = (LastName)lastNameNumber;
+
+            return lastName;
+        }
+
+        #endregion
     }
 }

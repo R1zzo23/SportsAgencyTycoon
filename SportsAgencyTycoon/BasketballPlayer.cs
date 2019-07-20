@@ -15,8 +15,8 @@ namespace SportsAgencyTycoon
         public int AllStarTeams;
         public int AllNBATeams;
 
-        public BasketballPlayer(Random rnd, int id, Sports sport, FirstName firstName, LastName lastName, int skillLevel, int age, Months birthMonth, int birthWeek, Position position)
-            : base(rnd, id, sport, firstName, lastName, skillLevel, age, birthMonth, birthWeek)
+        public BasketballPlayer(Random rnd, int id, Sports sport, int age, Position position)
+            : base(rnd, id, sport, age)
         {
             Position = position;
             PlayoffsMade = 0;

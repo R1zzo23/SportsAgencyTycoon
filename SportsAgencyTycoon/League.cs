@@ -20,6 +20,7 @@ namespace SportsAgencyTycoon
         public int MinSalary;
         public List<Player> FreeAgents = new List<Player>();
         public bool InSeason;
+        public int IdCount = 0;
 
         public League(Sports sport, string name, string abbreviation, int popularity, Date seasonStart, Date seasonEnd, int monthsInSeason, int maxSalary, int minSalary)
         {
@@ -34,6 +35,12 @@ namespace SportsAgencyTycoon
             MonthsInSeason = monthsInSeason;
             MaxSalary = maxSalary;
             MinSalary = minSalary;
+        }
+
+        public void AddPlayer(List<Player> l, Player p)
+        {
+            l.Add(p);
+            IdCount++;
         }
     }
 }
