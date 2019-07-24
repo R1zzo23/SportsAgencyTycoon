@@ -13,17 +13,20 @@ namespace SportsAgencyTycoon
     public partial class CallTeamForClientForm : Form
     {
         private Agent _Agent;
+        private Random rnd;
         private Player _Client;
         private League _League;
+        private string _InterestLevel;
         private List<Player> _PositionPlayers;
         private List<Control> _PlayerCards = new List<Control>();
         private List<Control> _AgeLabels = new List<Control>();
         private List<Control> _SkillLabels = new List<Control>();
         private List<Control> _ContractLabels = new List<Control>();
 
-        public CallTeamForClientForm(Agent agent, Player client, League league)
+        public CallTeamForClientForm(Random random, Agent agent, Player client, League league)
         {
             InitializeComponent();
+            rnd = random;
             _Agent = agent;
             _Client = client;
             _League = league;
@@ -106,11 +109,6 @@ namespace SportsAgencyTycoon
                     _PositionPlayers.Add(p);
                 }
 
-            /*for (int i = _PlayerCards.Count; i > _PlayerCards.Count - _PositionPlayers.Count; i--)
-            {
-                _PlayerCards[i - 1].Hide();
-            }*/
-
             for (int i = 0; i < _PlayerCards.Count - _PositionPlayers.Count; i++)
             {
                 _PlayerCards[_PlayerCards.Count - 1 - i].Hide();
@@ -128,7 +126,11 @@ namespace SportsAgencyTycoon
                 _ContractLabels[i].Text = "Years Left: " + _PositionPlayers[i].Contract.Years + " at " + _PositionPlayers[i].Contract.YearlySalary.ToString("C0") + " per season";
             }
 
-            lblTeamInterestLevel.Text = "Interest In Signing: " + GenerateTeamInterest();
+            GenerateTeamInterest();
+
+            lblTeamInterestLevel.Text = "Interest In Signing: " + _InterestLevel;
+
+            ContractOffer();
         }
 
         private void cbTeamList_SelectedIndexChanged(object sender, EventArgs e)
@@ -139,7 +141,7 @@ namespace SportsAgencyTycoon
             CreatePlayerCards(team);
         }
 
-        private string GenerateTeamInterest()
+        private void GenerateTeamInterest()
         {
             string interestLevel = "";
             //would free agent be a starter?
@@ -171,7 +173,84 @@ namespace SportsAgencyTycoon
             }
             else interestLevel = "ZERO INTEREST";
 
-            return interestLevel;
+            _InterestLevel = interestLevel;
+        }
+
+        private void ContractOffer()
+        {
+            int years;
+            int yearlySalary;
+            bool willingToNegotiate = false;
+            int randomNumber = rnd.Next(1, 101);
+
+            if (_InterestLevel == "ZERO INTEREST")
+            {
+                years = 0;
+                yearlySalary = 0;
+                willingToNegotiate = false;
+            }
+            else if (_InterestLevel == "VERY LOW")
+            {
+                if (randomNumber > 50)
+                {
+                    years = 1;
+                    yearlySalary = _Client.League.MinSalary;
+                }
+                else
+                {
+                    years = 0;
+                    yearlySalary = 0;
+                }
+                willingToNegotiate = false;
+            }
+            else if (_InterestLevel == "LOW")
+            {
+                years = 1;
+                yearlySalary = _Client.League.MinSalary;
+                willingToNegotiate = false;
+            }
+            else if (_InterestLevel == "MEDIUM")
+            {
+                years = rnd.Next(1, 3);
+                yearlySalary = _Client.DetermineYearlySalary(rnd);
+                double percent = rnd.Next(1, 21);
+                yearlySalary = Convert.ToInt32((double)yearlySalary * (1 - (percent / 100)));
+
+                willingToNegotiate = true;
+            }
+            else if (_InterestLevel == "HIGH")
+            {
+                years = rnd.Next(2, 5);
+                yearlySalary = _Client.DetermineYearlySalary(rnd);
+                willingToNegotiate = true;
+            }
+            else // _InterestLevel == "VERY HIGH"
+            {
+                years = rnd.Next(3, 5);
+                yearlySalary = _Client.DetermineYearlySalary(rnd);
+                double percent = rnd.Next(10, 26);
+                yearlySalary = Convert.ToInt32((double)yearlySalary * (1 + (percent / 100)));
+                if (yearlySalary > _Client.League.MaxSalary) yearlySalary = _Client.League.MaxSalary;
+                willingToNegotiate = true;
+            }
+
+            lblContractYears.Text = "# of Years: " + years.ToString();
+            lblContractSalary.Text = "Yearly Salary: " + yearlySalary.ToString("C0");
+            if (willingToNegotiate)
+            {
+                lblWillingToNegotiate.Text = "Willing to Negotiate: YES";
+                btnCounterOffer.Enabled = true;
+            }
+            else
+            {
+                lblWillingToNegotiate.Text = "Willing to Negotiate: NO";
+                btnCounterOffer.Enabled = false;
+            }
+        }
+
+        private void btnCounterOffer_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

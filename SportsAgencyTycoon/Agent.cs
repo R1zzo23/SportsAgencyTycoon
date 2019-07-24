@@ -86,10 +86,10 @@ namespace SportsAgencyTycoon
             return message;
         }
 
-        public void CallTeamsForClient(World world, Player client)
+        public void CallTeamsForClient(Random rnd, World world, Player client)
         {
             League l = world.Leagues[world.Leagues.FindIndex(o => o.Name == client.League.Name)];
-            CallTeamForClientForm callTeamForClientForm = new CallTeamForClientForm(this, client, l);
+            CallTeamForClientForm callTeamForClientForm = new CallTeamForClientForm(rnd, this, client, l);
             callTeamForClientForm.BringToFront();
             callTeamForClientForm.ShowDialog();
         }

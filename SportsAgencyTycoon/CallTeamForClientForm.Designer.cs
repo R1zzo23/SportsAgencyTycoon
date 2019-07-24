@@ -50,9 +50,9 @@
             this.skillLabel4 = new System.Windows.Forms.Label();
             this.ageLabel4 = new System.Windows.Forms.Label();
             this.clientCard = new System.Windows.Forms.GroupBox();
+            this.clientPosition = new System.Windows.Forms.Label();
             this.clientSkillLevel = new System.Windows.Forms.Label();
             this.clientAgeLabel = new System.Windows.Forms.Label();
-            this.clientPosition = new System.Windows.Forms.Label();
             this.playerCard5 = new System.Windows.Forms.GroupBox();
             this.contractLabel5 = new System.Windows.Forms.Label();
             this.skillLabel5 = new System.Windows.Forms.Label();
@@ -77,6 +77,16 @@
             this.contractLabel9 = new System.Windows.Forms.Label();
             this.skillLabel9 = new System.Windows.Forms.Label();
             this.ageLabel9 = new System.Windows.Forms.Label();
+            this.contractOfferBox = new System.Windows.Forms.GroupBox();
+            this.lblContractYears = new System.Windows.Forms.Label();
+            this.lblContractSalary = new System.Windows.Forms.Label();
+            this.counterOfferBox = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblWillingToNegotiate = new System.Windows.Forms.Label();
+            this.txtYears = new System.Windows.Forms.TextBox();
+            this.txtSalary = new System.Windows.Forms.TextBox();
+            this.btnCounterOffer = new System.Windows.Forms.Button();
             this.playerCard1.SuspendLayout();
             this.playerCard2.SuspendLayout();
             this.playerCard3.SuspendLayout();
@@ -88,6 +98,8 @@
             this.playerCard7.SuspendLayout();
             this.playerCard8.SuspendLayout();
             this.playerCard9.SuspendLayout();
+            this.contractOfferBox.SuspendLayout();
+            this.counterOfferBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLeagueName
@@ -116,7 +128,7 @@
             this.playerCard1.Controls.Add(this.ageLabel1);
             this.playerCard1.Location = new System.Drawing.Point(17, 65);
             this.playerCard1.Name = "playerCard1";
-            this.playerCard1.Size = new System.Drawing.Size(200, 100);
+            this.playerCard1.Size = new System.Drawing.Size(210, 100);
             this.playerCard1.TabIndex = 2;
             this.playerCard1.TabStop = false;
             this.playerCard1.Text = "groupBox1";
@@ -183,9 +195,9 @@
             this.playerCard2.Controls.Add(this.contractLabel2);
             this.playerCard2.Controls.Add(this.skillLabel2);
             this.playerCard2.Controls.Add(this.ageLabel2);
-            this.playerCard2.Location = new System.Drawing.Point(223, 65);
+            this.playerCard2.Location = new System.Drawing.Point(233, 65);
             this.playerCard2.Name = "playerCard2";
-            this.playerCard2.Size = new System.Drawing.Size(200, 100);
+            this.playerCard2.Size = new System.Drawing.Size(210, 100);
             this.playerCard2.TabIndex = 3;
             this.playerCard2.TabStop = false;
             this.playerCard2.Text = "groupBox2";
@@ -222,9 +234,9 @@
             this.playerCard3.Controls.Add(this.contractLabel3);
             this.playerCard3.Controls.Add(this.skillLabel3);
             this.playerCard3.Controls.Add(this.ageLabel3);
-            this.playerCard3.Location = new System.Drawing.Point(429, 65);
+            this.playerCard3.Location = new System.Drawing.Point(449, 65);
             this.playerCard3.Name = "playerCard3";
-            this.playerCard3.Size = new System.Drawing.Size(200, 100);
+            this.playerCard3.Size = new System.Drawing.Size(210, 100);
             this.playerCard3.TabIndex = 3;
             this.playerCard3.TabStop = false;
             this.playerCard3.Text = "groupBox3";
@@ -261,9 +273,9 @@
             this.playerCard4.Controls.Add(this.contractLabel4);
             this.playerCard4.Controls.Add(this.skillLabel4);
             this.playerCard4.Controls.Add(this.ageLabel4);
-            this.playerCard4.Location = new System.Drawing.Point(635, 65);
+            this.playerCard4.Location = new System.Drawing.Point(665, 65);
             this.playerCard4.Name = "playerCard4";
-            this.playerCard4.Size = new System.Drawing.Size(200, 100);
+            this.playerCard4.Size = new System.Drawing.Size(210, 100);
             this.playerCard4.TabIndex = 3;
             this.playerCard4.TabStop = false;
             this.playerCard4.Text = "groupBox4";
@@ -302,10 +314,19 @@
             this.clientCard.Controls.Add(this.clientAgeLabel);
             this.clientCard.Location = new System.Drawing.Point(17, 316);
             this.clientCard.Name = "clientCard";
-            this.clientCard.Size = new System.Drawing.Size(200, 100);
+            this.clientCard.Size = new System.Drawing.Size(210, 100);
             this.clientCard.TabIndex = 6;
             this.clientCard.TabStop = false;
             this.clientCard.Text = "clientCard";
+            // 
+            // clientPosition
+            // 
+            this.clientPosition.AutoSize = true;
+            this.clientPosition.Location = new System.Drawing.Point(7, 68);
+            this.clientPosition.Name = "clientPosition";
+            this.clientPosition.Size = new System.Drawing.Size(50, 13);
+            this.clientPosition.TabIndex = 2;
+            this.clientPosition.Text = "Position: ";
             // 
             // clientSkillLevel
             // 
@@ -325,23 +346,14 @@
             this.clientAgeLabel.TabIndex = 0;
             this.clientAgeLabel.Text = "Age";
             // 
-            // clientPosition
-            // 
-            this.clientPosition.AutoSize = true;
-            this.clientPosition.Location = new System.Drawing.Point(7, 68);
-            this.clientPosition.Name = "clientPosition";
-            this.clientPosition.Size = new System.Drawing.Size(50, 13);
-            this.clientPosition.TabIndex = 2;
-            this.clientPosition.Text = "Position: ";
-            // 
             // playerCard5
             // 
             this.playerCard5.Controls.Add(this.contractLabel5);
             this.playerCard5.Controls.Add(this.skillLabel5);
             this.playerCard5.Controls.Add(this.ageLabel5);
-            this.playerCard5.Location = new System.Drawing.Point(841, 65);
+            this.playerCard5.Location = new System.Drawing.Point(881, 65);
             this.playerCard5.Name = "playerCard5";
-            this.playerCard5.Size = new System.Drawing.Size(200, 100);
+            this.playerCard5.Size = new System.Drawing.Size(210, 100);
             this.playerCard5.TabIndex = 4;
             this.playerCard5.TabStop = false;
             this.playerCard5.Text = "groupBox3";
@@ -380,7 +392,7 @@
             this.playerCard6.Controls.Add(this.ageLabel6);
             this.playerCard6.Location = new System.Drawing.Point(17, 171);
             this.playerCard6.Name = "playerCard6";
-            this.playerCard6.Size = new System.Drawing.Size(200, 100);
+            this.playerCard6.Size = new System.Drawing.Size(210, 100);
             this.playerCard6.TabIndex = 5;
             this.playerCard6.TabStop = false;
             this.playerCard6.Text = "groupBox4";
@@ -417,9 +429,9 @@
             this.playerCard10.Controls.Add(this.contractLabel10);
             this.playerCard10.Controls.Add(this.skillLabel10);
             this.playerCard10.Controls.Add(this.ageLabel10);
-            this.playerCard10.Location = new System.Drawing.Point(841, 171);
+            this.playerCard10.Location = new System.Drawing.Point(881, 171);
             this.playerCard10.Name = "playerCard10";
-            this.playerCard10.Size = new System.Drawing.Size(200, 100);
+            this.playerCard10.Size = new System.Drawing.Size(210, 100);
             this.playerCard10.TabIndex = 8;
             this.playerCard10.TabStop = false;
             this.playerCard10.Text = "groupBox3";
@@ -456,9 +468,9 @@
             this.playerCard7.Controls.Add(this.contractLabel7);
             this.playerCard7.Controls.Add(this.skillLabel7);
             this.playerCard7.Controls.Add(this.ageLabel7);
-            this.playerCard7.Location = new System.Drawing.Point(223, 171);
+            this.playerCard7.Location = new System.Drawing.Point(233, 171);
             this.playerCard7.Name = "playerCard7";
-            this.playerCard7.Size = new System.Drawing.Size(200, 100);
+            this.playerCard7.Size = new System.Drawing.Size(210, 100);
             this.playerCard7.TabIndex = 5;
             this.playerCard7.TabStop = false;
             this.playerCard7.Text = "groupBox2";
@@ -495,9 +507,9 @@
             this.playerCard8.Controls.Add(this.contractLabel8);
             this.playerCard8.Controls.Add(this.skillLabel8);
             this.playerCard8.Controls.Add(this.ageLabel8);
-            this.playerCard8.Location = new System.Drawing.Point(429, 171);
+            this.playerCard8.Location = new System.Drawing.Point(449, 171);
             this.playerCard8.Name = "playerCard8";
-            this.playerCard8.Size = new System.Drawing.Size(200, 100);
+            this.playerCard8.Size = new System.Drawing.Size(210, 100);
             this.playerCard8.TabIndex = 6;
             this.playerCard8.TabStop = false;
             this.playerCard8.Text = "groupBox3";
@@ -534,9 +546,9 @@
             this.playerCard9.Controls.Add(this.contractLabel9);
             this.playerCard9.Controls.Add(this.skillLabel9);
             this.playerCard9.Controls.Add(this.ageLabel9);
-            this.playerCard9.Location = new System.Drawing.Point(635, 171);
+            this.playerCard9.Location = new System.Drawing.Point(665, 171);
             this.playerCard9.Name = "playerCard9";
-            this.playerCard9.Size = new System.Drawing.Size(200, 100);
+            this.playerCard9.Size = new System.Drawing.Size(210, 100);
             this.playerCard9.TabIndex = 7;
             this.playerCard9.TabStop = false;
             this.playerCard9.Text = "groupBox4";
@@ -568,11 +580,109 @@
             this.ageLabel9.TabIndex = 0;
             this.ageLabel9.Text = "Age";
             // 
+            // contractOfferBox
+            // 
+            this.contractOfferBox.Controls.Add(this.lblWillingToNegotiate);
+            this.contractOfferBox.Controls.Add(this.lblContractSalary);
+            this.contractOfferBox.Controls.Add(this.lblContractYears);
+            this.contractOfferBox.Location = new System.Drawing.Point(449, 316);
+            this.contractOfferBox.Name = "contractOfferBox";
+            this.contractOfferBox.Size = new System.Drawing.Size(210, 100);
+            this.contractOfferBox.TabIndex = 9;
+            this.contractOfferBox.TabStop = false;
+            this.contractOfferBox.Text = "Contract Offer";
+            // 
+            // lblContractYears
+            // 
+            this.lblContractYears.AutoSize = true;
+            this.lblContractYears.Location = new System.Drawing.Point(10, 20);
+            this.lblContractYears.Name = "lblContractYears";
+            this.lblContractYears.Size = new System.Drawing.Size(37, 13);
+            this.lblContractYears.TabIndex = 0;
+            this.lblContractYears.Text = "Years:";
+            // 
+            // lblContractSalary
+            // 
+            this.lblContractSalary.AutoSize = true;
+            this.lblContractSalary.Location = new System.Drawing.Point(10, 44);
+            this.lblContractSalary.Name = "lblContractSalary";
+            this.lblContractSalary.Size = new System.Drawing.Size(71, 13);
+            this.lblContractSalary.TabIndex = 1;
+            this.lblContractSalary.Text = "Yearly Salary:";
+            // 
+            // counterOfferBox
+            // 
+            this.counterOfferBox.Controls.Add(this.btnCounterOffer);
+            this.counterOfferBox.Controls.Add(this.txtSalary);
+            this.counterOfferBox.Controls.Add(this.txtYears);
+            this.counterOfferBox.Controls.Add(this.label1);
+            this.counterOfferBox.Controls.Add(this.label2);
+            this.counterOfferBox.Location = new System.Drawing.Point(665, 285);
+            this.counterOfferBox.Name = "counterOfferBox";
+            this.counterOfferBox.Size = new System.Drawing.Size(210, 131);
+            this.counterOfferBox.TabIndex = 10;
+            this.counterOfferBox.TabStop = false;
+            this.counterOfferBox.Text = "Agent Counter Offer";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Yearly Salary:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Years:";
+            // 
+            // lblWillingToNegotiate
+            // 
+            this.lblWillingToNegotiate.AutoSize = true;
+            this.lblWillingToNegotiate.Location = new System.Drawing.Point(10, 68);
+            this.lblWillingToNegotiate.Name = "lblWillingToNegotiate";
+            this.lblWillingToNegotiate.Size = new System.Drawing.Size(102, 13);
+            this.lblWillingToNegotiate.TabIndex = 2;
+            this.lblWillingToNegotiate.Text = "Willing to Negotiate:";
+            // 
+            // txtYears
+            // 
+            this.txtYears.Location = new System.Drawing.Point(53, 20);
+            this.txtYears.Name = "txtYears";
+            this.txtYears.Size = new System.Drawing.Size(100, 20);
+            this.txtYears.TabIndex = 2;
+            // 
+            // txtSalary
+            // 
+            this.txtSalary.Location = new System.Drawing.Point(87, 51);
+            this.txtSalary.Name = "txtSalary";
+            this.txtSalary.Size = new System.Drawing.Size(117, 20);
+            this.txtSalary.TabIndex = 3;
+            // 
+            // btnCounterOffer
+            // 
+            this.btnCounterOffer.Enabled = false;
+            this.btnCounterOffer.Location = new System.Drawing.Point(53, 94);
+            this.btnCounterOffer.Name = "btnCounterOffer";
+            this.btnCounterOffer.Size = new System.Drawing.Size(85, 23);
+            this.btnCounterOffer.TabIndex = 4;
+            this.btnCounterOffer.Text = "Counter Offer";
+            this.btnCounterOffer.UseVisualStyleBackColor = true;
+            this.btnCounterOffer.Click += new System.EventHandler(this.btnCounterOffer_Click);
+            // 
             // CallTeamForClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1335, 558);
+            this.ClientSize = new System.Drawing.Size(1103, 558);
+            this.Controls.Add(this.counterOfferBox);
+            this.Controls.Add(this.contractOfferBox);
             this.Controls.Add(this.playerCard10);
             this.Controls.Add(this.playerCard5);
             this.Controls.Add(this.playerCard7);
@@ -613,6 +723,10 @@
             this.playerCard8.PerformLayout();
             this.playerCard9.ResumeLayout(false);
             this.playerCard9.PerformLayout();
+            this.contractOfferBox.ResumeLayout(false);
+            this.contractOfferBox.PerformLayout();
+            this.counterOfferBox.ResumeLayout(false);
+            this.counterOfferBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -669,5 +783,15 @@
         private System.Windows.Forms.Label contractLabel9;
         private System.Windows.Forms.Label skillLabel9;
         private System.Windows.Forms.Label ageLabel9;
+        private System.Windows.Forms.GroupBox contractOfferBox;
+        private System.Windows.Forms.Label lblContractSalary;
+        private System.Windows.Forms.Label lblContractYears;
+        private System.Windows.Forms.GroupBox counterOfferBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblWillingToNegotiate;
+        private System.Windows.Forms.TextBox txtSalary;
+        private System.Windows.Forms.TextBox txtYears;
+        private System.Windows.Forms.Button btnCounterOffer;
     }
 }

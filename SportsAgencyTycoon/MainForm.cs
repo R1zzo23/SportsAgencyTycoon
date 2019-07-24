@@ -1088,7 +1088,7 @@ namespace SportsAgencyTycoon
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
             Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
-            selectedAgent.CallTeamsForClient(world, selectedClient);
+            selectedAgent.CallTeamsForClient(rnd, world, selectedClient);
         }
     }
 }
