@@ -532,6 +532,9 @@ namespace SportsAgencyTycoon
                 lblBirthMonth.Text = selectedClient.BirthMonth.ToString();
                 lblBirthWeek.Text = selectedClient.BirthWeek.ToString();
                 lblCareerEarnings.Text = selectedClient.CareerEarnings.ToString("C0");
+                clientPositionLabel.Text = selectedClient.Position.ToString();
+                if (selectedClient.FreeAgent) clientTeamLabel.Text = "Free Agent";
+                else clientTeamLabel.Text = selectedClient.Team.Mascot;
             }
             else
             {
@@ -543,6 +546,8 @@ namespace SportsAgencyTycoon
                 clientSkillLabel.Text = "";
                 clientAgeLabel.Text = "";
                 lblCareerEarnings.Text = "";
+                clientTeamLabel.Text = "";
+                clientPositionLabel.Text = "";
             }
         }
 

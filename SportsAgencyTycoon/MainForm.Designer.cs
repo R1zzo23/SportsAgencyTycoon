@@ -85,6 +85,7 @@
             this.cbAvailableLicenses = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnClientCallTeams = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.lblCareerEarnings = new System.Windows.Forms.Label();
             this.lblBirthWeek = new System.Windows.Forms.Label();
@@ -159,7 +160,8 @@
             this.lblHockeySeason = new System.Windows.Forms.Label();
             this.lblFootballSeason = new System.Windows.Forms.Label();
             this.lblBasketballSeason = new System.Windows.Forms.Label();
-            this.btnClientCallTeams = new System.Windows.Forms.Button();
+            this.clientPositionLabel = new System.Windows.Forms.Label();
+            this.clientTeamLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -745,6 +747,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.clientTeamLabel);
+            this.groupBox5.Controls.Add(this.clientPositionLabel);
             this.groupBox5.Controls.Add(this.btnClientCallTeams);
             this.groupBox5.Controls.Add(this.label28);
             this.groupBox5.Controls.Add(this.lblCareerEarnings);
@@ -768,6 +772,17 @@
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Client Information";
+            // 
+            // btnClientCallTeams
+            // 
+            this.btnClientCallTeams.Enabled = false;
+            this.btnClientCallTeams.Location = new System.Drawing.Point(284, 210);
+            this.btnClientCallTeams.Name = "btnClientCallTeams";
+            this.btnClientCallTeams.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCallTeams.TabIndex = 34;
+            this.btnClientCallTeams.Text = "Call Teams";
+            this.btnClientCallTeams.UseVisualStyleBackColor = true;
+            this.btnClientCallTeams.Click += new System.EventHandler(this.btnClientCallTeams_Click);
             // 
             // label28
             // 
@@ -899,7 +914,7 @@
             // 
             this.clientSportLabel.AutoSize = true;
             this.clientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientSportLabel.Location = new System.Drawing.Point(126, 53);
+            this.clientSportLabel.Location = new System.Drawing.Point(27, 53);
             this.clientSportLabel.Name = "clientSportLabel";
             this.clientSportLabel.Size = new System.Drawing.Size(79, 15);
             this.clientSportLabel.TabIndex = 18;
@@ -1475,16 +1490,27 @@
             this.lblBasketballSeason.TabIndex = 32;
             this.lblBasketballSeason.Text = "label45";
             // 
-            // btnClientCallTeams
+            // clientPositionLabel
             // 
-            this.btnClientCallTeams.Enabled = false;
-            this.btnClientCallTeams.Location = new System.Drawing.Point(284, 210);
-            this.btnClientCallTeams.Name = "btnClientCallTeams";
-            this.btnClientCallTeams.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCallTeams.TabIndex = 34;
-            this.btnClientCallTeams.Text = "Call Teams";
-            this.btnClientCallTeams.UseVisualStyleBackColor = true;
-            this.btnClientCallTeams.Click += new System.EventHandler(this.btnClientCallTeams_Click);
+            this.clientPositionLabel.AutoSize = true;
+            this.clientPositionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientPositionLabel.Location = new System.Drawing.Point(126, 53);
+            this.clientPositionLabel.Name = "clientPositionLabel";
+            this.clientPositionLabel.Size = new System.Drawing.Size(38, 15);
+            this.clientPositionLabel.TabIndex = 35;
+            this.clientPositionLabel.Text = "[POS]";
+            this.clientPositionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // clientTeamLabel
+            // 
+            this.clientTeamLabel.AutoSize = true;
+            this.clientTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientTeamLabel.Location = new System.Drawing.Point(193, 53);
+            this.clientTeamLabel.Name = "clientTeamLabel";
+            this.clientTeamLabel.Size = new System.Drawing.Size(46, 15);
+            this.clientTeamLabel.TabIndex = 36;
+            this.clientTeamLabel.Text = "[TEAM]";
+            this.clientTeamLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm
             // 
@@ -1690,6 +1716,8 @@
         private System.Windows.Forms.Label lblFootballSeason;
         private System.Windows.Forms.Label lblBasketballSeason;
         private System.Windows.Forms.Button btnClientCallTeams;
+        private System.Windows.Forms.Label clientTeamLabel;
+        private System.Windows.Forms.Label clientPositionLabel;
     }
 }
 

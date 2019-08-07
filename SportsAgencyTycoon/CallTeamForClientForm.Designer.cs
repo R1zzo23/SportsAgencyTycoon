@@ -78,15 +78,16 @@
             this.skillLabel9 = new System.Windows.Forms.Label();
             this.ageLabel9 = new System.Windows.Forms.Label();
             this.contractOfferBox = new System.Windows.Forms.GroupBox();
-            this.lblContractYears = new System.Windows.Forms.Label();
+            this.lblWillingToNegotiate = new System.Windows.Forms.Label();
             this.lblContractSalary = new System.Windows.Forms.Label();
+            this.lblContractYears = new System.Windows.Forms.Label();
             this.counterOfferBox = new System.Windows.Forms.GroupBox();
+            this.btnCounterOffer = new System.Windows.Forms.Button();
+            this.txtSalary = new System.Windows.Forms.TextBox();
+            this.txtYears = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblWillingToNegotiate = new System.Windows.Forms.Label();
-            this.txtYears = new System.Windows.Forms.TextBox();
-            this.txtSalary = new System.Windows.Forms.TextBox();
-            this.btnCounterOffer = new System.Windows.Forms.Button();
+            this.btnAcceptOffer = new System.Windows.Forms.Button();
             this.playerCard1.SuspendLayout();
             this.playerCard2.SuspendLayout();
             this.playerCard3.SuspendLayout();
@@ -592,14 +593,14 @@
             this.contractOfferBox.TabStop = false;
             this.contractOfferBox.Text = "Contract Offer";
             // 
-            // lblContractYears
+            // lblWillingToNegotiate
             // 
-            this.lblContractYears.AutoSize = true;
-            this.lblContractYears.Location = new System.Drawing.Point(10, 20);
-            this.lblContractYears.Name = "lblContractYears";
-            this.lblContractYears.Size = new System.Drawing.Size(37, 13);
-            this.lblContractYears.TabIndex = 0;
-            this.lblContractYears.Text = "Years:";
+            this.lblWillingToNegotiate.AutoSize = true;
+            this.lblWillingToNegotiate.Location = new System.Drawing.Point(10, 68);
+            this.lblWillingToNegotiate.Name = "lblWillingToNegotiate";
+            this.lblWillingToNegotiate.Size = new System.Drawing.Size(102, 13);
+            this.lblWillingToNegotiate.TabIndex = 2;
+            this.lblWillingToNegotiate.Text = "Willing to Negotiate:";
             // 
             // lblContractSalary
             // 
@@ -609,6 +610,15 @@
             this.lblContractSalary.Size = new System.Drawing.Size(71, 13);
             this.lblContractSalary.TabIndex = 1;
             this.lblContractSalary.Text = "Yearly Salary:";
+            // 
+            // lblContractYears
+            // 
+            this.lblContractYears.AutoSize = true;
+            this.lblContractYears.Location = new System.Drawing.Point(10, 20);
+            this.lblContractYears.Name = "lblContractYears";
+            this.lblContractYears.Size = new System.Drawing.Size(37, 13);
+            this.lblContractYears.TabIndex = 0;
+            this.lblContractYears.Text = "Years:";
             // 
             // counterOfferBox
             // 
@@ -623,6 +633,31 @@
             this.counterOfferBox.TabIndex = 10;
             this.counterOfferBox.TabStop = false;
             this.counterOfferBox.Text = "Agent Counter Offer";
+            // 
+            // btnCounterOffer
+            // 
+            this.btnCounterOffer.Enabled = false;
+            this.btnCounterOffer.Location = new System.Drawing.Point(53, 94);
+            this.btnCounterOffer.Name = "btnCounterOffer";
+            this.btnCounterOffer.Size = new System.Drawing.Size(85, 23);
+            this.btnCounterOffer.TabIndex = 4;
+            this.btnCounterOffer.Text = "Counter Offer";
+            this.btnCounterOffer.UseVisualStyleBackColor = true;
+            this.btnCounterOffer.Click += new System.EventHandler(this.btnCounterOffer_Click);
+            // 
+            // txtSalary
+            // 
+            this.txtSalary.Location = new System.Drawing.Point(87, 51);
+            this.txtSalary.Name = "txtSalary";
+            this.txtSalary.Size = new System.Drawing.Size(117, 20);
+            this.txtSalary.TabIndex = 3;
+            // 
+            // txtYears
+            // 
+            this.txtYears.Location = new System.Drawing.Point(53, 20);
+            this.txtYears.Name = "txtYears";
+            this.txtYears.Size = new System.Drawing.Size(100, 20);
+            this.txtYears.TabIndex = 2;
             // 
             // label1
             // 
@@ -642,45 +677,23 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Years:";
             // 
-            // lblWillingToNegotiate
+            // btnAcceptOffer
             // 
-            this.lblWillingToNegotiate.AutoSize = true;
-            this.lblWillingToNegotiate.Location = new System.Drawing.Point(10, 68);
-            this.lblWillingToNegotiate.Name = "lblWillingToNegotiate";
-            this.lblWillingToNegotiate.Size = new System.Drawing.Size(102, 13);
-            this.lblWillingToNegotiate.TabIndex = 2;
-            this.lblWillingToNegotiate.Text = "Willing to Negotiate:";
-            // 
-            // txtYears
-            // 
-            this.txtYears.Location = new System.Drawing.Point(53, 20);
-            this.txtYears.Name = "txtYears";
-            this.txtYears.Size = new System.Drawing.Size(100, 20);
-            this.txtYears.TabIndex = 2;
-            // 
-            // txtSalary
-            // 
-            this.txtSalary.Location = new System.Drawing.Point(87, 51);
-            this.txtSalary.Name = "txtSalary";
-            this.txtSalary.Size = new System.Drawing.Size(117, 20);
-            this.txtSalary.TabIndex = 3;
-            // 
-            // btnCounterOffer
-            // 
-            this.btnCounterOffer.Enabled = false;
-            this.btnCounterOffer.Location = new System.Drawing.Point(53, 94);
-            this.btnCounterOffer.Name = "btnCounterOffer";
-            this.btnCounterOffer.Size = new System.Drawing.Size(85, 23);
-            this.btnCounterOffer.TabIndex = 4;
-            this.btnCounterOffer.Text = "Counter Offer";
-            this.btnCounterOffer.UseVisualStyleBackColor = true;
-            this.btnCounterOffer.Click += new System.EventHandler(this.btnCounterOffer_Click);
+            this.btnAcceptOffer.Enabled = false;
+            this.btnAcceptOffer.Location = new System.Drawing.Point(509, 285);
+            this.btnAcceptOffer.Name = "btnAcceptOffer";
+            this.btnAcceptOffer.Size = new System.Drawing.Size(75, 23);
+            this.btnAcceptOffer.TabIndex = 11;
+            this.btnAcceptOffer.Text = "Accept Offer";
+            this.btnAcceptOffer.UseVisualStyleBackColor = true;
+            this.btnAcceptOffer.Click += new System.EventHandler(this.btnAcceptOffer_Click);
             // 
             // CallTeamForClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1103, 558);
+            this.Controls.Add(this.btnAcceptOffer);
             this.Controls.Add(this.counterOfferBox);
             this.Controls.Add(this.contractOfferBox);
             this.Controls.Add(this.playerCard10);
@@ -793,5 +806,6 @@
         private System.Windows.Forms.TextBox txtSalary;
         private System.Windows.Forms.TextBox txtYears;
         private System.Windows.Forms.Button btnCounterOffer;
+        private System.Windows.Forms.Button btnAcceptOffer;
     }
 }

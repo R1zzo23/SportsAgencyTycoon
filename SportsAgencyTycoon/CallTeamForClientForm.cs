@@ -16,6 +16,7 @@ namespace SportsAgencyTycoon
         private Random rnd;
         private Player _Client;
         private League _League;
+        private World _World;
         private string _InterestLevel;
         private List<Player> _PositionPlayers;
         private List<Control> _PlayerCards = new List<Control>();
@@ -23,13 +24,18 @@ namespace SportsAgencyTycoon
         private List<Control> _SkillLabels = new List<Control>();
         private List<Control> _ContractLabels = new List<Control>();
 
-        public CallTeamForClientForm(Random random, Agent agent, Player client, League league)
+        public int years;
+        public int yearlySalary;
+        public bool willingToNegotiate = false;
+
+        public CallTeamForClientForm(Random random, Agent agent, Player client, League league, World world)
         {
             InitializeComponent();
             rnd = random;
             _Agent = agent;
             _Client = client;
             _League = league;
+            _World = world;
             _PositionPlayers = new List<Player>();
             lblLeagueName.Text = _League.Name;
             FillLists();
@@ -143,6 +149,8 @@ namespace SportsAgencyTycoon
 
         private void GenerateTeamInterest()
         {
+            btnAcceptOffer.Enabled = false;
+
             string interestLevel = "";
             //would free agent be a starter?
             if (_Client.CurrentSkill > _PositionPlayers[0].CurrentSkill)
@@ -178,9 +186,6 @@ namespace SportsAgencyTycoon
 
         private void ContractOffer()
         {
-            int years;
-            int yearlySalary;
-            bool willingToNegotiate = false;
             int randomNumber = rnd.Next(1, 101);
 
             if (_InterestLevel == "ZERO INTEREST")
@@ -246,11 +251,39 @@ namespace SportsAgencyTycoon
                 lblWillingToNegotiate.Text = "Willing to Negotiate: NO";
                 btnCounterOffer.Enabled = false;
             }
+
+            if (years > 0) btnAcceptOffer.Enabled = true;
         }
 
         private void btnCounterOffer_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAcceptOffer_Click(object sender, EventArgs e)
+        {
+            _Client.Contract.YearlySalary = yearlySalary;
+            _Client.Contract.Years = years;
+            _Client.Team = _Client.League.TeamList[cbTeamList.SelectedIndex];
+            _Client.FreeAgent = false;
+
+
+            bool isStarter = false;
+
+            if (_Client.Sport == Sports.Baseball) isStarter = _World.IsBaseballStarter(_Client.Team, _Client);
+            else if (_Client.Sport == Sports.Basketball) isStarter = _World.IsBasketballStarter(_Client.Team, _Client);
+            else if (_Client.Sport == Sports.Football) isStarter = _World.IsFootballStarter(_Client.Team, _Client);
+            else if (_Client.Sport == Sports.Hockey) isStarter = _World.IsHockeyStarter(_Client.Team, _Client);
+            else if (_Client.Sport == Sports.Soccer) isStarter = _World.IsSoccerStarter(_Client.Team, _Client);
+            _Client.DetermineTeamHappiness(rnd, isStarter);
+            _Client.Contract.MonthlySalary = Convert.ToInt32((double)_Client.Contract.YearlySalary/ (double)_Client.League.MonthsInSeason);
+            _Client.Contract.StartDate = _Client.League.SeasonStart;
+            _Client.Contract.EndDate = _Client.League.SeasonEnd;
+
+            _Client.Team.Roster.Add(_Client);
+
+            MessageBox.Show("You've got a deal! Welcome to the team!");
+            this.Close();
         }
     }
 }

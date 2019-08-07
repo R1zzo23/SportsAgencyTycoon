@@ -204,25 +204,29 @@ namespace SportsAgencyTycoon
                 maxSalary = maxSalary / 2;
                 minSalary = minSalary * 2;
             }
-            else if (Age <= 30) minSalary = minSalary * 3;
+            else if (Age <= 30)
+            {
+                skillLevel = CurrentSkill;
+                minSalary = minSalary * 3;
+            }                
             else if (Age > 30) 
             {
-                CurrentSkill = (int)Math.Round(CurrentSkill * 0.75);
+                skillLevel = (int)Math.Round(CurrentSkill * 0.75);
                 minSalary = minSalary * 5;
             }
             else
             {
-                CurrentSkill = (int)Math.Round(CurrentSkill * 0.6);
+                skillLevel = (int)Math.Round(CurrentSkill * 0.6);
                 minSalary = minSalary * 5;
             }
 
             maxMinDifference = maxSalary - minSalary;
 
-            if (CurrentSkill < 40) YearlySalary = minSalary;
-            else if (CurrentSkill < 50) YearlySalary = rnd.Next(minSalary, (int)(minSalary * 5));
-            else if (CurrentSkill < 60) YearlySalary = rnd.Next((int)(maxSalary * 0.5), maxSalary);
-            else if (CurrentSkill < 70) YearlySalary = rnd.Next((int)(maxSalary * 0.6), maxSalary);
-            else if (CurrentSkill < 80) YearlySalary = rnd.Next((int)(maxSalary * 0.75), maxSalary);
+            if (skillLevel < 40) YearlySalary = minSalary;
+            else if (skillLevel < 50) YearlySalary = rnd.Next(minSalary, (int)(minSalary * 5));
+            else if (skillLevel < 60) YearlySalary = rnd.Next((int)(maxSalary * 0.5), maxSalary);
+            else if (skillLevel < 70) YearlySalary = rnd.Next((int)(maxSalary * 0.6), maxSalary);
+            else if (skillLevel < 80) YearlySalary = rnd.Next((int)(maxSalary * 0.75), maxSalary);
             else YearlySalary = maxSalary;
 
             return YearlySalary;
