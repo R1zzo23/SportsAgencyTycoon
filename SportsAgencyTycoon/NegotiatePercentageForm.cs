@@ -64,12 +64,15 @@ namespace SportsAgencyTycoon
         {
             int acceptAt;
             double acceptance;
-            int minMaxDifference = MaxPercent - MinPercent;
+            int oneQuarterRange = ((MaxPercent - MinPercent) / 4) * 100;
+            int firstQuarter = MinPercent + (oneQuarterRange);
+            int secondQuarter = MinPercent + (oneQuarterRange * 2);
+            int thirdQuarter = MinPercent + (oneQuarterRange * 3);
 
-            if (_Client.Greed >= 80) acceptAt = rnd.Next((MinPercent * 100), (MinPercent * (100 + (100 - _Client.Greed))));
-            else if (_Client.Greed >= 60) acceptAt = rnd.Next((MinPercent * (100 + (100 - _Client.Greed))), (MinPercent * 100 + minMaxDifference * 100));
-            else if (_Client.Greed >= 40) acceptAt = rnd.Next((MinPercent * (100 + (100 - _Client.Greed / 2))), (minMaxDifference * 100));
-            else acceptAt = rnd.Next((minMaxDifference * 100), (MaxPercent * 100));
+            if (_Client.Greed >= 80) acceptAt = rnd.Next((MinPercent * 100), firstQuarter);
+            else if (_Client.Greed >= 60) acceptAt = rnd.Next(firstQuarter, secondQuarter);
+            else if (_Client.Greed >= 40) acceptAt = rnd.Next(secondQuarter, thirdQuarter);
+            else acceptAt = rnd.Next(thirdQuarter, (MaxPercent * 100));
 
             acceptance = Convert.ToDouble((double)acceptAt / 100);
 
