@@ -16,3 +16,21 @@ C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\S
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.StartGameForm.resources
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.NegotiatePercentageForm.resources
 C:\Users\Adam\Documents\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.CallTeamForClientForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\bin\Debug\SportsAgencyTycoon.exe.config
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\bin\Debug\SportsAgencyTycoon.exe
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\bin\Debug\SportsAgencyTycoon.pdb
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csprojAssemblyReference.cache
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.AgentSearch.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.BankruptcyForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.CalendarForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.CallTeamForClientForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.HireAgentForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.MainForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.NegotiatePercentageForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.Properties.Resources.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.StartGameForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.TeamRosterForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csproj.GenerateResource.cache
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csproj.CoreCompileInputs.cache
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.exe
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.pdb

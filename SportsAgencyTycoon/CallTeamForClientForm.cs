@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,8 @@ namespace SportsAgencyTycoon
 
         public int years;
         public int yearlySalary;
+        public int maxSalaryWillingToOffer;
+        public int maxYears;
         public bool willingToNegotiate = false;
 
         public CallTeamForClientForm(Random random, Agent agent, Player client, League league, World world)
@@ -200,11 +203,13 @@ namespace SportsAgencyTycoon
                 {
                     years = 1;
                     yearlySalary = _Client.League.MinSalary;
+                    maxSalaryWillingToOffer = _Client.League.MinSalary;
                 }
                 else
                 {
                     years = 0;
                     yearlySalary = 0;
+                    maxSalaryWillingToOffer = 0;
                 }
                 willingToNegotiate = false;
             }
@@ -212,26 +217,44 @@ namespace SportsAgencyTycoon
             {
                 years = 1;
                 yearlySalary = _Client.League.MinSalary;
+                maxSalaryWillingToOffer = _Client.League.MinSalary;
+                maxYears = 1;
                 willingToNegotiate = false;
             }
             else if (_InterestLevel == "MEDIUM")
             {
                 years = rnd.Next(1, 3);
+                maxYears = rnd.Next(1, 3);
+                if (maxYears < years) maxYears = years;
                 yearlySalary = _Client.DetermineYearlySalary(rnd);
                 double percent = rnd.Next(1, 21);
+                double maxPercent = rnd.Next(5, 101);
                 yearlySalary = Convert.ToInt32((double)yearlySalary * (1 - (percent / 100)));
+                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (maxPercent / 100)));
+
+                if (yearlySalary > maxSalaryWillingToOffer)
+                {
+                    int temp = yearlySalary;
+                    yearlySalary = maxSalaryWillingToOffer;
+                    maxSalaryWillingToOffer = temp;
+                }
 
                 willingToNegotiate = true;
             }
             else if (_InterestLevel == "HIGH")
             {
-                years = rnd.Next(2, 5);
+                years = rnd.Next(2, 4);
+                maxYears = rnd.Next(2, 5);
+                if (maxYears < years) maxYears = years;
                 yearlySalary = _Client.DetermineYearlySalary(rnd);
+                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (rnd.Next(20, 51) / 100)));
                 willingToNegotiate = true;
             }
             else // _InterestLevel == "VERY HIGH"
             {
                 years = rnd.Next(3, 5);
+                maxYears = rnd.Next(3, 5);
+                if (maxYears < years) maxYears = years;
                 yearlySalary = _Client.DetermineYearlySalary(rnd);
                 double percent = rnd.Next(10, 26);
                 yearlySalary = Convert.ToInt32((double)yearlySalary * (1 + (percent / 100)));
@@ -257,7 +280,33 @@ namespace SportsAgencyTycoon
 
         private void btnCounterOffer_Click(object sender, EventArgs e)
         {
+            if (txtYears.Text == "")
+                MessageBox.Show("Enter length of contract for your client!");
+            else if (CheckSalaryCounterOffer())
+            {
+                MessageBox.Show("Counter offer sent!");
+            }
+        }
 
+        private bool CheckSalaryCounterOffer()
+        {
+            bool isBetweenMinAndMax = false;
+
+            if (int.Parse(txtSalary.Text) < _Client.League.MinSalary)
+            {
+                MessageBox.Show("Countered salary is below league minimum. We will now adjust it for you.");
+                txtSalary.Text = _Client.League.MinSalary.ToString();
+                isBetweenMinAndMax = false;
+            }
+            else if (int.Parse(txtSalary.Text) > _Client.League.MaxSalary)
+            {
+                MessageBox.Show("Countered salary is above league maximum. We will now adjust it for you.");
+                txtSalary.Text = _Client.League.MaxSalary.ToString();
+                isBetweenMinAndMax = false;
+            }
+            else isBetweenMinAndMax = true;
+
+            return isBetweenMinAndMax;
         }
 
         private void btnAcceptOffer_Click(object sender, EventArgs e)
@@ -284,6 +333,43 @@ namespace SportsAgencyTycoon
 
             MessageBox.Show("You've got a deal! Welcome to the team!");
             this.Close();
+        }
+
+        private void TxtYears_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //whole numbers only between 1 & 4
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            txtYears.MaxLength = 1;
+            //AdjustYears(int.Parse(txtYears.Text));
+        }
+
+        private void TxtSalary_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtYears_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txtYears.Text != "")
+            {
+                int years = int.Parse(txtYears.Text);
+                if (years < 1)
+                {
+                    MessageBox.Show("Minimum years you can suggest is 1.");
+                    txtYears.Text = "1";
+                }
+                if (years > 4)
+                {
+                    MessageBox.Show("Maximum years you can suggest is 4.");
+                    txtYears.Text = "4";
+                }
+            }
         }
     }
 }

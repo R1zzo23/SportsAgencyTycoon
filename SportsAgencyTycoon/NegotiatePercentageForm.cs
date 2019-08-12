@@ -64,7 +64,7 @@ namespace SportsAgencyTycoon
         {
             int acceptAt;
             double acceptance;
-            int oneQuarterRange = ((MaxPercent - MinPercent) / 4) * 100;
+            int oneQuarterRange = ((MaxPercent * 100 - MinPercent * 100) / 4);
             int firstQuarter = MinPercent + (oneQuarterRange);
             int secondQuarter = MinPercent + (oneQuarterRange * 2);
             int thirdQuarter = MinPercent + (oneQuarterRange * 3);
@@ -84,7 +84,7 @@ namespace SportsAgencyTycoon
         private double ClientAsksFor(Random rnd, double min, double accepted)
         {
             double askingPrice = min;
-            //if (accepted < min) accepted = min;
+            if (accepted < min) accepted = min + 0.1;
             askingPrice = (double)rnd.Next((int)(min * 100), (int)(accepted * 100)) / 100;
             ClientAsk = askingPrice;
 

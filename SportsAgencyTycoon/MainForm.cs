@@ -1003,6 +1003,7 @@ namespace SportsAgencyTycoon
                 else player.Contract = new Contract(50, 0, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
 
                 player.MemberOfAgency = true;
+                //player.CurrentSkill += 40;
 
                 SignClient(player);
             }
