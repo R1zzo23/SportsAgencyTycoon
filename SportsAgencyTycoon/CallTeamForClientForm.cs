@@ -259,6 +259,8 @@ namespace SportsAgencyTycoon
                 double percent = rnd.Next(10, 26);
                 yearlySalary = Convert.ToInt32((double)yearlySalary * (1 + (percent / 100)));
                 if (yearlySalary > _Client.League.MaxSalary) yearlySalary = _Client.League.MaxSalary;
+                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (rnd.Next(50, 101) / 100)));
+                if (yearlySalary > maxSalaryWillingToOffer) maxSalaryWillingToOffer = yearlySalary;
                 willingToNegotiate = true;
             }
 
@@ -278,6 +280,51 @@ namespace SportsAgencyTycoon
             if (years > 0) btnAcceptOffer.Enabled = true;
         }
 
+        private void TeamConsidersCounterOffer()
+        {
+            int counteredYears = Convert.ToInt32(txtYears.Text);
+            int counteredSalary = Convert.ToInt32(txtSalary.Text);
+            bool acceptedYears = false;
+            bool acceptedSalary = false;
+
+            //check if years is acceptable
+            if (counteredYears >= years && counteredYears <= maxYears)
+            {
+                acceptedYears = true;
+                years = counteredYears;
+                lblContractYears.Text = "Years: " + years.ToString();
+            }
+                
+            else
+            {
+                acceptedYears = false;
+                MessageBox.Show("We want the length of the contract to be more like this.");
+                lblContractYears.Text = "Years: " + rnd.Next(years, maxYears + 1).ToString();
+            }
+            //check if salary is acceptable
+            if (counteredSalary <= maxSalaryWillingToOffer)
+            {
+                acceptedSalary = true;
+                yearlySalary = counteredSalary;
+                lblContractSalary.Text = "Yearly Salary: " + yearlySalary.ToString("C0");
+            }
+                
+            else
+            {
+                acceptedSalary = false;
+                MessageBox.Show("That salary is not what we are looking at. How about this?");
+                int teamCounteredSalary = rnd.Next(yearlySalary, maxSalaryWillingToOffer);
+                yearlySalary = teamCounteredSalary;
+                lblContractSalary.Text = "Yearly Salary: " + yearlySalary.ToString("C0");
+            }
+            //check if both salary and years were accepted
+            if (acceptedYears && acceptedSalary)
+            {
+                MessageBox.Show("Welcome to the team, " + _Client.FirstName + "!");
+                DealHasBeenAgreedUpon();
+            }
+        }
+
         private void btnCounterOffer_Click(object sender, EventArgs e)
         {
             if (txtYears.Text == "")
@@ -285,6 +332,7 @@ namespace SportsAgencyTycoon
             else if (CheckSalaryCounterOffer())
             {
                 MessageBox.Show("Counter offer sent!");
+                TeamConsidersCounterOffer();
             }
         }
 
@@ -311,6 +359,11 @@ namespace SportsAgencyTycoon
 
         private void btnAcceptOffer_Click(object sender, EventArgs e)
         {
+            DealHasBeenAgreedUpon();
+        }
+
+        private void DealHasBeenAgreedUpon()
+        {
             _Client.Contract.YearlySalary = yearlySalary;
             _Client.Contract.Years = years;
             _Client.Team = _Client.League.TeamList[cbTeamList.SelectedIndex];
@@ -325,7 +378,7 @@ namespace SportsAgencyTycoon
             else if (_Client.Sport == Sports.Hockey) isStarter = _World.IsHockeyStarter(_Client.Team, _Client);
             else if (_Client.Sport == Sports.Soccer) isStarter = _World.IsSoccerStarter(_Client.Team, _Client);
             _Client.DetermineTeamHappiness(rnd, isStarter);
-            _Client.Contract.MonthlySalary = Convert.ToInt32((double)_Client.Contract.YearlySalary/ (double)_Client.League.MonthsInSeason);
+            _Client.Contract.MonthlySalary = Convert.ToInt32((double)_Client.Contract.YearlySalary / (double)_Client.League.MonthsInSeason);
             _Client.Contract.StartDate = _Client.League.SeasonStart;
             _Client.Contract.EndDate = _Client.League.SeasonEnd;
 

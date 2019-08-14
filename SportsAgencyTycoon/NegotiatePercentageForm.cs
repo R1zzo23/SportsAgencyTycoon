@@ -65,9 +65,9 @@ namespace SportsAgencyTycoon
             int acceptAt;
             double acceptance;
             int oneQuarterRange = ((MaxPercent * 100 - MinPercent * 100) / 4);
-            int firstQuarter = MinPercent + (oneQuarterRange);
-            int secondQuarter = MinPercent + (oneQuarterRange * 2);
-            int thirdQuarter = MinPercent + (oneQuarterRange * 3);
+            int firstQuarter = (MinPercent * 100) + (oneQuarterRange);
+            int secondQuarter = (MinPercent * 100) + (oneQuarterRange * 2);
+            int thirdQuarter = (MinPercent * 100) + (oneQuarterRange * 3);
 
             if (_Client.Greed >= 80) acceptAt = rnd.Next((MinPercent * 100), firstQuarter);
             else if (_Client.Greed >= 60) acceptAt = rnd.Next(firstQuarter, secondQuarter);
