@@ -116,26 +116,31 @@ namespace SportsAgencyTycoon
             if (licensedSport == Sports.Baseball)
             {
                 world.MonthName = world.MLB.SeasonStart.MonthName;
+                world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.MLB.SeasonStart.Week;
             }
             else if (licensedSport == Sports.Basketball)
             {
                 world.MonthName = world.NBA.SeasonStart.MonthName;
+                world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.NBA.SeasonStart.Week;
             }
             else if (licensedSport == Sports.Football)
             {
                 world.MonthName = world.NFL.SeasonStart.MonthName;
+                world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.NFL.SeasonStart.Week;
             }
             else if (licensedSport == Sports.Hockey)
             {
                 world.MonthName = world.NHL.SeasonStart.MonthName;
+                world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.NHL.SeasonStart.Week;
             }
             else if (licensedSport == Sports.Soccer)
             {
                 world.MonthName = world.MLS.SeasonStart.MonthName;
+                world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.MLS.SeasonStart.Week;
             }
             yearLabel.Text = world.Year.ToString();

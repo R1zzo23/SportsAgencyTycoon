@@ -237,15 +237,25 @@ namespace SportsAgencyTycoon
                 if (golfers[i].MadeCut)
                 {
                     golfers[i].CutsMade++;
-                    golfers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[i] / 100)));
+                    if (i > PayoutPercentages.GetLength(0) - 1)
+                    {
+                        golfers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[PayoutPercentages.GetLength(0) - 1] / 100)));
+                    }
+                    else golfers[i].CareerEarnings += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[i] / 100)));
 
                     // if golfer is member of agency, add % of winnings to agency.Money
-                    if (golfers[i].MemberOfAgency) myAgency.Money += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[i] / 100)) * (golfers[i].Contract.AgentPercentage / 100));
+                    if (golfers[i].MemberOfAgency)
+                    {
+                        if (i > PayoutPercentages.GetLength(0) - 1)
+                        {
+                            myAgency.Money += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[PayoutPercentages.GetLength(0) - 1] / 100)));
+                        }
+                        else myAgency.Money += Convert.ToInt32(Math.Floor(purse * (PayoutPercentages[i] / 100)) * (golfers[i].Contract.AgentPercentage / 100));
+                    }
                 }
                 golfers[i].EventsPlayed++;
                 golfers[i].TourPointsList.Add(AwardedPoints[p]);
                 golfers[i].TourPoints = CalculatePlayerTourPoints(golfers[i], world);
-                //Console.WriteLine(golfers[i].FirstName + " " + golfers[i].LastName + " " + golfers[i].CurrentScore); 
             }
             UpdatePGAPlayerList(golfers, world);
         }
