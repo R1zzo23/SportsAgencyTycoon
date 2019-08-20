@@ -284,6 +284,10 @@ namespace SportsAgencyTycoon
         {
             int counteredYears = Convert.ToInt32(txtYears.Text);
             int counteredSalary = Convert.ToInt32(txtSalary.Text);
+
+            txtSalary.Clear();
+            txtYears.Clear();
+
             bool acceptedYears = false;
             bool acceptedSalary = false;
 
@@ -292,14 +296,14 @@ namespace SportsAgencyTycoon
             {
                 acceptedYears = true;
                 years = counteredYears;
-                lblContractYears.Text = "Years: " + years.ToString();
+                lblContractYears.Text = "# of Years: " + years.ToString();
             }
                 
             else
             {
                 acceptedYears = false;
                 MessageBox.Show("We want the length of the contract to be more like this.");
-                lblContractYears.Text = "Years: " + rnd.Next(years, maxYears + 1).ToString();
+                lblContractYears.Text = "# of Years: " + rnd.Next(years, maxYears + 1).ToString();
             }
             //check if salary is acceptable
             if (counteredSalary <= maxSalaryWillingToOffer)
@@ -313,6 +317,7 @@ namespace SportsAgencyTycoon
             {
                 acceptedSalary = false;
                 MessageBox.Show("That salary is not what we are looking at. How about this?");
+                Console.WriteLine("Random salary between " + yearlySalary.ToString("C0") + " and " + maxSalaryWillingToOffer.ToString("C0"));
                 int teamCounteredSalary = rnd.Next(yearlySalary, maxSalaryWillingToOffer);
                 yearlySalary = teamCounteredSalary;
                 lblContractSalary.Text = "Yearly Salary: " + yearlySalary.ToString("C0");

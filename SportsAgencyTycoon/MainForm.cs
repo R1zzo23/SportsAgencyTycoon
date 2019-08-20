@@ -111,6 +111,37 @@ namespace SportsAgencyTycoon
             world.AvailableLicenses.Add(world.IndividualSportLicense[individualIndex]);
             world.IndividualSportLicense.Remove(world.IndividualSportLicense[individualIndex]);
             agency.Agents[0] = myManager;
+
+            Sports licensedSport = myManager.LicensesHeld[0].Sport;
+            if (licensedSport == Sports.Baseball)
+            {
+                world.MonthName = world.MLB.SeasonStart.MonthName;
+                world.WeekNumber = world.MLB.SeasonStart.Week;
+            }
+            else if (licensedSport == Sports.Basketball)
+            {
+                world.MonthName = world.NBA.SeasonStart.MonthName;
+                world.WeekNumber = world.NBA.SeasonStart.Week;
+            }
+            else if (licensedSport == Sports.Football)
+            {
+                world.MonthName = world.NFL.SeasonStart.MonthName;
+                world.WeekNumber = world.NFL.SeasonStart.Week;
+            }
+            else if (licensedSport == Sports.Hockey)
+            {
+                world.MonthName = world.NHL.SeasonStart.MonthName;
+                world.WeekNumber = world.NHL.SeasonStart.Week;
+            }
+            else if (licensedSport == Sports.Soccer)
+            {
+                world.MonthName = world.MLS.SeasonStart.MonthName;
+                world.WeekNumber = world.MLS.SeasonStart.Week;
+            }
+            yearLabel.Text = world.Year.ToString();
+            monthLabel.Text = world.MonthName.ToString();
+            weekLabel.Text = world.WeekNumber.ToString();
+
             UpdateAgencyInfo();
             UpdateAgentInfo(myManager);
             PopulateAgencyAgentList();
