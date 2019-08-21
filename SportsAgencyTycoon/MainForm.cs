@@ -56,6 +56,11 @@ namespace SportsAgencyTycoon
             PopulateEventList();
             DetermineSeasons();
             NerfFreeAgentsToStart();
+            world.Basketball = new Basketball(rnd, world, world.NBA);
+            //world.Baseball = new Baseball(world.MLB);
+            //world.Football = new Football(world.NFL);
+            //world.Hockey = new Hockey(world.NHL);
+            //world.Soccer = new Soccer(world.MLS);
         }
 
         public void NerfFreeAgentsToStart()
@@ -118,30 +123,35 @@ namespace SportsAgencyTycoon
                 world.MonthName = world.MLB.SeasonStart.MonthName;
                 world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.MLB.SeasonStart.Week;
+                world.MLB.Initialized = true;
             }
             else if (licensedSport == Sports.Basketball)
             {
                 world.MonthName = world.NBA.SeasonStart.MonthName;
                 world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.NBA.SeasonStart.Week;
+                world.NBA.Initialized = true;
             }
             else if (licensedSport == Sports.Football)
             {
                 world.MonthName = world.NFL.SeasonStart.MonthName;
                 world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.NFL.SeasonStart.Week;
+                world.NFL.Initialized = true;
             }
             else if (licensedSport == Sports.Hockey)
             {
                 world.MonthName = world.NHL.SeasonStart.MonthName;
                 world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.NHL.SeasonStart.Week;
+                world.NHL.Initialized = true;
             }
             else if (licensedSport == Sports.Soccer)
             {
                 world.MonthName = world.MLS.SeasonStart.MonthName;
                 world.MonthNumber = (int)world.MonthName;
                 world.WeekNumber = world.MLS.SeasonStart.Week;
+                world.MLS.Initialized = true;
             }
             yearLabel.Text = world.Year.ToString();
             monthLabel.Text = world.MonthName.ToString();
@@ -675,6 +685,13 @@ namespace SportsAgencyTycoon
         {
             RunEventsThisWeek();
 
+            //simulate games if league in initialized and in-season
+            if (world.NBA.Initialized && world.NBA.InSeason)
+            {
+                world.Basketball.SimulateGames();
+            }
+                
+
             //reset if agent took a test this week
             foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
 
@@ -766,10 +783,10 @@ namespace SportsAgencyTycoon
             leagueStandingsLabel.Text = "";
 
             List<Team> teamList = selectedLeague.TeamList;
-            teamList = teamList.OrderByDescending(o => o.TitleConteder).ToList();
+            teamList = teamList.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
             for (int i = 0; i < teamList.Count; i++)
             {
-                leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].TitleConteder + Environment.NewLine;
+                leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].Wins + "W - " + teamList[i].Losses + "L" + Environment.NewLine;
             }
 
         }
@@ -954,11 +971,31 @@ namespace SportsAgencyTycoon
                 }
                 else if (e.EventType == CalendarEventType.LeagueYearBegins)
                 {
-                    if (e.Sport == Sports.Baseball) world.MLB.InSeason= true;
-                    else if (e.Sport == Sports.Basketball) world.NBA.InSeason= true;
-                    else if (e.Sport == Sports.Football) world.NFL.InSeason = true;
-                    else if (e.Sport == Sports.Hockey) world.NHL.InSeason = true;
-                    else if (e.Sport == Sports.Soccer) world.MLS.InSeason= true;
+                    if (e.Sport == Sports.Baseball)
+                    {
+                        world.MLB.InSeason = true;
+                        world.MLB.Initialized = true;
+                    }   
+                    else if (e.Sport == Sports.Basketball)
+                    {
+                        world.NBA.InSeason = true;
+                        world.NBA.Initialized = true;
+                    }
+                    else if (e.Sport == Sports.Football)
+                    {
+                        world.NFL.InSeason = true;
+                        world.NFL.Initialized = true;
+                    }
+                    else if (e.Sport == Sports.Hockey)
+                    {
+                        world.NHL.InSeason = true;
+                        world.NHL.Initialized = true;
+                    }
+                    else if (e.Sport == Sports.Soccer)
+                    {
+                        world.MLS.InSeason = true;
+                        world.MLS.Initialized = true;
+                    }
                     DetermineSeasons();
                 }
                 else if (e.EventType == CalendarEventType.LeagueYearEnds)

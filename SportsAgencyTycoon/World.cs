@@ -22,6 +22,11 @@ namespace SportsAgencyTycoon
         public League NFL;
         public League NHL;
         public League MLS;
+        public Basketball Basketball;
+        //public Baseball Baseball;
+        //public Football Football;
+        //public Hockey Hockey;
+        //public Soccer Soccer;
         public Association PGA;
         public Association ATP;
         public Association WBA;

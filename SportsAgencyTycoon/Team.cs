@@ -13,6 +13,9 @@ namespace SportsAgencyTycoon
         public string Abbreviation;
         public int MarketValue;
         public int TitleConteder;
+        public int Wins;
+        public int Losses;
+        public bool PlayedGameThisCycle;
         public List<Player> Roster = new List<Player>();
 
         public Team (string city, string mascot, string abbreviation, int marketValue, int titleContender)
@@ -22,6 +25,8 @@ namespace SportsAgencyTycoon
             Abbreviation = abbreviation;
             MarketValue = marketValue;
             TitleConteder = titleContender;
+            Wins = 0;
+            Losses = 0;
         }
     }
 }
