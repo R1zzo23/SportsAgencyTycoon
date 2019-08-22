@@ -1169,5 +1169,12 @@ namespace SportsAgencyTycoon
             Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
             selectedAgent.CallTeamsForClient(rnd, world, selectedClient);
         }
+
+        private void BtnViewStandings_Click(object sender, EventArgs e)
+        {
+            ViewStandingsForm viewStandingsForm = new ViewStandingsForm(world);
+            viewStandingsForm.BringToFront();
+            viewStandingsForm.ShowDialog();
+        }
     }
 }

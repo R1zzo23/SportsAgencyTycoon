@@ -11,6 +11,8 @@ namespace SportsAgencyTycoon
         public string City;
         public string Mascot;
         public string Abbreviation;
+        public string Conference;
+        public string Division;
         public int MarketValue;
         public int TitleConteder;
         public int Wins;
@@ -22,6 +24,18 @@ namespace SportsAgencyTycoon
         {
             City = city;
             Mascot = mascot;
+            Abbreviation = abbreviation;
+            MarketValue = marketValue;
+            TitleConteder = titleContender;
+            Wins = 0;
+            Losses = 0;
+        }
+        public Team(string city, string mascot, string conference, string division, string abbreviation, int marketValue, int titleContender)
+        {
+            City = city;
+            Mascot = mascot;
+            Conference = conference;
+            Division = division;
             Abbreviation = abbreviation;
             MarketValue = marketValue;
             TitleConteder = titleContender;

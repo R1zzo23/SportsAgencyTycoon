@@ -12,6 +12,8 @@ namespace SportsAgencyTycoon
         public League NBA;
         public World World;
         public int index;
+        public List<string> Conferences;
+        public List<string> Divisions;
 
         public Basketball(Random r, World w, League l)
         {
@@ -19,6 +21,21 @@ namespace SportsAgencyTycoon
             World = w;
             NBA = l;
             index = 1;
+            Conferences = new List<string>();
+            Divisions = new List<string>();
+            FillLists();
+        }
+
+        public void FillLists()
+        {
+            Conferences.Add("Eastern");
+            Conferences.Add("Western");
+            Divisions.Add("Atlantic");
+            Divisions.Add("Central");
+            Divisions.Add("Southeast");
+            Divisions.Add("Northwest");
+            Divisions.Add("Southwest");
+            Divisions.Add("Pacific");
         }
 
         public void SimulateGames()
@@ -49,7 +66,7 @@ namespace SportsAgencyTycoon
                     }
                 }
                 index++;
-                if (index == 32) index = 1;
+                if (index == 30) index = 1;
             }
         }
 

@@ -52,3 +52,4 @@ C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgen
 C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.csproj.CoreCompileInputs.cache
 C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.exe
 C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.pdb
+C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.ViewStandingsForm.resources

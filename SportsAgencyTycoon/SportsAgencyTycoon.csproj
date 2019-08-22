@@ -140,6 +140,12 @@
       <DependentUpon>TeamRosterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TennisPlayer.cs" />
+    <Compile Include="ViewStandingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStandingsForm.Designer.cs">
+      <DependentUpon>ViewStandingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="World.cs" />
     <EmbeddedResource Include="AgentSearch.resx">
       <DependentUpon>AgentSearch.cs</DependentUpon>
@@ -176,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TeamRosterForm.resx">
       <DependentUpon>TeamRosterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStandingsForm.resx">
+      <DependentUpon>ViewStandingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -673,36 +673,36 @@ namespace SportsAgencyTycoon
         }
         public void CreateNBATeams(Random rnd)
         {
-            NBA.TeamList.Add(new Team("Atlanta", "Hawks", "ATL", 40, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Boston", "Celtics", "BOS", 60, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Brooklyn", "Nets", "BKN", 62, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Charlotte", "Hornets", "CHA", 33, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Chicago", "Bulls", "CHI", 62, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Cleveland", "Cavaliers", "CLE", 30, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Dallas", "Mavericks", "DAL", 49, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Denver", "Nuggets", "DEN", 38, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Detroit", "Pistons", "DET", 33, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Golden State", "Warriors", "GSW", 66, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Houston", "Rockets", "HOU", 49, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Indiana", "Pacers", "IND", 43, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Los Angeles", "Clippers", "LAC", 72, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Los Angeles", "Lakers", "LAL", 75, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Memphis", "Grizzlies", "MEM", 40, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Miami", "Heat", "MIA", 69, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Milwaukee", "Bucks", "MIL", 46, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Minnesota", "Timberwolves", "MIN", 46, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("New Orleans", "Pelicans", "NOP", 51, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("New York", "Knicks", "NYK", 82, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Oklahoma City", "Thunder", "OKC", 48, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Orlando", "Magic", "ORL", 52, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Philadelphia", "76ers", "PHI", 58, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Phoenix", "Suns", "PHO", 42, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Portland", "Trail Blazers", "POR", 54, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Sacramento", "Kings", "SAC", 54, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("San Antonio", "Spurs", "SAS", 51, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Toronto", "Raptors", "TOR", 47, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Utah", "Jazz", "UTA", 38, rnd.Next(25, 76)));
-            NBA.TeamList.Add(new Team("Washington", "Wizards", "WAS", 47, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Atlanta", "Hawks", "Eastern", "Southeast", "ATL", 40, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Boston", "Celtics", "Eastern", "Atlantic", "BOS", 60, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Brooklyn", "Nets", "Eastern", "Atlantic", "BKN", 62, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Charlotte", "Hornets", "Eastern", "Southeast", "CHA", 33, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Chicago", "Bulls", "Eastern", "Central", "CHI", 62, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Cleveland", "Cavaliers", "Eastern", "Central", "CLE", 30, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Dallas", "Mavericks", "Western", "Southwest", "DAL", 49, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Denver", "Nuggets", "Western", "Northwest", "DEN", 38, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Detroit", "Pistons", "Eastern", "Central", "DET", 33, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Golden State", "Warriors", "Western", "Pacific", "GSW", 66, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Houston", "Rockets", "Western", "Southwest", "HOU", 49, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Indiana", "Pacers", "Eastern", "Central", "IND", 43, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Los Angeles", "Clippers", "Western", "Pacific", "LAC", 72, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Los Angeles", "Lakers", "Western", "Pacific", "LAL", 75, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Memphis", "Grizzlies", "Western", "Southwest", "MEM", 40, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Miami", "Heat", "Eastern", "Southeast", "MIA", 69, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Milwaukee", "Bucks", "Eastern", "Central", "MIL", 46, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Minnesota", "Timberwolves", "Western", "Northwest", "MIN", 46, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("New Orleans", "Pelicans", "Western", "Southwest", "NOP", 51, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("New York", "Knicks", "Eastern", "Atlantic", "NYK", 82, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Oklahoma City", "Thunder", "Western", "Northwest", "OKC", 48, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Orlando", "Magic", "Eastern", "Southeast", "ORL", 52, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Philadelphia", "76ers", "Eastern", "Atlantic", "PHI", 58, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Phoenix", "Suns", "Western", "Pacific", "PHO", 42, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Portland", "Trail Blazers", "Western", "Northwest", "POR", 54, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Sacramento", "Kings", "Western", "Pacific", "SAC", 54, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("San Antonio", "Spurs", "Western", "Southwest", "SAS", 51, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Toronto", "Raptors", "Eastern", "Atlantic", "TOR", 47, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Utah", "Jazz", "Western", "Northwest", "UTA", 38, rnd.Next(25, 76)));
+            NBA.TeamList.Add(new Team("Washington", "Wizards", "Eastern", "Southeast", "WAS", 47, rnd.Next(25, 76)));
         }
         public void CreateMLBTeams(Random rnd)
         {
