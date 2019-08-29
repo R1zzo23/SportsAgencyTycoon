@@ -688,7 +688,20 @@ namespace SportsAgencyTycoon
             //simulate games if league in initialized and in-season
             if (world.NBA.Initialized && world.NBA.InSeason)
             {
-                world.Basketball.SimulateGames();
+                if (!world.NBA.Playoffs)
+                {
+                    world.Basketball.SimulateGames();
+
+                    //if it is the 1st week of May, games above will simulate and the playoffs will now be starting
+                    if (world.MonthName == Months.May && world.WeekNumber == 1)
+                    {
+                        world.NBA.Playoffs = true;
+                        world.Basketball.DeterminePlayoffField();
+                    }
+                        
+                }
+                else
+                    world.Basketball.SimulatePlayoffRound();
             }
                 
 

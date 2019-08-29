@@ -54,33 +54,19 @@ namespace SportsAgencyTycoon
                     indexList.RemoveAt(opponentIndex);
                     indexList.RemoveAt(0);
                 }
-                /*
-                foreach (Team t in NBA.TeamList) t.PlayedGameThisCycle = false;
-                for (int j = 0; j < NBA.TeamList.Count; j++)
-                {
-                    if (!NBA.TeamList[j].PlayedGameThisCycle)
-                    {
-                        int opponentIndex = j + index;
-                        if (opponentIndex > NBA.TeamList.Count - 1) opponentIndex -= NBA.TeamList.Count;
-                        if (NBA.TeamList[opponentIndex].PlayedGameThisCycle)
-                        {
-                            for (int x = opponentIndex + 1; x < NBA.TeamList.Count; x++)
-                            {
-                                if (!NBA.TeamList[x].PlayedGameThisCycle)
-                                {
-                                    opponentIndex = x;
-                                    return;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Team1 Index: " + j + " - Team2 Index: " + opponentIndex);
-                        SimulateGame(NBA.TeamList[j], NBA.TeamList[opponentIndex]);
-                    }
-                }
-                */
                 index++;
                 if (index == 30) index = 1;
             }
+        }
+
+        public void DeterminePlayoffField()
+        {
+
+        }
+
+        public void SimulatePlayoffRound()
+        {
+
         }
 
         public int HowManyGamesThisWeek()

@@ -9,6 +9,7 @@ namespace SportsAgencyTycoon
     public class League
     {
         public bool Initialized;
+        public bool Playoffs;
         public Sports Sport;
         public string Name;
         public string Abbreviation;
@@ -26,6 +27,7 @@ namespace SportsAgencyTycoon
         public League(Sports sport, string name, string abbreviation, int popularity, Date seasonStart, Date seasonEnd, int monthsInSeason, int maxSalary, int minSalary)
         {
             Initialized = false;
+            Playoffs = false;
             Sport = sport;
             Name = name;
             Abbreviation = abbreviation;
