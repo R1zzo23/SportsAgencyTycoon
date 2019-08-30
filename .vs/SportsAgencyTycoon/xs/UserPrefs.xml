@@ -1,11 +1,15 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/Basketball.cs">
+    <Files>
+      <File FileName="SportsAgencyTycoon/Basketball.cs" Line="114" Column="1" />
+      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="704" Column="61" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="NegotiatePercentageForm.cs" expanded="True" selected="True" />
+              <Node name="Basketball.cs" selected="True" />
             </Node>
           </Node>
         </State>

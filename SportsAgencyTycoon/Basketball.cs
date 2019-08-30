@@ -14,6 +14,10 @@ namespace SportsAgencyTycoon
         public int index;
         public List<string> Conferences;
         public List<string> Divisions;
+        public List<Team> EasternConference = new List<Team>();
+        public List<Team> WesternConference = new List<Team>();
+        public List<Team> EasternPlayoffs = new List<Team>();
+        public List<Team> WesternPlayoffs = new List<Team>();
 
         public Basketball(Random r, World w, League l)
         {
@@ -61,7 +65,48 @@ namespace SportsAgencyTycoon
 
         public void DeterminePlayoffField()
         {
+            foreach (Team t in World.NBA.TeamList)
+            {
+                if (t.Conference == "Eastern") EasternConference.Add(t);
+                else WesternConference.Add(t);
+            }
 
+            EasternConference = EasternConference.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+            WesternConference = WesternConference.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+
+            int atlanticIndex = EasternConference.FindIndex(t => t.Division == "Atlantic");
+            EasternPlayoffs.Add(EasternConference[atlanticIndex]);
+            EasternConference.RemoveAt(atlanticIndex);
+
+            int centralIndex = EasternConference.FindIndex(t => t.Division == "Central");
+            EasternPlayoffs.Add(EasternConference[centralIndex]);
+            EasternConference.RemoveAt(centralIndex);
+
+            int southeastIndex = EasternConference.FindIndex(t => t.Division == "Southeast");
+            EasternPlayoffs.Add(EasternConference[southeastIndex]);
+            EasternConference.RemoveAt(southeastIndex);
+
+            EasternPlayoffs.Add(EasternConference[0]);
+
+            EasternPlayoffs = EasternPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            for (int i = 0; i < 4; i++)
+                EasternPlayoffs.Add(EasternConference[i]);
+
+            int northwestIndex = WesternConference.FindIndex(t => t.Division == "Northwest");
+            WesternPlayoffs.Add(WesternConference[northwestIndex]);
+            WesternConference.RemoveAt(northwestIndex);
+
+            int southwestIndex = WesternConference.FindIndex(t => t.Division == "Southwest");
+            WesternPlayoffs.Add(WesternConference[southwestIndex]);
+            WesternConference.RemoveAt(southwestIndex);
+
+            int pacificIndex = WesternConference.FindIndex(t => t.Division == "Pacific");
+            WesternPlayoffs.Add(WesternConference[pacificIndex]);
+            WesternConference.RemoveAt(pacificIndex);
+
+            WesternPlayoffs.Add(WesternConference[0]);
+            for (int i = 0; i < 4; i++)
+                WesternPlayoffs.Add(WesternConference[i]);
         }
 
         public void SimulatePlayoffRound()
