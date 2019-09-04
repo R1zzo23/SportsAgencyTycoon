@@ -18,6 +18,8 @@ namespace SportsAgencyTycoon
         public List<Team> WesternConference = new List<Team>();
         public List<Team> EasternPlayoffs = new List<Team>();
         public List<Team> WesternPlayoffs = new List<Team>();
+        public List<int> EasternLoserIndex = new List<int>();
+        public List<int> WesternLoserIndex = new List<int>();
 
         public Basketball(Random r, World w, League l)
         {
@@ -63,8 +65,10 @@ namespace SportsAgencyTycoon
             }
         }
 
-        public void DeterminePlayoffField()
+        public string DeterminePlayoffField()
         {
+            string playoffSeedings = "";
+
             foreach (Team t in World.NBA.TeamList)
             {
                 if (t.Conference == "Eastern") EasternConference.Add(t);
@@ -87,6 +91,7 @@ namespace SportsAgencyTycoon
             EasternConference.RemoveAt(southeastIndex);
 
             EasternPlayoffs.Add(EasternConference[0]);
+            EasternConference.RemoveAt(0);
 
             EasternPlayoffs = EasternPlayoffs.OrderByDescending(o => o.Wins).ToList();
             for (int i = 0; i < 4; i++)
@@ -105,13 +110,74 @@ namespace SportsAgencyTycoon
             WesternConference.RemoveAt(pacificIndex);
 
             WesternPlayoffs.Add(WesternConference[0]);
+            WesternConference.RemoveAt(0);
+
+            WesternPlayoffs = WesternPlayoffs.OrderByDescending(o => o.Wins).ToList();
             for (int i = 0; i < 4; i++)
                 WesternPlayoffs.Add(WesternConference[i]);
+
+            for (int i = 0; i < 4; i++)
+            {
+                playoffSeedings += i + 1 + ") " + EasternPlayoffs[i].Abbreviation + " vs. " + (EasternPlayoffs.Count - i) + ") " + EasternPlayoffs[EasternPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
+                playoffSeedings += i + 1 + ") " + WesternPlayoffs[i].Abbreviation + " vs. " + (WesternPlayoffs.Count - i) + ") " + WesternPlayoffs[WesternPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
+            }
+
+            return playoffSeedings;
         }
 
-        public void SimulatePlayoffRound()
+        public string SimulatePlayoffRound()
         {
+            string results = "";
 
+            for (int i = 0; i < EasternPlayoffs.Count / 2; i++)
+            {
+                results += SimulateSeries(EasternPlayoffs[i], EasternPlayoffs[EasternPlayoffs.Count - 1 - i], i, EasternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                results += SimulateSeries(WesternPlayoffs[i], WesternPlayoffs[WesternPlayoffs.Count - 1 - i], i, WesternPlayoffs.Count - 1 - i) + Environment.NewLine;
+            }
+
+            return results;
+        }
+
+        public string SimulateSeries(Team team1, Team team2, int teamIndex1, int teamIndex2)
+        {
+            string seriesResult = "";
+            int winsTeam1 = 0;
+            int winsTeam2 = 0;
+
+            while (winsTeam1 < 4 && winsTeam2 < 4)
+            {
+                int result;
+                result = SimulatePlayoffGame(team1, team2);
+                if (result == 1) winsTeam1++;
+                else winsTeam2++;
+            }
+
+            if (winsTeam1 == 4)
+            {
+                seriesResult = team1.Abbreviation + " defeats " + team2.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+            }
+            else
+            {
+                seriesResult = team2.Abbreviation + " defeats " + team1.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+
+            }
+            
+
+            return seriesResult;
+        }
+
+        public int SimulatePlayoffGame(Team team1, Team team2)
+        {
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
         }
 
         public int HowManyGamesThisWeek()

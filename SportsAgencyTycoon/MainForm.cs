@@ -696,12 +696,12 @@ namespace SportsAgencyTycoon
                     if (world.MonthName == Months.May && world.WeekNumber == 1)
                     {
                         world.NBA.Playoffs = true;
-                        world.Basketball.DeterminePlayoffField();
+                        newsLabel.Text = world.Basketball.DeterminePlayoffField() + Environment.NewLine + newsLabel.Text;
                     }
                         
                 }
                 else
-                    world.Basketball.SimulatePlayoffRound();
+                    newsLabel.Text = world.Basketball.SimulatePlayoffRound() + Environment.NewLine + newsLabel.Text;
             }
                 
 
