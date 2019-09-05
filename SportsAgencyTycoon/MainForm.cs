@@ -698,8 +698,10 @@ namespace SportsAgencyTycoon
                         world.NBA.Playoffs = true;
                         newsLabel.Text = world.Basketball.DeterminePlayoffField() + Environment.NewLine + newsLabel.Text;
                     }
-                        
+
                 }
+                else if (world.NBA.Playoffs && (world.MonthName == Months.June && world.WeekNumber == 1))
+                    newsLabel.Text = world.Basketball.SimulateChampionship() + Environment.NewLine + newsLabel.Text;
                 else
                     newsLabel.Text = world.Basketball.SimulatePlayoffRound() + Environment.NewLine + newsLabel.Text;
             }

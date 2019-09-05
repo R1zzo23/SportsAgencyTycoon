@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public League NBA;
         public World World;
         public int index;
+        public int losingIndex;
         public List<string> Conferences;
         public List<string> Divisions;
         public List<Team> EasternConference = new List<Team>();
@@ -63,6 +64,19 @@ namespace SportsAgencyTycoon
                 index++;
                 if (index == 30) index = 1;
             }
+        }
+
+        public string SimulateChampionship()
+        {
+            string results = "";
+
+            results = SimulateSeries(EasternPlayoffs[0], WesternPlayoffs[0], 0, 1);
+            if (losingIndex == 0)
+                results = "The " + WesternPlayoffs[0].City + " " + WesternPlayoffs[0].Mascot + " are the " + World.Year + " NBA champions!" + Environment.NewLine + results;
+            else
+                results = "The " + EasternPlayoffs[0].City + " " + EasternPlayoffs[0].Mascot + " are the " + World.Year + " NBA champions!" + Environment.NewLine + results;
+
+            return results;
         }
 
         public string DeterminePlayoffField()
@@ -128,14 +142,29 @@ namespace SportsAgencyTycoon
         public string SimulatePlayoffRound()
         {
             string results = "";
+            EasternLoserIndex.Clear();
+            WesternLoserIndex.Clear();
 
             for (int i = 0; i < EasternPlayoffs.Count / 2; i++)
             {
                 results += SimulateSeries(EasternPlayoffs[i], EasternPlayoffs[EasternPlayoffs.Count - 1 - i], i, EasternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                EasternLoserIndex.Add(losingIndex);
                 results += SimulateSeries(WesternPlayoffs[i], WesternPlayoffs[WesternPlayoffs.Count - 1 - i], i, WesternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                WesternLoserIndex.Add(losingIndex);
             }
 
+            RemoveLosingTeamsFromPlayoffs();
+
             return results;
+        }
+
+        public void RemoveLosingTeamsFromPlayoffs()
+        {
+            EasternLoserIndex = EasternLoserIndex.OrderByDescending(i => i).ToList();
+            WesternLoserIndex = WesternLoserIndex.OrderByDescending(i => i).ToList();
+
+            foreach (int i in EasternLoserIndex) EasternPlayoffs.RemoveAt(i);
+            foreach (int i in WesternLoserIndex) WesternPlayoffs.RemoveAt(i);
         }
 
         public string SimulateSeries(Team team1, Team team2, int teamIndex1, int teamIndex2)
@@ -155,11 +184,12 @@ namespace SportsAgencyTycoon
             if (winsTeam1 == 4)
             {
                 seriesResult = team1.Abbreviation + " defeats " + team2.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+                losingIndex = teamIndex2;
             }
             else
             {
                 seriesResult = team2.Abbreviation + " defeats " + team1.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
-
+                losingIndex = teamIndex1;
             }
             
 
