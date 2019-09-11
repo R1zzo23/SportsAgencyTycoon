@@ -58,6 +58,7 @@
       <DependentUpon>AgentSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Association.cs" />
+    <Compile Include="Award.cs" />
     <Compile Include="BankruptcyForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -32,6 +32,7 @@
             this.cbTeamList = new System.Windows.Forms.ComboBox();
             this.lblRoster = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblAwards = new System.Windows.Forms.Label();
             this.lblTeamInfo = new System.Windows.Forms.Label();
             this.cbTeamRoster = new System.Windows.Forms.ComboBox();
             this.lblYearlySalary = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.lblLifestyle = new System.Windows.Forms.Label();
             this.lblGreed = new System.Windows.Forms.Label();
             this.lblPopularity = new System.Windows.Forms.Label();
+            this.lblStats = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,7 +81,7 @@
             // lblRoster
             // 
             this.lblRoster.AutoSize = true;
-            this.lblRoster.Location = new System.Drawing.Point(4, 40);
+            this.lblRoster.Location = new System.Drawing.Point(4, 175);
             this.lblRoster.Name = "lblRoster";
             this.lblRoster.Size = new System.Drawing.Size(35, 13);
             this.lblRoster.TabIndex = 2;
@@ -87,12 +89,23 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblAwards);
             this.panel1.Controls.Add(this.lblTeamInfo);
             this.panel1.Controls.Add(this.lblRoster);
             this.panel1.Location = new System.Drawing.Point(13, 40);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(486, 519);
             this.panel1.TabIndex = 3;
+            // 
+            // lblAwards
+            // 
+            this.lblAwards.AutoSize = true;
+            this.lblAwards.Location = new System.Drawing.Point(6, 48);
+            this.lblAwards.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAwards.Name = "lblAwards";
+            this.lblAwards.Size = new System.Drawing.Size(35, 13);
+            this.lblAwards.TabIndex = 4;
+            this.lblAwards.Text = "label1";
             // 
             // lblTeamInfo
             // 
@@ -289,11 +302,21 @@
             this.lblPopularity.TabIndex = 4;
             this.lblPopularity.Text = "Popularity:";
             // 
+            // lblStats
+            // 
+            this.lblStats.AutoSize = true;
+            this.lblStats.Location = new System.Drawing.Point(751, 52);
+            this.lblStats.Name = "lblStats";
+            this.lblStats.Size = new System.Drawing.Size(35, 13);
+            this.lblStats.TabIndex = 8;
+            this.lblStats.Text = "label1";
+            // 
             // TeamRosterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 632);
+            this.ClientSize = new System.Drawing.Size(877, 578);
+            this.Controls.Add(this.lblStats);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -314,6 +337,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -343,5 +367,7 @@
         private System.Windows.Forms.Label lblTeamHappiness;
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.Label lblAgentPercent;
+        private System.Windows.Forms.Label lblAwards;
+        private System.Windows.Forms.Label lblStats;
     }
 }

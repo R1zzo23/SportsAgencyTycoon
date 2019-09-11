@@ -73,9 +73,16 @@ namespace SportsAgencyTycoon
         {
             FillTeamRosterComboBox();
 
-            lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
             Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
+
+            lblAwards.Text = "";
+            if (selectedTeam.Awards.Count > 0)
+                foreach (Award award in selectedTeam.Awards)
+                    lblAwards.Text += award.Year + " " + award.AwardName + Environment.NewLine;
+
+            lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
+            
             lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + ": Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
             if (selectedLeague.Sport == Sports.Basketball)
                 foreach (BasketballPlayer p in selectedTeam.Roster)
@@ -99,6 +106,15 @@ namespace SportsAgencyTycoon
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
             Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
             Player selectedPlayer = selectedTeam.Roster[cbTeamRoster.SelectedIndex];
+
+            if (selectedLeague.Sport == Sports.Basketball)
+            {
+                List<BasketballPlayer> hoopsRoster = new List<BasketballPlayer>();
+                foreach (BasketballPlayer bp in selectedTeam.Roster)
+                    hoopsRoster.Add(bp);
+                DisplayBasketballStats(hoopsRoster[cbTeamRoster.SelectedIndex]);
+            }
+                
 
             if (selectedPlayer.Sport == Sports.Baseball)
             {
@@ -141,6 +157,12 @@ namespace SportsAgencyTycoon
             lblPlayForTitle.Text = "Play for Title: " + selectedPlayer.PlayForTitleContender.ToString();
             lblTeamHappiness.Text = "Team Happiness: " + selectedPlayer.TeamHappinessString;
             lblAgencyHappiness.Text = "Agency Happiness: " + selectedPlayer.AgencyHappinessString;
+        }
+        public void DisplayBasketballStats(BasketballPlayer player)
+        {
+            lblStats.Text = "PTS: " + player.Points + Environment.NewLine + "REB: " + player.Rebounds + Environment.NewLine
+                + "AST: " + player.Assists + Environment.NewLine + "BLK: " + player.Blocks + Environment.NewLine
+                + "STL: " + player.Steals;
         }
     }
 }

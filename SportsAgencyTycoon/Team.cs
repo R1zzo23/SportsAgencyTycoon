@@ -19,6 +19,7 @@ namespace SportsAgencyTycoon
         public int Losses;
         public bool PlayedGameThisCycle;
         public List<Player> Roster = new List<Player>();
+        public List<Award> Awards = new List<Award>();
 
         public Team (string city, string mascot, string abbreviation, int marketValue, int titleContender)
         {

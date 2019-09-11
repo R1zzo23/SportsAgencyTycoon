@@ -70,11 +70,21 @@ namespace SportsAgencyTycoon
         {
             string results = "";
 
+            EasternPlayoffs[0].Awards.Add(new Award(World.Year, "Eastern Conference Champs"));
+            WesternPlayoffs[0].Awards.Add(new Award(World.Year, "Western Conference Champs"));
+
             results = SimulateSeries(EasternPlayoffs[0], WesternPlayoffs[0], 0, 1);
             if (losingIndex == 0)
+            {
                 results = "The " + WesternPlayoffs[0].City + " " + WesternPlayoffs[0].Mascot + " are the " + World.Year + " NBA champions!" + Environment.NewLine + results;
+                WesternPlayoffs[0].Awards.Add(new Award(World.Year, "NBA Champions"));
+            }
+                
             else
+            {
                 results = "The " + EasternPlayoffs[0].City + " " + EasternPlayoffs[0].Mascot + " are the " + World.Year + " NBA champions!" + Environment.NewLine + results;
+                EasternPlayoffs[0].Awards.Add(new Award(World.Year, "NBA Champions"));
+            }
 
             return results;
         }
@@ -94,14 +104,17 @@ namespace SportsAgencyTycoon
 
             int atlanticIndex = EasternConference.FindIndex(t => t.Division == "Atlantic");
             EasternPlayoffs.Add(EasternConference[atlanticIndex]);
+            EasternConference[atlanticIndex].Awards.Add(new Award(World.Year, EasternConference[atlanticIndex].Division + " Division Champs"));
             EasternConference.RemoveAt(atlanticIndex);
 
             int centralIndex = EasternConference.FindIndex(t => t.Division == "Central");
             EasternPlayoffs.Add(EasternConference[centralIndex]);
+            EasternConference[centralIndex].Awards.Add(new Award(World.Year, EasternConference[centralIndex].Division + " Division Champs"));
             EasternConference.RemoveAt(centralIndex);
 
             int southeastIndex = EasternConference.FindIndex(t => t.Division == "Southeast");
             EasternPlayoffs.Add(EasternConference[southeastIndex]);
+            EasternConference[southeastIndex].Awards.Add(new Award(World.Year, EasternConference[southeastIndex].Division + " Division Champs"));
             EasternConference.RemoveAt(southeastIndex);
 
             EasternPlayoffs.Add(EasternConference[0]);
@@ -113,14 +126,17 @@ namespace SportsAgencyTycoon
 
             int northwestIndex = WesternConference.FindIndex(t => t.Division == "Northwest");
             WesternPlayoffs.Add(WesternConference[northwestIndex]);
+            WesternConference[northwestIndex].Awards.Add(new Award(World.Year, WesternConference[northwestIndex].Division + " Division Champs"));
             WesternConference.RemoveAt(northwestIndex);
 
             int southwestIndex = WesternConference.FindIndex(t => t.Division == "Southwest");
             WesternPlayoffs.Add(WesternConference[southwestIndex]);
+            WesternConference[southwestIndex].Awards.Add(new Award(World.Year, WesternConference[southwestIndex].Division + " Division Champs"));
             WesternConference.RemoveAt(southwestIndex);
 
             int pacificIndex = WesternConference.FindIndex(t => t.Division == "Pacific");
             WesternPlayoffs.Add(WesternConference[pacificIndex]);
+            WesternConference[pacificIndex].Awards.Add(new Award(World.Year, WesternConference[pacificIndex].Division + " Division Champs"));
             WesternConference.RemoveAt(pacificIndex);
 
             WesternPlayoffs.Add(WesternConference[0]);
