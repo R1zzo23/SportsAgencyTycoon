@@ -125,6 +125,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="Skill.cs" />
     <Compile Include="SoccerPlayer.cs" />
     <Compile Include="Sports.cs" />
     <Compile Include="StartGameForm.cs">
