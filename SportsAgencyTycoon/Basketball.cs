@@ -259,5 +259,102 @@ namespace SportsAgencyTycoon
             team1.PlayedGameThisCycle = true;
             team2.PlayedGameThisCycle = true;
         }
+
+        public void InitializeStats()
+        {
+            foreach (Team t in NBA.TeamList)
+                foreach (BasketballPlayer p in t.Roster)
+                {
+                    InitializePoints(p);
+                    InitializeRebounds(p);
+                    InitializeAssists(p);
+                    InitializeSteals(p);
+                    InitializeBlocks(p);
+                }
+        }
+        private void InitializePoints(BasketballPlayer p)
+        {
+            bool strength = false;
+            if (p.Strength == Skill.Scoring) strength = true;
+            if (p.CurrentSkill >= 70) p.Points = Convert.ToDouble(rnd.Next(1800, 3150)) / 100;
+            else if (p.CurrentSkill >= 50) p.Points = Convert.ToDouble(rnd.Next(1000, 1800)) / 100;
+            else if (p.CurrentSkill >= 40) p.Points = Convert.ToDouble(rnd.Next(500, 1000)) / 100;
+            else if (p.CurrentSkill >= 30) p.Points = Convert.ToDouble(rnd.Next(250, 500)) / 100;
+            else if (p.CurrentSkill >= 20) p.Points = Convert.ToDouble(rnd.Next(50, 250)) / 100;
+            else p.Points = Convert.ToDouble(rnd.Next(0, 199)) / 10;
+            if (strength) p.Points *= (1 + ((35 - p.Points) / 100));
+        }
+        private void InitializeRebounds(BasketballPlayer p)
+        {
+            bool strength = false;
+            if (p.Strength == Skill.Rebounding) strength = true;
+            if (p.Position == Position.PG) p.Rebounds = Convert.ToDouble(rnd.Next(50, 400)) / 100;
+            else if (p.Position == Position.SG) p.Rebounds = Convert.ToDouble(rnd.Next(150, 500)) / 100;
+            else if (p.Position == Position.SF) p.Rebounds = Convert.ToDouble(rnd.Next(250, 650)) / 100;
+            else if (p.Position == Position.PF) p.Rebounds = Convert.ToDouble(rnd.Next(450, 1100)) / 100;
+            else if (p.Position == Position.CE) p.Rebounds = Convert.ToDouble(rnd.Next(625, 1500)) / 100;
+
+            if (p.CurrentSkill <= 20) p.Rebounds *= Convert.ToDouble(rnd.Next(25, 50)) / 100;
+            else if (p.CurrentSkill <= 30) p.Rebounds *= Convert.ToDouble(rnd.Next(40, 60)) / 100;
+            else if (p.CurrentSkill <= 40) p.Rebounds *= Convert.ToDouble(rnd.Next(50, 75)) / 100;
+            else if (p.CurrentSkill <= 50) p.Rebounds *= Convert.ToDouble(rnd.Next(75, 95)) / 100;
+
+            if (strength) p.Rebounds *= (1 + ((30 - p.Rebounds) / 100));
+        }
+        private void InitializeAssists(BasketballPlayer p)
+        {
+            bool strength = false;
+            if (p.Strength == Skill.Passing) strength = true;
+            if (p.Position == Position.PG) p.Assists = Convert.ToDouble(rnd.Next(500, 1200)) / 100;
+            else if (p.Position == Position.SG) p.Assists = Convert.ToDouble(rnd.Next(150, 650)) / 100;
+            else if (p.Position == Position.SF) p.Assists = Convert.ToDouble(rnd.Next(100, 650)) / 100;
+            else if (p.Position == Position.PF) p.Assists = Convert.ToDouble(rnd.Next(50, 375)) / 100;
+            else if (p.Position == Position.CE) p.Assists = Convert.ToDouble(rnd.Next(25, 300)) / 100;
+
+            if (p.CurrentSkill <= 20) p.Assists *= Convert.ToDouble(rnd.Next(25, 50)) / 100;
+            else if (p.CurrentSkill <= 30) p.Assists *= Convert.ToDouble(rnd.Next(40, 60)) / 100;
+            else if (p.CurrentSkill <= 40) p.Assists *= Convert.ToDouble(rnd.Next(50, 75)) / 100;
+            else if (p.CurrentSkill <= 50) p.Assists *= Convert.ToDouble(rnd.Next(75, 95)) / 100;
+
+            if (strength) p.Assists *= (1 + ((30 - p.Assists) / 100));
+        }
+        private void InitializeSteals(BasketballPlayer p)
+        {
+            bool strength = false;
+            if (p.Strength == Skill.Stealing) strength = true;
+            if (p.Position == Position.PG) p.Steals = Convert.ToDouble(rnd.Next(50, 350)) / 100;
+            else if (p.Position == Position.SG) p.Steals = Convert.ToDouble(rnd.Next(50, 350)) / 100;
+            else if (p.Position == Position.SF) p.Steals = Convert.ToDouble(rnd.Next(50, 350)) / 100;
+            else if (p.Position == Position.PF) p.Steals = Convert.ToDouble(rnd.Next(25, 200)) / 100;
+            else if (p.Position == Position.CE) p.Steals = Convert.ToDouble(rnd.Next(10, 200)) / 100;
+
+            if (p.CurrentSkill <= 20) p.Steals *= Convert.ToDouble(rnd.Next(25, 50)) / 100;
+            else if (p.CurrentSkill <= 30) p.Steals *= Convert.ToDouble(rnd.Next(40, 60)) / 100;
+            else if (p.CurrentSkill <= 40) p.Steals *= Convert.ToDouble(rnd.Next(50, 75)) / 100;
+            else if (p.CurrentSkill <= 50) p.Steals *= Convert.ToDouble(rnd.Next(75, 95)) / 100;
+
+            if (strength) p.Steals *= (1 + ((30 - p.Steals) / 100));
+        }
+        private void InitializeBlocks(BasketballPlayer p)
+        {
+            bool strength = false;
+            if (p.Strength == Skill.Blocking) strength = true;
+            if (p.Position == Position.PG) p.Blocks = Convert.ToDouble(rnd.Next(10, 100)) / 100;
+            else if (p.Position == Position.SG) p.Blocks = Convert.ToDouble(rnd.Next(10, 120)) / 100;
+            else if (p.Position == Position.SF) p.Blocks = Convert.ToDouble(rnd.Next(10, 130)) / 100;
+            else if (p.Position == Position.PF) p.Blocks = Convert.ToDouble(rnd.Next(50, 250)) / 100;
+            else if (p.Position == Position.CE) p.Blocks = Convert.ToDouble(rnd.Next(75, 300)) / 100;
+
+            if (p.CurrentSkill <= 20) p.Blocks *= Convert.ToDouble(rnd.Next(25, 50)) / 100;
+            else if (p.CurrentSkill <= 30) p.Blocks *= Convert.ToDouble(rnd.Next(40, 60)) / 100;
+            else if (p.CurrentSkill <= 40) p.Blocks *= Convert.ToDouble(rnd.Next(50, 75)) / 100;
+            else if (p.CurrentSkill <= 50) p.Blocks *= Convert.ToDouble(rnd.Next(75, 95)) / 100;
+
+            if (strength) p.Blocks *= (1 + ((30 - p.Blocks) / 100));
+        }
+        public void UpdateStats()
+        {
+            Console.WriteLine("Updating basketball stats...");
+        }
     }
 }

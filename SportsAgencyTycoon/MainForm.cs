@@ -688,6 +688,9 @@ namespace SportsAgencyTycoon
             //simulate games if league in initialized and in-season
             if (world.NBA.Initialized && world.NBA.InSeason)
             {
+                if (world.MonthName == Months.October && world.WeekNumber == 4)
+                    world.Basketball.InitializeStats();
+                else world.Basketball.UpdateStats();
                 if (!world.NBA.Playoffs)
                 {
                     world.Basketball.SimulateGames();
