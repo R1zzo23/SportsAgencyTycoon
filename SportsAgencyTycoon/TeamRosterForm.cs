@@ -160,9 +160,9 @@ namespace SportsAgencyTycoon
         }
         public void DisplayBasketballStats(BasketballPlayer player)
         {
-            lblStats.Text = "PTS: " + player.Points + Environment.NewLine + "REB: " + player.Rebounds + Environment.NewLine
-                + "AST: " + player.Assists + Environment.NewLine + "BLK: " + player.Blocks + Environment.NewLine
-                + "STL: " + player.Steals;
+            lblStats.Text = "PTS: " + player.Points.ToString("0.##") + Environment.NewLine + "REB: " + player.Rebounds.ToString("0.##") + Environment.NewLine
+                + "AST: " + player.Assists.ToString("0.##") + Environment.NewLine + "BLK: " + player.Blocks.ToString("0.##") + Environment.NewLine
+                + "STL: " + player.Steals.ToString("0.##");
         }
     }
 }

@@ -354,7 +354,40 @@ namespace SportsAgencyTycoon
         }
         public void UpdateStats()
         {
-            Console.WriteLine("Updating basketball stats...");
+            foreach (Team t in NBA.TeamList)
+                foreach (BasketballPlayer p in t.Roster)
+                {
+                    UpdatePoints(p);
+                    UpdateRebounds(p);
+                    UpdateAssists(p);
+                    UpdateSteals(p);
+                    UpdateBlocks(p);
+                }
+        }
+        public void UpdatePoints(BasketballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
+            p.Points *= 1 + change;
+        }
+        public void UpdateRebounds(BasketballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-7, 8)) / 100;
+            p.Rebounds *= 1 + change;
+        }
+        public void UpdateAssists(BasketballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
+            p.Assists *= 1 + change;
+        }
+        public void UpdateSteals(BasketballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-7, 8)) / 100;
+            p.Steals *= 1 + change;
+        }
+        public void UpdateBlocks(BasketballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
+            p.Blocks *= 1 + change;
         }
     }
 }
