@@ -690,10 +690,11 @@ namespace SportsAgencyTycoon
             {
                 if (world.MonthName == Months.October && world.WeekNumber == 4)
                     world.Basketball.InitializeStats();
-                else world.Basketball.UpdateStats();
+                    
                 if (!world.NBA.Playoffs)
                 {
                     world.Basketball.SimulateGames();
+                    world.Basketball.UpdateStats();
 
                     //if it is the 1st week of May, games above will simulate and the playoffs will now be starting
                     if (world.MonthName == Months.May && world.WeekNumber == 1)
@@ -998,6 +999,12 @@ namespace SportsAgencyTycoon
                     {
                         world.NBA.InSeason = true;
                         world.NBA.Initialized = true;
+                        foreach (Team t in world.NBA.TeamList)
+                        {
+                            t.Wins = 0;
+                            t.Losses = 0;
+                        }
+                        world.NBA.Playoffs = false;
                     }
                     else if (e.Sport == Sports.Football)
                     {

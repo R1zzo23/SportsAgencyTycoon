@@ -92,6 +92,10 @@ namespace SportsAgencyTycoon
         public string DeterminePlayoffField()
         {
             string playoffSeedings = "";
+            EasternConference.Clear();
+            WesternConference.Clear();
+            EasternPlayoffs.Clear();
+            WesternPlayoffs.Clear();
 
             foreach (Team t in World.NBA.TeamList)
             {
