@@ -700,6 +700,23 @@ namespace SportsAgencyTycoon
                     if (world.MonthName == Months.May && world.WeekNumber == 1)
                     {
                         world.NBA.Playoffs = true;
+                        world.Basketball.DPOYCandidates.Clear();
+                        foreach (Team t in world.NBA.TeamList)
+                            foreach (BasketballPlayer p in t.Roster)
+                            {
+                                world.Basketball.MVPScores(p);
+                                if (p.Strength == Skill.Blocking || p.Strength == Skill.Stealing
+                                    || p.Strength == Skill.Rebounding)
+                                {
+                                    world.Basketball.BasketballDPOYScores(p);
+                                    world.Basketball.DPOYCandidates.Add(p);
+                                }
+                                    
+                            }
+
+                        newsLabel.Text = world.Basketball.DisplayDPOYTop5() + Environment.NewLine + newsLabel.Text;
+                        newsLabel.Text = world.Basketball.DisplayMVPTop5() + Environment.NewLine + newsLabel.Text;
+
                         newsLabel.Text = world.Basketball.DeterminePlayoffField() + Environment.NewLine + newsLabel.Text;
                     }
 

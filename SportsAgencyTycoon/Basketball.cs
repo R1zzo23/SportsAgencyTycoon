@@ -21,6 +21,7 @@ namespace SportsAgencyTycoon
         public List<Team> WesternPlayoffs = new List<Team>();
         public List<int> EasternLoserIndex = new List<int>();
         public List<int> WesternLoserIndex = new List<int>();
+        public List<BasketballPlayer> DPOYCandidates = new List<BasketballPlayer>();
 
         public Basketball(Random r, World w, League l)
         {
@@ -371,27 +372,95 @@ namespace SportsAgencyTycoon
         public void UpdatePoints(BasketballPlayer p)
         {
             double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
-            p.Points *= 1 + change;
+            if (change <= -.03)
+                p.Points *= 1 + (change + .02);
+            else if (change >= .03)
+                p.Points *= 1 + (change - .02);
         }
         public void UpdateRebounds(BasketballPlayer p)
         {
-            double change = Convert.ToDouble(rnd.Next(-7, 8)) / 100;
-            p.Rebounds *= 1 + change;
+            double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
+            if (change <= -.03)
+                p.Rebounds *= 1 + (change + .02);
+            else if (change >= .03)
+                p.Rebounds *= 1 + (change - .02);
         }
         public void UpdateAssists(BasketballPlayer p)
         {
             double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
-            p.Assists *= 1 + change;
+            if (change <= -.03)
+                p.Assists *= 1 + (change + .02);
+            else if (change >= .03)
+                p.Assists *= 1 + (change - .02);
         }
         public void UpdateSteals(BasketballPlayer p)
         {
-            double change = Convert.ToDouble(rnd.Next(-7, 8)) / 100;
-            p.Steals *= 1 + change;
+            double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
+            if (change <= -.03)
+                p.Steals *= 1 + (change + .02);
+            else if (change >= .03)
+                p.Steals *= 1 + (change - .02);
         }
         public void UpdateBlocks(BasketballPlayer p)
         {
             double change = Convert.ToDouble(rnd.Next(-5, 6)) / 100;
-            p.Blocks *= 1 + change;
+            if (change <= -.03)
+                p.Blocks *= 1 + (change + .02);
+            else if (change >= .03)
+                p.Blocks *= 1 + (change - .02);
+        }
+        public void MVPScores(BasketballPlayer p)
+        {
+            double score = 0;
+            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + p.Points * 2 + p.Rebounds + p.Assists + p.Steals + p.Blocks;
+            p.MVPScore = score;
+        }
+        public void BasketballDPOYScores(BasketballPlayer p)
+        {
+            double score = 0;
+            score = p.CurrentSkill / 2 + p.Team.Wins / 2 + p.Rebounds + p.Steals * 2 + p.Blocks * 2.5;
+            p.DPOYScore = score;
+        }
+        public string DisplayMVPTop5()
+        {
+            string results = "";
+
+            List<BasketballPlayer> mvpRanks = new List<BasketballPlayer>();
+            foreach (Team t in World.NBA.TeamList)
+                foreach (BasketballPlayer p in t.Roster)
+                    mvpRanks.Add(p);
+
+            mvpRanks = mvpRanks.OrderByDescending(o => o.MVPScore).ToList();
+
+            results = mvpRanks[0].Team.City + "'s " + mvpRanks[0].FullName + " has been named NBA MVP!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + mvpRanks[i - 1].Team.Abbreviation + "] " + mvpRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            mvpRanks[0].Awards.Add(new Award(World.Year, "NBA MVP"));
+                
+            return results;
+        }
+        public string DisplayDPOYTop5()
+        {
+            string results = "";
+
+            DPOYCandidates = DPOYCandidates.OrderByDescending(o => o.DPOYScore).ToList();
+
+            results = DPOYCandidates[0].Team.City + "'s " + DPOYCandidates[0].FullName + " has been named NBA Defensive Player of the Year!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + DPOYCandidates[i - 1].Team.Abbreviation + "] " + DPOYCandidates[i - 1].FullName;
+            }
+
+            //give the winner the award
+            DPOYCandidates[0].Awards.Add(new Award(World.Year, "NBA Defensive Player of the Year"));
+
+            return results;
         }
     }
 }
