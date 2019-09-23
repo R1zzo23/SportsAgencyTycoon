@@ -24,7 +24,7 @@ namespace SportsAgencyTycoon
         public League MLS;
         public Basketball Basketball;
         //public Baseball Baseball;
-        //public Football Football;
+        public Football Football;
         //public Hockey Hockey;
         //public Soccer Soccer;
         public Association PGA;
@@ -52,10 +52,41 @@ namespace SportsAgencyTycoon
             Year = 2000;
             MonthNumber = 0;
             MonthName = Months.January;
-            WeekNumber = 1;
+            WeekNumber = 1;            
 
             MainForm = form;
             Calendar = new Calendar(form);
+        }
+
+        public void InitializeCalendar(Licenses teamLicense)
+        {
+            if (teamLicense.Sport == Sports.Basketball) SetInitialDate(NBA);
+            else if (teamLicense.Sport == Sports.Football) SetInitialDate(NFL);
+            else if (teamLicense.Sport == Sports.Baseball) SetInitialDate(MLB);
+            else if (teamLicense.Sport == Sports.Hockey) SetInitialDate(NHL);
+            else if (teamLicense.Sport == Sports.Soccer) SetInitialDate(MLS);
+
+            SetDateOneWeekBack();
+            MainForm.UpdateWorldCalendar();
+        }
+
+        public void SetInitialDate(League l)
+        {
+            MonthName = l.SeasonStart.MonthName;
+            MonthNumber = l.SeasonStart.MonthNumber;
+            WeekNumber = l.SeasonStart.Week;
+        }
+
+        public void SetDateOneWeekBack()
+        {
+            WeekNumber--;
+            if (WeekNumber == 0)
+            {
+                MonthNumber--;
+                MonthName = (Months)MonthNumber;
+                if ((MonthNumber + 1) % 3 == 0) WeekNumber = 5;
+                else WeekNumber = 4;
+            }
         }
 
         public void InitializeLicenses()
@@ -116,15 +147,15 @@ namespace SportsAgencyTycoon
         {
             NBA = new League(Sports.Basketball, "National Basketball Association", "NBA", rnd.Next(45, 100), new Date(10, Months.October, 4), new Date(6, Months.June, 2), 8, 40000000, 582180);
             MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(4, Months.April, 1), new Date(10, Months.October, 4), 6, 35000000, 555000);
-            NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.August, 1), new Date(2, Months.February, 1), 6, 30000000, 495000);
+            NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.September, 3), new Date(2, Months.February, 1), 6, 30000000, 495000);
             NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(10, Months.October, 1), new Date(6, Months.June, 2), 8, 9500000, 650000);
             MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(3, Months.March, 2), new Date(12, Months.December, 2), 9, 7000000, 56250);
 
-            NBA.InSeason = true;
+            /*NBA.InSeason = true;
             MLB.InSeason = false;
             NFL.InSeason = true;
             NHL.InSeason = true;
-            MLS.InSeason = false;
+            MLS.InSeason = false;*/
         }
         public void CreateCalendarEventsForLeagueStartAndEnd()
         {

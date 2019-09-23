@@ -1651,7 +1651,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.ComboBox cbAgencyAgentList;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label newsLabel;
         private System.Windows.Forms.Label licenseYearlyDuesLabel;
         private System.Windows.Forms.Label licenseRenewalMonthLabel;
         private System.Windows.Forms.Label licenseIsAgentLicensedLabel;
@@ -1732,6 +1731,7 @@
         private System.Windows.Forms.Label clientTeamLabel;
         private System.Windows.Forms.Label clientPositionLabel;
         private System.Windows.Forms.Button btnViewStandings;
+        public System.Windows.Forms.Label newsLabel;
     }
 }
 

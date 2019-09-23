@@ -8,6 +8,7 @@ namespace SportsAgencyTycoon
 {
     public class Basketball
     {
+        public MainForm mainForm;
         public Random rnd;
         public League NBA;
         public World World;
@@ -23,8 +24,9 @@ namespace SportsAgencyTycoon
         public List<int> WesternLoserIndex = new List<int>();
         public List<BasketballPlayer> DPOYCandidates = new List<BasketballPlayer>();
 
-        public Basketball(Random r, World w, League l)
+        public Basketball(MainForm mf, Random r, World w, League l)
         {
+            mainForm = mf;
             rnd = r;
             World = w;
             NBA = l;
@@ -44,6 +46,47 @@ namespace SportsAgencyTycoon
             Divisions.Add("Northwest");
             Divisions.Add("Southwest");
             Divisions.Add("Pacific");
+        }
+
+        public void SimWeek()
+        {
+            if (World.MonthName == Months.October && World.WeekNumber == 4)
+                World.Basketball.InitializeStats();
+
+            if (!World.NBA.Playoffs)
+            {
+                World.Basketball.SimulateGames();
+                World.Basketball.UpdateStats();
+
+                //if it is the 1st week of May, games above will simulate and the playoffs will now be starting
+                if (World.MonthName == Months.May && World.WeekNumber == 1)
+                {
+                    World.NBA.Playoffs = true;
+                    World.Basketball.DPOYCandidates.Clear();
+                    foreach (Team t in World.NBA.TeamList)
+                        foreach (BasketballPlayer p in t.Roster)
+                        {
+                            World.Basketball.MVPScores(p);
+                            if (p.Strength == Skill.Blocking || p.Strength == Skill.Stealing
+                                || p.Strength == Skill.Rebounding)
+                            {
+                                World.Basketball.BasketballDPOYScores(p);
+                                World.Basketball.DPOYCandidates.Add(p);
+                            }
+
+                        }
+
+                    mainForm.newsLabel.Text = World.Basketball.DisplayDPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                    mainForm.newsLabel.Text = World.Basketball.DisplayMVPTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+
+                    mainForm.newsLabel.Text = World.Basketball.DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
+                }
+
+            }
+            else if (World.NBA.Playoffs && (World.MonthName == Months.June && World.WeekNumber == 1))
+                mainForm.newsLabel.Text = World.Basketball.SimulateChampionship() + Environment.NewLine + mainForm.newsLabel.Text;
+            else
+                mainForm.newsLabel.Text = World.Basketball.SimulatePlayoffRound() + Environment.NewLine + mainForm.newsLabel.Text;
         }
 
         public void SimulateGames()

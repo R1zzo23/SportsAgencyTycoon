@@ -31,6 +31,7 @@ namespace SportsAgencyTycoon
             Boxing = new Boxing(agency);
             MMA = new MMA(agency);
             Tennis = new Tennis(agency);
+            world.InitializeCalendar(myManager.LicensesHeld[0]);
         }
 
         #region Game Start
@@ -56,9 +57,9 @@ namespace SportsAgencyTycoon
             PopulateEventList();
             DetermineSeasons();
             NerfFreeAgentsToStart();
-            world.Basketball = new Basketball(rnd, world, world.NBA);
+            world.Basketball = new Basketball(this, rnd, world, world.NBA);
             //world.Baseball = new Baseball(world.MLB);
-            //world.Football = new Football(world.NFL);
+            world.Football = new Football(this, rnd, world, world.NFL);
             //world.Hockey = new Hockey(world.NHL);
             //world.Soccer = new Soccer(world.MLS);
         }
@@ -688,45 +689,13 @@ namespace SportsAgencyTycoon
             //simulate games if league in initialized and in-season
             if (world.NBA.Initialized && world.NBA.InSeason)
             {
-                if (world.MonthName == Months.October && world.WeekNumber == 4)
-                    world.Basketball.InitializeStats();
-                    
-                if (!world.NBA.Playoffs)
-                {
-                    world.Basketball.SimulateGames();
-                    world.Basketball.UpdateStats();
-
-                    //if it is the 1st week of May, games above will simulate and the playoffs will now be starting
-                    if (world.MonthName == Months.May && world.WeekNumber == 1)
-                    {
-                        world.NBA.Playoffs = true;
-                        world.Basketball.DPOYCandidates.Clear();
-                        foreach (Team t in world.NBA.TeamList)
-                            foreach (BasketballPlayer p in t.Roster)
-                            {
-                                world.Basketball.MVPScores(p);
-                                if (p.Strength == Skill.Blocking || p.Strength == Skill.Stealing
-                                    || p.Strength == Skill.Rebounding)
-                                {
-                                    world.Basketball.BasketballDPOYScores(p);
-                                    world.Basketball.DPOYCandidates.Add(p);
-                                }
-                                    
-                            }
-
-                        newsLabel.Text = world.Basketball.DisplayDPOYTop5() + Environment.NewLine + newsLabel.Text;
-                        newsLabel.Text = world.Basketball.DisplayMVPTop5() + Environment.NewLine + newsLabel.Text;
-
-                        newsLabel.Text = world.Basketball.DeterminePlayoffField() + Environment.NewLine + newsLabel.Text;
-                    }
-
-                }
-                else if (world.NBA.Playoffs && (world.MonthName == Months.June && world.WeekNumber == 1))
-                    newsLabel.Text = world.Basketball.SimulateChampionship() + Environment.NewLine + newsLabel.Text;
-                else
-                    newsLabel.Text = world.Basketball.SimulatePlayoffRound() + Environment.NewLine + newsLabel.Text;
+                world.Basketball.SimWeek();
             }
                 
+            if (world.NFL.Initialized && world.NFL.InSeason)
+            {
+                world.Football.SimWeek();
+            }
 
             //reset if agent took a test this week
             foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
@@ -759,7 +728,7 @@ namespace SportsAgencyTycoon
             }
         }   
 
-        private void UpdateWorldCalendar()
+        public void UpdateWorldCalendar()
         {
             yearLabel.Text = world.Year.ToString();
             monthLabel.Text = world.MonthName.ToString();

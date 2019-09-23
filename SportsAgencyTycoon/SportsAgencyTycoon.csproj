@@ -90,6 +90,7 @@
     <Compile Include="Endorsement.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FirstName.cs" />
+    <Compile Include="Football.cs" />
     <Compile Include="FootballPlayer.cs" />
     <Compile Include="HappinessDescription.cs" />
     <Compile Include="HireAgentForm.cs">
