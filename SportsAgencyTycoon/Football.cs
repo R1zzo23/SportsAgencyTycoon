@@ -53,7 +53,7 @@ namespace SportsAgencyTycoon
         public void SimWeek()
         {
             if (World.MonthName == Months.September && World.WeekNumber == 3)
-                InitializeStats();
+                DetermineStats();
 
             if (!NFL.Playoffs)
             {
@@ -62,10 +62,137 @@ namespace SportsAgencyTycoon
             }
         }
 
-        public void InitializeStats()
+        public void DetermineStats()
         {
-            Console.WriteLine("Initializing football stats...");
+            foreach (Team t in NFL.TeamList)
+                foreach (FootballPlayer p in t.Roster)
+                {
+                    if (p.Position == Position.QB)
+                    {
+                        DeterminePassingTD(p);
+                        DeterminePassingYards(p);
+                        DetermineInterceptions(p);
+                    }
+                    else if (p.Position == Position.RB)
+                    {
+                        DetermineCarries(p);
+                        DetermineRushingYards(p);
+                        DetermineRushingTD(p);
+                        DetermineFumbles(p);
+                    }
+                    else if (p.Position == Position.WR)
+                    {
+                        DetermineReceptions(p);
+                        DetermineReceivingYards(p);
+                        DetermineReceivingTDs(p);
+                    }
+                    else if (p.Position == Position.OG || p.Position == Position.OT || p.Position == Position.C)
+                    {
+                        DetermineSacksAllowed(p);
+                        DeterminePancakeBlocks(p);
+                    }
+                    else if (p.Position == Position.DT || p.Position == Position.DE || p.Position == Position.LB)
+                    {
+                        DetermineTackles(p);
+                        DetermineSacks(p);
+                        DetermineTacklesForLoss(p);
+                    }
+                    else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
+                    {
+                        DetermineTackles(p);
+                        DeterminePassesDefended(p);
+                        DetermineDefensiveInterceptions(p);
+                    }
+                    else if (p.Position == Position.K)
+                    {
+                        DetermineXPAttempts(p);
+                        DetermineXPMakes(p);
+                        DetermineFGAttempts(p);
+                        DetermineFGMakes(p);
+                    }
+                    else if (p.Position == Position.P)
+                    {
+                        DeterminePunts(p);
+                        DetermineNetPuntYards(p);
+                    }
+                }
         }
+
+        private void DetermineTacklesForLoss(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineSacks(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineTackles(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeterminePancakeBlocks(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineSacksAllowed(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineReceivingTDs(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineReceivingYards(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineReceptions(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineFumbles(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineRushingTD(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineRushingYards(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineCarries(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineInterceptions(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeterminePassingYards(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeterminePassingTD(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SimulateGames()
         {
 

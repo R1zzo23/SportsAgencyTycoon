@@ -15,6 +15,31 @@ namespace SportsAgencyTycoon
         public int ProBowlTeams;
         public int AllProSelections;
 
+        //individual player stats
+        public int PassingTDs = 0;
+        public int PassingYards = 0;
+        public int Interceptions = 0;
+        public int Receptions = 0;
+        public int ReceivingYards = 0;
+        public int ReceivingTDs = 0;
+        public int Carries = 0;
+        public int RushingYards = 0;
+        public int RushingTDs = 0;
+        public int Fumbles = 0;
+        public int Tackles = 0;
+        public int DefensiveInterceptions = 0;
+        public int TacklesForLoss = 0;
+        public int Sacks = 0;
+        public int FGAttempts = 0;
+        public int FGMakes = 0;
+        public int XPAttempts = 0;
+        public int XPMakes = 0;
+        public int Punts = 0;
+        public int NetPuntYardage = 0;
+        public int SacksAllowed = 0;
+        public int PassesDefended = 0;
+        public int PancakeBlocks = 0;
+
         public FootballPlayer(Random rnd, int id, Sports sport, int age, Position position)
             : base(rnd, id, sport, age)
         {
