@@ -52,16 +52,13 @@ namespace SportsAgencyTycoon
 
         public void SimWeek()
         {
-            if (World.MonthName == Months.September && World.WeekNumber == 3)
-                DetermineStats();
-
             if (!NFL.Playoffs)
             {
                 SimulateGames();
-                UpdateStats();
+                DetermineStats();
             }
         }
-
+        #region DetermineStats
         public void DetermineStats()
         {
             foreach (Team t in NFL.TeamList)
@@ -116,6 +113,45 @@ namespace SportsAgencyTycoon
                         DetermineNetPuntYards(p);
                     }
                 }
+        }
+        private void DetermineNetPuntYards(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeterminePunts(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineFGMakes(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineFGAttempts(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineXPMakes(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineXPAttempts(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DetermineDefensiveInterceptions(FootballPlayer p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeterminePassesDefended(FootballPlayer p)
+        {
+            throw new NotImplementedException();
         }
 
         private void DetermineTacklesForLoss(FootballPlayer p)
@@ -192,12 +228,8 @@ namespace SportsAgencyTycoon
         {
             throw new NotImplementedException();
         }
-
+        #endregion
         public void SimulateGames()
-        {
-
-        }
-        public void UpdateStats()
         {
 
         }
