@@ -114,6 +114,13 @@ namespace SportsAgencyTycoon
                     hoopsRoster.Add(bp);
                 DisplayBasketballStats(hoopsRoster[cbTeamRoster.SelectedIndex]);
             }
+            else if (selectedLeague.Sport == Sports.Football)
+            {
+                List<FootballPlayer> footballRoster = new List<FootballPlayer>();
+                foreach (FootballPlayer fp in selectedTeam.Roster)
+                    footballRoster.Add(fp);
+                DisplayFootballStats(footballRoster[cbTeamRoster.SelectedIndex]);
+            }
                 
 
             if (selectedPlayer.Sport == Sports.Baseball)
@@ -163,6 +170,16 @@ namespace SportsAgencyTycoon
             lblStats.Text = "PTS: " + player.Points.ToString("0.##") + Environment.NewLine + "REB: " + player.Rebounds.ToString("0.##") + Environment.NewLine
                 + "AST: " + player.Assists.ToString("0.##") + Environment.NewLine + "BLK: " + player.Blocks.ToString("0.##") + Environment.NewLine
                 + "STL: " + player.Steals.ToString("0.##");
+        }
+        public void DisplayFootballStats(FootballPlayer player)
+        {
+            if (player.Position == Position.QB) lblStats.Text = DisplayQBStats(player);
+        }
+        public string DisplayQBStats(FootballPlayer player)
+        {
+            string stats = "YDS: " + player.PassingYards.ToString() + Environment.NewLine + "TDS: " + player.PassingTDs.ToString()
+                + Environment.NewLine + "INT: " + player.Interceptions.ToString();
+            return stats;
         }
     }
 }

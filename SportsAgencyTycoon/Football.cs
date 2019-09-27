@@ -116,117 +116,163 @@ namespace SportsAgencyTycoon
         }
         private void DetermineNetPuntYards(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DeterminePunts(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineFGMakes(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineFGAttempts(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineXPMakes(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineXPAttempts(FootballPlayer p)
         {
-            throw new NotImplementedException();
+           
         }
 
         private void DetermineDefensiveInterceptions(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DeterminePassesDefended(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineTacklesForLoss(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineSacks(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineTackles(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DeterminePancakeBlocks(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineSacksAllowed(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineReceivingTDs(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineReceivingYards(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineReceptions(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineFumbles(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineRushingTD(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineRushingYards(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineCarries(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DetermineInterceptions(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            if (World.IsFootballStarter(p.Team, p))
+            {
+                int randomINTChance = rnd.Next(1, 101);
+                if (randomINTChance > p.CurrentSkill)
+                {
+                    if (p.CurrentSkill >= 70) p.Interceptions++;
+                    else if (p.CurrentSkill >= 50) p.Interceptions += rnd.Next(1, 3);
+                    else if (p.CurrentSkill >= 40) p.Interceptions += rnd.Next(1, 4);
+                    else p.Interceptions += rnd.Next(2, 4);
+                }
+            }
         }
 
         private void DeterminePassingYards(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            if (World.IsFootballStarter(p.Team, p))
+            {
+                if (p.CurrentSkill >= 70) p.PassingYards += rnd.Next(175, 451);
+                else if (p.CurrentSkill >= 60) p.PassingYards += rnd.Next(175, 390);
+                else if (p.CurrentSkill >= 50) p.PassingYards += rnd.Next(150, 301);
+                else if (p.CurrentSkill >= 40) p.PassingYards += rnd.Next(130, 251);
+                else p.PassingYards += rnd.Next(125, 201);
+            }
+            else
+            {
+                //backup gets 10% chance of playing time
+                int blowout = rnd.Next(1, 11);
+                if (blowout == 10)
+                {
+                    //backup passes for between 0-65 yards
+                    int yards = rnd.Next(0, 66);
+                    p.PassingYards += yards;
+                    //20% chance of backup tossing a TD if yards >= 30
+                    if (yards >= 30)
+                    {
+                        int tdPass = rnd.Next(1, 11);
+                        if (tdPass <= 2) p.PassingTDs++;
+                    }
+                    else
+                    {
+                        //if backup doesn't throw a TD, 30% chance of throwing INT
+                        int INT = rnd.Next(1, 11);
+                        if (INT <= 3) p.Interceptions++;
+                    }
+                }
+            }
         }
 
         private void DeterminePassingTD(FootballPlayer p)
         {
-            throw new NotImplementedException();
+            if (World.IsFootballStarter(p.Team, p))
+            {
+                if (p.CurrentSkill >= 70) p.PassingTDs += rnd.Next(1, 5);
+                else if (p.CurrentSkill >= 60) p.PassingTDs += rnd.Next(1, 4);
+                else if (p.CurrentSkill >= 50) p.PassingTDs += rnd.Next(0, 3);
+                else p.PassingTDs += rnd.Next(0, 2);
+            }
         }
         #endregion
         public void SimulateGames()
