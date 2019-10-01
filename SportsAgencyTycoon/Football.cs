@@ -73,9 +73,9 @@ namespace SportsAgencyTycoon
                     else if (p.Position == Position.RB)
                     {
                         DetermineCarries(p);
-                        DetermineRushingYards(p);
-                        DetermineRushingTD(p);
-                        DetermineFumbles(p);
+                        //DetermineRushingYards(p);
+                        //DetermineRushingTD(p);
+                        //DetermineFumbles(p);
                     }
                     else if (p.Position == Position.WR)
                     {
@@ -199,19 +199,28 @@ namespace SportsAgencyTycoon
             
         }
 
-        private void DetermineRushingTD(FootballPlayer p)
+        private void DetermineRushingTD(FootballPlayer p, int carries, int yards)
         {
-            
+            bool scoredTDChance;
+            int sumOfSkillAndProduction =  = p.CurrentSkill + yards + carries
         }
 
-        private void DetermineRushingYards(FootballPlayer p)
+        private void DetermineRushingYards(FootballPlayer p, int carries)
         {
-            
+            double ypc = Convert.ToDouble(rnd.Next(28, 55) / 10);
+            int yards = Convert.ToInt32(Math.Round(ypc * carries));
+            p.RushingYards += yards;
+            DetermineRushingTD(p, carries, yards);
         }
 
         private void DetermineCarries(FootballPlayer p)
         {
-            
+            if (p.IsStarter)
+            {
+                int carries = rnd.Next(8, 33);
+                p.Carries += carries;
+                DetermineRushingYards(p, carries);
+            }
         }
 
         private void DetermineInterceptions(FootballPlayer p)

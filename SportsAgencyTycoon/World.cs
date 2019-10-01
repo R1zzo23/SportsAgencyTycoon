@@ -586,6 +586,12 @@ namespace SportsAgencyTycoon
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
             if (player == playersAtPosition[0]) starter = true;
             else starter = false;
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+            }
+
+            player.IsStarter = starter;
 
             return starter;
         }
@@ -613,9 +619,13 @@ namespace SportsAgencyTycoon
                 if (player == playersAtPosition[i])
                 {
                     starter = true;
-                    return starter;
                 }
             }
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+            }
+            player.IsStarter = starter;
 
             return starter;
         }
@@ -642,9 +652,13 @@ namespace SportsAgencyTycoon
                 if (player == playersAtPosition[i])
                 {
                     starter = true;
-                    return starter;
                 }
             }
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+            }
+            player.IsStarter = starter;
 
             return starter;
         }
@@ -670,9 +684,13 @@ namespace SportsAgencyTycoon
                 if (player == playersAtPosition[i])
                 {
                     starter = true;
-                    return starter;
                 }
             }
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+            }
+            player.IsStarter = starter;
 
             return starter;
         }
@@ -689,6 +707,12 @@ namespace SportsAgencyTycoon
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
             if (player == playersAtPosition[0]) starter = true;
             else starter = false;
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+            }
+
+            player.IsStarter = starter;
 
             return starter;
         }

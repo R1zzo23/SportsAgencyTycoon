@@ -107,6 +107,10 @@ namespace SportsAgencyTycoon
             Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
             Player selectedPlayer = selectedTeam.Roster[cbTeamRoster.SelectedIndex];
 
+            lblDepthChart.Text = "Spot on Depth Chart: " + selectedPlayer.DepthChart.ToString();
+            if (selectedPlayer.IsStarter) lblStarter.Text = "Starter: yes";
+            else lblStarter.Text = "Starter: no";
+
             if (selectedLeague.Sport == Sports.Basketball)
             {
                 List<BasketballPlayer> hoopsRoster = new List<BasketballPlayer>();

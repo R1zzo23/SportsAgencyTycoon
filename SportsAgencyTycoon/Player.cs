@@ -15,6 +15,8 @@ namespace SportsAgencyTycoon
         public Team Team;
         public League League;
         public Position Position;
+        public int DepthChart;
+        public bool IsStarter;
 
         //name variables
         public FirstName FirstName;
@@ -68,6 +70,8 @@ namespace SportsAgencyTycoon
             Id = id;
             Sport = sport;
             PlayerType = DeterminePlayerType(Sport);
+            DepthChart = 0;
+            IsStarter = false;
 
             FirstName = randomFirstName(rnd);
             LastName = randomLastName(rnd);
