@@ -202,14 +202,23 @@ namespace SportsAgencyTycoon
         private void DetermineRushingTD(FootballPlayer p, int carries, int yards)
         {
             bool scoredTDChance;
-            int sumOfSkillAndProduction =  = p.CurrentSkill + yards + carries
+            int sumOfSkillAndProduction = p.CurrentSkill + yards + carries;
         }
 
         private void DetermineRushingYards(FootballPlayer p, int carries)
         {
+            bool chunkPlay = false;
+            int chunkChance = rnd.Next(1, 101);
+            int chunkYards = 0;
+            if (p.CurrentSkill >= chunkChance)
+            {
+                chunkYards = rnd.Next(25, 76);
+                chunkPlay = true;
+            }
             double ypc = Convert.ToDouble(rnd.Next(28, 55) / 10);
-            int yards = Convert.ToInt32(Math.Round(ypc * carries));
+            int yards = Convert.ToInt32(Math.Round(ypc * carries) + chunkYards);
             p.RushingYards += yards;
+            if (chunkPlay) carries++;
             DetermineRushingTD(p, carries, yards);
         }
 
