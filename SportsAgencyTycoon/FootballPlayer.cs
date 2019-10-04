@@ -14,6 +14,7 @@ namespace SportsAgencyTycoon
         public int TitlesWon;
         public int ProBowlTeams;
         public int AllProSelections;
+        public int ChunkPlays;
 
         //individual player stats
         public int PassingTDs = 0;

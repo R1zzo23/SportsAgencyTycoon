@@ -199,27 +199,52 @@ namespace SportsAgencyTycoon
             
         }
 
-        private void DetermineRushingTD(FootballPlayer p, int carries, int yards)
+        private void DetermineRushingTD(FootballPlayer p, int carries, int yards, int chunkPlays)
         {
-            bool scoredTDChance;
+            //bool scoredTD = false;
             int sumOfSkillAndProduction = p.CurrentSkill + yards + carries;
+            int random = rnd.Next(1, 351);
+            if (sumOfSkillAndProduction <= random)
+            {
+                p.RushingTDs++;
+                //scoredTD = true;
+            }
+                
+            if (chunkPlays > 0)
+            {
+                for (int i = 0; i < chunkPlays; i++)
+                {
+                    int diceRoll = DiceRoll();
+                    if (diceRoll >= 11) p.RushingTDs++;
+                }
+
+            }
         }
 
         private void DetermineRushingYards(FootballPlayer p, int carries)
         {
             bool chunkPlay = false;
+            int chunkPlays = 0;
             int chunkChance = rnd.Next(1, 101);
             int chunkYards = 0;
-            if (p.CurrentSkill >= chunkChance)
+            for (int i = 0; i < carries; i++)
             {
-                chunkYards = rnd.Next(25, 76);
-                chunkPlay = true;
+                int diceRoll = DiceRoll();
+                if (diceRoll == 2) chunkPlays++;
+            }
+            if (chunkPlays > 0)
+            {
+                for (int j = 0; j < chunkPlays; j++)
+                {
+                    chunkYards += rnd.Next(20, 61);
+                    p.ChunkPlays++;
+                }
             }
             double ypc = Convert.ToDouble(rnd.Next(28, 55) / 10);
-            int yards = Convert.ToInt32(Math.Round(ypc * carries) + chunkYards);
+            int yards = Convert.ToInt32(Math.Round(ypc * (carries - chunkPlays)) + chunkYards);
             p.RushingYards += yards;
             if (chunkPlay) carries++;
-            DetermineRushingTD(p, carries, yards);
+            DetermineRushingTD(p, carries, yards, chunkPlays);
         }
 
         private void DetermineCarries(FootballPlayer p)
@@ -296,6 +321,11 @@ namespace SportsAgencyTycoon
         public void SimulateGames()
         {
 
+        }
+
+        public int DiceRoll()
+        {
+            return rnd.Next(2, 13);
         }
     }
 }

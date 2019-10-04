@@ -178,11 +178,18 @@ namespace SportsAgencyTycoon
         public void DisplayFootballStats(FootballPlayer player)
         {
             if (player.Position == Position.QB) lblStats.Text = DisplayQBStats(player);
+            if (player.Position == Position.RB) lblStats.Text = DisplayRBStats(player);
         }
         public string DisplayQBStats(FootballPlayer player)
         {
             string stats = "YDS: " + player.PassingYards.ToString() + Environment.NewLine + "TDS: " + player.PassingTDs.ToString()
                 + Environment.NewLine + "INT: " + player.Interceptions.ToString();
+            return stats;
+        }
+        public string DisplayRBStats(FootballPlayer player)
+        {
+            string stats = "YDS: " + player.RushingYards.ToString() + Environment.NewLine + "TDS: " + player.RushingTDs.ToString()
+                + Environment.NewLine + "CAR: " + player.Carries.ToString() + Environment.NewLine + "CHNK: " + player.ChunkPlays.ToString();
             return stats;
         }
     }
