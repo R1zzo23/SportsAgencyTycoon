@@ -178,7 +178,7 @@ namespace SportsAgencyTycoon
         public void DisplayFootballStats(FootballPlayer player)
         {
             if (player.Position == Position.QB) lblStats.Text = DisplayQBStats(player);
-            if (player.Position == Position.RB) lblStats.Text = DisplayRBStats(player);
+            if (player.Position == Position.RB || player.Position == Position.FB) lblStats.Text = DisplayRBStats(player);
         }
         public string DisplayQBStats(FootballPlayer player)
         {
@@ -189,8 +189,8 @@ namespace SportsAgencyTycoon
         public string DisplayRBStats(FootballPlayer player)
         {
             string stats = "YDS: " + player.RushingYards.ToString() + Environment.NewLine + "TDS: " + player.RushingTDs.ToString()
-                + Environment.NewLine + "CAR: " + player.Carries.ToString() + Environment.NewLine + "YPC: " 
-                + player.YardsPerCarry.ToString("0.##") + Environment.NewLine + "CHNK: " + player.ChunkPlays.ToString();
+                + Environment.NewLine + "CAR: " + player.Carries.ToString() + Environment.NewLine + "YPC: " + player.YardsPerCarry.ToString("0.##") 
+                + Environment.NewLine + "CHNK: " + player.ChunkPlays.ToString() + Environment.NewLine + "FUM: " + player.Fumbles.ToString();
             return stats;
         }
     }

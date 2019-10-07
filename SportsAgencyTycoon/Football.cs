@@ -22,7 +22,10 @@ namespace SportsAgencyTycoon
         public List<Team> WesternPlayoffs = new List<Team>();
         public List<int> EasternLoserIndex = new List<int>();
         public List<int> WesternLoserIndex = new List<int>();
-        public List<BasketballPlayer> DPOYCandidates = new List<BasketballPlayer>();
+        public List<FootballPlayer> DPOYCandidates = new List<FootballPlayer>();
+        public int teamPassingYards = 0;
+        public int teamPassingTDs = 0;
+
 
         public Football(MainForm mf, Random r, World w, League l)
         {
@@ -62,7 +65,74 @@ namespace SportsAgencyTycoon
         public void DetermineStats()
         {
             foreach (Team t in NFL.TeamList)
+            {
+                teamPassingYards = 0;
+                teamPassingTDs = 0;
+                List<FootballPlayer> QBs = new List<FootballPlayer>();
+                List<FootballPlayer> WRandTE = new List<FootballPlayer>();
+                List<FootballPlayer> RBandFB = new List<FootballPlayer>();
+                List<FootballPlayer> OL = new List<FootballPlayer>();
+                List<FootballPlayer> DL = new List<FootballPlayer>();
+                List<FootballPlayer> LB = new List<FootballPlayer>();
+                List<FootballPlayer> Secondary = new List<FootballPlayer>();
+
                 foreach (FootballPlayer p in t.Roster)
+                {
+                    if (p.Position == Position.QB)
+                    {
+                        QBs.Add(p);
+                    }
+                    else if (p.Position == Position.RB || p.Position == Position.FB)
+                    {
+                        RBandFB.Add(p);
+                    }
+                    else if (p.Position == Position.WR || p.Position == Position.TE)
+                    {
+                        WRandTE.Add(p);
+                    }
+                    else if (p.Position == Position.OG || p.Position == Position.OT || p.Position == Position.C)
+                    {
+                        OL.Add(p);
+                    }
+                    else if (p.Position == Position.DT || p.Position == Position.DE)
+                    {
+                        DL.Add(p);
+                    }
+                    else if (p.Position == Position.LB)
+                    {
+                        LB.Add(p);
+                    }
+                    else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
+                    {
+                        Secondary.Add(p);
+                    }
+                    else if (p.Position == Position.K)
+                    {
+                        DetermineXPAttempts(p);
+                        DetermineXPMakes(p);
+                        DetermineFGAttempts(p);
+                        DetermineFGMakes(p);
+                    }
+                    else if (p.Position == Position.P)
+                    {
+                        DeterminePunts(p);
+                        DetermineNetPuntYards(p);
+                    }
+                }
+
+                foreach (FootballPlayer p in QBs)
+                {
+                    DeterminePassingTD(p);
+                    DeterminePassingYards(p);
+                    DetermineInterceptions(p);
+                }
+
+                foreach (FootballPlayer p in RBandFB)
+                {
+                    DetermineCarries(p);
+                }
+
+                /*foreach (FootballPlayer p in t.Roster)
                 {
                     if (p.Position == Position.QB)
                     {
@@ -112,7 +182,8 @@ namespace SportsAgencyTycoon
                         DeterminePunts(p);
                         DetermineNetPuntYards(p);
                     }
-                }
+                }*/
+            }
         }
         private void DetermineNetPuntYards(FootballPlayer p)
         {
@@ -200,7 +271,7 @@ namespace SportsAgencyTycoon
             {
                 int firstRoll = DiceRoll();
                 int secondRoll = DiceRoll();
-                if (firstRoll + secondRoll == 4) p.Fumbles++;
+                if (firstRoll + secondRoll <= 6) p.Fumbles++;
             }
         }
 
@@ -257,8 +328,8 @@ namespace SportsAgencyTycoon
             bool goodGame = false;
             bool badGame = false;
             int diceTotal = 0;
-            int numberOfDiceRolls = p.CurrentSkill % 20;
-
+            int numberOfDiceRolls = p.CurrentSkill / 20;
+            Console.WriteLine(p.FullName + "'s Dice Rolls: " + numberOfDiceRolls + " Current Skill: " + p.CurrentSkill);
             for (int i = 0; i < numberOfDiceRolls; i++)
             {
                 diceTotal += DiceRoll();
@@ -276,11 +347,37 @@ namespace SportsAgencyTycoon
 
         private void DetermineCarries(FootballPlayer p)
         {
-            if (p.IsStarter)
+            if (p.IsStarter && p.Position == Position.RB)
             {
                 int carries = rnd.Next(8, 26);
                 p.Carries += carries;
                 DetermineRushingYards(p, carries);
+            }
+            else if (p.DepthChart == 2 && p.Position == Position.RB)
+            {
+                int carries = rnd.Next(3, 8);
+                p.Carries += carries;
+                DetermineRushingYards(p, carries);
+            }
+            else if (p.DepthChart == 3 && p.Position == Position.RB)
+            {
+                int diceRoll = DiceRoll();
+                if (diceRoll <= 3)
+                {
+                    int carries = rnd.Next(1, 4);
+                    p.Carries += carries;
+                    DetermineRushingYards(p, carries);
+                }
+            }
+            else if (p.IsStarter && p.Position == Position.FB)
+            {
+                int diceRoll = DiceRoll();
+                if (diceRoll <= 3)
+                {
+                    int carries = rnd.Next(1, 4);
+                    p.Carries += carries;
+                    DetermineRushingYards(p, carries);
+                }
             }
         }
 
@@ -303,11 +400,15 @@ namespace SportsAgencyTycoon
         {
             if (World.IsFootballStarter(p.Team, p))
             {
-                if (p.CurrentSkill >= 70) p.PassingYards += rnd.Next(175, 451);
-                else if (p.CurrentSkill >= 60) p.PassingYards += rnd.Next(175, 390);
-                else if (p.CurrentSkill >= 50) p.PassingYards += rnd.Next(150, 301);
-                else if (p.CurrentSkill >= 40) p.PassingYards += rnd.Next(130, 251);
-                else p.PassingYards += rnd.Next(125, 201);
+                int passingYards = 0;
+                if (p.CurrentSkill >= 70) passingYards += rnd.Next(175, 451);
+                else if (p.CurrentSkill >= 60) passingYards += rnd.Next(175, 390);
+                else if (p.CurrentSkill >= 50) passingYards += rnd.Next(150, 301);
+                else if (p.CurrentSkill >= 40) passingYards += rnd.Next(130, 251);
+                else passingYards += rnd.Next(125, 201);
+
+                p.PassingYards += passingYards;
+                teamPassingYards += passingYards;
             }
             else
             {
@@ -338,10 +439,14 @@ namespace SportsAgencyTycoon
         {
             if (World.IsFootballStarter(p.Team, p))
             {
-                if (p.CurrentSkill >= 70) p.PassingTDs += rnd.Next(1, 5);
-                else if (p.CurrentSkill >= 60) p.PassingTDs += rnd.Next(1, 4);
-                else if (p.CurrentSkill >= 50) p.PassingTDs += rnd.Next(0, 3);
-                else p.PassingTDs += rnd.Next(0, 2);
+                int passingTDs = 0;
+                if (p.CurrentSkill >= 70) passingTDs += rnd.Next(1, 5);
+                else if (p.CurrentSkill >= 60) passingTDs += rnd.Next(1, 4);
+                else if (p.CurrentSkill >= 50) passingTDs += rnd.Next(0, 3);
+                else passingTDs += rnd.Next(0, 2);
+
+                p.PassingTDs += passingTDs;
+                teamPassingTDs += passingTDs;
             }
         }
         #endregion
