@@ -25,6 +25,7 @@ namespace SportsAgencyTycoon
         public int ReceivingTDs = 0;
         public int Carries = 0;
         public int RushingYards = 0;
+        public double YardsPerCarry = 0.0;
         public int RushingTDs = 0;
         public int Fumbles = 0;
         public int Tackles = 0;

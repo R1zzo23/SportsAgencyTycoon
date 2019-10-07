@@ -189,7 +189,8 @@ namespace SportsAgencyTycoon
         public string DisplayRBStats(FootballPlayer player)
         {
             string stats = "YDS: " + player.RushingYards.ToString() + Environment.NewLine + "TDS: " + player.RushingTDs.ToString()
-                + Environment.NewLine + "CAR: " + player.Carries.ToString() + Environment.NewLine + "CHNK: " + player.ChunkPlays.ToString();
+                + Environment.NewLine + "CAR: " + player.Carries.ToString() + Environment.NewLine + "YPC: " 
+                + player.YardsPerCarry.ToString("0.##") + Environment.NewLine + "CHNK: " + player.ChunkPlays.ToString();
             return stats;
         }
     }

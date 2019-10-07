@@ -237,14 +237,41 @@ namespace SportsAgencyTycoon
             {
                 for (int j = 0; j < chunkPlays; j++)
                 {
-                    chunkYards += rnd.Next(20, 61);
+                    int bigChunk = DiceRoll();
+                    if (bigChunk == 2) chunkYards += rnd.Next(41, 76);
+                    else chunkYards += rnd.Next(20, 41);
                     p.ChunkPlays++;
                 }
             }
-            double ypc = Convert.ToDouble(rnd.Next(28, 55) / 10);
-            int yards = Convert.ToInt32(Math.Round(ypc * (carries - chunkPlays)) + chunkYards);
+            double ypc = DetermineYPC(p);
+            int yards = Convert.ToInt32(Math.Round(ypc * Convert.ToDouble((carries - chunkPlays))) + chunkYards);
             p.RushingYards += yards;
+            p.YardsPerCarry = Convert.ToDouble(p.RushingYards) / Convert.ToDouble(p.Carries);
             DetermineRushingTD(p, carries, yards, chunkPlays);
+        }
+
+        private double DetermineYPC(FootballPlayer p)
+        {
+            double ypc = 0.0;
+            bool greatGame = false;
+            bool goodGame = false;
+            bool badGame = false;
+            int diceTotal = 0;
+            int numberOfDiceRolls = p.CurrentSkill % 20;
+
+            for (int i = 0; i < numberOfDiceRolls; i++)
+            {
+                diceTotal += DiceRoll();
+            }
+            if (diceTotal <= 9) badGame = true;
+            else if (diceTotal >= 10 && diceTotal <= 20) goodGame = true;
+            else greatGame = true;
+
+            if (badGame) ypc = Convert.ToDouble(rnd.Next(21, 31)) / 10;
+            else if (goodGame) ypc = Convert.ToDouble(rnd.Next(31, 41)) / 10;
+            else if (greatGame) ypc = Convert.ToDouble(rnd.Next(41, 56)) / 10;
+
+            return ypc;
         }
 
         private void DetermineCarries(FootballPlayer p)
@@ -325,7 +352,9 @@ namespace SportsAgencyTycoon
 
         public int DiceRoll()
         {
-            return rnd.Next(2, 13);
+            int firstDie = rnd.Next(1, 7);
+            int secondDie = rnd.Next(1, 7);
+            return firstDie + secondDie;
         }
     }
 }
