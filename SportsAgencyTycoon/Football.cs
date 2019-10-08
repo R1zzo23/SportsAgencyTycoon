@@ -25,6 +25,7 @@ namespace SportsAgencyTycoon
         public List<FootballPlayer> DPOYCandidates = new List<FootballPlayer>();
         public int teamPassingYards = 0;
         public int teamPassingTDs = 0;
+        public int teamPassingYardsUsed = 0;
 
 
         public Football(MainForm mf, Random r, World w, League l)
@@ -68,6 +69,7 @@ namespace SportsAgencyTycoon
             {
                 teamPassingYards = 0;
                 teamPassingTDs = 0;
+                teamPassingYardsUsed = 0;
                 List<FootballPlayer> QBs = new List<FootballPlayer>();
                 List<FootballPlayer> WRandTE = new List<FootballPlayer>();
                 List<FootballPlayer> RBandFB = new List<FootballPlayer>();
@@ -146,6 +148,45 @@ namespace SportsAgencyTycoon
                         else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill + WRandTE[4].CurrentSkill)) WRandTE[4].ReceivingTDs++;
                         else WRandTE[5].ReceivingTDs++;
                     }
+                }
+                WRandTE = WRandTE.OrderByDescending(o => o.CurrentSkill).ToList();
+                int totalDiceRolls = 0;
+                int totalDiceSum = 0;
+
+                for (int i = 0; i < WRandTE.Count; i++)
+                {
+                    WRandTE[i].DiceRoll = 0;
+                    int diceRolls = WRandTE[i].CurrentSkill / 20;
+                    if (i == 0)
+                    {
+                        //check if there's a true elite #1 weapon in passing game
+                        if (WRandTE[0].CurrentSkill > WRandTE[1].CurrentSkill + 15)
+                        {
+                            diceRolls++;
+                        }
+                    }
+                    for (int d = 0; d < diceRolls; d++)
+                    {
+                        int diceCount = DiceRoll();
+                        WRandTE[i].DiceRoll += diceCount;
+                        totalDiceSum += diceCount;
+                    }
+                }
+                while (teamPassingYards - teamPassingYardsUsed > 0)
+                {
+                    for (int i = 0; i < WRandTE.Count; i++)
+                    {
+                        double yardPercent = Convert.ToDouble(WRandTE[i].DiceRoll) / Convert.ToDouble(totalDiceSum);
+
+                        int receivingYards = Convert.ToInt32(Math.Floor(yardPercent * teamPassingYards));
+                        WRandTE[i].ReceivingYards += receivingYards;
+                        teamPassingYardsUsed += receivingYards;
+                    }
+                    //give remaining receiving yards to random receiver
+                    int randomReceiver = rnd.Next(0, WRandTE.Count);
+                    int leftoverYards = teamPassingYards - teamPassingYardsUsed;
+                    WRandTE[randomReceiver].ReceivingYards += leftoverYards;
+                    teamPassingYardsUsed += leftoverYards;
                 }
 
                 /*foreach (FootballPlayer p in t.Roster)
@@ -345,7 +386,6 @@ namespace SportsAgencyTycoon
             bool badGame = false;
             int diceTotal = 0;
             int numberOfDiceRolls = p.CurrentSkill / 20;
-            Console.WriteLine(p.FullName + "'s Dice Rolls: " + numberOfDiceRolls + " Current Skill: " + p.CurrentSkill);
             for (int i = 0; i < numberOfDiceRolls; i++)
             {
                 diceTotal += DiceRoll();
@@ -435,6 +475,7 @@ namespace SportsAgencyTycoon
                     //backup passes for between 0-65 yards
                     int yards = rnd.Next(0, 66);
                     p.PassingYards += yards;
+                    teamPassingYards += yards;
                     //20% chance of backup tossing a TD if yards >= 30
                     if (yards >= 30)
                     {

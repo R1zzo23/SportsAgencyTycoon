@@ -18,6 +18,8 @@ namespace SportsAgencyTycoon
         public int DepthChart;
         public bool IsStarter;
 
+        public int DiceRoll = 0;
+
         //name variables
         public FirstName FirstName;
         public LastName LastName;
