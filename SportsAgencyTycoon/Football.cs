@@ -132,6 +132,22 @@ namespace SportsAgencyTycoon
                     DetermineCarries(p);
                 }
 
+                if (teamPassingTDs > 0)
+                {
+                    for (int i = 0; i < teamPassingTDs; i++)
+                    {
+                        int tdCount = 0;
+                        foreach (FootballPlayer p in WRandTE) tdCount += p.CurrentSkill;
+                        int tdNumber = rnd.Next(0, tdCount);
+                        if (tdNumber <= WRandTE[0].CurrentSkill) WRandTE[0].ReceivingTDs++;
+                        else if (tdNumber > WRandTE[0].CurrentSkill && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill)) WRandTE[1].ReceivingTDs++;
+                        else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill)) WRandTE[2].ReceivingTDs++;
+                        else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill)) WRandTE[3].ReceivingTDs++;
+                        else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill + WRandTE[4].CurrentSkill)) WRandTE[4].ReceivingTDs++;
+                        else WRandTE[5].ReceivingTDs++;
+                    }
+                }
+
                 /*foreach (FootballPlayer p in t.Roster)
                 {
                     if (p.Position == Position.QB)

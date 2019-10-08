@@ -178,7 +178,8 @@ namespace SportsAgencyTycoon
         public void DisplayFootballStats(FootballPlayer player)
         {
             if (player.Position == Position.QB) lblStats.Text = DisplayQBStats(player);
-            if (player.Position == Position.RB || player.Position == Position.FB) lblStats.Text = DisplayRBStats(player);
+            if (player.Position == Position.RB || player.Position == Position.FB) lblStats.Text = DisplayRushingStats(player);
+            if (player.Position == Position.WR || player.Position == Position.TE) lblStats.Text = DisplayReceivingStats(player);
         }
         public string DisplayQBStats(FootballPlayer player)
         {
@@ -186,11 +187,18 @@ namespace SportsAgencyTycoon
                 + Environment.NewLine + "INT: " + player.Interceptions.ToString();
             return stats;
         }
-        public string DisplayRBStats(FootballPlayer player)
+        public string DisplayRushingStats(FootballPlayer player)
         {
             string stats = "YDS: " + player.RushingYards.ToString() + Environment.NewLine + "TDS: " + player.RushingTDs.ToString()
                 + Environment.NewLine + "CAR: " + player.Carries.ToString() + Environment.NewLine + "YPC: " + player.YardsPerCarry.ToString("0.##") 
                 + Environment.NewLine + "CHNK: " + player.ChunkPlays.ToString() + Environment.NewLine + "FUM: " + player.Fumbles.ToString();
+            return stats;
+        }
+        public string DisplayReceivingStats(FootballPlayer player)
+        {
+            string stats = "REC: " + player.Receptions.ToString() + Environment.NewLine +
+                "YDS: " + player.ReceivingYards.ToString() + Environment.NewLine +
+                "TDS: " + player.ReceivingTDs.ToString();
             return stats;
         }
     }
