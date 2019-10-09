@@ -88,8 +88,9 @@ namespace SportsAgencyTycoon
                 foreach (BasketballPlayer p in selectedTeam.Roster)
                     lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;
             else if (selectedLeague.Sport == Sports.Football)
-                foreach (FootballPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                lblRoster.Text = DisplayFootballTeamStats(selectedTeam);
+                //foreach (FootballPlayer p in selectedTeam.Roster)
+                    //lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
             if (selectedLeague.Sport == Sports.Baseball)
                 foreach (BaseballPlayer p in selectedTeam.Roster)
                     lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
@@ -199,6 +200,33 @@ namespace SportsAgencyTycoon
             string stats = "REC: " + player.Receptions.ToString() + Environment.NewLine +
                 "YDS: " + player.ReceivingYards.ToString() + Environment.NewLine +
                 "TDS: " + player.ReceivingTDs.ToString();
+            return stats;
+        }
+        public string DisplayFootballTeamStats(Team t)
+        {
+            List<FootballPlayer> QBS = new List<FootballPlayer>();
+            List<FootballPlayer> Backs = new List<FootballPlayer>();
+            List<FootballPlayer> PassCatchers = new List<FootballPlayer>();
+            string stats = "";
+
+            foreach (FootballPlayer p in t.Roster)
+            {
+                if (p.Position == Position.QB) QBS.Add(p);
+                else if (p.Position == Position.RB || p.Position == Position.FB) Backs.Add(p);
+                else if (p.Position == Position.WR || p.Position == Position.TE) PassCatchers.Add(p);
+            }
+
+            QBS = QBS.OrderByDescending(o => o.PassingYards).ToList();
+            Backs = Backs.OrderByDescending(o => o.RushingYards).ToList();
+            PassCatchers = PassCatchers.OrderByDescending(o => o.Receptions).ToList();
+
+            foreach (FootballPlayer fp in QBS)
+                stats += fp.FullName + " " + fp.PassingYards + " YDS || " + fp.PassingTDs + " TDS || " + fp.Interceptions + " INT" + Environment.NewLine;
+            foreach (FootballPlayer fp in Backs)
+                stats += fp.FullName + " " + fp.Carries + " CAR || " + fp.RushingYards + " YDS || " + fp.RushingTDs + " TDS || " + fp.Fumbles + " fumbles" + Environment.NewLine;
+            foreach (FootballPlayer fp in PassCatchers)
+                stats += fp.FullName + " " + fp.Receptions + " REC || " + fp.ReceivingYards + " YDS || " + fp.ReceivingTDs + " TDS || " + Environment.NewLine;
+
             return stats;
         }
     }
