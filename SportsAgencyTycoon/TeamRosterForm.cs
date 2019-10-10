@@ -83,7 +83,7 @@ namespace SportsAgencyTycoon
 
             lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
             
-            lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + ": Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+            lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
             if (selectedLeague.Sport == Sports.Basketball)
                 foreach (BasketballPlayer p in selectedTeam.Roster)
                     lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;
@@ -222,8 +222,10 @@ namespace SportsAgencyTycoon
 
             foreach (FootballPlayer fp in QBS)
                 stats += fp.FullName + " " + fp.PassingYards + " YDS || " + fp.PassingTDs + " TDS || " + fp.Interceptions + " INT" + Environment.NewLine;
+            stats += Environment.NewLine;
             foreach (FootballPlayer fp in Backs)
                 stats += fp.FullName + " " + fp.Carries + " CAR || " + fp.RushingYards + " YDS || " + fp.RushingTDs + " TDS || " + fp.Fumbles + " fumbles" + Environment.NewLine;
+            stats += Environment.NewLine;
             foreach (FootballPlayer fp in PassCatchers)
                 stats += fp.FullName + " " + fp.Receptions + " REC || " + fp.ReceivingYards + " YDS || " + fp.ReceivingTDs + " TDS || " + Environment.NewLine;
 
