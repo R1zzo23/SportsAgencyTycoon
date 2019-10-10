@@ -642,7 +642,7 @@ namespace SportsAgencyTycoon
 
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
 
-            if (position == Position.WR || position == Position.DE || position == Position.DT || position == Position.CB)
+            if (position == Position.WR || position == Position.DE || position == Position.DT || position == Position.C || position == Position.OT || position == Position.OG)
                 starterCount = 2;
             else if (position == Position.LB) starterCount = 4;
             else starterCount = 1;

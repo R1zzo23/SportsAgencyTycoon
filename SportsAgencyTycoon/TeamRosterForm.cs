@@ -181,6 +181,7 @@ namespace SportsAgencyTycoon
             if (player.Position == Position.QB) lblStats.Text = DisplayQBStats(player);
             if (player.Position == Position.RB || player.Position == Position.FB) lblStats.Text = DisplayRushingStats(player);
             if (player.Position == Position.WR || player.Position == Position.TE) lblStats.Text = DisplayReceivingStats(player);
+            if (player.Position == Position.OT || player.Position == Position.OG || player.Position == Position.C) lblStats.Text = DisplayOLStats(player);
         }
         public string DisplayQBStats(FootballPlayer player)
         {
@@ -200,6 +201,12 @@ namespace SportsAgencyTycoon
             string stats = "REC: " + player.Receptions.ToString() + Environment.NewLine +
                 "YDS: " + player.ReceivingYards.ToString() + Environment.NewLine +
                 "TDS: " + player.ReceivingTDs.ToString();
+            return stats;
+        }
+        public string DisplayOLStats(FootballPlayer player)
+        {
+            string stats = "Pancakes: " + player.PancakeBlocks + Environment.NewLine + "Sacks Allowed: " + player.SacksAllowed +
+                Environment.NewLine + "Rushing YPC: " + player.YardsPerCarry + Environment.NewLine + "Rushing TDS: " + player.RushingTDs;
             return stats;
         }
         public string DisplayFootballTeamStats(Team t)
