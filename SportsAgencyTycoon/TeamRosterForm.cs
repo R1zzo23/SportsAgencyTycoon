@@ -206,7 +206,7 @@ namespace SportsAgencyTycoon
         public string DisplayOLStats(FootballPlayer player)
         {
             string stats = "Pancakes: " + player.PancakeBlocks + Environment.NewLine + "Sacks Allowed: " + player.SacksAllowed +
-                Environment.NewLine + "Rushing YPC: " + player.YardsPerCarry + Environment.NewLine + "Rushing TDS: " + player.RushingTDs;
+                Environment.NewLine + "Rushing YPC: " + player.YardsPerCarry.ToString("0.##") + Environment.NewLine + "Rushing TDS: " + player.RushingTDs;
             return stats;
         }
         public string DisplayFootballTeamStats(Team t)

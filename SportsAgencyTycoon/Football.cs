@@ -22,6 +22,15 @@ namespace SportsAgencyTycoon
         public List<Team> WesternPlayoffs = new List<Team>();
         public List<int> EasternLoserIndex = new List<int>();
         public List<int> WesternLoserIndex = new List<int>();
+
+        public List<FootballPlayer> QBs = new List<FootballPlayer>();
+        public List<FootballPlayer> WRandTE = new List<FootballPlayer>();
+        public List<FootballPlayer> RBandFB = new List<FootballPlayer>();
+        public List<FootballPlayer> OL = new List<FootballPlayer>();
+        public List<FootballPlayer> DL = new List<FootballPlayer>();
+        public List<FootballPlayer> LB = new List<FootballPlayer>();
+        public List<FootballPlayer> Secondary = new List<FootballPlayer>();
+
         public List<FootballPlayer> DPOYCandidates = new List<FootballPlayer>();
         public int teamPassingYards = 0;
         public int teamPassingTDs = 0;
@@ -65,6 +74,48 @@ namespace SportsAgencyTycoon
                 DetermineStats();
             }
         }
+        public void GroupPlayersByPosition(Team t)
+        {
+            QBs.Clear();
+            WRandTE.Clear();
+            RBandFB.Clear();
+            OL.Clear();
+            DL.Clear();
+            LB.Clear();
+            Secondary.Clear();
+
+            foreach (FootballPlayer p in t.Roster)
+            {
+                if (p.Position == Position.QB)
+                {
+                    QBs.Add(p);
+                }
+                else if (p.Position == Position.RB || p.Position == Position.FB)
+                {
+                    RBandFB.Add(p);
+                }
+                else if (p.Position == Position.WR || p.Position == Position.TE)
+                {
+                    WRandTE.Add(p);
+                }
+                else if (p.Position == Position.OG || p.Position == Position.OT || p.Position == Position.C)
+                {
+                    OL.Add(p);
+                }
+                else if (p.Position == Position.DT || p.Position == Position.DE)
+                {
+                    DL.Add(p);
+                }
+                else if (p.Position == Position.LB)
+                {
+                    LB.Add(p);
+                }
+                else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
+                {
+                    Secondary.Add(p);
+                }
+            }
+        }
         #region DetermineStats
         public void DetermineStats()
         {
@@ -76,45 +127,10 @@ namespace SportsAgencyTycoon
                 teamCarries = 0;
                 teamRushingYards = 0;
                 teamRushingTDs = 0;
-                List<FootballPlayer> QBs = new List<FootballPlayer>();
-                List<FootballPlayer> WRandTE = new List<FootballPlayer>();
-                List<FootballPlayer> RBandFB = new List<FootballPlayer>();
-                List<FootballPlayer> OL = new List<FootballPlayer>();
-                List<FootballPlayer> DL = new List<FootballPlayer>();
-                List<FootballPlayer> LB = new List<FootballPlayer>();
-                List<FootballPlayer> Secondary = new List<FootballPlayer>();
 
-                foreach (FootballPlayer p in t.Roster)
-                {
-                    if (p.Position == Position.QB)
-                    {
-                        QBs.Add(p);
-                    }
-                    else if (p.Position == Position.RB || p.Position == Position.FB)
-                    {
-                        RBandFB.Add(p);
-                    }
-                    else if (p.Position == Position.WR || p.Position == Position.TE)
-                    {
-                        WRandTE.Add(p);
-                    }
-                    else if (p.Position == Position.OG || p.Position == Position.OT || p.Position == Position.C)
-                    {
-                        OL.Add(p);
-                    }
-                    else if (p.Position == Position.DT || p.Position == Position.DE)
-                    {
-                        DL.Add(p);
-                    }
-                    else if (p.Position == Position.LB)
-                    {
-                        LB.Add(p);
-                    }
-                    else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
-                    {
-                        Secondary.Add(p);
-                    }
-                    else if (p.Position == Position.K)
+                GroupPlayersByPosition(t);
+                
+                    /*else if (p.Position == Position.K)
                     {
                         DetermineXPAttempts(p);
                         DetermineXPMakes(p);
@@ -125,8 +141,7 @@ namespace SportsAgencyTycoon
                     {
                         DeterminePunts(p);
                         DetermineNetPuntYards(p);
-                    }
-                }
+                    }*/
 
                 foreach (FootballPlayer p in QBs)
                 {
@@ -141,58 +156,9 @@ namespace SportsAgencyTycoon
                 }
 
                 if (teamPassingTDs > 0)
-                {
-                    for (int i = 0; i < teamPassingTDs; i++)
-                    {
-                        int tdCount = 0;
-                        foreach (FootballPlayer p in WRandTE) tdCount += p.CurrentSkill;
-                        int tdNumber = rnd.Next(0, tdCount);
-                        if (tdNumber <= WRandTE[0].CurrentSkill) WRandTE[0].ReceivingTDs++;
-                        else if (tdNumber > WRandTE[0].CurrentSkill && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill)) WRandTE[1].ReceivingTDs++;
-                        else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill)) WRandTE[2].ReceivingTDs++;
-                        else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill)) WRandTE[3].ReceivingTDs++;
-                        else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill + WRandTE[4].CurrentSkill)) WRandTE[4].ReceivingTDs++;
-                        else WRandTE[5].ReceivingTDs++;
-                    }
-                }
-                WRandTE = WRandTE.OrderByDescending(o => o.CurrentSkill).ToList();
-                int totalDiceSum = 0;
+                    DetermineReceivingTDs(WRandTE);
 
-                for (int i = 0; i < WRandTE.Count; i++)
-                {
-                    WRandTE[i].DiceRoll = 0;
-                    int diceRolls = WRandTE[i].CurrentSkill / 20;
-                    if (i == 0)
-                    {
-                        //check if there's a true elite #1 weapon in passing game
-                        if (WRandTE[0].CurrentSkill > WRandTE[1].CurrentSkill + 15)
-                        {
-                            diceRolls++;
-                        }
-                    }
-                    for (int d = 0; d < diceRolls; d++)
-                    {
-                        int diceCount = DiceRoll();
-                        WRandTE[i].DiceRoll += diceCount;
-                        totalDiceSum += diceCount;
-                    }
-                }
-                while (teamPassingYards - teamPassingYardsUsed > 0)
-                {
-                    for (int i = 0; i < WRandTE.Count; i++)
-                    {
-                        double yardPercent = Convert.ToDouble(WRandTE[i].DiceRoll) / Convert.ToDouble(totalDiceSum);
-
-                        int receivingYards = Convert.ToInt32(Math.Floor(yardPercent * teamPassingYards));
-                        WRandTE[i].ReceivingYards += receivingYards;
-                        teamPassingYardsUsed += receivingYards;
-                    }
-                    //give remaining receiving yards to random receiver
-                    int randomReceiver = rnd.Next(0, WRandTE.Count);
-                    int leftoverYards = teamPassingYards - teamPassingYardsUsed;
-                    WRandTE[randomReceiver].ReceivingYards += leftoverYards;
-                    teamPassingYardsUsed += leftoverYards;
-                }
+                DetermineReceivingYards(WRandTE);
 
                 int totalOLSkill = 0;
                 foreach (FootballPlayer p in OL)
@@ -206,58 +172,6 @@ namespace SportsAgencyTycoon
                 DeterminePancakeBlocks(OL, averageOLSkill);
                 DetermineSacksAllowed(OL, averageOLSkill);
                 DetermineOLineYPC(OL);
-
-                /*foreach (FootballPlayer p in t.Roster)
-                {
-                    if (p.Position == Position.QB)
-                    {
-                        DeterminePassingTD(p);
-                        DeterminePassingYards(p);
-                        DetermineInterceptions(p);
-                    }
-                    else if (p.Position == Position.RB)
-                    {
-                        DetermineCarries(p);
-                        //DetermineRushingYards(p);
-                        //DetermineRushingTD(p);
-                        //DetermineFumbles(p);
-                    }
-                    else if (p.Position == Position.WR)
-                    {
-                        DetermineReceptions(p);
-                        DetermineReceivingYards(p);
-                        DetermineReceivingTDs(p);
-                    }
-                    else if (p.Position == Position.OG || p.Position == Position.OT || p.Position == Position.C)
-                    {
-                        DetermineSacksAllowed(p);
-                        DeterminePancakeBlocks(p);
-                    }
-                    else if (p.Position == Position.DT || p.Position == Position.DE || p.Position == Position.LB)
-                    {
-                        DetermineTackles(p);
-                        DetermineSacks(p);
-                        DetermineTacklesForLoss(p);
-                    }
-                    else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
-                    {
-                        DetermineTackles(p);
-                        DeterminePassesDefended(p);
-                        DetermineDefensiveInterceptions(p);
-                    }
-                    else if (p.Position == Position.K)
-                    {
-                        DetermineXPAttempts(p);
-                        DetermineXPMakes(p);
-                        DetermineFGAttempts(p);
-                        DetermineFGMakes(p);
-                    }
-                    else if (p.Position == Position.P)
-                    {
-                        DeterminePunts(p);
-                        DetermineNetPuntYards(p);
-                    }
-                }*/
             }
         }
         private void DetermineNetPuntYards(FootballPlayer p)
@@ -331,7 +245,31 @@ namespace SportsAgencyTycoon
 
         private void DeterminePancakeBlocks(List<FootballPlayer> list, double averageSkill)
         {
-            
+            int numberOfPancakes = 0;
+            List<FootballPlayer> Starters = new List<FootballPlayer>();
+            foreach (FootballPlayer p in list)
+                if (p.IsStarter) Starters.Add(p);
+            if (averageSkill >= 60)
+            {
+                numberOfPancakes = rnd.Next(4, 8);
+                int diceRoll = DiceRoll();
+                if (diceRoll <= 3) numberOfPancakes++;
+            }
+            else if (averageSkill >= 50) numberOfPancakes = rnd.Next(2, 7);
+            else if (averageSkill >= 40) numberOfPancakes = rnd.Next(1, 6);
+            else numberOfPancakes = rnd.Next(0, 4);
+
+            for (int i = 0; i < numberOfPancakes; i++)
+            {
+                int pancakeCount = 0;
+                foreach (FootballPlayer p in Starters) pancakeCount += p.CurrentSkill;
+                int pancakeNumber = rnd.Next(0, pancakeCount);
+                if (pancakeNumber <= Starters[0].CurrentSkill) Starters[0].PancakeBlocks++;
+                else if (pancakeNumber > Starters[0].CurrentSkill && pancakeNumber <= (Starters[0].CurrentSkill + Starters[1].CurrentSkill)) Starters[1].PancakeBlocks++;
+                else if (pancakeNumber > (Starters[0].CurrentSkill + Starters[1].CurrentSkill) && pancakeNumber <= (Starters[0].CurrentSkill + Starters[1].CurrentSkill + Starters[2].CurrentSkill)) Starters[2].PancakeBlocks++;
+                else if (pancakeNumber > (Starters[0].CurrentSkill + Starters[1].CurrentSkill + Starters[2].CurrentSkill) && pancakeNumber <= (Starters[0].CurrentSkill + Starters[1].CurrentSkill + Starters[2].CurrentSkill + Starters[3].CurrentSkill)) Starters[3].PancakeBlocks++;
+                else Starters[4].PancakeBlocks++;
+            }
         }
 
         private void DetermineSacksAllowed(List<FootballPlayer> list, double averageSkill)
@@ -350,25 +288,79 @@ namespace SportsAgencyTycoon
             }
             for (int i = 0; i < numberOfSacks; i++)
             {
-                int sackCount = 0;
-                foreach (FootballPlayer p in Starters) sackCount += p.CurrentSkill;
-                int sackNumber = rnd.Next(0, sackCount);
-                if (sackNumber <= Starters[0].CurrentSkill) Starters[0].SacksAllowed++;
-                else if (sackNumber > Starters[0].CurrentSkill && sackNumber <= (Starters[0].CurrentSkill + Starters[1].CurrentSkill)) Starters[1].SacksAllowed++;
-                else if (sackNumber > (Starters[0].CurrentSkill + Starters[1].CurrentSkill) && sackNumber <= (Starters[0].CurrentSkill + Starters[1].CurrentSkill + Starters[2].CurrentSkill)) Starters[2].SacksAllowed++;
-                else if (sackNumber > (Starters[0].CurrentSkill + Starters[1].CurrentSkill + Starters[2].CurrentSkill) && sackNumber <= (Starters[0].CurrentSkill + Starters[1].CurrentSkill + Starters[2].CurrentSkill + Starters[3].CurrentSkill)) Starters[3].SacksAllowed++;
-                else Starters[4].SacksAllowed++;
+                foreach (FootballPlayer fp in Starters)
+                {
+                    int numberOfRolls = 0;
+                    if (fp.CurrentSkill >= 80) numberOfRolls = 1;
+                    else if (fp.CurrentSkill >= 60) numberOfRolls = 2;
+                    else if (fp.CurrentSkill >= 40) numberOfRolls = 3;
+                    else numberOfRolls = 4;
+                    fp.DiceRoll = 0;
+                    for (int j = 0; j < numberOfRolls; j++)
+                        fp.DiceRoll += DiceRoll();
+                }
+                list = list.OrderByDescending(o => o.DiceRoll).ToList();
+                list[0].SacksAllowed++;
             }
         }
 
-        private void DetermineReceivingTDs(FootballPlayer p)
+        private void DetermineReceivingTDs(List<FootballPlayer> WRandTE)
         {
-            
+            for (int i = 0; i < teamPassingTDs; i++)
+            {
+                int tdCount = 0;
+                foreach (FootballPlayer p in WRandTE) tdCount += p.CurrentSkill;
+                int tdNumber = rnd.Next(0, tdCount);
+                if (tdNumber <= WRandTE[0].CurrentSkill) WRandTE[0].ReceivingTDs++;
+                else if (tdNumber > WRandTE[0].CurrentSkill && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill)) WRandTE[1].ReceivingTDs++;
+                else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill)) WRandTE[2].ReceivingTDs++;
+                else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill)) WRandTE[3].ReceivingTDs++;
+                else if (tdNumber > (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill) && tdNumber <= (WRandTE[0].CurrentSkill + WRandTE[1].CurrentSkill + WRandTE[2].CurrentSkill + WRandTE[3].CurrentSkill + WRandTE[4].CurrentSkill)) WRandTE[4].ReceivingTDs++;
+                else WRandTE[5].ReceivingTDs++;
+            }
         }
 
-        private void DetermineReceivingYards(FootballPlayer p)
+        private void DetermineReceivingYards(List<FootballPlayer> WRandTE)
         {
-            
+
+            WRandTE = WRandTE.OrderByDescending(o => o.CurrentSkill).ToList();
+            int totalDiceSum = 0;
+
+            for (int i = 0; i < WRandTE.Count; i++)
+            {
+                WRandTE[i].DiceRoll = 0;
+                int diceRolls = WRandTE[i].CurrentSkill / 20;
+                if (i == 0)
+                {
+                    //check if there's a true elite #1 weapon in passing game
+                    if (WRandTE[0].CurrentSkill > WRandTE[1].CurrentSkill + 15)
+                    {
+                        diceRolls++;
+                    }
+                }
+                for (int d = 0; d < diceRolls; d++)
+                {
+                    int diceCount = DiceRoll();
+                    WRandTE[i].DiceRoll += diceCount;
+                    totalDiceSum += diceCount;
+                }
+            }
+            while (teamPassingYards - teamPassingYardsUsed > 0)
+            {
+                for (int i = 0; i < WRandTE.Count; i++)
+                {
+                    double yardPercent = Convert.ToDouble(WRandTE[i].DiceRoll) / Convert.ToDouble(totalDiceSum);
+
+                    int receivingYards = Convert.ToInt32(Math.Floor(yardPercent * teamPassingYards));
+                    WRandTE[i].ReceivingYards += receivingYards;
+                    teamPassingYardsUsed += receivingYards;
+                }
+                //give remaining receiving yards to random receiver
+                int randomReceiver = rnd.Next(0, WRandTE.Count);
+                int leftoverYards = teamPassingYards - teamPassingYardsUsed;
+                WRandTE[randomReceiver].ReceivingYards += leftoverYards;
+                teamPassingYardsUsed += leftoverYards;
+            }
         }
 
         private void DetermineReceptions(FootballPlayer p)
