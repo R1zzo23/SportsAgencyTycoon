@@ -214,6 +214,7 @@ namespace SportsAgencyTycoon
             List<FootballPlayer> QBS = new List<FootballPlayer>();
             List<FootballPlayer> Backs = new List<FootballPlayer>();
             List<FootballPlayer> PassCatchers = new List<FootballPlayer>();
+            List<FootballPlayer> OL = new List<FootballPlayer>();
             string stats = "";
 
             foreach (FootballPlayer p in t.Roster)
@@ -221,11 +222,13 @@ namespace SportsAgencyTycoon
                 if (p.Position == Position.QB) QBS.Add(p);
                 else if (p.Position == Position.RB || p.Position == Position.FB) Backs.Add(p);
                 else if (p.Position == Position.WR || p.Position == Position.TE) PassCatchers.Add(p);
+                else if (p.Position == Position.OT || p.Position == Position.OG || p.Position == Position.C) OL.Add(p);
             }
 
             QBS = QBS.OrderByDescending(o => o.PassingYards).ToList();
             Backs = Backs.OrderByDescending(o => o.RushingYards).ToList();
             PassCatchers = PassCatchers.OrderByDescending(o => o.Receptions).ToList();
+            OL = OL.OrderByDescending(o => o.PancakeBlocks).ThenBy(o => o.SacksAllowed).ToList();
 
             foreach (FootballPlayer fp in QBS)
                 stats += fp.FullName + " " + fp.PassingYards + " YDS || " + fp.PassingTDs + " TDS || " + fp.Interceptions + " INT" + Environment.NewLine;
@@ -235,7 +238,10 @@ namespace SportsAgencyTycoon
             stats += Environment.NewLine;
             foreach (FootballPlayer fp in PassCatchers)
                 stats += fp.FullName + " " + fp.Receptions + " REC || " + fp.ReceivingYards + " YDS || " + fp.ReceivingTDs + " TDS || " + Environment.NewLine;
-
+            stats += Environment.NewLine;
+            foreach (FootballPlayer fp in OL)
+                stats += fp.FullName + " " + fp.PancakeBlocks + " PANCAKES || " + fp.SacksAllowed + " SACKS ALLOWED" + Environment.NewLine;
+            stats += Environment.NewLine;
             return stats;
         }
     }
