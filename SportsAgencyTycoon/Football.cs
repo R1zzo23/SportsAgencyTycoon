@@ -172,6 +172,9 @@ namespace SportsAgencyTycoon
                 DeterminePancakeBlocks(OL, averageOLSkill);
                 DetermineSacksAllowed(OL, averageOLSkill);
                 DetermineOLineYPC(OL);
+
+                foreach (FootballPlayer p in DL)
+                    DetermineTackles(p);
             }
         }
         private void DetermineNetPuntYards(FootballPlayer p)
@@ -214,19 +217,44 @@ namespace SportsAgencyTycoon
             
         }
 
-        private void DetermineTacklesForLoss(FootballPlayer p)
+        private void DetermineTacklesForLoss(FootballPlayer p, int tackles)
         {
-            
+            int tacklesForLoss = 0;
+            for (int i = 0; i < tackles; i++)
+            {
+                int diceRoll = DiceRoll();
+                if (diceRoll <= 4) tacklesForLoss++;
+            }
+            p.TacklesForLoss += tacklesForLoss;
+            if (tacklesForLoss > 0)
+                DetermineSacks(p, tacklesForLoss);
         }
 
-        private void DetermineSacks(FootballPlayer p)
+        private void DetermineSacks(FootballPlayer p, int tacklesForLoss)
         {
-            
+            int sacks = 0;
+            for (int i = 0; i < tacklesForLoss; i++)
+            {
+                int diceRoll = DiceRoll();
+                if (diceRoll <= 5) sacks++;
+            }
+            p.Sacks += sacks;
         }
 
         private void DetermineTackles(FootballPlayer p)
         {
-            
+            int tackles = 0;
+            if (p.IsStarter)
+                tackles = rnd.Next(2, 8);
+            else
+            {
+                int diceRoll = DiceRoll();
+                if (diceRoll >= 10)
+                    tackles = rnd.Next(1, 4);
+            }
+            p.Tackles += tackles;
+            if (tackles > 0)
+                DetermineTacklesForLoss(p, tackles);
         }
 
         private void DetermineOLineYPC(List<FootballPlayer> list)

@@ -182,6 +182,8 @@ namespace SportsAgencyTycoon
             if (player.Position == Position.RB || player.Position == Position.FB) lblStats.Text = DisplayRushingStats(player);
             if (player.Position == Position.WR || player.Position == Position.TE) lblStats.Text = DisplayReceivingStats(player);
             if (player.Position == Position.OT || player.Position == Position.OG || player.Position == Position.C) lblStats.Text = DisplayOLStats(player);
+            if (player.Position == Position.LB || player.Position == Position.DE || player.Position == Position.DT) lblStats.Text = DisplayerFrontSevenStats(player);
+            if (player.Position == Position.CB || player.Position == Position.SS || player.Position == Position.FS) lblStats.Text = DisplaySecondaryStats(player);
         }
         public string DisplayQBStats(FootballPlayer player)
         {
@@ -209,12 +211,27 @@ namespace SportsAgencyTycoon
                 Environment.NewLine + "Rushing YPC: " + player.YardsPerCarry.ToString("0.##") + Environment.NewLine + "Rushing TDS: " + player.RushingTDs;
             return stats;
         }
+        public string DisplayerFrontSevenStats(FootballPlayer player)
+        {
+            string stats = "Tackles: " + player.Tackles + Environment.NewLine + "TFLs: " + player.TacklesForLoss
+                + Environment.NewLine + "Sacks: " + player.Sacks;
+            return stats;
+        }
+        public string DisplaySecondaryStats(FootballPlayer player)
+        {
+            string stats = "Tackles: " + player.Tackles + Environment.NewLine + "INTs: " + player.DefensiveInterceptions
+                + Environment.NewLine + "TFLs :" + player.TacklesForLoss;
+            return stats;
+        }
         public string DisplayFootballTeamStats(Team t)
         {
             List<FootballPlayer> QBS = new List<FootballPlayer>();
             List<FootballPlayer> Backs = new List<FootballPlayer>();
             List<FootballPlayer> PassCatchers = new List<FootballPlayer>();
             List<FootballPlayer> OL = new List<FootballPlayer>();
+            List<FootballPlayer> DL = new List<FootballPlayer>();
+            List<FootballPlayer> LB = new List<FootballPlayer>();
+            List<FootballPlayer> Secondary = new List<FootballPlayer>();
             string stats = "";
 
             foreach (FootballPlayer p in t.Roster)
@@ -223,12 +240,18 @@ namespace SportsAgencyTycoon
                 else if (p.Position == Position.RB || p.Position == Position.FB) Backs.Add(p);
                 else if (p.Position == Position.WR || p.Position == Position.TE) PassCatchers.Add(p);
                 else if (p.Position == Position.OT || p.Position == Position.OG || p.Position == Position.C) OL.Add(p);
+                else if (p.Position == Position.DE || p.Position == Position.DT) DL.Add(p);
+                else if (p.Position == Position.LB) LB.Add(p);
+                else if (p.Position == Position.CB || p.Position == Position.SS || p.Position == Position.FS) Secondary.Add(p);
             }
 
             QBS = QBS.OrderByDescending(o => o.PassingYards).ToList();
             Backs = Backs.OrderByDescending(o => o.RushingYards).ToList();
             PassCatchers = PassCatchers.OrderByDescending(o => o.Receptions).ToList();
             OL = OL.OrderByDescending(o => o.PancakeBlocks).ThenBy(o => o.SacksAllowed).ToList();
+            DL = DL.OrderByDescending(o => o.Tackles).ThenBy(o => o.TacklesForLoss).ThenBy(o => o.Sacks).ToList();
+            LB = LB.OrderByDescending(o => o.Tackles).ThenBy(o => o.TacklesForLoss).ThenBy(o => o.Sacks).ToList();
+            Secondary = Secondary.OrderByDescending(o => o.Tackles).ThenBy(o => o.DefensiveInterceptions).ToList();
 
             foreach (FootballPlayer fp in QBS)
                 stats += fp.FullName + " " + fp.PassingYards + " YDS || " + fp.PassingTDs + " TDS || " + fp.Interceptions + " INT" + Environment.NewLine;
@@ -242,6 +265,15 @@ namespace SportsAgencyTycoon
             foreach (FootballPlayer fp in OL)
                 stats += fp.FullName + " " + fp.PancakeBlocks + " PANCAKES || " + fp.SacksAllowed + " SACKS ALLOWED" + Environment.NewLine;
             stats += Environment.NewLine;
+            foreach (FootballPlayer fp in DL)
+                stats += fp.FullName + " " + fp.Tackles + " TKLS || " + fp.TacklesForLoss + " TFL || " + fp.Sacks + " SACKS" + Environment.NewLine;
+            stats += Environment.NewLine;
+            foreach (FootballPlayer fp in LB)
+                stats += fp.FullName + " " + fp.Tackles + " TKLS || " + fp.TacklesForLoss + " TFL || " + fp.Sacks + " SACKS" + Environment.NewLine;
+            stats += Environment.NewLine;
+            foreach (FootballPlayer fp in Secondary)
+                stats += fp.FullName + " " + fp.Tackles + " TKLS || " + fp.DefensiveInterceptions + " INT || " + fp.TacklesForLoss + " TFL" + Environment.NewLine;
+
             return stats;
         }
     }
