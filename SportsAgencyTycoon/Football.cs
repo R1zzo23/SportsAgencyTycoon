@@ -30,6 +30,8 @@ namespace SportsAgencyTycoon
         public List<FootballPlayer> DL = new List<FootballPlayer>();
         public List<FootballPlayer> LB = new List<FootballPlayer>();
         public List<FootballPlayer> Secondary = new List<FootballPlayer>();
+        public List<FootballPlayer> Kicker = new List<FootballPlayer>();
+        public List<FootballPlayer> Punter = new List<FootballPlayer>();
 
         public List<FootballPlayer> DPOYCandidates = new List<FootballPlayer>();
         public int teamPassingYards = 0;
@@ -38,6 +40,8 @@ namespace SportsAgencyTycoon
         public int teamCarries = 0;
         public int teamRushingYards = 0;
         public int teamRushingTDs = 0;
+        public int fgAttempts = 0;
+        public int totalPossessions = 0;
 
 
         public Football(MainForm mf, Random r, World w, League l)
@@ -83,6 +87,8 @@ namespace SportsAgencyTycoon
             DL.Clear();
             LB.Clear();
             Secondary.Clear();
+            Kicker.Clear();
+            Punter.Clear();
 
             foreach (FootballPlayer p in t.Roster)
             {
@@ -114,6 +120,14 @@ namespace SportsAgencyTycoon
                 {
                     Secondary.Add(p);
                 }
+                else if (p.Position == Position.K)
+                {
+                    Kicker.Add(p);
+                }
+                else if (p.Position == Position.P)
+                {
+                    Punter.Add(p);
+                }
             }
         }
         #region DetermineStats
@@ -127,21 +141,10 @@ namespace SportsAgencyTycoon
                 teamCarries = 0;
                 teamRushingYards = 0;
                 teamRushingTDs = 0;
+                fgAttempts = 0;
+                totalPossessions = rnd.Next(11, 15);
 
                 GroupPlayersByPosition(t);
-                
-                    /*else if (p.Position == Position.K)
-                    {
-                        DetermineXPAttempts(p);
-                        DetermineXPMakes(p);
-                        DetermineFGAttempts(p);
-                        DetermineFGMakes(p);
-                    }
-                    else if (p.Position == Position.P)
-                    {
-                        DeterminePunts(p);
-                        DetermineNetPuntYards(p);
-                    }*/
 
                 foreach (FootballPlayer p in QBs)
                 {
@@ -159,6 +162,8 @@ namespace SportsAgencyTycoon
                     DetermineReceivingTDs(WRandTE);
 
                 DetermineReceivingYards(WRandTE);
+
+                totalPossessions = totalPossessions - (teamPassingTDs + teamRushingTDs);
 
                 int totalOLSkill = 0;
                 foreach (FootballPlayer p in OL)
@@ -179,46 +184,88 @@ namespace SportsAgencyTycoon
                     DetermineTackles(p);
                 foreach (FootballPlayer p in Secondary)
                     DetermineTackles(p);
+                foreach (FootballPlayer p in Punter)
+                    DeterminePunts(p);
+                foreach (FootballPlayer p in Kicker)
+                    DetermineXPAttempts(p);
             }
         }
-        private void DetermineNetPuntYards(FootballPlayer p)
+        private void DetermineNetPuntYards(FootballPlayer p, int punts)
         {
             
         }
 
         private void DeterminePunts(FootballPlayer p)
         {
-            
+            int punts = Convert.ToInt32(Math.Floor(Convert.ToDouble(totalPossessions) * 0.8));
+            p.Punts += punts;
+            totalPossessions -= punts;
+            DetermineNetPuntYards(p, punts);
         }
 
-        private void DetermineFGMakes(FootballPlayer p)
+        private void DetermineFGMakes(FootballPlayer p, int fgAttempts)
         {
             
         }
 
         private void DetermineFGAttempts(FootballPlayer p)
         {
-            
+            int fgAttempts = totalPossessions;
+            p.FGAttempts += fgAttempts;
+            DetermineFGMakes(p, fgAttempts);
         }
 
-        private void DetermineXPMakes(FootballPlayer p)
+        private void DetermineXPMakes(FootballPlayer p, int xpAttempts)
         {
-            
+            int xpMakes = 0;
+            for (int i = 0; i < xpAttempts; i++)
+            {
+                int sumOfDice = DiceRoll();
+                if (sumOfDice > 2) xpMakes++;
+            }
+            p.XPMakes += xpMakes;
         }
 
         private void DetermineXPAttempts(FootballPlayer p)
         {
-           
+            int xpAttempts = teamPassingTDs + teamRushingTDs;
+            p.XPAttempts += xpAttempts;
+            DetermineXPMakes(p, xpAttempts);
         }
 
-        private void DetermineDefensiveInterceptions(FootballPlayer p)
+        private void DetermineDefensiveInterceptions(FootballPlayer p, int passesDefended)
         {
-            
+            int interceptions = 0;
+            for (int i = 0; i < passesDefended; i++)
+            {
+                int sumOfDice = DiceRoll();
+                if (sumOfDice == 2) interceptions++;
+            }
+            p.DefensiveInterceptions += interceptions;
         }
 
         private void DeterminePassesDefended(FootballPlayer p)
         {
-            
+            int diceRolls = 0;
+            int passesDefended = 0;
+            if (p.CurrentSkill >= 80) diceRolls = 6;
+            else if (p.CurrentSkill >= 70) diceRolls = 5;
+            else if (p.CurrentSkill >= 60) diceRolls = 4;
+            else if (p.CurrentSkill >= 50) diceRolls = 3;
+            else if (p.CurrentSkill >= 40) diceRolls = 2;
+            else diceRolls = 1;
+
+            for (int i = 0; i < diceRolls; i++)
+            {
+                int sumOfDice = DiceRoll();
+                if (sumOfDice == 2) passesDefended++;
+            }
+
+            if (passesDefended > 0)
+            {
+                p.PassesDefended += passesDefended;
+                DetermineDefensiveInterceptions(p, passesDefended);
+            }
         }
 
         private void DetermineTacklesForLoss(FootballPlayer p, int tackles)
