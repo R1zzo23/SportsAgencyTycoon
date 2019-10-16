@@ -175,6 +175,10 @@ namespace SportsAgencyTycoon
 
                 foreach (FootballPlayer p in DL)
                     DetermineTackles(p);
+                foreach (FootballPlayer p in LB)
+                    DetermineTackles(p);
+                foreach (FootballPlayer p in Secondary)
+                    DetermineTackles(p);
             }
         }
         private void DetermineNetPuntYards(FootballPlayer p)
@@ -226,8 +230,9 @@ namespace SportsAgencyTycoon
                 if (diceRoll <= 4) tacklesForLoss++;
             }
             p.TacklesForLoss += tacklesForLoss;
-            if (tacklesForLoss > 0)
-                DetermineSacks(p, tacklesForLoss);
+            if (p.Position == Position.LB || p.Position == Position.DE || p.Position == Position.DT)
+                if (tacklesForLoss > 0)
+                    DetermineSacks(p, tacklesForLoss);
         }
 
         private void DetermineSacks(FootballPlayer p, int tacklesForLoss)
@@ -245,16 +250,31 @@ namespace SportsAgencyTycoon
         {
             int tackles = 0;
             if (p.IsStarter)
+            {
                 tackles = rnd.Next(2, 8);
+                if (p.Position == Position.LB && p.CurrentSkill >= 65)
+                    tackles += DiceRoll() / 2;
+                if (p.Position == Position.CB)
+                    if (tackles > 4) tackles -= 2;
+                if (p.CurrentSkill < 50)
+                    tackles = tackles / 2;
+            }
             else
             {
                 int diceRoll = DiceRoll();
                 if (diceRoll >= 10)
                     tackles = rnd.Next(1, 4);
+                if (p.Position == Position.CB && tackles == 3)
+                {
+                    tackles--;
+                }
+                    
             }
             p.Tackles += tackles;
-            if (tackles > 0)
+            if (tackles > 0 && (p.Position == Position.LB || p.Position == Position.DE || p.Position == Position.DT))
                 DetermineTacklesForLoss(p, tackles);
+            else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
+                DeterminePassesDefended(p);
         }
 
         private void DetermineOLineYPC(List<FootballPlayer> list)
