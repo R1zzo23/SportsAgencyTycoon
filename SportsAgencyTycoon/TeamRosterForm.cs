@@ -184,6 +184,8 @@ namespace SportsAgencyTycoon
             if (player.Position == Position.OT || player.Position == Position.OG || player.Position == Position.C) lblStats.Text = DisplayOLStats(player);
             if (player.Position == Position.LB || player.Position == Position.DE || player.Position == Position.DT) lblStats.Text = DisplayerFrontSevenStats(player);
             if (player.Position == Position.CB || player.Position == Position.SS || player.Position == Position.FS) lblStats.Text = DisplaySecondaryStats(player);
+            if (player.Position == Position.K) lblStats.Text = DisplayKickingStats(player);
+            if (player.Position == Position.P) lblStats.Text = DisplayPuntingStats(player);
         }
         public string DisplayQBStats(FootballPlayer player)
         {
@@ -223,6 +225,17 @@ namespace SportsAgencyTycoon
                 + Environment.NewLine + "TFLs :" + player.TacklesForLoss;
             return stats;
         }
+        public string DisplayKickingStats(FootballPlayer player)
+        {
+            string stats = "FGM/FGA: " + player.FGMakes + "/" + player.FGAttempts + Environment.NewLine +
+                "XPM/XPA: " + player.XPMakes + "/" + player.XPAttempts;
+            return stats;
+        }
+        public string DisplayPuntingStats(FootballPlayer player)
+        {
+            string stats = "Punts: " + player.Punts + Environment.NewLine + "Net Average: " + player.NetPuntAverage.ToString("0.##");
+            return stats;
+        }
         public string DisplayFootballTeamStats(Team t)
         {
             List<FootballPlayer> QBS = new List<FootballPlayer>();
@@ -232,6 +245,8 @@ namespace SportsAgencyTycoon
             List<FootballPlayer> DL = new List<FootballPlayer>();
             List<FootballPlayer> LB = new List<FootballPlayer>();
             List<FootballPlayer> Secondary = new List<FootballPlayer>();
+            List<FootballPlayer> Kicker = new List<FootballPlayer>();
+            List<FootballPlayer> Punter = new List<FootballPlayer>();
             string stats = "";
 
             foreach (FootballPlayer p in t.Roster)
@@ -243,6 +258,8 @@ namespace SportsAgencyTycoon
                 else if (p.Position == Position.DE || p.Position == Position.DT) DL.Add(p);
                 else if (p.Position == Position.LB) LB.Add(p);
                 else if (p.Position == Position.CB || p.Position == Position.SS || p.Position == Position.FS) Secondary.Add(p);
+                else if (p.Position == Position.K) Kicker.Add(p);
+                else if (p.Position == Position.P) Punter.Add(p);
             }
 
             QBS = QBS.OrderByDescending(o => o.PassingYards).ToList();
@@ -273,6 +290,12 @@ namespace SportsAgencyTycoon
             stats += Environment.NewLine;
             foreach (FootballPlayer fp in Secondary)
                 stats += fp.FullName + " " + fp.Tackles + " TKLS || " + fp.DefensiveInterceptions + " INT || " + fp.TacklesForLoss + " TFL" + Environment.NewLine;
+            stats += Environment.NewLine;
+            foreach (FootballPlayer fp in Kicker)
+                stats += fp.FullName + " " + fp.FGMakes + "/" + fp.FGAttempts + " FGM/FGA || " + fp.XPMakes + "/" + fp.XPAttempts + " XPM/XPA";
+            stats += Environment.NewLine;
+            foreach (FootballPlayer fp in Punter)
+                stats += fp.FullName + " " + fp.Punts + " Punts || " + fp.NetPuntAverage.ToString("0.##") + " NET AVG";
 
             return stats;
         }

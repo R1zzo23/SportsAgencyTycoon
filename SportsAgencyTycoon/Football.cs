@@ -192,7 +192,15 @@ namespace SportsAgencyTycoon
         }
         private void DetermineNetPuntYards(FootballPlayer p, int punts)
         {
-            
+            int yards = 0;
+            for (int i = 0; i < punts; i++)
+            {
+                if (p.CurrentSkill >= 70) yards += rnd.Next(40, 49);
+                else if (p.CurrentSkill >= 50) yards += rnd.Next(35, 45);
+                else yards += rnd.Next(31, 40);
+            }
+            p.NetPuntYards += yards;
+            p.NetPuntAverage = Convert.ToDouble(p.NetPuntYards) / Convert.ToDouble(p.Punts);
         }
 
         private void DeterminePunts(FootballPlayer p)
@@ -205,7 +213,26 @@ namespace SportsAgencyTycoon
 
         private void DetermineFGMakes(FootballPlayer p, int fgAttempts)
         {
-            
+            int fgMakes = 0;
+            int diceRoll = 0;
+            int numberOfRolls = 0;
+            if (p.CurrentSkill >= 70) numberOfRolls = 3;
+            else if (p.CurrentSkill >= 50) numberOfRolls = 2;
+            else numberOfRolls = 1;
+
+            for (int i = 0; i < fgAttempts; i++)
+            {
+                for (int j = 0; j < numberOfRolls; j++)
+                {
+                    diceRoll = DiceRoll();
+                    if (diceRoll > 3)
+                    {
+                        fgMakes++;
+                        return;
+                    }
+                }
+            }
+            p.FGMakes += fgMakes;
         }
 
         private void DetermineFGAttempts(FootballPlayer p)

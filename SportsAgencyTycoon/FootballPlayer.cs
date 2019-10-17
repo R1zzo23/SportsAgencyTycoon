@@ -37,7 +37,8 @@ namespace SportsAgencyTycoon
         public int XPAttempts = 0;
         public int XPMakes = 0;
         public int Punts = 0;
-        public int NetPuntYardage = 0;
+        public int NetPuntYards = 0;
+        public double NetPuntAverage = 0;
         public int SacksAllowed = 0;
         public int PassesDefended = 0;
         public int PancakeBlocks = 0;
