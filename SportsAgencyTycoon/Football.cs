@@ -187,7 +187,10 @@ namespace SportsAgencyTycoon
                 foreach (FootballPlayer p in Punter)
                     DeterminePunts(p);
                 foreach (FootballPlayer p in Kicker)
+                {
                     DetermineXPAttempts(p);
+                    DetermineFGAttempts(p);
+                }
             }
         }
         private void DetermineNetPuntYards(FootballPlayer p, int punts)
@@ -222,15 +225,13 @@ namespace SportsAgencyTycoon
 
             for (int i = 0; i < fgAttempts; i++)
             {
+                int highRoll = 0;
                 for (int j = 0; j < numberOfRolls; j++)
                 {
                     diceRoll = DiceRoll();
-                    if (diceRoll > 3)
-                    {
-                        fgMakes++;
-                        return;
-                    }
+                    if (diceRoll > highRoll) highRoll = diceRoll;
                 }
+                if (highRoll > 4) fgMakes++;
             }
             p.FGMakes += fgMakes;
         }
