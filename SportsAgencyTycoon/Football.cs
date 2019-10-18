@@ -445,7 +445,7 @@ namespace SportsAgencyTycoon
 
         private void DetermineReceivingYards(List<FootballPlayer> WRandTE)
         {
-
+            foreach (FootballPlayer p in WRandTE) p.ReceivingYardsThisWeek = 0;
             WRandTE = WRandTE.OrderByDescending(o => o.CurrentSkill).ToList();
             int totalDiceSum = 0;
 
@@ -476,19 +476,31 @@ namespace SportsAgencyTycoon
 
                     int receivingYards = Convert.ToInt32(Math.Floor(yardPercent * teamPassingYards));
                     WRandTE[i].ReceivingYards += receivingYards;
+                    WRandTE[i].ReceivingYardsThisWeek += receivingYards;
                     teamPassingYardsUsed += receivingYards;
                 }
                 //give remaining receiving yards to random receiver
                 int randomReceiver = rnd.Next(0, WRandTE.Count);
                 int leftoverYards = teamPassingYards - teamPassingYardsUsed;
                 WRandTE[randomReceiver].ReceivingYards += leftoverYards;
+                WRandTE[randomReceiver].ReceivingYardsThisWeek += leftoverYards;
                 teamPassingYardsUsed += leftoverYards;
             }
+            foreach (FootballPlayer p in WRandTE)
+                if (p.ReceivingYardsThisWeek > 0) DetermineReceptions(p);
         }
 
         private void DetermineReceptions(FootballPlayer p)
         {
-            
+            int receptions = 0;
+
+            if (p.ReceivingYardsThisWeek < 15) receptions = 1;
+            else
+            {
+                double yardsPerReception = Convert.ToDouble(rnd.Next(70, 400)) / 10;
+                receptions = Convert.ToInt32(Math.Ceiling(p.ReceivingYardsThisWeek / yardsPerReception));
+            }
+            p.Receptions += receptions;
         }
 
         private void DetermineFumbles(FootballPlayer p, int carries)

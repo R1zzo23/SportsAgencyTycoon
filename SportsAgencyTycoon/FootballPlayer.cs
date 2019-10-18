@@ -22,6 +22,7 @@ namespace SportsAgencyTycoon
         public int Interceptions = 0;
         public int Receptions = 0;
         public int ReceivingYards = 0;
+        public int ReceivingYardsThisWeek = 0;
         public int ReceivingTDs = 0;
         public int Carries = 0;
         public int RushingYards = 0;
