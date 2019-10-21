@@ -696,7 +696,84 @@ namespace SportsAgencyTycoon
         #endregion
         public void SimulateGames()
         {
+            List<Team> teams = new List<Team>();
+            teams = NFL.TeamList;
+            teams = teams.OrderBy(o => o.City).ThenBy(o => o.Conference).ThenBy(o => o.Division).ToList();
+            if (World.MonthName == Months.October && World.WeekNumber == 3)
+                DivisionGame1(teams);
+            else if (World.MonthName == Months.October && World.WeekNumber == 4)
+                DivisionGame2(teams);
+            else if (World.MonthName == Months.October && World.WeekNumber == 5)
+                DivisionGame3(teams);
+        }
+        public void DivisionGame1(List<Team> teams)
+        {
+            for (int i = 0; i < teams.Count / 4; i++)
+            {
+                SimulateGame(teams[i * 4], teams[i * 4 + 1]);
+                SimulateGame(teams[i * 4 + 2], teams[i * 4 + 3]);
+            }
+        }
+        public void DivisionGame2(List<Team> teams)
+        {
+            for (int i = 0; i < teams.Count / 4; i++)
+            {
+                SimulateGame(teams[i * 4], teams[i * 4 + 2]);
+                SimulateGame(teams[i * 4 + 1], teams[i * 4 + 3]);
+            }
+        }
+        public void DivisionGame3(List<Team> teams)
+        {
+            for (int i = 0; i < teams.Count / 4; i++)
+            {
+                SimulateGame(teams[i * 4], teams[i * 4 + 3]);
+                SimulateGame(teams[i * 4 + 1], teams[i * 4 + 2]);
+            }
+        }
 
+        public void SimulateGame(Team team1, Team team2)
+        {
+            bool conferenceGame = false;
+            bool divisionGame = false;
+            if (team1.Conference == team2.Conference) conferenceGame = true;
+            if (team1.Division == team2.Division) divisionGame = true;
+
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                team1.Wins++;
+                team2.Losses++;
+                if (divisionGame)
+                {
+                    team1.DivisionWins++;
+                    team2.DivisionLosses++;
+                }
+                if (conferenceGame)
+                {
+                    team1.ConferenceWins++;
+                    team2.ConferenceLosses++;
+                }
+                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
+            }
+            else
+            {
+                team1.Losses++;
+                team2.Wins++;
+                if (divisionGame)
+                {
+                    team2.DivisionWins++;
+                    team1.DivisionLosses++;
+                }
+                if (conferenceGame)
+                {
+                    team2.ConferenceWins++;
+                    team1.ConferenceLosses++;
+                }
+                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
+            }
+            team1.PlayedGameThisCycle = true;
+            team2.PlayedGameThisCycle = true;
         }
 
         public int DiceRoll()

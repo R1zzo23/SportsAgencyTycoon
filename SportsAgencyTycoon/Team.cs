@@ -16,7 +16,11 @@ namespace SportsAgencyTycoon
         public int MarketValue;
         public int TitleConteder;
         public int Wins;
+        public int ConferenceWins;
+        public int DivisionWins;
         public int Losses;
+        public int ConferenceLosses;
+        public int DivisionLosses;
         public bool PlayedGameThisCycle;
         public List<Player> Roster = new List<Player>();
         public List<Award> Awards = new List<Award>();
@@ -29,7 +33,11 @@ namespace SportsAgencyTycoon
             MarketValue = marketValue;
             TitleConteder = titleContender;
             Wins = 0;
+            ConferenceWins = 0;
+            DivisionWins = 0;
             Losses = 0;
+            ConferenceLosses = 0;
+            DivisionLosses = 0;
         }
         public Team(string city, string mascot, string conference, string division, string abbreviation, int marketValue, int titleContender)
         {
@@ -41,7 +49,11 @@ namespace SportsAgencyTycoon
             MarketValue = marketValue;
             TitleConteder = titleContender;
             Wins = 0;
+            ConferenceWins = 0;
+            DivisionWins = 0;
             Losses = 0;
+            ConferenceLosses = 0;
+            DivisionLosses = 0;
         }
     }
 }

@@ -2,11 +2,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/Football.cs">
     <Files>
       <File FileName="SportsAgencyTycoon/MainForm.cs" Line="704" Column="42" />
-      <File FileName="SportsAgencyTycoon/Football.cs" Line="699" Column="1" />
-      <File FileName="SportsAgencyTycoon/TeamRosterForm.cs" />
-      <File FileName="SportsAgencyTycoon/FootballPlayer.cs" Line="25" Column="47" />
-      <File FileName="SportsAgencyTycoon/World.cs" />
-      <File FileName="SportsAgencyTycoon/Basketball.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/Football.cs" Line="777" Column="10" />
+      <File FileName="SportsAgencyTycoon/World.cs" Line="840" Column="74" />
+      <File FileName="SportsAgencyTycoon/Basketball.cs" Line="290" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
