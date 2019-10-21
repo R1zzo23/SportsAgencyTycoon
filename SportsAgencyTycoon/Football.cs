@@ -16,10 +16,10 @@ namespace SportsAgencyTycoon
         public int losingIndex;
         public List<string> Conferences;
         public List<string> Divisions;
-        public List<Team> EasternConference = new List<Team>();
-        public List<Team> WesternConference = new List<Team>();
-        public List<Team> EasternPlayoffs = new List<Team>();
-        public List<Team> WesternPlayoffs = new List<Team>();
+        public List<Team> AFC = new List<Team>();
+        public List<Team> NFC = new List<Team>();
+        public List<Team> AFCPlayoffs = new List<Team>();
+        public List<Team> NFCPlayoffs = new List<Team>();
         public List<int> EasternLoserIndex = new List<int>();
         public List<int> WesternLoserIndex = new List<int>();
 
@@ -78,6 +78,91 @@ namespace SportsAgencyTycoon
                 SimulateGames();
                 DetermineStats();
             }
+            if (NFL.WeekNumber == 17)
+            {
+                NFL.Playoffs = true;
+                DeterminePlayoffField();
+            }
+        }
+        public string DeterminePlayoffField()
+        {
+            string playoffSeedings = "";
+            AFC.Clear();
+            NFC.Clear();
+            AFCPlayoffs.Clear();
+            NFCPlayoffs.Clear();
+
+            foreach (Team t in World.NBA.TeamList)
+            {
+                if (t.Conference == "AFC") AFC.Add(t);
+                else NFC.Add(t);
+            }
+
+            AFC = AFC.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+            NFC = NFC.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+
+            int afcEastIndex = AFC.FindIndex(t => t.Division == "East");
+            AFCPlayoffs.Add(AFC[afcEastIndex]);
+            AFC[afcEastIndex].Awards.Add(new Award(World.Year, AFC[afcEastIndex].Conference + " " + AFC[afcEastIndex].Division + " Division Champs"));
+            AFC.RemoveAt(afcEastIndex);
+
+            int afcSouthIndex = AFC.FindIndex(t => t.Division == "South");
+            AFCPlayoffs.Add(AFC[afcSouthIndex]);
+            AFC[afcSouthIndex].Awards.Add(new Award(World.Year, AFC[afcSouthIndex].Conference + " " + AFC[afcSouthIndex].Division + " Division Champs"));
+            AFC.RemoveAt(afcSouthIndex);
+
+            int afcNorthIndex = AFC.FindIndex(t => t.Division == "North");
+            AFCPlayoffs.Add(AFC[afcNorthIndex]);
+            AFC[afcNorthIndex].Awards.Add(new Award(World.Year, AFC[afcNorthIndex].Conference + " " + AFC[afcNorthIndex].Division + " Division Champs"));
+            AFC.RemoveAt(afcNorthIndex);
+
+            int afcWestIndex = AFC.FindIndex(t => t.Division == "West");
+            AFCPlayoffs.Add(AFC[afcWestIndex]);
+            AFC[afcWestIndex].Awards.Add(new Award(World.Year, AFC[afcWestIndex].Conference + " " + AFC[afcWestIndex].Division + " Division Champs"));
+            AFC.RemoveAt(afcWestIndex);
+
+            AFCPlayoffs = AFCPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            for (int i = 0; i < 2; i++)
+                AFCPlayoffs.Add(AFC[i]);
+
+            int nfcEastIndex = NFC.FindIndex(t => t.Division == "East");
+            NFCPlayoffs.Add(NFC[nfcEastIndex]);
+            NFC[nfcEastIndex].Awards.Add(new Award(World.Year, NFC[nfcEastIndex].Conference + " " + NFC[nfcEastIndex].Division + " Division Champs"));
+            NFC.RemoveAt(nfcEastIndex);
+
+            int nfcSouthIndex = NFC.FindIndex(t => t.Division == "South");
+            NFCPlayoffs.Add(NFC[nfcSouthIndex]);
+            NFC[nfcSouthIndex].Awards.Add(new Award(World.Year, NFC[nfcSouthIndex].Conference + " " + NFC[nfcSouthIndex].Division + " Division Champs"));
+            NFC.RemoveAt(nfcSouthIndex);
+
+            int nfcNorthIndex = NFC.FindIndex(t => t.Division == "North");
+            NFCPlayoffs.Add(NFC[nfcNorthIndex]);
+            NFC[nfcNorthIndex].Awards.Add(new Award(World.Year, NFC[nfcNorthIndex].Conference + " " + NFC[nfcNorthIndex].Division + " Division Champs"));
+            NFC.RemoveAt(nfcNorthIndex);
+
+            int nfcWestIndex = NFC.FindIndex(t => t.Division == "West");
+            NFCPlayoffs.Add(NFC[nfcWestIndex]);
+            NFC[nfcWestIndex].Awards.Add(new Award(World.Year, NFC[nfcWestIndex].Conference + " " + NFC[nfcWestIndex].Division + " Division Champs"));
+            NFC.RemoveAt(nfcWestIndex);
+
+            NFCPlayoffs = NFCPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            for (int i = 0; i < 2; i++)
+                NFCPlayoffs.Add(NFC[i]);
+
+            playoffSeedings = "AFC Playoffs:" + Environment.NewLine + "#1 " + AFCPlayoffs[0].Mascot + Environment.NewLine + "2 " +
+                AFCPlayoffs[1].Mascot + "#3 " + AFCPlayoffs[2].Mascot + " vs. #6 " + AFCPlayoffs[5].Mascot + Environment.NewLine
+                + "#4 " + AFCPlayoffs[3].Mascot + " vs. #5 " + AFCPlayoffs[4].Mascot + Environment.NewLine;
+            playoffSeedings += "NFC Playoffs:" + Environment.NewLine + "#1 " + NFCPlayoffs[0].Mascot + Environment.NewLine + "2 " +
+                NFCPlayoffs[1].Mascot + "#3 " + NFCPlayoffs[2].Mascot + " vs. #6 " + NFCPlayoffs[5].Mascot + Environment.NewLine
+                + "#4 " + NFCPlayoffs[3].Mascot + " vs. #5 " + NFCPlayoffs[4].Mascot + Environment.NewLine;
+
+            /*for (int i = 0; i < 4; i++)
+            {
+                playoffSeedings += i + 1 + ") " + AFCPlayoffs[i].Abbreviation + " vs. " + (AFCPlayoffs.Count - i) + ") " + AFCPlayoffs[AFCPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
+                playoffSeedings += i + 1 + ") " + NFCPlayoffs[i].Abbreviation + " vs. " + (NFCPlayoffs.Count - i) + ") " + NFCPlayoffs[NFCPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
+            }*/
+
+            return playoffSeedings;
         }
         public void GroupPlayersByPosition(Team t)
         {
@@ -752,9 +837,11 @@ namespace SportsAgencyTycoon
         {
             bool conferenceGame = false;
             bool divisionGame = false;
-            if (team1.Conference == team2.Conference) conferenceGame = true;
-            if (team1.Division == team2.Division) divisionGame = true;
-
+            if (team1.Conference == team2.Conference)
+            {
+                conferenceGame = true;
+                if (team1.Division == team2.Division) divisionGame = true;
+            }
             int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
             int winningNumber = rnd.Next(1, totalNumber);
             if (winningNumber <= team1.TitleConteder)
@@ -789,8 +876,6 @@ namespace SportsAgencyTycoon
                 }
                 Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
             }
-            team1.PlayedGameThisCycle = true;
-            team2.PlayedGameThisCycle = true;
         }
 
         public int DiceRoll()
