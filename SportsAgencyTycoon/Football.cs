@@ -74,6 +74,7 @@ namespace SportsAgencyTycoon
         {
             if (!NFL.Playoffs)
             {
+                NFL.WeekNumber++;
                 SimulateGames();
                 DetermineStats();
             }
@@ -698,13 +699,29 @@ namespace SportsAgencyTycoon
         {
             List<Team> teams = new List<Team>();
             teams = NFL.TeamList;
-            teams = teams.OrderBy(o => o.City).ThenBy(o => o.Conference).ThenBy(o => o.Division).ToList();
-            if (World.MonthName == Months.October && World.WeekNumber == 3)
+            teams = teams.OrderBy(o => o.Conference).ThenBy(o => o.Division).ThenBy(o => o.City).ToList();
+            if (NFL.WeekNumber == 1 || NFL.WeekNumber == 14)
                 DivisionGame1(teams);
-            else if (World.MonthName == Months.October && World.WeekNumber == 4)
+            else if (NFL.WeekNumber == 2 || NFL.WeekNumber == 15)
                 DivisionGame2(teams);
-            else if (World.MonthName == Months.October && World.WeekNumber == 5)
+            else if (NFL.WeekNumber == 3 || NFL.WeekNumber == 16)
                 DivisionGame3(teams);
+            else
+            {
+                List<int> indexList = new List<int>();
+                for (int i = 0; i < NFL.TeamList.Count; i++)
+                {
+                    indexList.Add(i);
+                }
+
+                for (int j = 0; j < NFL.TeamList.Count / 2; j++)
+                {
+                    int opponentIndex = rnd.Next(1, indexList.Count);
+                    SimulateGame(NFL.TeamList[indexList[0]], NFL.TeamList[indexList[opponentIndex]]);
+                    indexList.RemoveAt(opponentIndex);
+                    indexList.RemoveAt(0);
+                }
+            }
         }
         public void DivisionGame1(List<Team> teams)
         {
