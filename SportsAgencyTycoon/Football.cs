@@ -72,17 +72,50 @@ namespace SportsAgencyTycoon
 
         public void SimWeek()
         {
+            NFL.WeekNumber++;
             if (!NFL.Playoffs)
             {
-                NFL.WeekNumber++;
                 SimulateGames();
                 DetermineStats();
             }
-            if (NFL.WeekNumber == 17)
+            if (NFL.WeekNumber == 16)
             {
                 NFL.Playoffs = true;
-                DeterminePlayoffField();
+                mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
             }
+            if (NFL.Playoffs)
+            {
+                if (NFL.WeekNumber == 17) SimulateWildCardRound();
+            }
+        }
+        public void SimulateWildCardRound()
+        {
+            List<Team> afcTemp = new List<Team>();
+            List<Team> nfcTemp = new List<Team>();
+            for (int i = 0; i < AFCPlayoffs.Count; i++)
+            {
+                afcTemp.Add(AFCPlayoffs[i]);
+                nfcTemp.Add(NFCPlayoffs[i]);
+            }
+            AFCPlayoffs.Clear();
+            NFCPlayoffs.Clear();
+            for (int j = 0; j < 2; j++)
+            {
+                AFCPlayoffs.Add(afcTemp[j]);
+                NFCPlayoffs.Add(nfcTemp[j]);
+            }
+            int afcWildCard1 = SimulatePlayoffGame(afcTemp[2], afcTemp[5]);
+            int nfcWildCard1 = SimulatePlayoffGame(nfcTemp[2], nfcTemp[5]);
+            int afcWildCard2 = SimulatePlayoffGame(afcTemp[3], afcTemp[4]);
+            int nfcWildCard2 = SimulatePlayoffGame(nfcTemp[3], nfcTemp[4]);
+            if (afcWildCard2 == 1) AFCPlayoffs.Add(afcTemp[3]);
+            else AFCPlayoffs.Add(afcTemp[4]);
+            if (afcWildCard1 == 1) AFCPlayoffs.Insert(2, afcTemp[2]);
+            else AFCPlayoffs.Add(afcTemp[5]);
+            if (nfcWildCard2 == 1) NFCPlayoffs.Add(nfcTemp[3]);
+            else NFCPlayoffs.Add(nfcTemp[4]);
+            if (nfcWildCard1 == 1) NFCPlayoffs.Insert(2, nfcTemp[2]);
+            else NFCPlayoffs.Add(nfcTemp[5]);
         }
         public string DeterminePlayoffField()
         {
@@ -92,7 +125,7 @@ namespace SportsAgencyTycoon
             AFCPlayoffs.Clear();
             NFCPlayoffs.Clear();
 
-            foreach (Team t in World.NBA.TeamList)
+            foreach (Team t in World.NFL.TeamList)
             {
                 if (t.Conference == "AFC") AFC.Add(t);
                 else NFC.Add(t);
@@ -149,18 +182,12 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < 2; i++)
                 NFCPlayoffs.Add(NFC[i]);
 
-            playoffSeedings = "AFC Playoffs:" + Environment.NewLine + "#1 " + AFCPlayoffs[0].Mascot + Environment.NewLine + "2 " +
-                AFCPlayoffs[1].Mascot + "#3 " + AFCPlayoffs[2].Mascot + " vs. #6 " + AFCPlayoffs[5].Mascot + Environment.NewLine
+            playoffSeedings = "AFC Playoffs:" + Environment.NewLine + "#1 " + AFCPlayoffs[0].Mascot + Environment.NewLine + "#2 " +
+                AFCPlayoffs[1].Mascot + Environment.NewLine + "#3 " + AFCPlayoffs[2].Mascot + " vs. #6 " + AFCPlayoffs[5].Mascot + Environment.NewLine
                 + "#4 " + AFCPlayoffs[3].Mascot + " vs. #5 " + AFCPlayoffs[4].Mascot + Environment.NewLine;
-            playoffSeedings += "NFC Playoffs:" + Environment.NewLine + "#1 " + NFCPlayoffs[0].Mascot + Environment.NewLine + "2 " +
-                NFCPlayoffs[1].Mascot + "#3 " + NFCPlayoffs[2].Mascot + " vs. #6 " + NFCPlayoffs[5].Mascot + Environment.NewLine
+            playoffSeedings += "NFC Playoffs:" + Environment.NewLine + "#1 " + NFCPlayoffs[0].Mascot + Environment.NewLine + "#2 " +
+                NFCPlayoffs[1].Mascot + Environment.NewLine + "#3 " + NFCPlayoffs[2].Mascot + " vs. #6 " + NFCPlayoffs[5].Mascot + Environment.NewLine
                 + "#4 " + NFCPlayoffs[3].Mascot + " vs. #5 " + NFCPlayoffs[4].Mascot + Environment.NewLine;
-
-            /*for (int i = 0; i < 4; i++)
-            {
-                playoffSeedings += i + 1 + ") " + AFCPlayoffs[i].Abbreviation + " vs. " + (AFCPlayoffs.Count - i) + ") " + AFCPlayoffs[AFCPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
-                playoffSeedings += i + 1 + ") " + NFCPlayoffs[i].Abbreviation + " vs. " + (NFCPlayoffs.Count - i) + ") " + NFCPlayoffs[NFCPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
-            }*/
 
             return playoffSeedings;
         }
@@ -780,6 +807,25 @@ namespace SportsAgencyTycoon
             }
         }
         #endregion
+        public int SimulatePlayoffGame(Team team1, Team team2)
+        {
+            int winningTeam = 0;
+
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
+                winningTeam = 1;
+            }
+            else
+            {
+                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
+                winningTeam = 2;
+            }
+
+            return winningTeam;
+        }
         public void SimulateGames()
         {
             List<Team> teams = new List<Team>();
