@@ -307,7 +307,7 @@ namespace SportsAgencyTycoon
             team1.PlayedGameThisCycle = true;
             team2.PlayedGameThisCycle = true;
         }
-
+        #region Stat Creation and Updating
         public void InitializeStats()
         {
             foreach (Team t in NBA.TeamList)
@@ -452,6 +452,7 @@ namespace SportsAgencyTycoon
             else if (change >= .03)
                 p.Blocks *= 1 + (change - .02);
         }
+#endregion
         public void MVPScores(BasketballPlayer p)
         {
             double score = 0;
