@@ -43,6 +43,10 @@ namespace SportsAgencyTycoon
         public int SacksAllowed = 0;
         public int PassesDefended = 0;
         public int PancakeBlocks = 0;
+        public double MVPScore = 0;
+        public double OPOYScore = 0;
+        public double DPOYScore = 0;
+        public List<Award> Awards = new List<Award>();
 
         public FootballPlayer(Random rnd, int id, Sports sport, int age, Position position)
             : base(rnd, id, sport, age)

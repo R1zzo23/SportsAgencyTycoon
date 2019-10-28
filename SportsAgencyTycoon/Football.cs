@@ -81,6 +81,18 @@ namespace SportsAgencyTycoon
             if (NFL.WeekNumber == 16)
             {
                 NFL.Playoffs = true;
+                foreach (Team t in World.NFL.TeamList)
+                    foreach (FootballPlayer p in t.Roster)
+                    {
+                        World.Football.MVPScore(p);
+                        if (p.Position == Position.QB || p.Position == Position.RB || p.Position == Position.WR || p.Position == Position.TE)
+                            World.Football.OPOYScore(p);
+                        else if (p.Position == Position.DT || p.Position == Position.DE || p.Position == Position.LB || p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
+                            World.Football.DPOYScore(p);
+                    }
+                mainForm.newsLabel.Text = DisplayDPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayOPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayMVPTop5() + Environment.NewLine + mainForm.newsLabel.Text;
                 mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
             }
             if (NFL.Playoffs)
@@ -89,6 +101,97 @@ namespace SportsAgencyTycoon
                 if (NFL.WeekNumber == 18 || NFL.WeekNumber == 19) SimulateDivisionalAndConferenceChampionship();
                 if (NFL.WeekNumber == 20) SimulateSuperBowl();
             }
+        }
+        public void MVPScore(FootballPlayer p)
+        {
+            double score = 0;
+            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + (p.PassingYards / 4) + p.RushingYards 
+                + p.PassingYards + (p.PassingTDs / 2) + p.RushingTDs + p.ReceivingTDs + (p.Tackles * 12) 
+                + (p.Sacks * 1.5) + (p.DefensiveInterceptions * 5) + (p.PassesDefended * 2);
+            p.MVPScore = score;
+        }
+        public void OPOYScore(FootballPlayer p)
+        {
+            double score = 0;
+            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + (p.PassingYards / 4) + p.RushingYards
+                + p.PassingYards + (p.PassingTDs / 2) + p.RushingTDs + p.ReceivingTDs;
+            p.OPOYScore = score;
+        }
+        public void DPOYScore(FootballPlayer p)
+        {
+            double score = 0;
+            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + (p.Tackles * 12)
+                + (p.Sacks * 1.5) + (p.DefensiveInterceptions * 5) + (p.PassesDefended * 2);
+            p.MVPScore = score;
+        }
+        public string DisplayMVPTop5()
+        {
+            string results = "";
+
+            List<FootballPlayer> mvpRanks = new List<FootballPlayer>();
+            foreach (Team t in World.NFL.TeamList)
+                foreach (FootballPlayer p in t.Roster)
+                    mvpRanks.Add(p);
+
+            mvpRanks = mvpRanks.OrderByDescending(o => o.MVPScore).ToList();
+
+            results = mvpRanks[0].Team.City + "'s " + mvpRanks[0].FullName + " has been named NFL MVP!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + mvpRanks[i - 1].Team.Abbreviation + "] " + mvpRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            mvpRanks[0].Awards.Add(new Award(World.Year, "NFL MVP"));
+
+            return results;
+        }
+        public string DisplayOPOYTop5()
+        {
+            string results = "";
+
+            List<FootballPlayer> OPOYCandidates = new List<FootballPlayer>();
+            foreach (Team t in World.NFL.TeamList)
+                foreach (FootballPlayer p in t.Roster)
+                    OPOYCandidates.Add(p);
+
+            OPOYCandidates = OPOYCandidates.OrderByDescending(o => o.OPOYScore).ToList();
+
+            results = OPOYCandidates[0].Team.City + "'s " + OPOYCandidates[0].FullName + " has been named NFL Offensive Player of the Year!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + OPOYCandidates[i - 1].Team.Abbreviation + "] " + OPOYCandidates[i - 1].FullName;
+            }
+
+            //give the winner the award
+            OPOYCandidates[0].Awards.Add(new Award(World.Year, "NFL Offensive Player of the Year"));
+
+            return results;
+        }
+        public string DisplayDPOYTop5()
+        {
+            string results = "";
+
+            List<FootballPlayer> DPOYCandidates = new List<FootballPlayer>();
+            foreach (Team t in World.NFL.TeamList)
+                foreach (FootballPlayer p in t.Roster)
+                    DPOYCandidates.Add(p);
+
+            DPOYCandidates = DPOYCandidates.OrderByDescending(o => o.DPOYScore).ToList();
+
+            results = DPOYCandidates[0].Team.City + "'s " + DPOYCandidates[0].FullName + " has been named NFL Defensive Player of the Year!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + DPOYCandidates[i - 1].Team.Abbreviation + "] " + DPOYCandidates[i - 1].FullName;
+            }
+
+            //give the winner the award
+            DPOYCandidates[0].Awards.Add(new Award(World.Year, "NFL Defensive Player of the Year"));
+
+            return results;
         }
         public void SimulateSuperBowl()
         {
