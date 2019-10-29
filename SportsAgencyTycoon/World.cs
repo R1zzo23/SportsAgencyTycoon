@@ -844,7 +844,7 @@ namespace SportsAgencyTycoon
             NFL.TeamList.Add(new Team("Indianapolis", "Colts", "AFC", "South", "IND", 40, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Jacksonville", "Jaguars", "AFC", "South", "JAX", 31, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Kansas City", "Chiefs", "AFC", "West", "KC", 48, rnd.Next(25, 76)));
-            NFL.TeamList.Add(new Team("Los Angeles", "Chargers", "LAC", "AFC", "West", 77, rnd.Next(25, 76)));
+            NFL.TeamList.Add(new Team("Los Angeles", "Chargers", "AFC", "West", "LAC", 77, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Los Angeles", "Rams", "NFC", "West", "LAR", 77, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Miami", "Dolphins", "AFC", "East", "MIA", 85, rnd.Next(25, 76)));
             NFL.TeamList.Add(new Team("Minnesota", "Vikings", "NFC", "North", "MIN", 28, rnd.Next(25, 76)));

@@ -82,6 +82,7 @@ namespace SportsAgencyTycoon
             {
                 NFL.Playoffs = true;
                 foreach (Team t in World.NFL.TeamList)
+                {
                     foreach (FootballPlayer p in t.Roster)
                     {
                         World.Football.MVPScore(p);
@@ -90,6 +91,7 @@ namespace SportsAgencyTycoon
                         else if (p.Position == Position.DT || p.Position == Position.DE || p.Position == Position.LB || p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
                             World.Football.DPOYScore(p);
                     }
+                }
                 mainForm.newsLabel.Text = DisplayDPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
                 mainForm.newsLabel.Text = DisplayOPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
                 mainForm.newsLabel.Text = DisplayMVPTop5() + Environment.NewLine + mainForm.newsLabel.Text;
@@ -120,9 +122,9 @@ namespace SportsAgencyTycoon
         public void DPOYScore(FootballPlayer p)
         {
             double score = 0;
-            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + (p.Tackles * 12)
+            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + (p.Tackles / 4)
                 + (p.Sacks * 1.5) + (p.DefensiveInterceptions * 5) + (p.PassesDefended * 2);
-            p.MVPScore = score;
+            p.DPOYScore = score;
         }
         public string DisplayMVPTop5()
         {
@@ -529,7 +531,7 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < passesDefended; i++)
             {
                 int sumOfDice = DiceRoll();
-                if (sumOfDice == 2) interceptions++;
+                if (sumOfDice == 4) interceptions++;
             }
             p.DefensiveInterceptions += interceptions;
         }
@@ -538,17 +540,17 @@ namespace SportsAgencyTycoon
         {
             int diceRolls = 0;
             int passesDefended = 0;
-            if (p.CurrentSkill >= 80) diceRolls = 6;
-            else if (p.CurrentSkill >= 70) diceRolls = 5;
-            else if (p.CurrentSkill >= 60) diceRolls = 4;
-            else if (p.CurrentSkill >= 50) diceRolls = 3;
-            else if (p.CurrentSkill >= 40) diceRolls = 2;
-            else diceRolls = 1;
+            if (p.CurrentSkill >= 80) diceRolls = 10;
+            else if (p.CurrentSkill >= 70) diceRolls = 8;
+            else if (p.CurrentSkill >= 60) diceRolls = 6;
+            else if (p.CurrentSkill >= 50) diceRolls = 5;
+            else if (p.CurrentSkill >= 40) diceRolls = 4;
+            else diceRolls = 2;
 
             for (int i = 0; i < diceRolls; i++)
             {
                 int sumOfDice = DiceRoll();
-                if (sumOfDice == 2) passesDefended++;
+                if (sumOfDice == 5) passesDefended++;
             }
 
             if (passesDefended > 0)
@@ -608,10 +610,10 @@ namespace SportsAgencyTycoon
                     
             }
             p.Tackles += tackles;
-            if (tackles > 0 && (p.Position == Position.LB || p.Position == Position.DE || p.Position == Position.DT))
-                DetermineTacklesForLoss(p, tackles);
-            else if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
+            DetermineTacklesForLoss(p, tackles);
+            if (p.Position == Position.CB || p.Position == Position.FS || p.Position == Position.SS)
                 DeterminePassesDefended(p);
+                
         }
 
         private void DetermineOLineYPC(List<FootballPlayer> list)

@@ -221,8 +221,8 @@ namespace SportsAgencyTycoon
         }
         public string DisplaySecondaryStats(FootballPlayer player)
         {
-            string stats = "Tackles: " + player.Tackles + Environment.NewLine + "INTs: " + player.DefensiveInterceptions
-                + Environment.NewLine + "TFLs :" + player.TacklesForLoss;
+            string stats = "Tackles: " + player.Tackles + Environment.NewLine + "PDs: " + player.PassesDefended 
+                + Environment.NewLine + "INTs: " + player.DefensiveInterceptions + Environment.NewLine + "TFLs: " + player.TacklesForLoss;
             return stats;
         }
         public string DisplayKickingStats(FootballPlayer player)
