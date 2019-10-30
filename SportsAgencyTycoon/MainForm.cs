@@ -980,32 +980,32 @@ namespace SportsAgencyTycoon
                     {
                         world.MLB.InSeason = true;
                         world.MLB.Initialized = true;
+                        ResetTeamRecords(world.MLB);
                     }   
                     else if (e.Sport == Sports.Basketball)
                     {
                         world.NBA.InSeason = true;
                         world.NBA.Initialized = true;
-                        foreach (Team t in world.NBA.TeamList)
-                        {
-                            t.Wins = 0;
-                            t.Losses = 0;
-                        }
-                        world.NBA.Playoffs = false;
+                        ResetTeamRecords(world.NBA);
                     }
                     else if (e.Sport == Sports.Football)
                     {
                         world.NFL.InSeason = true;
                         world.NFL.Initialized = true;
+                        world.NFL.WeekNumber = 0;
+                        ResetTeamRecords(world.NFL);
                     }
                     else if (e.Sport == Sports.Hockey)
                     {
                         world.NHL.InSeason = true;
                         world.NHL.Initialized = true;
+                        ResetTeamRecords(world.NHL);
                     }
                     else if (e.Sport == Sports.Soccer)
                     {
                         world.MLS.InSeason = true;
                         world.MLS.Initialized = true;
+                        ResetTeamRecords(world.MLS);
                     }
                     DetermineSeasons();
                 }
@@ -1020,7 +1020,20 @@ namespace SportsAgencyTycoon
                 }
             }
         }
-
+        private void ResetTeamRecords(League l)
+        {
+            foreach (Team t in l.TeamList)
+            {
+                t.Wins = 0;
+                t.ConferenceWins = 0;
+                t.DivisionWins = 0;
+                t.Losses = 0;
+                t.ConferenceLosses = 0;
+                t.DivisionLosses = 0;
+            }
+            //set league.Playoffs to false
+            l.Playoffs = false;
+        }
         private void btnHireAgent_Click(object sender, EventArgs e)
         {
             Agent hiredAgent = null;
