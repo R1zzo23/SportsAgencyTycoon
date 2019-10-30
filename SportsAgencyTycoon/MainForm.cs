@@ -994,6 +994,7 @@ namespace SportsAgencyTycoon
                         world.NFL.Initialized = true;
                         world.NFL.WeekNumber = 0;
                         ResetTeamRecords(world.NFL);
+                        world.Football.ResetPlayerStats();
                     }
                     else if (e.Sport == Sports.Hockey)
                     {
