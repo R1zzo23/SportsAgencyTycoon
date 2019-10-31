@@ -58,10 +58,10 @@ namespace SportsAgencyTycoon
             DetermineSeasons();
             NerfFreeAgentsToStart();
             world.Basketball = new Basketball(this, rnd, world, world.NBA);
-            //world.Baseball = new Baseball(world.MLB);
+            world.Baseball = new Baseball(this, rnd, world, world.MLB);
             world.Football = new Football(this, rnd, world, world.NFL);
-            //world.Hockey = new Hockey(world.NHL);
-            //world.Soccer = new Soccer(world.MLS);
+            world.Hockey = new Hockey(this, rnd, world, world.NHL);
+            world.Soccer = new Soccer(this, rnd, world, world.MLS);
         }
 
         public void NerfFreeAgentsToStart()
@@ -697,6 +697,11 @@ namespace SportsAgencyTycoon
                 world.Football.SimWeek();
             }
 
+            if (world.MLB.Initialized && world.MLB.InSeason)
+            {
+                world.Baseball.SimWeek();
+            }
+
             //reset if agent took a test this week
             foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
 
@@ -980,6 +985,7 @@ namespace SportsAgencyTycoon
                     {
                         world.MLB.InSeason = true;
                         world.MLB.Initialized = true;
+                        world.MLB.WeekNumber = 0;
                         ResetTeamRecords(world.MLB);
                     }   
                     else if (e.Sport == Sports.Basketball)

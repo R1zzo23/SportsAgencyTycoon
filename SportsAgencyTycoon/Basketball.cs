@@ -10,7 +10,7 @@ namespace SportsAgencyTycoon
     {
         public MainForm mainForm;
         public Random rnd;
-        public League NBA;
+        public League MLB;
         public World World;
         public int index;
         public int losingIndex;
@@ -29,7 +29,7 @@ namespace SportsAgencyTycoon
             mainForm = mf;
             rnd = r;
             World = w;
-            NBA = l;
+            MLB = l;
             index = 1;
             Conferences = new List<string>();
             Divisions = new List<string>();
@@ -53,7 +53,7 @@ namespace SportsAgencyTycoon
             if (World.MonthName == Months.October && World.WeekNumber == 4)
                 World.Basketball.InitializeStats();
 
-            if (!World.NBA.Playoffs)
+            if (!World.MLB.Playoffs)
             {
                 World.Basketball.SimulateGames();
                 World.Basketball.UpdateStats();
@@ -61,9 +61,9 @@ namespace SportsAgencyTycoon
                 //if it is the 1st week of May, games above will simulate and the playoffs will now be starting
                 if (World.MonthName == Months.May && World.WeekNumber == 1)
                 {
-                    World.NBA.Playoffs = true;
+                    World.MLB.Playoffs = true;
                     World.Basketball.DPOYCandidates.Clear();
-                    foreach (Team t in World.NBA.TeamList)
+                    foreach (Team t in World.MLB.TeamList)
                         foreach (BasketballPlayer p in t.Roster)
                         {
                             World.Basketball.MVPScores(p);
@@ -83,7 +83,7 @@ namespace SportsAgencyTycoon
                 }
 
             }
-            else if (World.NBA.Playoffs && (World.MonthName == Months.June && World.WeekNumber == 1))
+            else if (World.MLB.Playoffs && (World.MonthName == Months.June && World.WeekNumber == 1))
                 mainForm.newsLabel.Text = World.Basketball.SimulateChampionship() + Environment.NewLine + mainForm.newsLabel.Text;
             else
                 mainForm.newsLabel.Text = World.Basketball.SimulatePlayoffRound() + Environment.NewLine + mainForm.newsLabel.Text;
@@ -97,11 +97,11 @@ namespace SportsAgencyTycoon
                 //int[] indexArray = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
                 var indexList = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
 
-                for (int j = 0; j < NBA.TeamList.Count / 2; j++)
+                for (int j = 0; j < MLB.TeamList.Count / 2; j++)
                 {
                     int opponentIndex = rnd.Next(1, indexList.Count);
-                    Console.WriteLine("Team1 Index: " + NBA.TeamList[indexList[0]] + " - Team2 Index: " + NBA.TeamList[indexList[opponentIndex]]);
-                    SimulateGame(NBA.TeamList[indexList[0]], NBA.TeamList[indexList[opponentIndex]]);
+                    Console.WriteLine("Team1 Index: " + MLB.TeamList[indexList[0]] + " - Team2 Index: " + MLB.TeamList[indexList[opponentIndex]]);
+                    SimulateGame(MLB.TeamList[indexList[0]], MLB.TeamList[indexList[opponentIndex]]);
                     indexList.RemoveAt(opponentIndex);
                     indexList.RemoveAt(0);
                 }
@@ -120,14 +120,14 @@ namespace SportsAgencyTycoon
             results = SimulateSeries(EasternPlayoffs[0], WesternPlayoffs[0], 0, 1);
             if (losingIndex == 0)
             {
-                results = "The " + WesternPlayoffs[0].City + " " + WesternPlayoffs[0].Mascot + " are the " + World.Year + " NBA champions!" + Environment.NewLine + results;
-                WesternPlayoffs[0].Awards.Add(new Award(World.Year, "NBA Champions"));
+                results = "The " + WesternPlayoffs[0].City + " " + WesternPlayoffs[0].Mascot + " are the " + World.Year + " MLB champions!" + Environment.NewLine + results;
+                WesternPlayoffs[0].Awards.Add(new Award(World.Year, "MLB Champions"));
             }
                 
             else
             {
-                results = "The " + EasternPlayoffs[0].City + " " + EasternPlayoffs[0].Mascot + " are the " + World.Year + " NBA champions!" + Environment.NewLine + results;
-                EasternPlayoffs[0].Awards.Add(new Award(World.Year, "NBA Champions"));
+                results = "The " + EasternPlayoffs[0].City + " " + EasternPlayoffs[0].Mascot + " are the " + World.Year + " MLB champions!" + Environment.NewLine + results;
+                EasternPlayoffs[0].Awards.Add(new Award(World.Year, "MLB Champions"));
             }
 
             return results;
@@ -141,7 +141,7 @@ namespace SportsAgencyTycoon
             EasternPlayoffs.Clear();
             WesternPlayoffs.Clear();
 
-            foreach (Team t in World.NBA.TeamList)
+            foreach (Team t in World.MLB.TeamList)
             {
                 if (t.Conference == "Eastern") EasternConference.Add(t);
                 else WesternConference.Add(t);
@@ -310,7 +310,7 @@ namespace SportsAgencyTycoon
         #region Stat Creation and Updating
         public void InitializeStats()
         {
-            foreach (Team t in NBA.TeamList)
+            foreach (Team t in MLB.TeamList)
                 foreach (BasketballPlayer p in t.Roster)
                 {
                     InitializePoints(p);
@@ -402,7 +402,7 @@ namespace SportsAgencyTycoon
         }
         public void UpdateStats()
         {
-            foreach (Team t in NBA.TeamList)
+            foreach (Team t in MLB.TeamList)
                 foreach (BasketballPlayer p in t.Roster)
                 {
                     UpdatePoints(p);
@@ -470,13 +470,13 @@ namespace SportsAgencyTycoon
             string results = "";
 
             List<BasketballPlayer> mvpRanks = new List<BasketballPlayer>();
-            foreach (Team t in World.NBA.TeamList)
+            foreach (Team t in World.MLB.TeamList)
                 foreach (BasketballPlayer p in t.Roster)
                     mvpRanks.Add(p);
 
             mvpRanks = mvpRanks.OrderByDescending(o => o.MVPScore).ToList();
 
-            results = mvpRanks[0].Team.City + "'s " + mvpRanks[0].FullName + " has been named NBA MVP!" + Environment.NewLine +
+            results = mvpRanks[0].Team.City + "'s " + mvpRanks[0].FullName + " has been named MLB MVP!" + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
@@ -484,7 +484,7 @@ namespace SportsAgencyTycoon
             }
 
             //give the winner the award
-            mvpRanks[0].Awards.Add(new Award(World.Year, "NBA MVP"));
+            mvpRanks[0].Awards.Add(new Award(World.Year, "MLB MVP"));
                 
             return results;
         }
@@ -494,7 +494,7 @@ namespace SportsAgencyTycoon
 
             DPOYCandidates = DPOYCandidates.OrderByDescending(o => o.DPOYScore).ToList();
 
-            results = DPOYCandidates[0].Team.City + "'s " + DPOYCandidates[0].FullName + " has been named NBA Defensive Player of the Year!" + Environment.NewLine +
+            results = DPOYCandidates[0].Team.City + "'s " + DPOYCandidates[0].FullName + " has been named MLB Defensive Player of the Year!" + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
@@ -502,7 +502,7 @@ namespace SportsAgencyTycoon
             }
 
             //give the winner the award
-            DPOYCandidates[0].Awards.Add(new Award(World.Year, "NBA Defensive Player of the Year"));
+            DPOYCandidates[0].Awards.Add(new Award(World.Year, "MLB Defensive Player of the Year"));
 
             return results;
         }
