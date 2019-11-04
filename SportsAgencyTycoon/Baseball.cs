@@ -18,6 +18,12 @@ namespace SportsAgencyTycoon
         public List<string> Divisions;
         public List<Team> AmericanLeague = new List<Team>();
         public List<Team> NationalLeague = new List<Team>();
+        public List<Team> ALEast = new List<Team>();
+        public List<Team> ALCentral = new List<Team>();
+        public List<Team> ALWest = new List<Team>();
+        public List<Team> NLEast = new List<Team>();
+        public List<Team> NLCentral = new List<Team>();
+        public List<Team> NLWest = new List<Team>();
         public List<Team> ALPlayoffs = new List<Team>();
         public List<Team> NLPlayoffs = new List<Team>();
         public List<int> ALLoserIndex = new List<int>();
@@ -31,7 +37,25 @@ namespace SportsAgencyTycoon
             index = 1;
             Conferences = new List<string>();
             Divisions = new List<string>();
-            //FillLists();
+            FillLists();
+        }
+        public void FillLists()
+        {
+            foreach (Team t in MLB.TeamList)
+                if (t.Conference == "AL")
+                {
+                    AmericanLeague.Add(t);
+                    if (t.Division == "East") ALEast.Add(t);
+                    else if (t.Division == "Central") ALCentral.Add(t);
+                    else ALWest.Add(t);
+                }
+                else
+                {
+                    NationalLeague.Add(t);
+                    if (t.Division == "East") NLEast.Add(t);
+                    else if (t.Division == "Central") NLCentral.Add(t);
+                    else NLWest.Add(t);
+                }
         }
         public void SimWeek()
         {
@@ -58,7 +82,7 @@ namespace SportsAgencyTycoon
                 //mainForm.newsLabel.Text = DisplayMVPTop5() + Environment.NewLine + mainForm.newsLabel.Text;
                 //mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
 
-                DeterminePlayoffField();
+                mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
             }
             if (MLB.Playoffs)
             {
@@ -125,7 +149,81 @@ namespace SportsAgencyTycoon
         }
         private string DeterminePlayoffField()
         {
+            string playoffSeedings = "";
+            AmericanLeague.Clear();
+            NationalLeague.Clear();
+            ALEast.Clear();
+            ALCentral.Clear();
+            ALWest.Clear();
+            NLEast.Clear();
+            NLCentral.Clear();
+            NLWest.Clear();
+            ALPlayoffs.Clear();
+            NLPlayoffs.Clear();
 
+            foreach (Team t in World.MLB.TeamList)
+            {
+                if (t.Conference == "AL") AmericanLeague.Add(t);
+                else NationalLeague.Add(t);
+            }
+
+            AmericanLeague = AmericanLeague.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+            NationalLeague = NationalLeague.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+
+            int alEastIndex = AmericanLeague.FindIndex(t => t.Division == "East");
+            ALPlayoffs.Add(AmericanLeague[alEastIndex]);
+            AmericanLeague[alEastIndex].Awards.Add(new Award(World.Year, AmericanLeague[alEastIndex].Division + " Division Champs"));
+            AmericanLeague.RemoveAt(alEastIndex);
+
+            int alCentralIndex = AmericanLeague.FindIndex(t => t.Division == "Central");
+            ALPlayoffs.Add(AmericanLeague[alCentralIndex]);
+            AmericanLeague[alCentralIndex].Awards.Add(new Award(World.Year, AmericanLeague[alCentralIndex].Division + " Division Champs"));
+            AmericanLeague.RemoveAt(alCentralIndex);
+
+            int alWestIndex = AmericanLeague.FindIndex(t => t.Division == "West");
+            ALPlayoffs.Add(AmericanLeague[alWestIndex]);
+            AmericanLeague[alWestIndex].Awards.Add(new Award(World.Year, AmericanLeague[alWestIndex].Division + " Division Champs"));
+            AmericanLeague.RemoveAt(alWestIndex);
+
+            int nlEastIndex = NationalLeague.FindIndex(t => t.Division == "East");
+            NLPlayoffs.Add(NationalLeague[nlEastIndex]);
+            NationalLeague[nlEastIndex].Awards.Add(new Award(World.Year, NationalLeague[nlEastIndex].Division + " Division Champs"));
+            NationalLeague.RemoveAt(nlEastIndex);
+
+            int nlCentralIndex = NationalLeague.FindIndex(t => t.Division == "Central");
+            NLPlayoffs.Add(NationalLeague[nlCentralIndex]);
+            NationalLeague[nlCentralIndex].Awards.Add(new Award(World.Year, NationalLeague[nlCentralIndex].Division + " Division Champs"));
+            NationalLeague.RemoveAt(nlCentralIndex);
+
+            int nlWestIndex = NationalLeague.FindIndex(t => t.Division == "West");
+            NLPlayoffs.Add(NationalLeague[nlWestIndex]);
+            NationalLeague[nlWestIndex].Awards.Add(new Award(World.Year, NationalLeague[nlWestIndex].Division + " Division Champs"));
+            NationalLeague.RemoveAt(nlWestIndex);
+
+            ALPlayoffs = ALPlayoffs.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+            NLPlayoffs = NLPlayoffs.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+
+            //add both Wild Card teams for each league
+            for (int i = 0; i < 2; i++)
+            {
+                ALPlayoffs.Add(AmericanLeague[0]);
+                AmericanLeague.RemoveAt(0);
+                NLPlayoffs.Add(NationalLeague[0]);
+                NationalLeague.RemoveAt(0);
+            }
+
+            playoffSeedings += "American League Seeds:" + Environment.NewLine;
+            for (int i = 0; i < ALPlayoffs.Count; i++)
+            {
+                playoffSeedings += i+1 + ") " + ALPlayoffs[i].City + " " + ALPlayoffs[i].Mascot + Environment.NewLine;
+            }
+            playoffSeedings += "National League Seeds:" + Environment.NewLine;
+            for (int i = 0; i < NLPlayoffs.Count; i++)
+            {
+                playoffSeedings += i+1 + ") " + NLPlayoffs[i].City + " " + NLPlayoffs[i].Mascot + Environment.NewLine;
+            }
+
+            return playoffSeedings;
         }
         private void SimulateWildCardRound()
         {

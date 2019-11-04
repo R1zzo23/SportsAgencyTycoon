@@ -755,36 +755,36 @@ namespace SportsAgencyTycoon
         }
         public void CreateMLBTeams(Random rnd)
         {
-            MLB.TeamList.Add(new Team("Arizona", "Diamondbacks", "ARI", 29, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Atlanta", "Braves", "ATL", 40, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Baltimore", "Orioles", "BAL", 45, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Boston", "Red Sox", "BOS", 72, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Chicago", "Cubs", "CHC", 71, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Chicago", "White Sox", "CHW", 61, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Cincinnati", "Reds", "CIN", 30, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Cleveland", "Indians", "CLE", 31, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Colorado", "Rockies", "COL", 29, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Detroit", "Tigers", "DET", 38, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Houston", "Astros", "HOU", 50, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Kansas City", "Royals", "KC", 48, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Los Angeles", "Angels", "LAA", 66, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Los Angeles", "Dodgers", "LAD", 69, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Miami", "Marlins", "MIA", 65, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Milwaukee", "Brewers", "MIL", 25, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Minnesota", "Twins", "MIN", 27, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("New York", "Mets", "NYM", 80, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("New York", "Yankees", "NYY", 85, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Oakland", "Athletics", "OAK", 33, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Philadelphia", "Phillies", "PHI", 58, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Pittsburgh", "Pirates", "PIT", 49, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("San Diego", "Padres", "SD", 31, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("San Francisco", "Giants", "SF", 58, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Seattle", "Mariners", "SEA", 47, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("St. Louis", "Cardinals", "STL", 57, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Tampa Bay", "Rays", "TB", 43, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Texas", "Rangers", "TEX", 55, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Toronto", "Blue Jays", "TOR", 52, rnd.Next(25, 76)));
-            MLB.TeamList.Add(new Team("Washington", "Nationals", "WAS", 47, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Arizona", "Diamondbacks", "NL", "West", "ARI", 29, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Atlanta", "Braves", "NL", "East", "ATL", 40, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Baltimore", "Orioles", "AL", "East", "BAL", 45, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Boston", "Red Sox", "AL", "East", "BOS", 72, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Chicago", "Cubs", "NL", "Central", "CHC", 71, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Chicago", "White Sox", "AL", "Central", "CHW", 61, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Cincinnati", "Reds", "NL", "Central", "CIN", 30, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Cleveland", "Indians", "AL", "Central", "CLE", 31, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Colorado", "Rockies", "NL", "West", "COL", 29, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Detroit", "Tigers", "AL", "Central", "DET", 38, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Houston", "Astros", "AL", "West", "HOU", 50, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Kansas City", "Royals", "AL", "Central", "KC", 48, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Los Angeles", "Angels", "AL", "West", "LAA", 66, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Los Angeles", "Dodgers", "NL", "West", "LAD", 69, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Miami", "Marlins", "NL", "East", "MIA", 65, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Milwaukee", "Brewers", "NL", "Central", "MIL", 25, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Minnesota", "Twins", "AL", "Central", "MIN", 27, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("New York", "Mets", "NL", "East", "NYM", 80, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("New York", "Yankees", "AL", "East", "NYY", 85, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Oakland", "Athletics", "AL", "West", "OAK", 33, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Philadelphia", "Phillies", "NL", "East", "PHI", 58, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Pittsburgh", "Pirates", "NL", "Central", "PIT", 49, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("San Diego", "Padres", "NL", "West", "SD", 31, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("San Francisco", "Giants", "NL", "West", "SF", 58, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Seattle", "Mariners", "AL", "West", "SEA", 47, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("St. Louis", "Cardinals", "NL", "Central", "STL", 57, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Tampa Bay", "Rays", "AL", "East", "TB", 43, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Texas", "Rangers", "AL", "West", "TEX", 55, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Toronto", "Blue Jays", "AL", "East", "TOR", 52, rnd.Next(25, 76)));
+            MLB.TeamList.Add(new Team("Washington", "Nationals", "NL", "East", "WAS", 47, rnd.Next(25, 76)));
         }
         public void CreateNHLTeams(Random rnd)
         {
