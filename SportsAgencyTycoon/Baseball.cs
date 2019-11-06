@@ -91,6 +91,7 @@ namespace SportsAgencyTycoon
                 if (MLB.WeekNumber == 29) mainForm.newsLabel.Text = SimulateWorldSeries() + Environment.NewLine + mainForm.newsLabel.Text;
             }
         }
+        #region Statistics
         private void InitializeStats()
         {
 
@@ -99,6 +100,8 @@ namespace SportsAgencyTycoon
         {
 
         }
+        #endregion
+        #region Simulation
         private void SimulateGames()
         {
             int gamesThisWeek = HowManyGamesThisWeek();
@@ -331,5 +334,9 @@ namespace SportsAgencyTycoon
                 return 2;
             }
         }
+        #endregion
+        #region Awards
+
+        #endregion
     }
 }
