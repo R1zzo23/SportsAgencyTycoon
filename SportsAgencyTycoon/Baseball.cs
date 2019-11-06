@@ -86,9 +86,9 @@ namespace SportsAgencyTycoon
             }
             if (MLB.Playoffs)
             {
-                if (MLB.WeekNumber == 26) SimulateWildCardRound();
-                if (MLB.WeekNumber == 27 || MLB.WeekNumber == 28) SimulateRoundsTwoAndThree();
-                if (MLB.WeekNumber == 29) SimulateWorldSeries();
+                if (MLB.WeekNumber == 26) mainForm.newsLabel.Text = SimulateWildCardRound() + Environment.NewLine + mainForm.newsLabel.Text;
+                if (MLB.WeekNumber == 27 || MLB.WeekNumber == 28) mainForm.newsLabel.Text = SimulateRoundsTwoAndThree() + Environment.NewLine + mainForm.newsLabel.Text;
+                if (MLB.WeekNumber == 29) mainForm.newsLabel.Text = SimulateWorldSeries() + Environment.NewLine + mainForm.newsLabel.Text;
             }
         }
         private void InitializeStats()
@@ -225,17 +225,111 @@ namespace SportsAgencyTycoon
 
             return playoffSeedings;
         }
-        private void SimulateWildCardRound()
+        private string SimulateWildCardRound()
         {
+            string results = "";
 
+            results += SimulateSeries(ALPlayoffs[3], ALPlayoffs[4], 3, 4) + Environment.NewLine;
+            ALLoserIndex.Add(losingIndex);
+            results += SimulateSeries(NLPlayoffs[3], NLPlayoffs[4], 3, 4);
+            NLLoserIndex.Add(losingIndex);
+
+            RemoveLosingTeamsFromPlayoffs();
+
+            return results;
         }
-        private void SimulateRoundsTwoAndThree()
+        public void RemoveLosingTeamsFromPlayoffs()
         {
+            ALLoserIndex = ALLoserIndex.OrderByDescending(i => i).ToList();
+            NLLoserIndex = NLLoserIndex.OrderByDescending(i => i).ToList();
 
+            foreach (int i in ALLoserIndex) ALPlayoffs.RemoveAt(i);
+            foreach (int i in NLLoserIndex) NLPlayoffs.RemoveAt(i);
         }
-        private void SimulateWorldSeries()
+        private string SimulateRoundsTwoAndThree()
         {
+            string results = "";
+            ALLoserIndex.Clear();
+            NLLoserIndex.Clear();
 
+            for (int i = 0; i < ALPlayoffs.Count / 2; i++)
+            {
+                results += SimulateSeries(ALPlayoffs[i], ALPlayoffs[ALPlayoffs.Count - 1 - i], i, ALPlayoffs.Count - 1 - i) + Environment.NewLine;
+                ALLoserIndex.Add(losingIndex);
+                results += SimulateSeries(NLPlayoffs[i], NLPlayoffs[NLPlayoffs.Count - 1 - i], i, NLPlayoffs.Count - 1 - i) + Environment.NewLine;
+                NLLoserIndex.Add(losingIndex);
+            }
+
+            RemoveLosingTeamsFromPlayoffs();
+
+            return results;
+        }
+        private string SimulateWorldSeries()
+        {
+            string results = "";
+
+            ALPlayoffs[0].Awards.Add(new Award(World.Year, "American League Champs"));
+            NLPlayoffs[0].Awards.Add(new Award(World.Year, "National League Champs"));
+
+            results = SimulateSeries(ALPlayoffs[0], NLPlayoffs[0], 0, 1);
+            if (losingIndex == 0)
+            {
+                results = "The " + NLPlayoffs[0].City + " " + NLPlayoffs[0].Mascot + " are the " + World.Year + " MLB champions!" + Environment.NewLine + results;
+                NLPlayoffs[0].Awards.Add(new Award(World.Year, "World Series Champions"));
+            }
+
+            else
+            {
+                results = "The " + ALPlayoffs[0].City + " " + ALPlayoffs[0].Mascot + " are the " + World.Year + " MLB champions!" + Environment.NewLine + results;
+                ALPlayoffs[0].Awards.Add(new Award(World.Year, "World Series Champions"));
+            }
+
+            return results;
+        }
+        public string SimulateSeries(Team team1, Team team2, int teamIndex1, int teamIndex2)
+        {
+            string seriesResult = "";
+            int winsTeam1 = 0;
+            int winsTeam2 = 0;
+
+            int winsNeeded = 0;
+            if (MLB.WeekNumber == 26) winsNeeded = 1;
+            else if (MLB.WeekNumber == 27) winsNeeded = 3;
+            else if (MLB.WeekNumber == 28 || MLB.WeekNumber == 29) winsNeeded = 4;
+
+            while (winsTeam1 < winsNeeded && winsTeam2 < winsNeeded)
+            {
+                int result;
+                result = SimulatePlayoffGame(team1, team2);
+                if (result == 1) winsTeam1++;
+                else winsTeam2++;
+            }
+
+            if (winsTeam1 == winsNeeded)
+            {
+                seriesResult = team1.Abbreviation + " defeats " + team2.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+                losingIndex = teamIndex2;
+            }
+            else
+            {
+                seriesResult = team2.Abbreviation + " defeats " + team1.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+                losingIndex = teamIndex1;
+            }
+
+            return seriesResult;
+        }
+        public int SimulatePlayoffGame(Team team1, Team team2)
+        {
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
         }
     }
 }
