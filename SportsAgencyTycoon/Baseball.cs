@@ -94,11 +94,131 @@ namespace SportsAgencyTycoon
         #region Statistics
         private void InitializeStats()
         {
-
+            foreach (Team t in MLB.TeamList)
+                foreach (BaseballPlayer p in t.Roster)
+                    if (p.Position != Position.SP || p.Position != Position.RP)
+                        InitializeAverage(p);
+                    else InitializeERA(p);
+        }
+        private void InitializeAverage(BaseballPlayer p)
+        {
+            if (p.CurrentSkill >= 70) p.Average = Convert.ToDouble(rnd.Next(325, 376)) / 1000;
+            else if (p.CurrentSkill >= 50) p.Average = Convert.ToDouble(rnd.Next(290, 325)) / 1000;
+            else if (p.CurrentSkill >= 40) p.Average = Convert.ToDouble(rnd.Next(265, 290)) / 1000;
+            else if (p.CurrentSkill >= 30) p.Average = Convert.ToDouble(rnd.Next(240, 265)) / 1000;
+            else if (p.CurrentSkill >= 20) p.Average = Convert.ToDouble(rnd.Next(195, 240)) / 1000;
+            else p.Average = Convert.ToDouble(rnd.Next(180, 195)) / 1000;
+        }
+        private void InitializeERA(BaseballPlayer p)
+        {
+            if (p.CurrentSkill >= 70) p.ERA = Convert.ToDouble(rnd.Next(100, 275)) / 100;
+            else if (p.CurrentSkill >= 50) p.ERA = Convert.ToDouble(rnd.Next(275, 350)) / 100;
+            else if (p.CurrentSkill >= 40) p.ERA = Convert.ToDouble(rnd.Next(325, 400)) / 100;
+            else if (p.CurrentSkill >= 30) p.ERA = Convert.ToDouble(rnd.Next(375, 450)) / 100;
+            else if (p.CurrentSkill >= 20) p.ERA = Convert.ToDouble(rnd.Next(450, 700)) / 100;
+            else p.ERA = Convert.ToDouble(rnd.Next(550, 800)) / 100;
         }
         private void UpdateStats()
         {
+            foreach (Team t in MLB.TeamList)
+                foreach (BaseballPlayer p in t.Roster)
+                    if (p.Position != Position.SP || p.Position != Position.RP)
+                    {
+                        UpdateAverage(p);
+                        DetermineRBIs(p);
+                    }
+                    else
+                    {
+                        UpdateERA(p);
+                        DetermineWinsAndLosses(p);
+                        if (p.Position == Position.RP && p.DepthChart == 1)
+                            DetermineSaves(p);
+                    }
+        }
+        private void UpdateAverage(BaseballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-50, 51)) / 1000;
+            p.Average *= (1 + change);
+        }
+        private void UpdateERA(BaseballPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-50, 51)) / 1000;
+            p.ERA *= (1 + change);
+        }
+        private void DetermineRBIs(BaseballPlayer p)
+        {
+            int RBI = 0;
+            int rolls = 0;
 
+            if (p.CurrentSkill >= 70) rolls = 5;
+            else if (p.CurrentSkill >= 50) rolls = 4;
+            else if (p.CurrentSkill >= 40) rolls = 3;
+            else if (p.CurrentSkill >= 30) rolls = 2;
+            else if (p.CurrentSkill >= 20) rolls = 1;
+
+            for (int i = 0; i < rolls; i++)
+            {
+                int numberOnDice = DiceRoll();
+                if (numberOnDice > 8) RBI++;
+            }
+
+            p.RBI += RBI;
+            if (RBI > 0) DetermineHomeRuns(p, RBI);
+        }
+        private void DetermineHomeRuns(BaseballPlayer p, int RBI)
+        {
+            if (RBI % 2 == 1 && RBI >= 3) RBI -= 1;
+            for (int i = 0; i < RBI / 2, i++)
+            {
+                int numberOnDice = DiceRoll();
+                int playerNumber = 0;
+
+                if (p.CurrentSkill >= 70) playerNumber = 8;
+                else if (p.CurrentSkill >= 50) playerNumber = 9;
+                else if (p.CurrentSkill >= 40) playerNumber = 10;
+                else if (p.CurrentSkill >= 30) playerNumber = 11;
+                else if (p.CurrentSkill >= 20) playerNumber = 12;
+
+                if (numberOnDice >= playerNumber) p.HomeRuns++;
+            }
+        }
+        private void DetermineWinsAndLosses(BaseballPlayer p)
+        {
+            int rolls = 0;
+            bool didPitcherWin = false;
+            if (p.CurrentSkill >= 70) rolls = 5;
+            else if (p.CurrentSkill >= 50) rolls = 4;
+            else if (p.CurrentSkill >= 40) rolls = 3;
+            else if (p.CurrentSkill >= 30) rolls = 2;
+            else if (p.CurrentSkill >= 20) rolls = 1;
+
+            for (int i = 0; i < rolls; i++)
+            {
+                int numberOnDice = DiceRoll();
+                if (numberOnDice > 8)
+                {
+                    didPitcherWin = true;
+                    break;
+                }
+            }
+
+            if (didPitcherWin) p.Wins++;
+            else p.Losses++;
+        }
+        private void DetermineSaves(BaseballPlayer p)
+        {
+            int chances = 0;
+
+            if (p.Team.TitleConteder > 70) chances = 5;
+            else if (p.Team.TitleConteder > 60) chances = 4;
+            else if (p.Team.TitleConteder > 50) chances = 3;
+            else chances = 2;
+
+            for (int i = 0; i < chances; i++)
+            {
+                int numberOnDice = DiceRoll();
+                if (numberOnDice > 7) p.Saves++;
+            }
         }
         #endregion
         #region Simulation
@@ -338,5 +458,11 @@ namespace SportsAgencyTycoon
         #region Awards
 
         #endregion
+        public int DiceRoll()
+        {
+            int firstDie = rnd.Next(1, 7);
+            int secondDie = rnd.Next(1, 7);
+            return firstDie + secondDie;
+        }
     }
 }
