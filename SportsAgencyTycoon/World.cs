@@ -788,37 +788,37 @@ namespace SportsAgencyTycoon
         }
         public void CreateNHLTeams(Random rnd)
         {
-            NHL.TeamList.Add(new Team("Anaheim", "Ducks", "ANA", 60, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Arizona", "Coyotes", "ARI", 23, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Boston", "Bruins", "BOS", 85, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Buffalo", "Sabres", "BUF", 43, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Calgary", "Flames", "CAL", 44, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Carolina", "Hurricanes", "CAR", 38, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Chicago", "Blackhawks", "CHI", 66, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Colorado", "Avalanche", "COL", 44, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Columbus", "Blue Jackets", "COL", 45, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Dallas", "Stars", "DAL", 33, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Detroit", "Red Wings", "DET", 80, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Edmonton", "Oilers", "EDM", 66, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Florida", "Panthers", "FLA", 29, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Los Angeles", "Kings", "LAK", 71, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Minnesota", "Wild", "MIN", 61, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Montreal", "Canadiens", "MON", 85, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Nashville", "Predators", "NSH", 60, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("New Jersey", "Devils", "NJD", 73, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("New York", "Islanders", "NYI", 75, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("New York", "Rangers", "NYR", 79, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Ottawa", "Senators", "OTT", 67, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Philadelphia", "Flyers", "PHI", 58, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Pittsburgh", "Penguins", "PIT", 59, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("San Jose", "Sharks", "SJS", 61, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("St. Louis", "Blues", "STL", 57, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Tampa Bay", "Lightning", "TB", 59, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Toronto", "Maples Leafs", "TOR", 67, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Vancouver", "Canucks", "VAN", 65, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Vegas", "Golden Knights", "VEG", 60, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Washington", "Capitals", "WAS", 64, rnd.Next(25, 76)));
-            NHL.TeamList.Add(new Team("Winnipeg", "Jets", "WIN", 46, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Anaheim", "Ducks", "Western", "Pacific", "ANA", 60, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Arizona", "Coyotes", "Western", "Pacific", "ARI", 23, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Boston", "Bruins", "Eastern", "Atlantic", "BOS", 85, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Buffalo", "Sabres", "Eastern", "Atlantic", "BUF", 43, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Calgary", "Flames", "Western", "Pacific", "CAL", 44, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Carolina", "Hurricanes", "Eastern", "Metropolitan", "CAR", 38, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Chicago", "Blackhawks", "Western", "Central", "CHI", 66, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Colorado", "Avalanche", "Western", "Central", "COL", 44, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Columbus", "Blue Jackets", "Eastern", "Metropolitan", "CLM", 45, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Dallas", "Stars", "Western", "Central", "DAL", 33, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Detroit", "Red Wings", "Eastern", "Atlantic", "DET", 80, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Edmonton", "Oilers", "Western", "Pacific", "EDM", 66, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Florida", "Panthers", "Eastern", "Atlantic", "FLA", 29, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Los Angeles", "Kings", "Western", "Pacific", "LAK", 71, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Minnesota", "Wild", "Western", "Central", "MIN", 61, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Montreal", "Canadiens", "Eastern", "Atlantic", "MON", 85, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Nashville", "Predators", "Western", "Central", "NSH", 60, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("New Jersey", "Devils", "Eastern", "Metropolitan", "NJD", 73, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("New York", "Islanders", "Eastern", "Metropolitan", "NYI", 75, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("New York", "Rangers", "Eastern", "Metropolitan", "NYR", 79, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Ottawa", "Senators", "Eastern", "Atlantic", "OTT", 67, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Philadelphia", "Flyers", "Eastern", "Metropolitan", "PHI", 58, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Pittsburgh", "Penguins", "Eastern", "Metropolitan", "PIT", 59, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("San Jose", "Sharks", "Western", "Pacific", "SJS", 61, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("St. Louis", "Blues", "Western", "Central", "STL", 57, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Tampa Bay", "Lightning", "Eastern", "Atlantic", "TB", 59, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Toronto", "Maples Leafs", "Eastern", "Atlantic", "TOR", 67, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Vancouver", "Canucks", "Western", "Pacific", "VAN", 65, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Vegas", "Golden Knights", "Western", "Pacific", "VEG", 60, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Washington", "Capitals", "Eastern", "Metropolitan", "WAS", 64, rnd.Next(25, 76)));
+            NHL.TeamList.Add(new Team("Winnipeg", "Jets", "Western", "Central", "WIN", 46, rnd.Next(25, 76)));
         }
         public void CreateNFLTeams(Random rnd)
         {
