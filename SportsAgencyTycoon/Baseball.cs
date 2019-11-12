@@ -484,7 +484,10 @@ namespace SportsAgencyTycoon
         }
         private void CalculateCyYoungScore(BaseballPlayer p)
         {
-            p.CyYoungScore = ((5.00 - p.ERA) * 100) + (p.Wins * 10) + (p.Saves * 4) + p.Team.Wins + p.Popularity;
+            int winMultiplier = 1;
+            if (p.Position == Position.SP) winMultiplier = 10;
+            else winMultiplier = 3;
+            p.CyYoungScore = ((5.00 - p.ERA) * 100) + (p.Wins * winMultiplier) + (p.Saves * 3) + p.Team.Wins + p.Popularity;
         }
         private string DisplayMVPTop5()
         {
@@ -501,18 +504,18 @@ namespace SportsAgencyTycoon
             alMVPRanks = alMVPRanks.OrderByDescending(o => o.MVPScore).ToList();
             nlMVPRanks = nlMVPRanks.OrderByDescending(o => o.MVPScore).ToList();
 
-            results = alMVPRanks[0].Team.City + "'s " + alMVPRanks[0].FullName + " has been named AL MVP!" + Environment.NewLine +
+            results = alMVPRanks[0].MVPScore + " - " + alMVPRanks[0].Team.City + "'s " + alMVPRanks[0].FullName + " has been named AL MVP!" + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
-                results += Environment.NewLine + i + ") [" + alMVPRanks[i - 1].Team.Abbreviation + "] " + alMVPRanks[i - 1].FullName;
+                results += Environment.NewLine + i + ") [" + alMVPRanks[i - 1].Team.Abbreviation + "] " + alMVPRanks[i - 1].FullName + " - " + alMVPRanks[i].MVPScore;
             }
 
-            results += Environment.NewLine + nlMVPRanks[0].Team.City + "'s " + nlMVPRanks[0].FullName + " has been named NL MVP!" + Environment.NewLine +
+            results += Environment.NewLine + nlMVPRanks[0].MVPScore + " - " + nlMVPRanks[0].Team.City + "'s " + nlMVPRanks[0].FullName + " has been named NL MVP!" + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
-                results += Environment.NewLine + i + ") [" + nlMVPRanks[i - 1].Team.Abbreviation + "] " + nlMVPRanks[i - 1].FullName;
+                results += Environment.NewLine + i + ") [" + nlMVPRanks[i - 1].Team.Abbreviation + "] " + nlMVPRanks[i - 1].FullName + " - " + nlMVPRanks[i].MVPScore;
             }
 
             //give the winner the award
@@ -536,18 +539,18 @@ namespace SportsAgencyTycoon
             alCYRanks = alCYRanks.OrderByDescending(o => o.CyYoungScore).ToList();
             nlCYRanks = nlCYRanks.OrderByDescending(o => o.CyYoungScore).ToList();
 
-            results = alCYRanks[0].Team.City + "'s " + alCYRanks[0].FullName + " has been named AL Cy Young Award winner!" + Environment.NewLine +
+            results = alCYRanks[0].CyYoungScore.ToString("000.00") + " - " + alCYRanks[0].Team.City + "'s " + alCYRanks[0].FullName + " has been named AL Cy Young Award winner!" + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
-                results += Environment.NewLine + i + ") [" + alCYRanks[i - 1].Team.Abbreviation + "] " + alCYRanks[i - 1].FullName;
+                results += Environment.NewLine + i + ") [" + alCYRanks[i - 1].Team.Abbreviation + "] " + alCYRanks[i - 1].FullName + " - " + alCYRanks[i].CyYoungScore.ToString("000.00");
             }
 
-            results += Environment.NewLine + nlCYRanks[0].Team.City + "'s " + nlCYRanks[0].FullName + " has been named NL MVP!" + Environment.NewLine +
+            results += Environment.NewLine + nlCYRanks[0].CyYoungScore.ToString("000.00") + " - " + nlCYRanks[0].Team.City + "'s " + nlCYRanks[0].FullName + " has been named NL Cy Young Award winner!" + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
-                results += Environment.NewLine + i + ") [" + nlCYRanks[i - 1].Team.Abbreviation + "] " + nlCYRanks[i - 1].FullName;
+                results += Environment.NewLine + i + ") [" + nlCYRanks[i - 1].Team.Abbreviation + "] " + nlCYRanks[i - 1].FullName + " - " + nlCYRanks[i].CyYoungScore.ToString("000.00");
             }
 
             //give the winner the award
