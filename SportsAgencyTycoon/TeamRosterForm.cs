@@ -126,7 +126,14 @@ namespace SportsAgencyTycoon
                     footballRoster.Add(fp);
                 DisplayFootballStats(footballRoster[cbTeamRoster.SelectedIndex]);
             }
-                
+            else if (selectedLeague.Sport == Sports.Baseball)
+            {
+                List<BaseballPlayer> baseballRoster = new List<BaseballPlayer>();
+                foreach (BaseballPlayer p in selectedTeam.Roster)
+                    baseballRoster.Add(p);
+                DisplayBaseballStats(baseballRoster[cbTeamRoster.SelectedIndex]);
+            }
+
 
             if (selectedPlayer.Sport == Sports.Baseball)
             {
@@ -182,7 +189,7 @@ namespace SportsAgencyTycoon
             if (player.Position == Position.RB || player.Position == Position.FB) lblStats.Text = DisplayRushingStats(player);
             if (player.Position == Position.WR || player.Position == Position.TE) lblStats.Text = DisplayReceivingStats(player);
             if (player.Position == Position.OT || player.Position == Position.OG || player.Position == Position.C) lblStats.Text = DisplayOLStats(player);
-            if (player.Position == Position.LB || player.Position == Position.DE || player.Position == Position.DT) lblStats.Text = DisplayerFrontSevenStats(player);
+            if (player.Position == Position.LB || player.Position == Position.DE || player.Position == Position.DT) lblStats.Text = DisplayFrontSevenStats(player);
             if (player.Position == Position.CB || player.Position == Position.SS || player.Position == Position.FS) lblStats.Text = DisplaySecondaryStats(player);
             if (player.Position == Position.K) lblStats.Text = DisplayKickingStats(player);
             if (player.Position == Position.P) lblStats.Text = DisplayPuntingStats(player);
@@ -213,7 +220,7 @@ namespace SportsAgencyTycoon
                 Environment.NewLine + "Rushing YPC: " + player.YardsPerCarry.ToString("0.##") + Environment.NewLine + "Rushing TDS: " + player.RushingTDs;
             return stats;
         }
-        public string DisplayerFrontSevenStats(FootballPlayer player)
+        public string DisplayFrontSevenStats(FootballPlayer player)
         {
             string stats = "Tackles: " + player.Tackles + Environment.NewLine + "TFLs: " + player.TacklesForLoss
                 + Environment.NewLine + "Sacks: " + player.Sacks;
@@ -234,6 +241,21 @@ namespace SportsAgencyTycoon
         public string DisplayPuntingStats(FootballPlayer player)
         {
             string stats = "Punts: " + player.Punts + Environment.NewLine + "Net Average: " + player.NetPuntAverage.ToString("0.##");
+            return stats;
+        }
+        public void DisplayBaseballStats(BaseballPlayer player)
+        {
+            if (player.Position == Position.SP || player.Position == Position.RP) lblStats.Text = DisplayPitchingStats(player);
+            else lblStats.Text = DisplayHittingStats(player);
+        }
+        public string DisplayHittingStats(BaseballPlayer player)
+        {
+            string stats = "AVG: " + player.Average.ToString(".###") + Environment.NewLine + "HRS: " + player.HomeRuns + Environment.NewLine + "RBI: " + player.RBI;
+            return stats;
+        }
+        public string DisplayPitchingStats(BaseballPlayer player)
+        {
+            string stats = "ERA: " + player.ERA.ToString("0.##") + Environment.NewLine + "WINS: " + player.Wins + Environment.NewLine + "LOSSES: " + player.Losses + Environment.NewLine + "SAVES: " + player.Saves;
             return stats;
         }
         public string DisplayFootballTeamStats(Team t)

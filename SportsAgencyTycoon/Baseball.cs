@@ -96,9 +96,12 @@ namespace SportsAgencyTycoon
         {
             foreach (Team t in MLB.TeamList)
                 foreach (BaseballPlayer p in t.Roster)
-                    if (p.Position != Position.SP || p.Position != Position.RP)
+                {
+                    if (p.Position == Position.INF || p.Position == Position.OF || p.Position == Position.C)
                         InitializeAverage(p);
-                    else InitializeERA(p);
+                    else if (p.Position == Position.SP || p.Position == Position.RP)
+                        InitializeERA(p);
+                }
         }
         private void InitializeAverage(BaseballPlayer p)
         {
@@ -122,12 +125,12 @@ namespace SportsAgencyTycoon
         {
             foreach (Team t in MLB.TeamList)
                 foreach (BaseballPlayer p in t.Roster)
-                    if (p.Position != Position.SP || p.Position != Position.RP)
+                    if (p.Position == Position.INF || p.Position == Position.OF || p.Position == Position.C)
                     {
                         UpdateAverage(p);
                         DetermineRBIs(p);
                     }
-                    else
+                    else if (p.Position == Position.SP || p.Position == Position.RP)
                     {
                         UpdateERA(p);
                         DetermineWinsAndLosses(p);
@@ -168,7 +171,7 @@ namespace SportsAgencyTycoon
         private void DetermineHomeRuns(BaseballPlayer p, int RBI)
         {
             if (RBI % 2 == 1 && RBI >= 3) RBI -= 1;
-            for (int i = 0; i < RBI / 2, i++)
+            for (int i = 0; i < RBI / 2; i++)
             {
                 int numberOnDice = DiceRoll();
                 int playerNumber = 0;
@@ -198,8 +201,8 @@ namespace SportsAgencyTycoon
                 if (numberOnDice > 8)
                 {
                     didPitcherWin = true;
-                    break;
                 }
+                if (didPitcherWin) break;
             }
 
             if (didPitcherWin) p.Wins++;
