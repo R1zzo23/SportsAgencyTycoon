@@ -74,13 +74,14 @@ namespace SportsAgencyTycoon
                 {
                     foreach (BaseballPlayer p in t.Roster)
                     {
-                        //hand out award scores
+                        if (p.Position == Position.INF || p.Position == Position.OF || p.Position == Position.C)
+                            CalculateMVPScore(p);
+                        else if (p.Position == Position.SP || p.Position == Position.RP)
+                            CalculateCyYoungScore(p);
                     }
                 }
-                //mainForm.newsLabel.Text = DisplayDPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
-                //mainForm.newsLabel.Text = DisplayOPOYTop5() + Environment.NewLine + mainForm.newsLabel.Text;
-                //mainForm.newsLabel.Text = DisplayMVPTop5() + Environment.NewLine + mainForm.newsLabel.Text;
-                //mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayMVPTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayCyYoungTop5() + Environment.NewLine + mainForm.newsLabel.Text;
 
                 mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
             }
@@ -133,7 +134,9 @@ namespace SportsAgencyTycoon
                     else if (p.Position == Position.SP || p.Position == Position.RP)
                     {
                         UpdateERA(p);
-                        DetermineWinsAndLosses(p);
+                        if (p.Position == Position.SP)
+                            DetermineStarterWinsAndLosses(p);
+                        else DetermineReliefWinsAndLosses(p);
                         if (p.Position == Position.RP && p.DepthChart == 1)
                             DetermineSaves(p);
                     }
@@ -162,7 +165,7 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < rolls; i++)
             {
                 int numberOnDice = DiceRoll();
-                if (numberOnDice > 8) RBI++;
+                if (numberOnDice >= 5) RBI++;
             }
 
             p.RBI += RBI;
@@ -170,14 +173,18 @@ namespace SportsAgencyTycoon
         }
         private void DetermineHomeRuns(BaseballPlayer p, int RBI)
         {
-            if (RBI % 2 == 1 && RBI >= 3) RBI -= 1;
-            for (int i = 0; i < RBI / 2; i++)
+            int hrRolls = 0;
+            if (RBI == 1) hrRolls = 1;
+            else if (RBI <= 3) hrRolls = 2;
+            else if (RBI <= 4) hrRolls = 3;
+            else hrRolls = 4;
+            for (int i = 0; i < hrRolls; i++)
             {
                 int numberOnDice = DiceRoll();
                 int playerNumber = 0;
 
-                if (p.CurrentSkill >= 70) playerNumber = 8;
-                else if (p.CurrentSkill >= 50) playerNumber = 9;
+                if (p.CurrentSkill >= 70) playerNumber = 7;
+                else if (p.CurrentSkill >= 50) playerNumber = 8;
                 else if (p.CurrentSkill >= 40) playerNumber = 10;
                 else if (p.CurrentSkill >= 30) playerNumber = 11;
                 else if (p.CurrentSkill >= 20) playerNumber = 12;
@@ -185,7 +192,7 @@ namespace SportsAgencyTycoon
                 if (numberOnDice >= playerNumber) p.HomeRuns++;
             }
         }
-        private void DetermineWinsAndLosses(BaseballPlayer p)
+        private void DetermineStarterWinsAndLosses(BaseballPlayer p)
         {
             int rolls = 0;
             bool didPitcherWin = false;
@@ -207,6 +214,18 @@ namespace SportsAgencyTycoon
 
             if (didPitcherWin) p.Wins++;
             else p.Losses++;
+        }
+        private void DetermineReliefWinsAndLosses(BaseballPlayer p)
+        {
+            bool decisionThisWeek = false;
+            int diceRoll = DiceRoll();
+            if (diceRoll % 2 == 0) decisionThisWeek = true;
+            if (decisionThisWeek)
+            {
+                int random = rnd.Next(1, 101);
+                if (random <= (p.CurrentSkill + p.Team.TitleConteder) / 2) p.Wins++;
+                else p.Losses++;
+            }
         }
         private void DetermineSaves(BaseballPlayer p)
         {
@@ -459,7 +478,84 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Awards
+        private void CalculateMVPScore(BaseballPlayer p)
+        {
+            p.MVPScore = (p.Average * 100) + p.HomeRuns + p.RBI + p.Team.Wins + p.Popularity;
+        }
+        private void CalculateCyYoungScore(BaseballPlayer p)
+        {
+            p.CyYoungScore = ((5.00 - p.ERA) * 100) + (p.Wins * 10) + (p.Saves * 4) + p.Team.Wins + p.Popularity;
+        }
+        private string DisplayMVPTop5()
+        {
+            string results = "";
 
+            List<BaseballPlayer> alMVPRanks = new List<BaseballPlayer>();
+            List<BaseballPlayer> nlMVPRanks = new List<BaseballPlayer>();
+            foreach (Team t in World.MLB.TeamList)
+                foreach (BaseballPlayer p in t.Roster)
+                    if (p.Team.Conference == "AL")
+                        alMVPRanks.Add(p);
+                    else nlMVPRanks.Add(p);
+
+            alMVPRanks = alMVPRanks.OrderByDescending(o => o.MVPScore).ToList();
+            nlMVPRanks = nlMVPRanks.OrderByDescending(o => o.MVPScore).ToList();
+
+            results = alMVPRanks[0].Team.City + "'s " + alMVPRanks[0].FullName + " has been named AL MVP!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + alMVPRanks[i - 1].Team.Abbreviation + "] " + alMVPRanks[i - 1].FullName;
+            }
+
+            results += Environment.NewLine + nlMVPRanks[0].Team.City + "'s " + nlMVPRanks[0].FullName + " has been named NL MVP!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + nlMVPRanks[i - 1].Team.Abbreviation + "] " + nlMVPRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            alMVPRanks[0].Awards.Add(new Award(World.Year, "AL MVP"));
+            nlMVPRanks[0].Awards.Add(new Award(World.Year, "NL MVP"));
+
+            return results;
+        }
+        private string DisplayCyYoungTop5()
+        {
+            string results = "";
+
+            List<BaseballPlayer> alCYRanks = new List<BaseballPlayer>();
+            List<BaseballPlayer> nlCYRanks = new List<BaseballPlayer>();
+            foreach (Team t in World.MLB.TeamList)
+                foreach (BaseballPlayer p in t.Roster)
+                    if (p.Team.Conference == "AL")
+                        alCYRanks.Add(p);
+                    else nlCYRanks.Add(p);
+
+            alCYRanks = alCYRanks.OrderByDescending(o => o.CyYoungScore).ToList();
+            nlCYRanks = nlCYRanks.OrderByDescending(o => o.CyYoungScore).ToList();
+
+            results = alCYRanks[0].Team.City + "'s " + alCYRanks[0].FullName + " has been named AL Cy Young Award winner!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + alCYRanks[i - 1].Team.Abbreviation + "] " + alCYRanks[i - 1].FullName;
+            }
+
+            results += Environment.NewLine + nlCYRanks[0].Team.City + "'s " + nlCYRanks[0].FullName + " has been named NL MVP!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + nlCYRanks[i - 1].Team.Abbreviation + "] " + nlCYRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            alCYRanks[0].Awards.Add(new Award(World.Year, "AL Cy Young"));
+            nlCYRanks[0].Awards.Add(new Award(World.Year, "NL Cy Young"));
+
+            return results;
+        }
         #endregion
         public int DiceRoll()
         {

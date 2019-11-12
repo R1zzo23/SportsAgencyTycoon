@@ -20,7 +20,9 @@ namespace SportsAgencyTycoon
         public int Losses;
         public int Saves;
         public double ERA;
-
+        public double CyYoungScore = 0.00;
+        public double MVPScore = 0.00;
+        public List<Award> Awards = new List<Award>();
         public BaseballPlayer(Random rnd, int id, Sports sport, int age, Position position)
             : base(rnd, id, sport, age)
         {
