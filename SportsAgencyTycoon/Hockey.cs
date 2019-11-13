@@ -12,6 +12,8 @@ namespace SportsAgencyTycoon
         public Random rnd;
         public League NHL;
         public World World;
+        public int gamesThisWeek = 0;
+        public int gamesForStarter = 0;
         public int index;
         public int losingIndex;
         public List<string> Conferences;
@@ -57,7 +59,7 @@ namespace SportsAgencyTycoon
         public void SimWeek()
         {
             if (NHL.WeekNumber == 0)
-                InitializeGAA();
+                //InitializeGAA();
             NHL.WeekNumber++;
             if (!NHL.Playoffs)
             {
@@ -91,19 +93,58 @@ namespace SportsAgencyTycoon
             }
         }
         #region Statistics
-        private void InitializeGAA()
-        {
-
-        }
         private void UpdateStats()
         {
+            foreach (Team t in NHL.TeamList)
+                foreach (HockeyPlayer p in t.Roster)
+                {
+                    if (p.Position == Position.G)
+                        DetermineShotsFaced(p);
+                }
+        }
+        private void DetermineShotsFaced(HockeyPlayer p)
+        {
+            int shotsFaced = 0;
 
+            DetermineShotsSaved(p, shotsFaced);
+        }
+        private void DetermineShotsSaved(HockeyPlayer p, int shotsFaced)
+        {
+            int saves = 0;
+
+
+
+            if (saves == shotsFaced) p.ShutOuts++;
+            CalculateSavePercentage(p);
+            CalculateGAA(p);
+        }
+        private void CalculateSavePercentage(HockeyPlayer p)
+        {
+            if (p.ShotsFaced > 0)
+            {
+                p.SavePercentage = Convert.ToDouble(p.Saves) / Convert.ToDouble(p.ShotsFaced);
+            }
+        }
+        private void CalculateGAA(HockeyPlayer p)
+        {
+            if (p.ShotsFaced > 0)
+            {
+                p.GAA = Convert.ToDouble(p.GoalsAllowed) / Convert.ToDouble(p.GamesPlayed);
+            }
         }
         #endregion
         #region Simulation
         private void SimulateGames()
         {
+            int gamesThisWeek = HowManyGamesThisWeek();
+        }
+        private int HowManyGamesThisWeek()
+        {
+            int games = 0;
 
+
+
+            return games;
         }
         private string DeterminePlayoffField()
         {
