@@ -702,6 +702,11 @@ namespace SportsAgencyTycoon
                 world.Baseball.SimWeek();
             }
 
+            if (world.NHL.Initialized && world.NHL.InSeason)
+            {
+                world.Hockey.SimWeek();
+            }
+
             //reset if agent took a test this week
             foreach (Agent agent in agency.Agents) agent.TestedThisWeek = false;
 
@@ -1006,6 +1011,7 @@ namespace SportsAgencyTycoon
                     {
                         world.NHL.InSeason = true;
                         world.NHL.Initialized = true;
+                        world.NHL.WeekNumber = 0;
                         ResetTeamRecords(world.NHL);
                     }
                     else if (e.Sport == Sports.Soccer)

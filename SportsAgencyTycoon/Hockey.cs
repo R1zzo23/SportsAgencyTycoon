@@ -14,6 +14,9 @@ namespace SportsAgencyTycoon
         public World World;
         public int gamesThisWeek = 0;
         public int gamesForStarter = 0;
+        public int gamesForBackup = 0;
+        public int starterWins = 0;
+        public int backupWins = 0;
         public int index;
         public int losingIndex;
         public List<string> Conferences;
@@ -96,23 +99,88 @@ namespace SportsAgencyTycoon
         private void UpdateStats()
         {
             foreach (Team t in NHL.TeamList)
+            {
+                int gamesForStarterRoll = DiceRoll();
+                if (gamesForStarterRoll >= 9) gamesForStarter = gamesThisWeek - 1;
+                else if (gamesForStarterRoll < 7) gamesForStarter = gamesThisWeek;
+                gamesForBackup = gamesThisWeek - gamesForStarter;
+
                 foreach (HockeyPlayer p in t.Roster)
                 {
                     if (p.Position == Position.G)
+                    {
+                        if (t.WinsThisWeek > 0)
+                            DetermineGoalieWins(t.WinsThisWeek);
                         DetermineShotsFaced(p);
+                    }
                 }
+            }
+                
+        }
+        private void DetermineGoalieWins(int teamWins)
+        {
+            if (gamesForBackup == 0)
+                starterWins = teamWins;
+            else
+            {
+                int diceRoll = DiceRoll();
+                if (diceRoll >= 8)
+                {
+                    backupWins = 1;
+                    starterWins = teamWins - 1;
+                }
+            }
         }
         private void DetermineShotsFaced(HockeyPlayer p)
         {
             int shotsFaced = 0;
+            int numberOfGames = 0;
+            if (p.DepthChart == 1)
+            {
+                p.Wins += starterWins;
+                numberOfGames = gamesForStarter;
+            }
+            else
+            {
+                p.Wins += backupWins;
+                numberOfGames = gamesForBackup;
+            }
 
-            DetermineShotsSaved(p, shotsFaced);
+            if (numberOfGames > 0)
+            {
+                for (int i = 0; i < numberOfGames; i++)
+                {
+                    shotsFaced = rnd.Next(25, 36);
+                    p.ShotsFaced += shotsFaced;
+                    DetermineShotsSaved(p, shotsFaced);
+                }
+            }
+            p.GamesPlayed += numberOfGames;
         }
         private void DetermineShotsSaved(HockeyPlayer p, int shotsFaced)
         {
             int saves = 0;
+            int goalsAllowed = 0;
 
-
+            for (int i = 0; i < shotsFaced; i++)
+            {
+                int saveRoll = DiceRoll();
+                if (p.CurrentSkill >= 65)
+                {
+                    if (saveRoll > 2) saves++;
+                }
+                else if (p.CurrentSkill >= 45)
+                {
+                    if (saveRoll > 3) saves++;
+                }
+                else
+                {
+                    if (saveRoll > 4) saves++;
+                }
+            }
+            p.Saves += saves;
+            goalsAllowed = shotsFaced - saves;
+            p.GoalsAllowed += goalsAllowed;
 
             if (saves == shotsFaced) p.ShutOuts++;
             CalculateSavePercentage(p);
@@ -124,6 +192,7 @@ namespace SportsAgencyTycoon
             {
                 p.SavePercentage = Convert.ToDouble(p.Saves) / Convert.ToDouble(p.ShotsFaced);
             }
+            else p.SavePercentage = 0.00;
         }
         private void CalculateGAA(HockeyPlayer p)
         {
@@ -131,18 +200,21 @@ namespace SportsAgencyTycoon
             {
                 p.GAA = Convert.ToDouble(p.GoalsAllowed) / Convert.ToDouble(p.GamesPlayed);
             }
+            else p.GAA = 99.99;
         }
         #endregion
         #region Simulation
         private void SimulateGames()
         {
-            int gamesThisWeek = HowManyGamesThisWeek();
+            gamesThisWeek = HowManyGamesThisWeek();
+            foreach (Team t in NHL.TeamList) t.WinsThisWeek = 0;
         }
         private int HowManyGamesThisWeek()
         {
             int games = 0;
 
-
+            if (NHL.WeekNumber <= 18) games = 3;
+            else games = 2;
 
             return games;
         }
@@ -183,5 +255,11 @@ namespace SportsAgencyTycoon
             return results;
         }
         #endregion
+        public int DiceRoll()
+        {
+            int firstDie = rnd.Next(1, 7);
+            int secondDie = rnd.Next(1, 7);
+            return firstDie + secondDie;
+        }
     }
 }

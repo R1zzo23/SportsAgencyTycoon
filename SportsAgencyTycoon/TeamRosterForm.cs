@@ -133,6 +133,13 @@ namespace SportsAgencyTycoon
                     baseballRoster.Add(p);
                 DisplayBaseballStats(baseballRoster[cbTeamRoster.SelectedIndex]);
             }
+            else if (selectedLeague.Sport == Sports.Hockey)
+            {
+                List<HockeyPlayer> hockeyRoster = new List<HockeyPlayer>();
+                foreach (HockeyPlayer p in selectedTeam.Roster)
+                    hockeyRoster.Add(p);
+                DisplayHockeyStats(hockeyRoster[cbTeamRoster.SelectedIndex]);
+            }
 
 
             if (selectedPlayer.Sport == Sports.Baseball)
@@ -257,6 +264,21 @@ namespace SportsAgencyTycoon
         {
             string stats = "ERA: " + player.ERA.ToString("0.##") + Environment.NewLine + "WINS: " + player.Wins + Environment.NewLine + "LOSSES: " + player.Losses + Environment.NewLine + "SAVES: " + player.Saves;
             return stats;
+        }
+        public void DisplayHockeyStats(HockeyPlayer player)
+        {
+            if (player.Position == Position.G) lblStats.Text = DisplayGoalieStats(player);
+            else lblStats.Text = DisplaySkaterStats(player);
+        }
+        public string DisplayGoalieStats(HockeyPlayer player)
+        {
+            string results = "WINS: " + player.Wins + Environment.NewLine + "LOSSES: " + (player.GamesPlayed - player.Wins) + Environment.NewLine + "SAVES: " + player.Saves + Environment.NewLine + "SAVE%: " + player.SavePercentage.ToString("P2") + Environment.NewLine + "GAA: " + player.GAA.ToString("0.##");
+            return results;
+        }
+        public string DisplaySkaterStats(HockeyPlayer player)
+        {
+            string results = "";
+            return results;
         }
         public string DisplayFootballTeamStats(Team t)
         {

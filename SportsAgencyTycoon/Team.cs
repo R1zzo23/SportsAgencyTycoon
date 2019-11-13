@@ -16,6 +16,7 @@ namespace SportsAgencyTycoon
         public int MarketValue;
         public int TitleConteder;
         public int Wins;
+        public int WinsThisWeek;
         public int ConferenceWins;
         public int DivisionWins;
         public int Losses;
