@@ -208,6 +208,27 @@ namespace SportsAgencyTycoon
         {
             gamesThisWeek = HowManyGamesThisWeek();
             foreach (Team t in NHL.TeamList) t.WinsThisWeek = 0;
+            for (int i = 0; i < gamesThisWeek; i++)
+            {
+                var indexList = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
+
+                for (int j = 0; j < NHL.TeamList.Count / 2; j++)
+                {
+                    int opponentIndex = rnd.Next(1, indexList.Count);
+                    SimulateGame(NHL.TeamList[indexList[0]], NHL.TeamList[indexList[opponentIndex]]);
+                    indexList.RemoveAt(opponentIndex);
+                    indexList.RemoveAt(0);
+                }
+                index++;
+                if (index == 30) index = 1;
+                int rndWinNumber = rnd.Next(1, 101);
+                if (rndWinNumber <= NHL.TeamList[indexList[0]].TitleConteder)
+                {
+                    NHL.TeamList[indexList[0]].Wins++;
+                    NHL.TeamList[indexList[0]].WinsThisWeek++;
+                }
+                else NHL.TeamList[indexList[0]].Losses++;
+            }
         }
         private int HowManyGamesThisWeek()
         {
@@ -218,12 +239,79 @@ namespace SportsAgencyTycoon
 
             return games;
         }
+        private void SimulateGame(Team team1, Team team2)
+        {
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                team1.Wins++;
+                team1.WinsThisWeek++;
+                team2.Losses++;
+                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
+            }
+            else
+            {
+                team1.Losses++;
+                team2.WinsThisWeek++;
+                team2.Wins++;
+                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
+            }
+            team1.PlayedGameThisCycle = true;
+            team2.PlayedGameThisCycle = true;
+        }
         private string DeterminePlayoffField()
         {
-            string results = "";
+            string playoffSeedings = "";
+            EasternConference.Clear();
+            WesternConference.Clear();
+            EasternPlayoffs.Clear();
+            WesternPlayoffs.Clear();
 
+            foreach (Team t in World.NHL.TeamList)
+            {
+                if (t.Conference == "Eastern") EasternConference.Add(t);
+                else WesternConference.Add(t);
+            }
 
-            return results;
+            EasternConference = EasternConference.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+            WesternConference = WesternConference.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+
+            int atlanticIndex = EasternConference.FindIndex(t => t.Division == "Atlantic");
+            EasternPlayoffs.Add(EasternConference[atlanticIndex]);
+            EasternConference[atlanticIndex].Awards.Add(new Award(World.Year, EasternConference[atlanticIndex].Division + " Division Champs"));
+            EasternConference.RemoveAt(atlanticIndex);
+
+            int metropolitanIndex = EasternConference.FindIndex(t => t.Division == "Metropolitan");
+            EasternPlayoffs.Add(EasternConference[metropolitanIndex]);
+            EasternConference[metropolitanIndex].Awards.Add(new Award(World.Year, EasternConference[metropolitanIndex].Division + " Division Champs"));
+            EasternConference.RemoveAt(metropolitanIndex);
+                      
+            EasternPlayoffs = EasternPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            for (int i = 0; i < 6; i++)
+                EasternPlayoffs.Add(EasternConference[i]);
+
+            int centralIndex = WesternConference.FindIndex(t => t.Division == "Central");
+            WesternPlayoffs.Add(WesternConference[centralIndex]);
+            WesternConference[centralIndex].Awards.Add(new Award(World.Year, WesternConference[centralIndex].Division + " Division Champs"));
+            WesternConference.RemoveAt(centralIndex);
+
+            int pacificIndex = WesternConference.FindIndex(t => t.Division == "Pacific");
+            WesternPlayoffs.Add(WesternConference[pacificIndex]);
+            WesternConference[pacificIndex].Awards.Add(new Award(World.Year, WesternConference[pacificIndex].Division + " Division Champs"));
+            WesternConference.RemoveAt(pacificIndex);
+            
+            WesternPlayoffs = WesternPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            for (int i = 0; i < 6; i++)
+                WesternPlayoffs.Add(WesternConference[i]);
+
+            for (int i = 0; i < 4; i++)
+            {
+                playoffSeedings += i + 1 + ") " + EasternPlayoffs[i].Abbreviation + " vs. " + (EasternPlayoffs.Count - i) + ") " + EasternPlayoffs[EasternPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
+                playoffSeedings += i + 1 + ") " + WesternPlayoffs[i].Abbreviation + " vs. " + (WesternPlayoffs.Count - i) + ") " + WesternPlayoffs[WesternPlayoffs.Count - 1 - i].Abbreviation + Environment.NewLine;
+            }
+
+            return playoffSeedings;
         }
         #endregion
         #region Awards
