@@ -92,7 +92,8 @@ namespace SportsAgencyTycoon
             }
             if (NHL.Playoffs)
             {
-
+                if (NHL.WeekNumber == 33 || NHL.WeekNumber == 34 || NHL.WeekNumber == 35) mainForm.newsLabel.Text = SimulatePlayoffRound() + Environment.NewLine + mainForm.newsLabel.Text;
+                else if (NHL.WeekNumber == 29) mainForm.newsLabel.Text = SimulateStanleyCup() + Environment.NewLine + mainForm.newsLabel.Text;
             }
         }
         #region Statistics
@@ -112,6 +113,12 @@ namespace SportsAgencyTycoon
                         if (t.WinsThisWeek > 0)
                             DetermineGoalieWins(t.WinsThisWeek);
                         DetermineShotsFaced(p);
+                    }
+                    else if (p.Position == Position.C || p.Position == Position.W || p.Position == Position.D)
+                    {
+                        DetermineGoalsScored();
+                        DetermineAssists();
+                        CalculatePoints();
                     }
                 }
             }
@@ -204,6 +211,96 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Simulation
+        public string SimulateStanleyCup()
+        {
+            string results = "";
+
+            EasternPlayoffs[0].Awards.Add(new Award(World.Year, "Eastern Conference Champs"));
+            WesternPlayoffs[0].Awards.Add(new Award(World.Year, "Western Conference Champs"));
+
+            results = SimulateSeries(EasternPlayoffs[0], WesternPlayoffs[0], 0, 1);
+            if (losingIndex == 0)
+            {
+                results = "The " + WesternPlayoffs[0].City + " " + WesternPlayoffs[0].Mascot + " are the " + World.Year + " Stanley Cup champions!" + Environment.NewLine + results;
+                WesternPlayoffs[0].Awards.Add(new Award(World.Year, "Stanley Cup Champions"));
+            }
+
+            else
+            {
+                results = "The " + EasternPlayoffs[0].City + " " + EasternPlayoffs[0].Mascot + " are the " + World.Year + " Stanley Cup champions!" + Environment.NewLine + results;
+                EasternPlayoffs[0].Awards.Add(new Award(World.Year, "Stanley Cup Champions"));
+            }
+
+            return results;
+        }
+        public string SimulatePlayoffRound()
+        {
+            string results = "";
+            EasternLoserIndex.Clear();
+            WesternLoserIndex.Clear();
+
+            for (int i = 0; i < EasternPlayoffs.Count / 2; i++)
+            {
+                results += SimulateSeries(EasternPlayoffs[i], EasternPlayoffs[EasternPlayoffs.Count - 1 - i], i, EasternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                EasternLoserIndex.Add(losingIndex);
+                results += SimulateSeries(WesternPlayoffs[i], WesternPlayoffs[WesternPlayoffs.Count - 1 - i], i, WesternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                WesternLoserIndex.Add(losingIndex);
+            }
+
+            RemoveLosingTeamsFromPlayoffs();
+
+            return results;
+        }
+        public void RemoveLosingTeamsFromPlayoffs()
+        {
+            EasternLoserIndex = EasternLoserIndex.OrderByDescending(i => i).ToList();
+            WesternLoserIndex = WesternLoserIndex.OrderByDescending(i => i).ToList();
+
+            foreach (int i in EasternLoserIndex) EasternPlayoffs.RemoveAt(i);
+            foreach (int i in WesternLoserIndex) WesternPlayoffs.RemoveAt(i);
+        }
+
+        public string SimulateSeries(Team team1, Team team2, int teamIndex1, int teamIndex2)
+        {
+            string seriesResult = "";
+            int winsTeam1 = 0;
+            int winsTeam2 = 0;
+
+            while (winsTeam1 < 4 && winsTeam2 < 4)
+            {
+                int result;
+                result = SimulatePlayoffGame(team1, team2);
+                if (result == 1) winsTeam1++;
+                else winsTeam2++;
+            }
+
+            if (winsTeam1 == 4)
+            {
+                seriesResult = team1.Abbreviation + " defeats " + team2.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+                losingIndex = teamIndex2;
+            }
+            else
+            {
+                seriesResult = team2.Abbreviation + " defeats " + team1.Abbreviation + " in " + (winsTeam1 + winsTeam2) + " games.";
+                losingIndex = teamIndex1;
+            }
+
+
+            return seriesResult;
+        }
+        public int SimulatePlayoffGame(Team team1, Team team2)
+        {
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
         private void SimulateGames()
         {
             gamesThisWeek = HowManyGamesThisWeek();
