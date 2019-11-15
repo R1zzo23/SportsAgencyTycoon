@@ -61,15 +61,16 @@ namespace SportsAgencyTycoon
         }
         public void SimWeek()
         {
-            if (NHL.WeekNumber == 0)
+            //if (NHL.WeekNumber == 0)
                 //InitializeGAA();
             NHL.WeekNumber++;
+            Console.WriteLine("NHL.WeekNumber: " + NHL.WeekNumber);
             if (!NHL.Playoffs)
             {
                 SimulateGames();
                 UpdateStats();
             }
-            if (NHL.WeekNumber == 32)
+            if (NHL.WeekNumber == 31)
             {
                 NHL.Playoffs = true;
                 foreach (Team t in NHL.TeamList)
@@ -92,8 +93,8 @@ namespace SportsAgencyTycoon
             }
             if (NHL.Playoffs)
             {
-                if (NHL.WeekNumber == 33 || NHL.WeekNumber == 34 || NHL.WeekNumber == 35) mainForm.newsLabel.Text = SimulatePlayoffRound() + Environment.NewLine + mainForm.newsLabel.Text;
-                else if (NHL.WeekNumber == 29) mainForm.newsLabel.Text = SimulateStanleyCup() + Environment.NewLine + mainForm.newsLabel.Text;
+                if (NHL.WeekNumber == 32 || NHL.WeekNumber == 33 || NHL.WeekNumber == 34) mainForm.newsLabel.Text = SimulatePlayoffRound() + Environment.NewLine + mainForm.newsLabel.Text;
+                else if (NHL.WeekNumber == 35) mainForm.newsLabel.Text = SimulateStanleyCup() + Environment.NewLine + mainForm.newsLabel.Text;
             }
         }
         #region Statistics
@@ -116,9 +117,9 @@ namespace SportsAgencyTycoon
                     }
                     else if (p.Position == Position.C || p.Position == Position.W || p.Position == Position.D)
                     {
-                        DetermineGoalsScored();
-                        DetermineAssists();
-                        CalculatePoints();
+                        //DetermineGoalsScored();
+                        //DetermineAssists();
+                        //CalculatePoints();
                     }
                 }
             }
@@ -307,7 +308,7 @@ namespace SportsAgencyTycoon
             foreach (Team t in NHL.TeamList) t.WinsThisWeek = 0;
             for (int i = 0; i < gamesThisWeek; i++)
             {
-                var indexList = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
+                var indexList = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
 
                 for (int j = 0; j < NHL.TeamList.Count / 2; j++)
                 {
@@ -331,7 +332,7 @@ namespace SportsAgencyTycoon
         {
             int games = 0;
 
-            if (NHL.WeekNumber <= 18) games = 3;
+            if (NHL.WeekNumber <= 20) games = 3;
             else games = 2;
 
             return games;
