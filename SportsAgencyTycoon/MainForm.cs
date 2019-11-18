@@ -798,11 +798,31 @@ namespace SportsAgencyTycoon
             leagueStandingsLabel.Text = "";
 
             List<Team> teamList = selectedLeague.TeamList;
-            teamList = teamList.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
-            for (int i = 0; i < teamList.Count; i++)
+            if (selectedLeague.Sport == Sports.Hockey)
             {
-                leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].Wins + "W - " + teamList[i].Losses + "L" + Environment.NewLine;
+                teamList = teamList.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+                for (int i = 0; i < teamList.Count; i++)
+                {
+                    leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].Wins + "W - " + teamList[i].Losses + "L - " + teamList[i].OTLosses + "OTL" + Environment.NewLine;
+                }
             }
+            else if (selectedLeague.Sport == Sports.Soccer)
+            {
+                teamList = teamList.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+                for (int i = 0; i < teamList.Count; i++)
+                {
+                    leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].Wins + "W - " + teamList[i].Losses + "L - " + teamList[i].OTLosses + "T" + Environment.NewLine;
+                }
+            }
+            else
+            {
+                teamList = teamList.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+                for (int i = 0; i < teamList.Count; i++)
+                {
+                    leagueStandingsLabel.Text += (i + 1) + ") " + teamList[i].City + " " + teamList[i].Mascot + " " + teamList[i].Wins + "W - " + teamList[i].Losses + "L" + Environment.NewLine;
+                }
+            }
+            
 
         }
 

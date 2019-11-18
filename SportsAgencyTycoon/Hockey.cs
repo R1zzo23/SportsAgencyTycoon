@@ -68,6 +68,8 @@ namespace SportsAgencyTycoon
             if (!NHL.Playoffs)
             {
                 SimulateGames();
+                foreach (Team t in NHL.TeamList)
+                    CalculateTeamPoints(t);
                 UpdateStats();
             }
             if (NHL.WeekNumber == 31)
@@ -267,6 +269,10 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Simulation
+        private void CalculateTeamPoints(Team t)
+        {
+            t.Points = (t.Wins * 2) + t.OTLosses;
+        }
         public string SimulateStanleyCup()
         {
             string results = "";
@@ -394,18 +400,28 @@ namespace SportsAgencyTycoon
         }
         private void SimulateGame(Team team1, Team team2)
         {
+            bool overtime = false;
+            int otRandom = rnd.Next(1, 101);
+            if (otRandom <= 10)
+            {
+                overtime = true;
+            }
             int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
             int winningNumber = rnd.Next(1, totalNumber);
             if (winningNumber <= team1.TitleConteder)
             {
                 team1.Wins++;
                 team1.WinsThisWeek++;
-                team2.Losses++;
+                if (overtime)
+                    team2.OTLosses++;
+                else team2.Losses++;
                 Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
             }
             else
             {
-                team1.Losses++;
+                if (overtime)
+                    team1.OTLosses++;
+                else team1.Losses++;
                 team2.WinsThisWeek++;
                 team2.Wins++;
                 Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
@@ -427,8 +443,8 @@ namespace SportsAgencyTycoon
                 else WesternConference.Add(t);
             }
 
-            EasternConference = EasternConference.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
-            WesternConference = WesternConference.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
+            EasternConference = EasternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            WesternConference = WesternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
 
             int atlanticIndex = EasternConference.FindIndex(t => t.Division == "Atlantic");
             EasternPlayoffs.Add(EasternConference[atlanticIndex]);
@@ -440,7 +456,7 @@ namespace SportsAgencyTycoon
             EasternConference[metropolitanIndex].Awards.Add(new Award(World.Year, EasternConference[metropolitanIndex].Division + " Division Champs"));
             EasternConference.RemoveAt(metropolitanIndex);
 
-            EasternPlayoffs = EasternPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            EasternPlayoffs = EasternPlayoffs.OrderByDescending(o => o.Points).ToList();
             for (int i = 0; i < 6; i++)
                 EasternPlayoffs.Add(EasternConference[i]);
 
@@ -454,7 +470,7 @@ namespace SportsAgencyTycoon
             WesternConference[pacificIndex].Awards.Add(new Award(World.Year, WesternConference[pacificIndex].Division + " Division Champs"));
             WesternConference.RemoveAt(pacificIndex);
 
-            WesternPlayoffs = WesternPlayoffs.OrderByDescending(o => o.Wins).ToList();
+            WesternPlayoffs = WesternPlayoffs.OrderByDescending(o => o.Points).ToList();
             for (int i = 0; i < 6; i++)
                 WesternPlayoffs.Add(WesternConference[i]);
 

@@ -20,6 +20,9 @@ namespace SportsAgencyTycoon
         public int ConferenceWins;
         public int DivisionWins;
         public int Losses;
+        public int Ties;
+        public int OTLosses;
+        public int Points;
         public int ConferenceLosses;
         public int DivisionLosses;
         public bool PlayedGameThisCycle;
