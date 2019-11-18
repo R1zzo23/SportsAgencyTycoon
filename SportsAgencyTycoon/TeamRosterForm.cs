@@ -82,8 +82,15 @@ namespace SportsAgencyTycoon
                     lblAwards.Text += award.Year + " " + award.AwardName + Environment.NewLine;
 
             lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
+            if (selectedLeague.Sport == Sports.Hockey)
+            {
+                lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.OTLosses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+            }
+            else
+            {
+                lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+            }
             
-            lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
             if (selectedLeague.Sport == Sports.Basketball)
                 foreach (BasketballPlayer p in selectedTeam.Roster)
                     lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;
@@ -272,12 +279,12 @@ namespace SportsAgencyTycoon
         }
         public string DisplayGoalieStats(HockeyPlayer player)
         {
-            string results = "WINS: " + player.Wins + Environment.NewLine + "LOSSES: " + (player.GamesPlayed - player.Wins) + Environment.NewLine + "SAVES: " + player.Saves + Environment.NewLine + "SAVE%: " + player.SavePercentage.ToString("P2") + Environment.NewLine + "GAA: " + player.GAA.ToString("0.##");
+            string results = "GP: " + player.GamesPlayed + Environment.NewLine + "WINS: " + player.Wins + Environment.NewLine + "LOSSES: " + (player.GamesPlayed - player.Wins) + Environment.NewLine + "SAVES: " + player.Saves + Environment.NewLine + "SAVE%: " + player.SavePercentage.ToString("P2") + Environment.NewLine + "GAA: " + player.GAA.ToString("0.##");
             return results;
         }
         public string DisplaySkaterStats(HockeyPlayer player)
         {
-            string results = "";
+            string results = "GOALS: " + player.Goals + Environment.NewLine + "ASSISTS: " + player.Assists + Environment.NewLine + "POINTS: " + player.Points;
             return results;
         }
         public string DisplayFootballTeamStats(Team t)

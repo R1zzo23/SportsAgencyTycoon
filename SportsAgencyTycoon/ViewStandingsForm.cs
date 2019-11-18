@@ -40,6 +40,8 @@ namespace SportsAgencyTycoon
         List<Team> NLEast = new List<Team>();
         List<Team> NLCentral = new List<Team>();
         List<Team> NLWest = new List<Team>();
+        List<Team> MetropolitanDivision = new List<Team>();
+        
         public ViewStandingsForm(World world)
         {
             InitializeComponent();
@@ -74,6 +76,10 @@ namespace SportsAgencyTycoon
             else if (selectedLeague.Sport == Sports.Baseball)
             {
                 DisplayBaseballStandings(selectedLeague);
+            }
+            else if (selectedLeague.Sport == Sports.Hockey)
+            {
+                DisplayHockeyStandings(selectedLeague);
             }
         }
         private void FillFootballLists(League l)
@@ -223,6 +229,66 @@ namespace SportsAgencyTycoon
                 lblWestDivision2.Text += Environment.NewLine + SouthwestDivision[j].Abbreviation + " " + SouthwestDivision[j].Wins + "W - " + SouthwestDivision[j].Losses + "L";
                 lblWestDivision3.Text += Environment.NewLine + PacificDivision[j].Abbreviation + " " + PacificDivision[j].Wins + "W - " + PacificDivision[j].Losses + "L";
             }
+        }
+        private void DisplayHockeyStandings(League l)
+        {
+            EasternConference.Clear();
+            WesternConference.Clear();
+            AtlanticDivision.Clear();
+            CentralDivision.Clear();
+            MetropolitanDivision.Clear();
+            PacificDivision.Clear();
+
+            foreach (Team t in l.TeamList)
+            {
+                if (t.Conference == "Eastern")
+                {
+                    EasternConference.Add(t);
+                    if (t.Division == "Atlantic") AtlanticDivision.Add(t);
+                    else MetropolitanDivision.Add(t);
+                }
+                else
+                {
+                    WesternConference.Add(t);
+                    if (t.Division == "Pacific") PacificDivision.Add(t);
+                    else CentralDivision.Add(t);
+                }
+            }
+
+            EasternConference = EasternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            WesternConference = WesternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            AtlanticDivision = AtlanticDivision.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            MetropolitanDivision = MetropolitanDivision.OrderByDescending(o => o.Points).ThenBy(o => o.Wins).ToList();
+            CentralDivision = CentralDivision.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            PacificDivision = PacificDivision.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+
+            lblEastConference.Text = "Eastern Conference Standings:";
+            lblWestConference.Text = "Western Conference Standings:";
+            lblEastDivision1.Text = "Atlantic Divisions Standings:";
+            lblEastDivision2.Text = "";
+            lblEastDivision3.Text = "Metropolitan Division Standings:";
+            lblEastDivision4.Text = "";
+            lblWestDivision1.Text = "Central Division Standings:";
+            lblWestDivision2.Text = "";
+            lblWestDivision3.Text = "Pacific Division Standings:";
+            lblWestDivision4.Text = "";
+
+            for (int i = 0; i < WesternConference.Count; i++)
+            {
+                lblEastConference.Text += Environment.NewLine + EasternConference[i].Abbreviation + ": " + EasternConference[i].Points + " points (" + EasternConference[i].Wins + "-" + EasternConference[i].Losses + "-" + EasternConference[i].OTLosses + ")";
+                lblWestConference.Text += Environment.NewLine + WesternConference[i].Abbreviation + ": " + WesternConference[i].Points + " points (" + WesternConference[i].Wins + "-" + WesternConference[i].Losses + "-" + WesternConference[i].OTLosses + ")";
+            }
+            lblEastConference.Text += Environment.NewLine + EasternConference[15].Abbreviation + ": " + EasternConference[15].Points + " point (" + EasternConference[15].Wins + "-" + EasternConference[15].Losses + "-" + EasternConference[15].OTLosses + ")";
+            for (int j = 0; j < AtlanticDivision.Count; j++)
+            {
+                lblEastDivision1.Text += Environment.NewLine + AtlanticDivision[j].Abbreviation + ": " + AtlanticDivision[j].Points + " points (" + AtlanticDivision[j].Wins + "-" + AtlanticDivision[j].Losses + "-" + AtlanticDivision[j].OTLosses + ")";
+                //lblEastDivision2.Text += Environment.NewLine + CentralDivision[j].Abbreviation + " " + CentralDivision[j].Wins + "W - " + CentralDivision[j].Losses + "L";
+                lblEastDivision3.Text += Environment.NewLine + MetropolitanDivision[j].Abbreviation + ": " + MetropolitanDivision[j].Points + " points (" + MetropolitanDivision[j].Wins + "-" + MetropolitanDivision[j].Losses + "-" + MetropolitanDivision[j].OTLosses + ")";
+                //lblWestDivision2.Text += Environment.NewLine + SouthwestDivision[j].Abbreviation + " " + SouthwestDivision[j].Wins + "W - " + SouthwestDivision[j].Losses + "L";
+                lblWestDivision3.Text += Environment.NewLine + PacificDivision[j].Abbreviation + ": " + PacificDivision[j].Points + " points (" + PacificDivision[j].Wins + "-" + PacificDivision[j].Losses + "-" + PacificDivision[j].OTLosses + ")";
+            }
+            for (int x = 0; x < CentralDivision.Count; x++)
+                lblWestDivision1.Text += Environment.NewLine + CentralDivision[x].Abbreviation + ": " + CentralDivision[x].Points + " points (" + CentralDivision[x].Wins + "-" + CentralDivision[x].Losses + "-" + CentralDivision[x].OTLosses + ")";
         }
         private void DisplayBaseballStandings(League l)
         {

@@ -103,16 +103,24 @@ namespace SportsAgencyTycoon
             foreach (Team t in NHL.TeamList)
             {
                 int gamesForStarterRoll = DiceRoll();
-                if (gamesForStarterRoll >= 9) gamesForStarter = gamesThisWeek - 1;
-                else if (gamesForStarterRoll < 7) gamesForStarter = gamesThisWeek;
+
+                if (gamesForStarterRoll >= 8) gamesForStarter = gamesThisWeek - 1;
+                else gamesForStarter = gamesThisWeek;
+
                 gamesForBackup = gamesThisWeek - gamesForStarter;
 
                 foreach (HockeyPlayer p in t.Roster)
                 {
                     if (p.Position == Position.G)
                     {
+                        if (p.DepthChart == 1)
+                            p.GamesPlayed += gamesForStarter;
+                        else
+                            p.GamesPlayed += gamesForBackup;
+
                         if (t.WinsThisWeek > 0)
                             DetermineGoalieWins(t.WinsThisWeek);
+
                         DetermineShotsFaced(p);
                     }
                     else if (p.Position == Position.C || p.Position == Position.W || p.Position == Position.D)
@@ -220,7 +228,7 @@ namespace SportsAgencyTycoon
                     DetermineShotsSaved(p, shotsFaced);
                 }
             }
-            p.GamesPlayed += numberOfGames;
+            //p.GamesPlayed += numberOfGames;
         }
         private void DetermineShotsSaved(HockeyPlayer p, int shotsFaced)
         {
