@@ -62,7 +62,7 @@ namespace SportsAgencyTycoon
         public void SimWeek()
         {
             //if (NHL.WeekNumber == 0)
-                //InitializeGAA();
+            //InitializeGAA();
             NHL.WeekNumber++;
             Console.WriteLine("NHL.WeekNumber: " + NHL.WeekNumber);
             if (!NHL.Playoffs)
@@ -77,10 +77,8 @@ namespace SportsAgencyTycoon
                 {
                     foreach (HockeyPlayer p in t.Roster)
                     {
-                        if (p.Position == Position.W || p.Position == Position.C)
-                            CalculateForwardOfTheYearScore(p);
-                        else if (p.Position == Position.D)
-                            CalculateDefensemanOfTheYearScore(p);
+                        if (p.Position == Position.W || p.Position == Position.C || p.Position == Position.D)
+                            CalculatePlayerOfTheYearScore(p);
                         else if (p.Position == Position.G)
                             CalculateGoalieOfTheYearScore(p);
                     }
@@ -117,13 +115,70 @@ namespace SportsAgencyTycoon
                     }
                     else if (p.Position == Position.C || p.Position == Position.W || p.Position == Position.D)
                     {
-                        //DetermineGoalsScored();
-                        //DetermineAssists();
-                        //CalculatePoints();
+                        DetermineGoalsScored(p);
+                        DetermineAssists(p);
+                        CalculatePoints(p);
                     }
                 }
             }
-                
+
+        }
+        private void DetermineGoalsScored(HockeyPlayer p)
+        {
+            int playerDiceRoll = DiceRoll();
+            int neededDiceNumber = 0;
+            if (p.Position == Position.W || p.Position == Position.C)
+            {
+                if (p.CurrentSkill >= 70)
+                    neededDiceNumber = 5;
+                else if (p.CurrentSkill >= 60)
+                    neededDiceNumber = 6;
+                else if (p.CurrentSkill >= 50)
+                    neededDiceNumber = 7;
+                else if (p.CurrentSkill >= 40)
+                    neededDiceNumber = 8;
+                else if (p.CurrentSkill >= 30)
+                    neededDiceNumber = 9;
+                else neededDiceNumber = 10;
+            }
+            else if (p.Position == Position.D)
+            {
+                if (p.CurrentSkill >= 70)
+                    neededDiceNumber = 9;
+                else if (p.CurrentSkill >= 60)
+                    neededDiceNumber = 10;
+                else if (p.CurrentSkill >= 50)
+                    neededDiceNumber = 10;
+                else if (p.CurrentSkill >= 40)
+                    neededDiceNumber = 11;
+                else if (p.CurrentSkill >= 30)
+                    neededDiceNumber = 11;
+                else neededDiceNumber = 12;
+            }
+            if (playerDiceRoll >= neededDiceNumber) p.Goals++;
+        }
+        private void DetermineAssists(HockeyPlayer p)
+        {
+            int playerDiceRoll = DiceRoll();
+            int neededDiceNumber = 0;
+
+            if (p.CurrentSkill >= 70)
+                neededDiceNumber = 4;
+            else if (p.CurrentSkill >= 60)
+                neededDiceNumber = 5;
+            else if (p.CurrentSkill >= 50)
+                neededDiceNumber = 6;
+            else if (p.CurrentSkill >= 40)
+                neededDiceNumber = 7;
+            else if (p.CurrentSkill >= 30)
+                neededDiceNumber = 8;
+            else neededDiceNumber = 9;
+
+            if (playerDiceRoll >= neededDiceNumber) p.Assists++;
+        }
+        private void CalculatePoints(HockeyPlayer p)
+        {
+            p.Points = p.Goals + p.Assists;
         }
         private void DetermineGoalieWins(int teamWins)
         {
@@ -384,7 +439,7 @@ namespace SportsAgencyTycoon
             EasternPlayoffs.Add(EasternConference[metropolitanIndex]);
             EasternConference[metropolitanIndex].Awards.Add(new Award(World.Year, EasternConference[metropolitanIndex].Division + " Division Champs"));
             EasternConference.RemoveAt(metropolitanIndex);
-                      
+
             EasternPlayoffs = EasternPlayoffs.OrderByDescending(o => o.Wins).ToList();
             for (int i = 0; i < 6; i++)
                 EasternPlayoffs.Add(EasternConference[i]);
@@ -398,7 +453,7 @@ namespace SportsAgencyTycoon
             WesternPlayoffs.Add(WesternConference[pacificIndex]);
             WesternConference[pacificIndex].Awards.Add(new Award(World.Year, WesternConference[pacificIndex].Division + " Division Champs"));
             WesternConference.RemoveAt(pacificIndex);
-            
+
             WesternPlayoffs = WesternPlayoffs.OrderByDescending(o => o.Wins).ToList();
             for (int i = 0; i < 6; i++)
                 WesternPlayoffs.Add(WesternConference[i]);
@@ -413,31 +468,90 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Awards
-        private void CalculateForwardOfTheYearScore(HockeyPlayer p)
+        private void CalculatePlayerOfTheYearScore(HockeyPlayer p)
         {
-
-        }
-        private void CalculateDefensemanOfTheYearScore(HockeyPlayer p)
-        {
-
+            double score = 0;
+            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + p.Goals * 2 + p.Assists;
+            p.PlayerOfYearScore = score;
         }
         private void CalculateGoalieOfTheYearScore(HockeyPlayer p)
         {
-
+            double score = 0;
+            score = (p.CurrentSkill * 2) + (p.Team.Wins * 7) + (p.Popularity) + (3 - (p.GAA * 100)) + (p.ShutOuts * 5);
+            if (p.GamesPlayed >= 25)
+                p.PlayerOfYearScore = score;
+            else p.PlayerOfYearScore = score / 4;
         }
         private string DisplayForwardOfTheYearTop5()
         {
             string results = "";
+
+            List<HockeyPlayer> forwardRanks = new List<HockeyPlayer>();
+            foreach (Team t in World.NHL.TeamList)
+                foreach (HockeyPlayer p in t.Roster)
+                    if (p.Position == Position.W || p.Position == Position.C)
+                        forwardRanks.Add(p);
+
+            forwardRanks = forwardRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = forwardRanks[0].Team.City + "'s " + forwardRanks[0].FullName + " has been named NHL Forward of the Year!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + forwardRanks[i - 1].Team.Abbreviation + "] " + forwardRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            forwardRanks[0].Awards.Add(new Award(World.Year, "Forward of the Year"));
+
             return results;
         }
         private string DisplayDefensemanOfTheYearTop5()
         {
             string results = "";
+
+            List<HockeyPlayer> defensemanRanks = new List<HockeyPlayer>();
+            foreach (Team t in World.NHL.TeamList)
+                foreach (HockeyPlayer p in t.Roster)
+                    if (p.Position == Position.D)
+                        defensemanRanks.Add(p);
+
+            defensemanRanks = defensemanRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = defensemanRanks[0].Team.City + "'s " + defensemanRanks[0].FullName + " has been named NHL Defenseman of the Year!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + defensemanRanks[i - 1].Team.Abbreviation + "] " + defensemanRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            defensemanRanks[0].Awards.Add(new Award(World.Year, "Defenseman of the Year"));
+
             return results;
         }
         private string DisplayGoalieOfTheYearTop5()
         {
             string results = "";
+
+            List<HockeyPlayer> goalieRanks = new List<HockeyPlayer>();
+            foreach (Team t in World.NHL.TeamList)
+                foreach (HockeyPlayer p in t.Roster)
+                    if (p.Position == Position.G)
+                        goalieRanks.Add(p);
+
+            goalieRanks = goalieRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = goalieRanks[0].Team.City + "'s " + goalieRanks[0].FullName + " has been named NHL Goalie of the Year!" + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + goalieRanks[i - 1].Team.Abbreviation + "] " + goalieRanks[i - 1].FullName;
+            }
+
+            //give the winner the award
+            goalieRanks[0].Awards.Add(new Award(World.Year, "Goalie of the Year"));
+
             return results;
         }
         #endregion

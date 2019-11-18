@@ -1,17 +1,18 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/Hockey.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/HockeyPlayer.cs">
     <Files>
       <File FileName="SportsAgencyTycoon/MainForm.cs" Line="704" Column="1" />
-      <File FileName="SportsAgencyTycoon/Hockey.cs" Line="121" Column="43" />
-      <File FileName="SportsAgencyTycoon/Basketball.cs" Line="134" Column="10" />
-      <File FileName="SportsAgencyTycoon/Baseball.cs" Line="92" Column="139" />
+      <File FileName="SportsAgencyTycoon/Hockey.cs" Line="475" Column="1" />
+      <File FileName="SportsAgencyTycoon/Basketball.cs" />
+      <File FileName="SportsAgencyTycoon/Baseball.cs" />
+      <File FileName="SportsAgencyTycoon/HockeyPlayer.cs" Line="28" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="Hockey.cs" selected="True" />
+              <Node name="HockeyPlayer.cs" selected="True" />
               <Node name="TeamRosterForm.cs" expanded="True" />
             </Node>
           </Node>

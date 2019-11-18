@@ -25,6 +25,8 @@ namespace SportsAgencyTycoon
         public int ShutOuts = 0;
         public double GAA = 0.00;
         public double SavePercentage = 0.00;
+        public double PlayerOfYearScore = 0.00;
+        public List<Award> Awards = new List<Award>();
 
         public HockeyPlayer(Random rnd, int id, Sports sport, int age, Position position)
             : base(rnd, id, sport, age)
