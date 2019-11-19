@@ -149,7 +149,7 @@ namespace SportsAgencyTycoon
             MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(3, Months.April, 1), new Date(10, Months.October, 4), 6, 35000000, 555000);
             NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.September, 3), new Date(2, Months.February, 1), 6, 30000000, 495000);
             NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(9, Months.October, 1), new Date(6, Months.June, 2), 8, 9500000, 650000);
-            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(2, Months.March, 2), new Date(10, Months.November, 4), 9, 7000000, 56250);
+            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(2, Months.March, 2), new Date(11, Months.December, 1), 9, 7000000, 56250);
         }
         public void CreateCalendarEventsForLeagueStartAndEnd()
         {

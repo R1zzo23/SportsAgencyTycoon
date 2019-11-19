@@ -1076,42 +1076,7 @@ namespace SportsAgencyTycoon
                 Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
             }
         }
-        public void ResetPlayerStats()
-        {
-            foreach (Team t in World.NFL.TeamList)
-                foreach(FootballPlayer p in t.Roster)
-                {
-                    p.PassingTDs = 0;
-                    p.PassingYards = 0;
-                    p.Interceptions = 0;
-                    p.Receptions = 0;
-                    p.ReceivingYards = 0;
-                    p.ReceivingYardsThisWeek = 0;
-                    p.ReceivingTDs = 0;
-                    p.Carries = 0;
-                    p.RushingYards = 0;
-                    p.YardsPerCarry = 0.0;
-                    p.RushingTDs = 0;
-                    p.Fumbles = 0;
-                    p.Tackles = 0;
-                    p.DefensiveInterceptions = 0;
-                    p.TacklesForLoss = 0;
-                    p.Sacks = 0;
-                    p.FGAttempts = 0;
-                    p.FGMakes = 0;
-                    p.XPAttempts = 0;
-                    p.XPMakes = 0;
-                    p.Punts = 0;
-                    p.NetPuntYards = 0;
-                    p.NetPuntAverage = 0;
-                    p.SacksAllowed = 0;
-                    p.PassesDefended = 0;
-                    p.PancakeBlocks = 0;
-                    p.MVPScore = 0;
-                    p.OPOYScore = 0;
-                    p.DPOYScore = 0;
-                }
-        }
+        
         public int DiceRoll()
         {
             int firstDie = rnd.Next(1, 7);

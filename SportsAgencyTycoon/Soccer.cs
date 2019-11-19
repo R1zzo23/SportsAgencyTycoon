@@ -78,7 +78,7 @@ namespace SportsAgencyTycoon
                 //mainForm.newsLabel.Text = DisplayDefensemanOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
                 //mainForm.newsLabel.Text = DisplayKeeperOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
 
-                //mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
             }
             if (MLS.Playoffs)
             {
@@ -145,9 +145,9 @@ namespace SportsAgencyTycoon
                     team2.Wins++;
                     Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
                 }
-                team1.PlayedGameThisCycle = true;
-                team2.PlayedGameThisCycle = true;
             }
+            team1.PlayedGameThisCycle = true;
+            team2.PlayedGameThisCycle = true;
         }
         private void CalculateTeamPoints(Team t)
         {
@@ -155,7 +155,43 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Playoffs
+        private string DeterminePlayoffField()
+        {
+            string playoffSeedings = "";
+            EasternConference.Clear();
+            WesternConference.Clear();
+            EasternPlayoffs.Clear();
+            WesternPlayoffs.Clear();
 
+            foreach (Team t in World.MLS.TeamList)
+            {
+                if (t.Conference == "Eastern") EasternConference.Add(t);
+                else WesternConference.Add(t);
+            }
+
+            EasternConference = EasternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            WesternConference = WesternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+
+            for (int i = 0; i < 7; i++)
+            {
+                EasternPlayoffs.Add(EasternConference[i]);
+                WesternPlayoffs.Add(WesternConference[i]);
+            }
+
+            playoffSeedings = "Eastern Conference Playoffs:" + Environment.NewLine + "#1 " + EasternPlayoffs[0].Abbreviation +
+                Environment.NewLine + "#2 " + EasternPlayoffs[1].Abbreviation + " vs. #7 " + EasternPlayoffs[6].Abbreviation +
+                Environment.NewLine + "#3 " + EasternPlayoffs[2].Abbreviation + " vs. #6 " + EasternPlayoffs[5].Abbreviation +
+                Environment.NewLine + "#4 " + EasternPlayoffs[3].Abbreviation + " vs. #5 " + EasternPlayoffs[4].Abbreviation +
+                Environment.NewLine;
+                
+            playoffSeedings += "Western Conference Playoffs:" + Environment.NewLine + "#1 " + WesternPlayoffs[0].Abbreviation +
+                Environment.NewLine + "#2 " + WesternPlayoffs[1].Abbreviation + " vs. #7 " + WesternPlayoffs[6].Abbreviation +
+                Environment.NewLine + "#3 " + WesternPlayoffs[2].Abbreviation + " vs. #6 " + WesternPlayoffs[5].Abbreviation +
+                Environment.NewLine + "#4 " + WesternPlayoffs[3].Abbreviation + " vs. #5 " + WesternPlayoffs[4].Abbreviation +
+                Environment.NewLine;
+
+            return playoffSeedings;
+        }
         #endregion
         #endregion
         #region Awards

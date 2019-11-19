@@ -13,13 +13,13 @@ namespace SportsAgencyTycoon
         public int SeasonsPlayed;
         public int TitlesWon;
         public int AllStarTeams;
-        public int Goals;
-        public int Assists;
-        public int Shots;
-        public int Saves;
-        public int ShotsFaced;
-        public int ShutOuts;
-        public double MatchRating;
+        public int Goals = 0;
+        public int Assists = 0;
+        public int Shots = 0;
+        public int Saves = 0;
+        public int ShotsFaced = 0;
+        public int CleanSheets = 0;
+        public double MatchRating = 0.0;
 
         public SoccerPlayer(Random rnd, int id, Sports sport, int age, Position position)
             : base(rnd, id, sport, age)
