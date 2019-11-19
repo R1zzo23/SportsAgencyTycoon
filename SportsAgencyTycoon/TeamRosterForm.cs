@@ -279,7 +279,7 @@ namespace SportsAgencyTycoon
         }
         public string DisplayGoalieStats(HockeyPlayer player)
         {
-            string results = "GP: " + player.GamesPlayed + Environment.NewLine + "WINS: " + player.Wins + Environment.NewLine + "LOSSES: " + (player.GamesPlayed - player.Wins) + Environment.NewLine + "SAVES: " + player.Saves + Environment.NewLine + "SAVE%: " + player.SavePercentage.ToString("P2") + Environment.NewLine + "GAA: " + player.GAA.ToString("0.##");
+            string results = "SAVE%: " + player.SavePercentage.ToString("P2") + Environment.NewLine + "GAA: " + player.GAA.ToString("0.##") + Environment.NewLine + "SHUTOUTS: " + player.ShutOuts;
             return results;
         }
         public string DisplaySkaterStats(HockeyPlayer player)

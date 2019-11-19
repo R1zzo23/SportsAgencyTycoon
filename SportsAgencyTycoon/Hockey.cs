@@ -118,8 +118,13 @@ namespace SportsAgencyTycoon
                         else
                             p.GamesPlayed += gamesForBackup;
 
-                        if (t.WinsThisWeek > 0)
+                        /*if (t.WinsThisWeek > 0)
                             DetermineGoalieWins(t.WinsThisWeek);
+                        else
+                        {
+                            starterWins = 0;
+                            backupWins = 0;
+                        }*/
 
                         DetermineShotsFaced(p);
                     }
@@ -135,14 +140,56 @@ namespace SportsAgencyTycoon
         }
         private void DetermineGoalsScored(HockeyPlayer p)
         {
-            int playerDiceRoll = DiceRoll();
+            int playerDiceRoll = 0;
+            int neededDiceNumber = 0;
+            int numberOfRolls = 0;
+            if (p.CurrentSkill >= 70)
+                numberOfRolls = 3;
+            else if (p.CurrentSkill >= 50)
+                numberOfRolls = 2;
+            else numberOfRolls = 1;
+
+            for (int i = 0; i < numberOfRolls; i++)
+            {
+                playerDiceRoll = DiceRoll();
+                if (p.Position == Position.W || p.Position == Position.C)
+                {
+                    if (p.CurrentSkill >= 70)
+                        neededDiceNumber = 7;
+                    else if (p.CurrentSkill >= 60)
+                        neededDiceNumber = 8;
+                    else if (p.CurrentSkill >= 50)
+                        neededDiceNumber = 9;
+                    else if (p.CurrentSkill >= 40)
+                        neededDiceNumber = 10;
+                    else if (p.CurrentSkill >= 30)
+                        neededDiceNumber = 11;
+                    else neededDiceNumber = 12;
+                }
+                else if (p.Position == Position.D)
+                {
+                    if (p.CurrentSkill >= 70)
+                        neededDiceNumber = 9;
+                    else if (p.CurrentSkill >= 60)
+                        neededDiceNumber = 10;
+                    else if (p.CurrentSkill >= 50)
+                        neededDiceNumber = 10;
+                    else if (p.CurrentSkill >= 40)
+                        neededDiceNumber = 11;
+                    else if (p.CurrentSkill >= 30)
+                        neededDiceNumber = 11;
+                    else neededDiceNumber = 12;
+                }
+                if (playerDiceRoll >= neededDiceNumber) p.Goals++;
+            }
+            /*int playerDiceRoll = DiceRoll();
             int neededDiceNumber = 0;
             if (p.Position == Position.W || p.Position == Position.C)
             {
                 if (p.CurrentSkill >= 70)
-                    neededDiceNumber = 5;
+                    neededDiceNumber = 3;
                 else if (p.CurrentSkill >= 60)
-                    neededDiceNumber = 6;
+                    neededDiceNumber = 5;
                 else if (p.CurrentSkill >= 50)
                     neededDiceNumber = 7;
                 else if (p.CurrentSkill >= 40)
@@ -165,7 +212,7 @@ namespace SportsAgencyTycoon
                     neededDiceNumber = 11;
                 else neededDiceNumber = 12;
             }
-            if (playerDiceRoll >= neededDiceNumber) p.Goals++;
+            if (playerDiceRoll >= neededDiceNumber) p.Goals++;*/
         }
         private void DetermineAssists(HockeyPlayer p)
         {
@@ -197,11 +244,12 @@ namespace SportsAgencyTycoon
             else
             {
                 int diceRoll = DiceRoll();
-                if (diceRoll >= 8)
+                if (diceRoll >= 10)
                 {
                     backupWins = 1;
                     starterWins = teamWins - 1;
                 }
+                else starterWins = teamWins;
             }
         }
         private void DetermineShotsFaced(HockeyPlayer p)
@@ -210,13 +258,15 @@ namespace SportsAgencyTycoon
             int numberOfGames = 0;
             if (p.DepthChart == 1)
             {
-                p.Wins += starterWins;
+                //p.Wins += starterWins;
                 numberOfGames = gamesForStarter;
+                //p.GamesPlayed += gamesForStarter;
             }
             else
             {
-                p.Wins += backupWins;
+                //p.Wins += backupWins;
                 numberOfGames = gamesForBackup;
+                //p.GamesPlayed += gamesForBackup;
             }
 
             if (numberOfGames > 0)
@@ -518,11 +568,11 @@ namespace SportsAgencyTycoon
 
             forwardRanks = forwardRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
 
-            results = forwardRanks[0].Team.City + "'s " + forwardRanks[0].FullName + " has been named NHL Forward of the Year!" + Environment.NewLine +
+            results = forwardRanks[0].Team.City + "'s " + forwardRanks[0].FullName + " has been named NHL Forward of the Year! " + forwardRanks[0].PlayerOfYearScore + Environment.NewLine +
                 "Here are the rest of the top-5:";
             for (int i = 2; i < 6; i++)
             {
-                results += Environment.NewLine + i + ") [" + forwardRanks[i - 1].Team.Abbreviation + "] " + forwardRanks[i - 1].FullName;
+                results += Environment.NewLine + i + ") [" + forwardRanks[i - 1].Team.Abbreviation + "] " + forwardRanks[i - 1].FullName + " " + forwardRanks[i - 1].PlayerOfYearScore;
             }
 
             //give the winner the award
