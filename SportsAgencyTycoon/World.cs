@@ -149,7 +149,7 @@ namespace SportsAgencyTycoon
             MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(3, Months.April, 1), new Date(10, Months.October, 4), 6, 35000000, 555000);
             NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.September, 3), new Date(2, Months.February, 1), 6, 30000000, 495000);
             NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(9, Months.October, 1), new Date(6, Months.June, 2), 8, 9500000, 650000);
-            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(2, Months.March, 2), new Date(12, Months.December, 2), 9, 7000000, 56250);
+            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(2, Months.March, 2), new Date(10, Months.November, 4), 9, 7000000, 56250);
         }
         public void CreateCalendarEventsForLeagueStartAndEnd()
         {
@@ -857,30 +857,30 @@ namespace SportsAgencyTycoon
         }
         public void CreateMLSTeams(Random rnd)
         {
-            MLS.TeamList.Add(new Team("Atlanta", "United FC", "ATL", 55, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Chicago", "Fire", "CHI", 45, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Cincinnati", "FC", "CIN", 33, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Colorado", "Rapids", "COL", 37, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Columbus", "Crew SC", "CLM", 39, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("D.C.", "United", "DCU", 41, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Dallas", "FC", "DAL", 43, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Houston", "Dynamo", "HOU", 41, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("LA", "Galaxy", "LAG", 66, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Los Angeles", "FC", "LAFC", 60, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Minnesota", "United FC", "MIN", 37, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Montreal", "Impact", "MON", 31, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("New England", "Revolution", "NE", 33, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("New York City", "FC", "NYCFC", 57, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("New York", "Red Bulls", "NYRB", 55, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Orlando City", "FC", "ORL", 44, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Philadelphia", "Union", "PHI", 31, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Portland", "Timbers", "POR", 62, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Salt Lake", "Real", "RSL", 32, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("San Jose", "Earthquakes", "SJ", 36, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Seattle", "Sounders FC", "SEA", 77, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Kansas City", "Sporting", "KC", 35, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Toronto", "FC", "TOR", 41, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Vancouver", "Whitecaps FC", "VAN", 29, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Atlanta", "United FC", "Eastern", "", "ATL", 55, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Chicago", "Fire", "Eastern", "", "CHI", 45, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Cincinnati", "FC", "Eastern", "", "CIN", 33, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Colorado", "Rapids", "Western", "", "COL", 37, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Columbus", "Crew SC", "Eastern", "", "CLM", 39, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("D.C.", "United", "Eastern", "", "DCU", 41, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Dallas", "FC", "Western", "", "DAL", 43, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Houston", "Dynamo", "Western", "", "HOU", 41, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("LA", "Galaxy", "Western", "", "LAG", 66, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Los Angeles", "FC", "Western", "", "LAFC", 60, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Minnesota", "United FC", "Western", "", "MIN", 37, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Montreal", "Impact", "Eastern", "", "MON", 31, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("New England", "Revolution", "Eastern", "", "NE", 33, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("New York City", "FC", "Eastern", "", "NYCFC", 57, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("New York", "Red Bulls", "Eastern", "", "NYRB", 55, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Orlando City", "FC", "Eastern", "", "ORL", 44, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Philadelphia", "Union", "Eastern", "", "PHI", 31, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Portland", "Timbers", "Western", "", "POR", 62, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Salt Lake", "Real", "Western", "", "RSL", 32, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("San Jose", "Earthquakes", "Western", "", "SJ", 36, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Seattle", "Sounders FC", "Western", "", "SEA", 77, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Kansas City", "Sporting", "Western", "", "KC", 35, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Toronto", "FC", "TOR", "Eastern", "", 41, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Vancouver", "Whitecaps FC", "Western", "", "VAN", 29, rnd.Next(25, 76)));
         }
         #endregion
 
