@@ -143,60 +143,32 @@ namespace SportsAgencyTycoon
             int playerDiceRoll = 0;
             int neededDiceNumber = 0;
             int numberOfRolls = 0;
-            if (p.CurrentSkill >= 70)
-                numberOfRolls = 3;
-            else if (p.CurrentSkill >= 50)
-                numberOfRolls = 2;
-            else numberOfRolls = 1;
-
-            for (int i = 0; i < numberOfRolls; i++)
-            {
-                playerDiceRoll = DiceRoll();
-                if (p.Position == Position.W || p.Position == Position.C)
-                {
-                    if (p.CurrentSkill >= 70)
-                        neededDiceNumber = 7;
-                    else if (p.CurrentSkill >= 60)
-                        neededDiceNumber = 8;
-                    else if (p.CurrentSkill >= 50)
-                        neededDiceNumber = 9;
-                    else if (p.CurrentSkill >= 40)
-                        neededDiceNumber = 10;
-                    else if (p.CurrentSkill >= 30)
-                        neededDiceNumber = 11;
-                    else neededDiceNumber = 12;
-                }
-                else if (p.Position == Position.D)
-                {
-                    if (p.CurrentSkill >= 70)
-                        neededDiceNumber = 9;
-                    else if (p.CurrentSkill >= 60)
-                        neededDiceNumber = 10;
-                    else if (p.CurrentSkill >= 50)
-                        neededDiceNumber = 10;
-                    else if (p.CurrentSkill >= 40)
-                        neededDiceNumber = 11;
-                    else if (p.CurrentSkill >= 30)
-                        neededDiceNumber = 11;
-                    else neededDiceNumber = 12;
-                }
-                if (playerDiceRoll >= neededDiceNumber) p.Goals++;
-            }
-            /*int playerDiceRoll = DiceRoll();
-            int neededDiceNumber = 0;
             if (p.Position == Position.W || p.Position == Position.C)
             {
                 if (p.CurrentSkill >= 70)
-                    neededDiceNumber = 3;
-                else if (p.CurrentSkill >= 60)
-                    neededDiceNumber = 5;
+                    numberOfRolls = 3;
                 else if (p.CurrentSkill >= 50)
-                    neededDiceNumber = 7;
-                else if (p.CurrentSkill >= 40)
+                    numberOfRolls = 2;
+                else numberOfRolls = 1;
+            }
+            else
+            {
+                if (p.CurrentSkill >= 55) numberOfRolls = 2;
+                else numberOfRolls = 1;
+            }
+            if (p.Position == Position.W || p.Position == Position.C)
+            {
+                if (p.CurrentSkill >= 70)
                     neededDiceNumber = 8;
-                else if (p.CurrentSkill >= 30)
+                else if (p.CurrentSkill >= 60)
                     neededDiceNumber = 9;
-                else neededDiceNumber = 10;
+                else if (p.CurrentSkill >= 50)
+                    neededDiceNumber = 10;
+                else if (p.CurrentSkill >= 40)
+                    neededDiceNumber = 11;
+                else if (p.CurrentSkill >= 30)
+                    neededDiceNumber = 11;
+                else neededDiceNumber = 12;
             }
             else if (p.Position == Position.D)
             {
@@ -212,26 +184,43 @@ namespace SportsAgencyTycoon
                     neededDiceNumber = 11;
                 else neededDiceNumber = 12;
             }
-            if (playerDiceRoll >= neededDiceNumber) p.Goals++;*/
+
+            for (int i = 0; i < numberOfRolls; i++)
+            {
+                playerDiceRoll = DiceRoll();
+                if (playerDiceRoll >= neededDiceNumber) p.Goals++;
+            }
         }
         private void DetermineAssists(HockeyPlayer p)
         {
-            int playerDiceRoll = DiceRoll();
+            int playerDiceRoll = 0;
             int neededDiceNumber = 0;
+            int numberOfRolls = 0;
 
             if (p.CurrentSkill >= 70)
-                neededDiceNumber = 4;
-            else if (p.CurrentSkill >= 60)
-                neededDiceNumber = 5;
+                numberOfRolls = 3;
             else if (p.CurrentSkill >= 50)
-                neededDiceNumber = 6;
-            else if (p.CurrentSkill >= 40)
-                neededDiceNumber = 7;
-            else if (p.CurrentSkill >= 30)
-                neededDiceNumber = 8;
-            else neededDiceNumber = 9;
+                numberOfRolls = 2;
+            else numberOfRolls = 1;
 
-            if (playerDiceRoll >= neededDiceNumber) p.Assists++;
+            if (p.CurrentSkill >= 70)
+                neededDiceNumber = 6;
+            else if (p.CurrentSkill >= 60)
+                neededDiceNumber = 7;
+            else if (p.CurrentSkill >= 50)
+                neededDiceNumber = 8;
+            else if (p.CurrentSkill >= 40)
+                neededDiceNumber = 9;
+            else if (p.CurrentSkill >= 30)
+                neededDiceNumber = 10;
+            else neededDiceNumber = 12;
+
+            for (int i = 0; i < numberOfRolls; i++)
+            {
+                playerDiceRoll = DiceRoll();
+                if (playerDiceRoll >= neededDiceNumber) p.Assists++;
+            }
+            
         }
         private void CalculatePoints(HockeyPlayer p)
         {
@@ -290,15 +279,15 @@ namespace SportsAgencyTycoon
                 int saveRoll = DiceRoll();
                 if (p.CurrentSkill >= 65)
                 {
-                    if (saveRoll > 2) saves++;
+                    if (saveRoll > 3) saves++;
                 }
                 else if (p.CurrentSkill >= 45)
                 {
-                    if (saveRoll > 3) saves++;
+                    if (saveRoll > 4) saves++;
                 }
                 else
                 {
-                    if (saveRoll > 4) saves++;
+                    if (saveRoll > 5) saves++;
                 }
             }
             p.Saves += saves;
@@ -545,7 +534,7 @@ namespace SportsAgencyTycoon
         private void CalculatePlayerOfTheYearScore(HockeyPlayer p)
         {
             double score = 0;
-            score = p.CurrentSkill * 2 + p.Team.Wins * 5 + p.Popularity * 2 + p.Goals * 2 + p.Assists;
+            score = p.CurrentSkill * 2 + p.Team.Wins * 3 + p.Popularity * 2 + p.Goals * 3 + p.Assists;
             p.PlayerOfYearScore = score;
         }
         private void CalculateGoalieOfTheYearScore(HockeyPlayer p)
