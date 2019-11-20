@@ -169,7 +169,7 @@ namespace SportsAgencyTycoon
             int diceRoll2 = DiceRoll();
             if (p.Position == Position.F)
             {
-                if (p.DepthChart == 1)
+                if (p.DepthChart == 1 || p.DepthChart == 2)
                 {
                     if (p.CurrentSkill >= 65)
                     {
@@ -207,7 +207,7 @@ namespace SportsAgencyTycoon
             }
             else if (p.Position == Position.MID)
             {
-                if (p.DepthChart == 1)
+                if (p.DepthChart == 1 || p.DepthChart == 2)
                 {
                     if (p.CurrentSkill >= 65)
                     {
@@ -245,7 +245,7 @@ namespace SportsAgencyTycoon
             }
             else if (p.Position == Position.D)
             {
-                if (p.DepthChart == 1)
+                if (p.DepthChart == 1 || p.DepthChart == 2)
                 {
                     if (p.CurrentSkill >= 60)
                     {
@@ -268,6 +268,36 @@ namespace SportsAgencyTycoon
             DetermineGoals(p, shotsTaken);
         }
         private void DetermineGoals(SoccerPlayer p, int shotsTaken)
+        {
+            int goalsScored = 0;
+            int diceRoll = 0;
+            for (int i = 0; i < shotsTaken; i++)
+            {
+                diceRoll = DiceRoll();
+                if (p.Position == Position.F)
+                {
+                    if (p.CurrentSkill >= 65 && diceRoll <= 6) goalsScored++;
+                    else if (p.CurrentSkill >= 50 && diceRoll <= 5) goalsScored++;
+                    else if (p.CurrentSkill >= 35 && diceRoll <= 4) goalsScored++;
+                    else if (p.CurrentSkill < 35 && diceRoll <= 3) goalsScored++;
+                }
+                else if (p.Position == Position.MID)
+                {
+                    if (p.CurrentSkill >= 65 && diceRoll <= 5) goalsScored++;
+                    else if (p.CurrentSkill >= 50 && diceRoll <= 4) goalsScored++;
+                    else if (p.CurrentSkill >= 35 && diceRoll <= 3) goalsScored++;
+                    else if (p.CurrentSkill < 35 && diceRoll <= 2) goalsScored++;
+                }
+                else if (p.Position == Position.D)
+                {
+                    if (p.CurrentSkill >= 65 && diceRoll <= 4) goalsScored++;
+                    else if (p.CurrentSkill >= 50 && diceRoll <= 3) goalsScored++;
+                    else if (p.CurrentSkill < 50 && diceRoll == 2) goalsScored++;
+                }
+            }
+            p.Goals += goalsScored;
+        }
+        private void DetermineAssists(SoccerPlayer p)
         {
 
         }
