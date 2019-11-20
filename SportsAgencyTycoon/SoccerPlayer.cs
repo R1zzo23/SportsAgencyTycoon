@@ -20,6 +20,9 @@ namespace SportsAgencyTycoon
         public int GoalsAllowed = 0;
         public int ShotsFaced = 0;
         public int CleanSheets = 0;
+        public int GamesPlayed = 0;
+        public double GAA = 0.0;
+        public double SavePercentage = 0.0;
         public double MatchRating = 0.0;
 
         public SoccerPlayer(Random rnd, int id, Sports sport, int age, Position position)

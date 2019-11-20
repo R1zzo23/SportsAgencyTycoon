@@ -95,7 +95,6 @@ namespace SportsAgencyTycoon
             else if (p.CurrentSkill >= 30) p.MatchRating = Convert.ToDouble(rnd.Next(500, 650)) / 100;
             else if (p.CurrentSkill >= 20) p.MatchRating = Convert.ToDouble(rnd.Next(450, 550)) / 100;
             else p.MatchRating = Convert.ToDouble(rnd.Next(180, 195)) / 100;
-
         }
         private void UpdateStats()
         {
@@ -106,14 +105,24 @@ namespace SportsAgencyTycoon
                     {
                         DetermineShotsFaced(p);
                     }
+                    else
+                    {
+                        UpdateMatchRating(p);
+                        DetermineShotsTaken(p);
+                    }
                 }
         }
+        #region Goal Keeper Stats
         private void DetermineShotsFaced(SoccerPlayer p)
         {
-            int shotsFaced = rnd.Next(2, 7);
-            p.ShotsFaced = shotsFaced;
+            if (p.DepthChart == 1)
+            {
+                p.GamesPlayed++;
+                int shotsFaced = rnd.Next(2, 7);
+                p.ShotsFaced = shotsFaced;
 
-            DetermineSaves(p, shotsFaced);
+                DetermineSaves(p, shotsFaced);
+            }
         }
         private void DetermineSaves(SoccerPlayer p, int shotsFaced)
         {
@@ -133,8 +142,136 @@ namespace SportsAgencyTycoon
             }
             if (goalsAllowed > 4) goalsAllowed = 4;
             p.GoalsAllowed += goalsAllowed;
+            if (goalsAllowed == 0) p.CleanSheets++;
+            CalculateGAA(p);
+            CalculateSavePercentage(p);
         }
+        private void CalculateGAA(SoccerPlayer p)
+        {
+            p.GAA = Convert.ToDouble(p.GoalsAllowed) / Convert.ToDouble(p.GamesPlayed);
+        }
+        private void CalculateSavePercentage(SoccerPlayer p)
+        {
+            p.SavePercentage = Convert.ToDouble(p.Saves) / Convert.ToDouble(p.ShotsFaced);
+        }
+        #endregion
+        #region Non-Goal Keeper Stats
+        private void UpdateMatchRating(SoccerPlayer p)
+        {
+            double change = Convert.ToDouble(rnd.Next(-50, 51)) / 1000;
+            p.MatchRating *= (1 + change);
+            if (p.MatchRating > 10) p.MatchRating = 10.0;
+        }
+        private void DetermineShotsTaken(SoccerPlayer p)
+        {
+            int shotsTaken = 0;
+            int diceRoll = DiceRoll();
+            int diceRoll2 = DiceRoll();
+            if (p.Position == Position.F)
+            {
+                if (p.DepthChart == 1)
+                {
+                    if (p.CurrentSkill >= 65)
+                    {
+                        if (diceRoll <= 3) shotsTaken = 3;
+                        else if (diceRoll == 12) shotsTaken = 1;
+                        else shotsTaken = 2;
+                    }
+                    else if (p.CurrentSkill >= 45)
+                    {
+                        if (diceRoll <= 3) shotsTaken = 2;
+                        else if (diceRoll == 12) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                    else
+                    {
+                        if (diceRoll == 2) shotsTaken = 2;
+                        if (diceRoll >= 11) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                }
+                else
+                {
+                    if (p.CurrentSkill >= 55)
+                    {
+                        if (diceRoll <= 3) shotsTaken = 2;
+                        else if (diceRoll >= 10) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                    else
+                    {
+                        if (diceRoll <= 4) shotsTaken = 1;
+                        else shotsTaken = 0;
+                    }
+                }
+            }
+            else if (p.Position == Position.MID)
+            {
+                if (p.DepthChart == 1)
+                {
+                    if (p.CurrentSkill >= 65)
+                    {
+                        if (diceRoll <= 3) shotsTaken = 2;
+                        else if (diceRoll >= 11) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                    else if (p.CurrentSkill >= 45)
+                    {
+                        if (diceRoll == 2) shotsTaken = 2;
+                        else if (diceRoll == 7) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                    else
+                    {
+                        if (diceRoll == 2) shotsTaken = 2;
+                        if (diceRoll >= 8) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                }
+                else
+                {
+                    if (p.CurrentSkill >= 55)
+                    {
+                        if (diceRoll == 2) shotsTaken = 2;
+                        else if (diceRoll >= 6) shotsTaken = 0;
+                        else shotsTaken = 1;
+                    }
+                    else
+                    {
+                        if (diceRoll <= 3) shotsTaken = 1;
+                        else shotsTaken = 0;
+                    }
+                }
+            }
+            else if (p.Position == Position.D)
+            {
+                if (p.DepthChart == 1)
+                {
+                    if (p.CurrentSkill >= 60)
+                    {
+                        if (diceRoll <= 3) shotsTaken = 1;
+                        else shotsTaken = 0;
+                    }
+                    else
+                    {
+                        if (diceRoll == 2) shotsTaken = 1;
+                        else shotsTaken = 0;
+                    }
+                }
+                else
+                {
+                    diceRoll2 = DiceRoll();
+                    if (diceRoll <= 3 && diceRoll2 <= 3) shotsTaken = 1;
+                    else shotsTaken = 0;
+                }
+            }
+            DetermineGoals(p, shotsTaken);
+        }
+        private void DetermineGoals(SoccerPlayer p, int shotsTaken)
+        {
 
+        }
+        #endregion
         #endregion
         #region Simulation
         #region Regular Season
