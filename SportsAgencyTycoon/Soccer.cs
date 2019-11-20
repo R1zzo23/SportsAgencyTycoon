@@ -99,8 +99,42 @@ namespace SportsAgencyTycoon
         }
         private void UpdateStats()
         {
-
+            foreach (Team t in MLS.TeamList)
+                foreach (SoccerPlayer p in t.Roster)
+                {
+                    if (p.Position == Position.GK)
+                    {
+                        DetermineShotsFaced(p);
+                    }
+                }
         }
+        private void DetermineShotsFaced(SoccerPlayer p)
+        {
+            int shotsFaced = rnd.Next(2, 7);
+            p.ShotsFaced = shotsFaced;
+
+            DetermineSaves(p, shotsFaced);
+        }
+        private void DetermineSaves(SoccerPlayer p, int shotsFaced)
+        {
+            int gkSaveRoll = 0;
+            int goalsAllowed = 0;
+            int diceRoll = 0;
+            if (p.CurrentSkill >= 70) gkSaveRoll = 3;
+            else if (p.CurrentSkill >= 60) gkSaveRoll = 4;
+            else if (p.CurrentSkill >= 50) gkSaveRoll = 5;
+            else if (p.CurrentSkill >= 40) gkSaveRoll = 6;
+            else gkSaveRoll = 7;
+
+            for (int i = 0; i < shotsFaced; i++)
+            {
+                diceRoll = DiceRoll();
+                if (diceRoll <= gkSaveRoll) goalsAllowed++;
+            }
+            if (goalsAllowed > 4) goalsAllowed = 4;
+            p.GoalsAllowed += goalsAllowed;
+        }
+
         #endregion
         #region Simulation
         #region Regular Season
@@ -204,5 +238,11 @@ namespace SportsAgencyTycoon
 
         }
         #endregion
+        public int DiceRoll()
+        {
+            int firstDie = rnd.Next(1, 7);
+            int secondDie = rnd.Next(1, 7);
+            return firstDie + secondDie;
+        }
     }
 }

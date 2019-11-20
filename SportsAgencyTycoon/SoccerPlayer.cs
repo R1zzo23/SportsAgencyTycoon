@@ -17,6 +17,7 @@ namespace SportsAgencyTycoon
         public int Assists = 0;
         public int Shots = 0;
         public int Saves = 0;
+        public int GoalsAllowed = 0;
         public int ShotsFaced = 0;
         public int CleanSheets = 0;
         public double MatchRating = 0.0;
