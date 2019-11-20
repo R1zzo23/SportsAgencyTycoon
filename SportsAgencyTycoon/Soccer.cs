@@ -82,20 +82,12 @@ namespace SportsAgencyTycoon
             }
             if (MLS.Playoffs)
             {
-                //if (MLS.WeekNumber == 32 || MLS.WeekNumber == 33 || MLS.WeekNumber == 34) mainForm.newsLabel.Text = SimulatePlayoffRound() + Environment.NewLine + mainForm.newsLabel.Text;
-                //else if (MLS.WeekNumber == 35) mainForm.newsLabel.Text = SimulateStanleyCup() + Environment.NewLine + mainForm.newsLabel.Text;
+                if (MLS.WeekNumber == 35) mainForm.newsLabel.Text = SimulateFirstRound() + Environment.NewLine + mainForm.newsLabel.Text;
+                else if (MLS.WeekNumber == 36 || MLS.WeekNumber == 37) mainForm.newsLabel.Text = SimulateSecondAndThirdRounds() + Environment.NewLine + mainForm.newsLabel.Text;
+                else if (MLS.WeekNumber == 38) mainForm.newsLabel.Text = SimulateChampionship() + Environment.NewLine + mainForm.newsLabel.Text;
             }
         }
         #region Statistics
-        private void InitializeMatchRating(SoccerPlayer p)
-        {
-            if (p.CurrentSkill >= 70) p.MatchRating = Convert.ToDouble(rnd.Next(850, 1000)) / 100;
-            else if (p.CurrentSkill >= 50) p.MatchRating = Convert.ToDouble(rnd.Next(700, 850)) / 100;
-            else if (p.CurrentSkill >= 40) p.MatchRating = Convert.ToDouble(rnd.Next(600, 750)) / 100;
-            else if (p.CurrentSkill >= 30) p.MatchRating = Convert.ToDouble(rnd.Next(500, 650)) / 100;
-            else if (p.CurrentSkill >= 20) p.MatchRating = Convert.ToDouble(rnd.Next(450, 550)) / 100;
-            else p.MatchRating = Convert.ToDouble(rnd.Next(180, 195)) / 100;
-        }
         private void UpdateStats()
         {
             foreach (Team t in MLS.TeamList)
@@ -109,6 +101,7 @@ namespace SportsAgencyTycoon
                     {
                         UpdateMatchRating(p);
                         DetermineShotsTaken(p);
+                        DetermineAssists(p);
                     }
                 }
         }
@@ -119,7 +112,7 @@ namespace SportsAgencyTycoon
             {
                 p.GamesPlayed++;
                 int shotsFaced = rnd.Next(2, 7);
-                p.ShotsFaced = shotsFaced;
+                p.ShotsFaced += shotsFaced;
 
                 DetermineSaves(p, shotsFaced);
             }
@@ -142,6 +135,7 @@ namespace SportsAgencyTycoon
             }
             if (goalsAllowed > 4) goalsAllowed = 4;
             p.GoalsAllowed += goalsAllowed;
+            p.Saves += shotsFaced - goalsAllowed;
             if (goalsAllowed == 0) p.CleanSheets++;
             CalculateGAA(p);
             CalculateSavePercentage(p);
@@ -156,6 +150,15 @@ namespace SportsAgencyTycoon
         }
         #endregion
         #region Non-Goal Keeper Stats
+        private void InitializeMatchRating(SoccerPlayer p)
+        {
+            if (p.CurrentSkill >= 70) p.MatchRating = Convert.ToDouble(rnd.Next(750, 900)) / 100;
+            else if (p.CurrentSkill >= 50) p.MatchRating = Convert.ToDouble(rnd.Next(600, 750)) / 100;
+            else if (p.CurrentSkill >= 40) p.MatchRating = Convert.ToDouble(rnd.Next(500, 650)) / 100;
+            else if (p.CurrentSkill >= 30) p.MatchRating = Convert.ToDouble(rnd.Next(400, 550)) / 100;
+            else if (p.CurrentSkill >= 20) p.MatchRating = Convert.ToDouble(rnd.Next(300, 450)) / 100;
+            else p.MatchRating = Convert.ToDouble(rnd.Next(200, 350)) / 100;
+        }
         private void UpdateMatchRating(SoccerPlayer p)
         {
             double change = Convert.ToDouble(rnd.Next(-50, 51)) / 1000;
@@ -299,7 +302,67 @@ namespace SportsAgencyTycoon
         }
         private void DetermineAssists(SoccerPlayer p)
         {
-
+            bool assist = false;
+            int diceRoll = DiceRoll();
+            if (p.Position == Position.F || p.Position == Position.D)
+            {
+                if (p.DepthChart == 1 || p.DepthChart == 2)
+                {
+                    if (p.CurrentSkill >= 65)
+                    {
+                        if (diceRoll <= 4) assist = true;
+                    }
+                    else if (p.CurrentSkill >= 45)
+                    {
+                        if (diceRoll <= 3) assist = true; 
+                    }
+                    else
+                    {
+                        if (diceRoll == 2) assist = true;
+                    }
+                }
+                else
+                {
+                    if (p.CurrentSkill >= 55)
+                    {
+                        if (diceRoll <= 3) assist = true;
+                    }
+                    else
+                    {
+                        if (diceRoll == 2) assist = true;
+                    }
+                }
+            }
+            else if (p.Position == Position.MID)
+            {
+                if (p.DepthChart == 1 || p.DepthChart == 2)
+                {
+                    if (p.CurrentSkill >= 65)
+                    {
+                        if (diceRoll <= 6) assist = true;
+                    }
+                    else if (p.CurrentSkill >= 45)
+                    {
+                        if (diceRoll <= 4) assist = true;
+                    }
+                    else
+                    {
+                        if (diceRoll <= 3) assist = true;
+                    }
+                }
+                else
+                {
+                    if (p.CurrentSkill >= 55)
+                    {
+                        if (diceRoll <= 3) assist = true;
+                    }
+                    else
+                    {
+                        if (diceRoll == 2) assist = true;
+                    }
+                }
+            }
+            if (assist) p.Assists++;
         }
         #endregion
         #endregion
@@ -392,6 +455,88 @@ namespace SportsAgencyTycoon
                 Environment.NewLine;
 
             return playoffSeedings;
+        }
+        public void RemoveLosingTeamsFromPlayoffs()
+        {
+            EasternLoserIndex = EasternLoserIndex.OrderByDescending(i => i).ToList();
+            WesternLoserIndex = WesternLoserIndex.OrderByDescending(i => i).ToList();
+
+            foreach (int i in EasternLoserIndex) EasternPlayoffs.RemoveAt(i);
+            foreach (int i in WesternLoserIndex) WesternPlayoffs.RemoveAt(i);
+        }
+        private string SimulatePlayoffGame(Team team1, Team team2, int teamIndex1, int teamIndex2)
+        {
+            int totalNumber = team1.TitleConteder + team2.TitleConteder + 1;
+            int winningNumber = rnd.Next(1, totalNumber);
+            if (winningNumber <= team1.TitleConteder)
+            {
+                losingIndex = teamIndex2;
+                return team1.City + " " + team1.Mascot + " defeats " + team2.City + " " + team2.Mascot + "!";
+            }
+            else
+            {
+                losingIndex = teamIndex1;
+                return team2.City + " " + team2.Mascot + " defeats " + team1.City + " " + team1.Mascot + "!";
+            }
+        }
+        private string SimulateFirstRound()
+        {
+            string results = "";
+            EasternLoserIndex.Clear();
+            WesternLoserIndex.Clear();
+
+            for (int i = 0; i < EasternPlayoffs.Count / 2; i++)
+            {
+                results += SimulatePlayoffGame(EasternPlayoffs[i], EasternPlayoffs[EasternPlayoffs.Count - 1 - i], i, EasternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                EasternLoserIndex.Add(losingIndex);
+                results += SimulatePlayoffGame(WesternPlayoffs[i], WesternPlayoffs[EasternPlayoffs.Count - 1 - i], i, WesternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                WesternLoserIndex.Add(losingIndex);
+            }
+
+            RemoveLosingTeamsFromPlayoffs();
+
+            return results;
+        }
+        private string SimulateSecondAndThirdRounds()
+        {
+            string results = "";
+
+            EasternLoserIndex.Clear();
+            WesternLoserIndex.Clear();
+
+            for (int i = 0; i < EasternPlayoffs.Count / 2; i++)
+            {
+                results += SimulatePlayoffGame(EasternPlayoffs[i], EasternPlayoffs[EasternPlayoffs.Count - 1 - i], i, EasternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                EasternLoserIndex.Add(losingIndex);
+                results += SimulatePlayoffGame(WesternPlayoffs[i], WesternPlayoffs[EasternPlayoffs.Count - 1 - i], i, WesternPlayoffs.Count - 1 - i) + Environment.NewLine;
+                WesternLoserIndex.Add(losingIndex);
+            }
+
+            RemoveLosingTeamsFromPlayoffs();
+
+            return results;
+        }
+        private string SimulateChampionship()
+        {
+            string results = "";
+
+            EasternPlayoffs[0].Awards.Add(new Award(World.Year, "Eastern Conference Champs"));
+            WesternPlayoffs[0].Awards.Add(new Award(World.Year, "Western Conference Champs"));
+
+            results = SimulatePlayoffGame(EasternPlayoffs[0], WesternPlayoffs[0], 0, 1);
+            if (losingIndex == 0)
+            {
+                results = "The " + WesternPlayoffs[0].City + " " + WesternPlayoffs[0].Mascot + " are the " + World.Year + " MLS champions!" + Environment.NewLine + results;
+                WesternPlayoffs[0].Awards.Add(new Award(World.Year, "MLS Champions"));
+            }
+
+            else
+            {
+                results = "The " + EasternPlayoffs[0].City + " " + EasternPlayoffs[0].Mascot + " are the " + World.Year + " MLS champions!" + Environment.NewLine + results;
+                EasternPlayoffs[0].Awards.Add(new Award(World.Year, "MLS Champions"));
+            }
+
+            return results;
         }
         #endregion
         #endregion

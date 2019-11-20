@@ -86,6 +86,10 @@ namespace SportsAgencyTycoon
             {
                 lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.OTLosses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
             }
+            else if (selectedLeague.Sport == Sports.Soccer)
+            {
+                lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.Ties + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+            }
             else
             {
                 lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
@@ -146,6 +150,13 @@ namespace SportsAgencyTycoon
                 foreach (HockeyPlayer p in selectedTeam.Roster)
                     hockeyRoster.Add(p);
                 DisplayHockeyStats(hockeyRoster[cbTeamRoster.SelectedIndex]);
+            }
+            else if (selectedLeague.Sport == Sports.Soccer)
+            {
+                List<SoccerPlayer> soccerRoster = new List<SoccerPlayer>();
+                foreach (SoccerPlayer p in selectedTeam.Roster)
+                    soccerRoster.Add(p);
+                DisplaySoccerStats(soccerRoster[cbTeamRoster.SelectedIndex]);
             }
 
 
@@ -348,6 +359,22 @@ namespace SportsAgencyTycoon
             foreach (FootballPlayer fp in Punter)
                 stats += fp.FullName + " " + fp.Punts + " Punts || " + fp.NetPuntAverage.ToString("0.##") + " NET AVG";
 
+            return stats;
+        }
+        private void DisplaySoccerStats(SoccerPlayer player)
+        {
+            if (player.Position == Position.GK)
+                lblStats.Text = DisplayKeeperStats(player);
+            else lblStats.Text = DisplayNonKeeperStats(player);
+        }
+        private string DisplayKeeperStats(SoccerPlayer player)
+        {
+            string results = "SAVES: " + player.Saves + Environment.NewLine + "SAVE%: " + player.SavePercentage.ToString("P2") + Environment.NewLine + "GA: " + player.GoalsAllowed + Environment.NewLine + "GAA: " + player.GAA.ToString("0.##") + Environment.NewLine + "Clean Sheets: " + player.CleanSheets;
+            return results;
+        }
+        private string DisplayNonKeeperStats(SoccerPlayer player)
+        {
+            string stats = "GOALS: " + player.Goals + Environment.NewLine + "ASSISTS: " + player.Assists + Environment.NewLine + "Rating: " + player.MatchRating.ToString("#.00");
             return stats;
         }
     }
