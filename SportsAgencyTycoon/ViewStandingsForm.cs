@@ -81,6 +81,10 @@ namespace SportsAgencyTycoon
             {
                 DisplayHockeyStandings(selectedLeague);
             }
+            else if (selectedLeague.Sport == Sports.Soccer)
+            {
+                DisplaySoccerStandings(selectedLeague);
+            }
         }
         private void FillFootballLists(League l)
         {
@@ -173,7 +177,37 @@ namespace SportsAgencyTycoon
             NFCSouth = NFCSouth.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
             NFCWest = NFCWest.OrderByDescending(o => o.Wins).ThenByDescending(o => o.TitleConteder).ToList();
         }
+        private void DisplaySoccerStandings(League l)
+        {
+            EasternConference.Clear();
+            WesternConference.Clear();
 
+            foreach (Team t in l.TeamList)
+            {
+                if (t.Conference == "Eastern") EasternConference.Add(t);
+                else WesternConference.Add(t);
+            }
+
+            EasternConference = EasternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            WesternConference = WesternConference.OrderByDescending(o => o.Points).ThenByDescending(o => o.Wins).ToList();
+            
+            lblEastConference.Text = "Eastern Conference Standings:";
+            lblWestConference.Text = "Western Conference Standings:";
+            lblEastDivision1.Text = "";
+            lblEastDivision2.Text = "";
+            lblEastDivision3.Text = "";
+            lblEastDivision4.Text = "";
+            lblWestDivision1.Text = "";
+            lblWestDivision2.Text = "";
+            lblWestDivision3.Text = "";
+            lblWestDivision4.Text = "";
+
+            for (int i = 0; i < EasternConference.Count; i++)
+            {
+                lblEastConference.Text += Environment.NewLine + EasternConference[i].Abbreviation + " " + EasternConference[i].Wins + "-" + EasternConference[i].Losses + "-" + EasternConference[i].Ties;
+                lblWestConference.Text += Environment.NewLine + WesternConference[i].Abbreviation + " " + WesternConference[i].Wins + "-" + WesternConference[i].Losses + "-" + WesternConference[i].Ties;
+            }
+        }
         private void DisplayBasketballStandings(League l)
         {
             EasternConference.Clear();
@@ -211,9 +245,11 @@ namespace SportsAgencyTycoon
             lblEastDivision1.Text = "Atlantic Divisions Standings:";
             lblEastDivision2.Text = "Central Division Standings:";
             lblEastDivision3.Text = "Southeast Division Standings:";
+            lblEastDivision4.Text = "";
             lblWestDivision1.Text = "Northwest Division Standings:";
             lblWestDivision2.Text = "Southwest Division Standings:";
             lblWestDivision3.Text = "Pacific Division Standings:";
+            lblWestDivision4.Text = "";
 
             for (int i = 0; i < EasternConference.Count; i++)
             {
@@ -331,9 +367,11 @@ namespace SportsAgencyTycoon
             lblEastDivision1.Text = "AL East Standings:";
             lblEastDivision2.Text = "AL Central Standings:";
             lblEastDivision3.Text = "AL West Standings:";
+            lblEastDivision4.Text = "";
             lblWestDivision1.Text = "NL East Standings:";
             lblWestDivision2.Text = "NL Central Standings:";
             lblWestDivision3.Text = "NL West Standings:";
+            lblWestDivision4.Text = "";
 
             for (int i = 0; i < AmericanLeague.Count; i++)
             {
