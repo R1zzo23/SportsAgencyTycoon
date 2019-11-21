@@ -74,9 +74,10 @@ namespace SportsAgencyTycoon
                             CalculateKeeperOfTheYearScore(p);
                     }
                 }
-                //mainForm.newsLabel.Text = DisplayForwardOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
-                //mainForm.newsLabel.Text = DisplayDefensemanOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
-                //mainForm.newsLabel.Text = DisplayKeeperOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayForwardOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayMidfielderOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayDefensemanOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text = DisplayKeeperOfTheYearTop5() + Environment.NewLine + mainForm.newsLabel.Text;
 
                 mainForm.newsLabel.Text = DeterminePlayoffField() + Environment.NewLine + mainForm.newsLabel.Text;
             }
@@ -122,11 +123,10 @@ namespace SportsAgencyTycoon
             int gkSaveRoll = 0;
             int goalsAllowed = 0;
             int diceRoll = 0;
-            if (p.CurrentSkill >= 70) gkSaveRoll = 3;
-            else if (p.CurrentSkill >= 60) gkSaveRoll = 4;
-            else if (p.CurrentSkill >= 50) gkSaveRoll = 5;
-            else if (p.CurrentSkill >= 40) gkSaveRoll = 6;
-            else gkSaveRoll = 7;
+            if (p.CurrentSkill >= 65) gkSaveRoll = 5;
+            else if (p.CurrentSkill >= 50) gkSaveRoll = 6;
+            else if (p.CurrentSkill >= 35) gkSaveRoll = 7;
+            else gkSaveRoll = 8;
 
             for (int i = 0; i < shotsFaced; i++)
             {
@@ -543,11 +543,117 @@ namespace SportsAgencyTycoon
         #region Awards
         private void CalculatePlayerOfTheYearScore(SoccerPlayer p)
         {
+            int goalModifier = 4;
+            int assistModifier = 1;
+            double score = 0;
+            if (p.Position == Position.F) goalModifier = 7;
+            if (p.Position == Position.MID) assistModifier = 5;
 
+            score = (p.CurrentSkill * 2) + (p.Team.Points * 2) + (p.Popularity * 2) + (p.MatchRating * 10) + (p.Goals * goalModifier) + (p.Assists * assistModifier);
+            p.PlayerOfYearScore = score;
         }
         private void CalculateKeeperOfTheYearScore(SoccerPlayer p)
         {
+            double score = 0;
+            score = (p.CurrentSkill * 2) + (p.Team.Wins * 7) + (p.Popularity) + (2 - (p.GAA * 100)) + (p.CleanSheets * 5) + (p.Saves) + p.SavePercentage;
+            if (p.DepthChart != 1) score = score / 2;
+            p.PlayerOfYearScore = score;
+        }
+        private string DisplayForwardOfTheYearTop5()
+        {
+            string results = "";
 
+            List<SoccerPlayer> forwardRanks = new List<SoccerPlayer>();
+            foreach (Team t in World.MLS.TeamList)
+                foreach (SoccerPlayer p in t.Roster)
+                    if (p.Position == Position.F)
+                        forwardRanks.Add(p);
+
+            forwardRanks = forwardRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = forwardRanks[0].Team.City + " " + forwardRanks[0].Team.Mascot + "'s " + forwardRanks[0].FullName + " has been named MLS Forward of the Year! " + forwardRanks[0].PlayerOfYearScore + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + forwardRanks[i - 1].Team.Abbreviation + "] " + forwardRanks[i - 1].FullName + " " + forwardRanks[i - 1].PlayerOfYearScore;
+            }
+
+            //give the winner the award
+            forwardRanks[0].Awards.Add(new Award(World.Year, "Forward of the Year"));
+
+            return results;
+        }
+        private string DisplayMidfielderOfTheYearTop5()
+        {
+            string results = "";
+
+            List<SoccerPlayer> midfielderRanks = new List<SoccerPlayer>();
+            foreach (Team t in World.MLS.TeamList)
+                foreach (SoccerPlayer p in t.Roster)
+                    if (p.Position == Position.MID)
+                        midfielderRanks.Add(p);
+
+            midfielderRanks = midfielderRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = midfielderRanks[0].Team.City + " " + midfielderRanks[0].Team.Mascot + "'s " + midfielderRanks[0].FullName + " has been named MLS Midfiedler of the Year! " + midfielderRanks[0].PlayerOfYearScore + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + midfielderRanks[i - 1].Team.Abbreviation + "] " + midfielderRanks[i - 1].FullName + " " + midfielderRanks[i - 1].PlayerOfYearScore;
+            }
+
+            //give the winner the award
+            midfielderRanks[0].Awards.Add(new Award(World.Year, "Midfielder of the Year"));
+
+            return results;
+        }
+        private string DisplayDefensemanOfTheYearTop5()
+        {
+            string results = "";
+
+            List<SoccerPlayer> defenderRanks = new List<SoccerPlayer>();
+            foreach (Team t in World.MLS.TeamList)
+                foreach (SoccerPlayer p in t.Roster)
+                    if (p.Position == Position.D)
+                        defenderRanks.Add(p);
+
+            defenderRanks = defenderRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = defenderRanks[0].Team.City + " " + defenderRanks[0].Team.Mascot + "'s " + defenderRanks[0].FullName + " has been named MLS Defender of the Year! " + defenderRanks[0].PlayerOfYearScore + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + defenderRanks[i - 1].Team.Abbreviation + "] " + defenderRanks[i - 1].FullName + " " + defenderRanks[i - 1].PlayerOfYearScore;
+            }
+
+            //give the winner the award
+            defenderRanks[0].Awards.Add(new Award(World.Year, "Defender of the Year"));
+
+            return results;
+        }
+        private string DisplayKeeperOfTheYearTop5()
+        {
+            string results = "";
+
+            List<SoccerPlayer> keeperRanks = new List<SoccerPlayer>();
+            foreach (Team t in World.MLS.TeamList)
+                foreach (SoccerPlayer p in t.Roster)
+                    if (p.Position == Position.GK)
+                        keeperRanks.Add(p);
+
+            keeperRanks = keeperRanks.OrderByDescending(o => o.PlayerOfYearScore).ToList();
+
+            results = keeperRanks[0].Team.City + " " + keeperRanks[0].Team.Mascot + "'s " + keeperRanks[0].FullName + " has been named MLS Keeper of the Year! " + keeperRanks[0].PlayerOfYearScore + Environment.NewLine +
+                "Here are the rest of the top-5:";
+            for (int i = 2; i < 6; i++)
+            {
+                results += Environment.NewLine + i + ") [" + keeperRanks[i - 1].Team.Abbreviation + "] " + keeperRanks[i - 1].FullName + " " + keeperRanks[i - 1].PlayerOfYearScore;
+            }
+
+            //give the winner the award
+            keeperRanks[0].Awards.Add(new Award(World.Year, "Keeper of the Year"));
+
+            return results;
         }
         #endregion
         public int DiceRoll()

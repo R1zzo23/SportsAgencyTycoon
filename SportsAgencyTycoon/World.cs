@@ -879,7 +879,7 @@ namespace SportsAgencyTycoon
             MLS.TeamList.Add(new Team("San Jose", "Earthquakes", "Western", "", "SJ", 36, rnd.Next(25, 76)));
             MLS.TeamList.Add(new Team("Seattle", "Sounders FC", "Western", "", "SEA", 77, rnd.Next(25, 76)));
             MLS.TeamList.Add(new Team("Kansas City", "Sporting", "Western", "", "KC", 35, rnd.Next(25, 76)));
-            MLS.TeamList.Add(new Team("Toronto", "FC", "TOR", "Eastern", "", 41, rnd.Next(25, 76)));
+            MLS.TeamList.Add(new Team("Toronto", "FC", "Eastern", "", "TOR", 41, rnd.Next(25, 76)));
             MLS.TeamList.Add(new Team("Vancouver", "Whitecaps FC", "Western", "", "VAN", 29, rnd.Next(25, 76)));
         }
         #endregion
