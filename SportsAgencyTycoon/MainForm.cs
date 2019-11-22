@@ -1341,5 +1341,40 @@ namespace SportsAgencyTycoon
             viewStandingsForm.BringToFront();
             viewStandingsForm.ShowDialog();
         }
+
+        private void BtnMarketPlayer_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void BtnHireMarketer_Click(object sender, EventArgs e)
+        {
+            Marketer hiredMarketer = null;
+            MarketerSearch marketerSearch = new MarketerSearch(rnd, agency);
+            int fundsSpent = marketerSearch.FundsSpent;
+            string marketerType = marketerSearch.MarketerType;
+            Console.WriteLine(fundsSpent);
+            Console.WriteLine(marketerType);
+            agency.Money -= fundsSpent;
+            UpdateAgencyInfo();
+
+            if (fundsSpent != 0)
+            {
+                HireMarketerForm hireMarketerForm = new HireMarketerForm(fundsSpent, marketerType);
+                hireMarketerForm.HowManyAgents();
+                hireMarketerForm.CreateApplicants(world, rnd);
+                hireMarketerForm.BringToFront();
+                hireMarketerForm.ShowDialog();
+
+                hiredMarketer = hireMarketerForm.HiredMarketer;
+                if (hiredMarketer != null)
+                {
+                    agency.Marketers.Add(hiredMarketer);
+                    agency.AgentCount++;
+                    UpdateAgencyInfo();
+                    PopulateAgencyAgentList();
+                }
+            }
+        }
     }
 }
