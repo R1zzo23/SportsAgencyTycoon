@@ -101,6 +101,12 @@
       <DependentUpon>HireAgentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Golfer.cs" />
+    <Compile Include="HireMarketerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HireMarketerForm.Designer.cs">
+      <DependentUpon>HireMarketerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hockey.cs" />
     <Compile Include="HockeyPlayer.cs" />
     <Compile Include="LastName.cs" />
@@ -111,6 +117,13 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Marketer.cs" />
+    <Compile Include="MarketerSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarketerSearch.Designer.cs">
+      <DependentUpon>MarketerSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="MMAFighter.cs" />
     <Compile Include="Months.cs" />
@@ -170,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarketerSearch.resx">
+      <DependentUpon>MarketerSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NegotiatePercentageForm.resx">
       <DependentUpon>NegotiatePercentageForm.cs</DependentUpon>
