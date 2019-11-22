@@ -578,12 +578,14 @@ namespace SportsAgencyTycoon
                 if (b.Position == position) playersAtPosition.Add(b);
 
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
-            if (player == playersAtPosition[0]) starter = true;
-            else starter = false;
+            
             for (int i = 0; i < playersAtPosition.Count; i++)
             {
-                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+                playersAtPosition[i].DepthChart = i + 1;
             }
+
+            if (player == playersAtPosition[0]) starter = true;
+            else starter = false;
 
             player.IsStarter = starter;
 
@@ -608,6 +610,11 @@ namespace SportsAgencyTycoon
             else if (position == Position.C) starterCount = 1;
             else if (position == Position.RP) starterCount = 2;
 
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                playersAtPosition[i].DepthChart = i + 1;
+            }
+
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
@@ -615,10 +622,7 @@ namespace SportsAgencyTycoon
                     starter = true;
                 }
             }
-            for (int i = 0; i < playersAtPosition.Count; i++)
-            {
-                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
-            }
+            
             player.IsStarter = starter;
 
             return starter;
@@ -641,6 +645,11 @@ namespace SportsAgencyTycoon
             else if (position == Position.LB) starterCount = 4;
             else starterCount = 1;
 
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                playersAtPosition[i].DepthChart = i + 1;
+            }
+
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
@@ -648,10 +657,7 @@ namespace SportsAgencyTycoon
                     starter = true;
                 }
             }
-            for (int i = 0; i < playersAtPosition.Count; i++)
-            {
-                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
-            }
+            
             player.IsStarter = starter;
 
             return starter;
@@ -673,6 +679,11 @@ namespace SportsAgencyTycoon
             else if (position == Position.W) starterCount = 3;
             else starterCount = 2;
 
+            for (int i = 0; i < playersAtPosition.Count; i++)
+            {
+                playersAtPosition[i].DepthChart = i + 1;
+            }
+
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
@@ -680,10 +691,7 @@ namespace SportsAgencyTycoon
                     starter = true;
                 }
             }
-            for (int i = 0; i < playersAtPosition.Count; i++)
-            {
-                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
-            }
+            
             player.IsStarter = starter;
 
             return starter;
@@ -699,12 +707,15 @@ namespace SportsAgencyTycoon
                 if (s.Position == position) playersAtPosition.Add(s);
 
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
-            if (player == playersAtPosition[0]) starter = true;
-            else starter = false;
+
             for (int i = 0; i < playersAtPosition.Count; i++)
             {
-                if (player == playersAtPosition[i]) player.DepthChart = i + 1;
+                playersAtPosition[i].DepthChart = i + 1;
             }
+
+            if (player == playersAtPosition[0]) starter = true;
+            else starter = false;
+            
 
             player.IsStarter = starter;
 

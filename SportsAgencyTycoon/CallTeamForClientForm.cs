@@ -373,7 +373,7 @@ namespace SportsAgencyTycoon
             _Client.Contract.Years = years;
             _Client.Team = _Client.League.TeamList[cbTeamList.SelectedIndex];
             _Client.FreeAgent = false;
-
+            _Client.Team.Roster.Add(_Client);
 
             bool isStarter = false;
 
@@ -387,7 +387,7 @@ namespace SportsAgencyTycoon
             _Client.Contract.StartDate = _Client.League.SeasonStart;
             _Client.Contract.EndDate = _Client.League.SeasonEnd;
 
-            _Client.Team.Roster.Add(_Client);
+            
 
             MessageBox.Show("You've got a deal! Welcome to the team!");
             this.Close();
