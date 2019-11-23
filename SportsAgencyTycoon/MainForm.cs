@@ -1344,7 +1344,15 @@ namespace SportsAgencyTycoon
 
         private void BtnMarketPlayer_Click(object sender, EventArgs e)
         {
-            
+            Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+            Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
+            if (agency.MarketerCount == 0)
+                MessageBox.Show("Hire a marketer before running a marketing plan for this player.");
+            else
+            {
+                //create drop down list of agency.Markterers
+                //send selectedMarketer and selectedClient to MarketingPlanForm
+            }
         }
 
         private void BtnHireMarketer_Click(object sender, EventArgs e)
@@ -1361,7 +1369,7 @@ namespace SportsAgencyTycoon
             if (fundsSpent != 0)
             {
                 HireMarketerForm hireMarketerForm = new HireMarketerForm(fundsSpent, marketerType);
-                hireMarketerForm.HowManyAgents();
+                hireMarketerForm.HowManyMarketers();
                 hireMarketerForm.CreateApplicants(world, rnd);
                 hireMarketerForm.BringToFront();
                 hireMarketerForm.ShowDialog();
@@ -1370,7 +1378,7 @@ namespace SportsAgencyTycoon
                 if (hiredMarketer != null)
                 {
                     agency.Marketers.Add(hiredMarketer);
-                    agency.AgentCount++;
+                    agency.MarketerCount++;
                     UpdateAgencyInfo();
                     PopulateAgencyAgentList();
                 }

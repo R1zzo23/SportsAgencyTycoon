@@ -37,7 +37,7 @@ namespace SportsAgencyTycoon
             _MarketerType = s;
 
         }
-        public void HowManyAgents()
+        public void HowManyMarketers()
         {
             if (_FundsSpent == 25000)
             {
@@ -45,7 +45,7 @@ namespace SportsAgencyTycoon
                 _MarketerLevel = 1;
             }
             else if (_FundsSpent == 50000 || _FundsSpent == 100000)
-            {
+            { 
                 _MarketerApplicants = 3;
                 _MarketerLevel = 2;
             }
@@ -69,18 +69,35 @@ namespace SportsAgencyTycoon
                 marketers.Add(new Marketer(
                     world.randomFirstName(rnd).ToString(),
                     world.randomLastName(rnd).ToString(),
+                    ratings[3],
                     ratings[0],
                     ratings[1],
                     ratings[2],
-                    ratings[3],
                     _MarketerLevel,
-                    Roles.Agent));
+                    Roles.Marketer));
             }
             DisplayApplicantInformation();
         }
         private void DisplayApplicantInformation()
         {
-
+            Marketer m1 = marketers[0];
+            Marketer m2 = marketers[1];
+            radioApplicant1.Text = m1.First + " " + m1.Last + " (LVL " + _MarketerLevel + ")";
+            radioApplicant2.Text = m2.First + " " + m2.Last + " (LVL " + _MarketerLevel + ")";
+            lblAgent1.Text = m1.Salary.ToString("C0") + "/month | OUTREACH: " + m1.Outreach.ToString() + " | CREATIVITY: " + m1.Creativity.ToString() + " | STRAT: " + m1.Strategy.ToString();
+            lblAgent2.Text = m2.Salary.ToString("C0") + "/month | OUTREACH: " + m2.Outreach.ToString() + " | CREATIVITY: " + m2.Creativity.ToString() + " | STRAT: " + m2.Strategy.ToString();
+            if (marketers.Count < 3)
+            {
+                radioApplicant3.Enabled = false;
+                radioApplicant3.Text = "";
+                lblAgent3.Text = "";
+            }
+            else
+            {
+                Marketer m3 = marketers[2];
+                radioApplicant3.Text = m3.First + " " + m3.Last + " (LVL " + _MarketerLevel + ")";
+                lblAgent3.Text = m3.Salary.ToString("C0") + "/month | OUTREACH: " + m3.Outreach.ToString() + " | CREATIVITY: " + m3.Creativity.ToString() + " | STRAT: " + m3.Strategy.ToString();
+            }
         }
         public int DetermineSalary(int level, string type, Random rnd, List<int> ratings)
         {
@@ -93,7 +110,7 @@ namespace SportsAgencyTycoon
             int ratingsDifference = sum - 80;
             salary += ratingsDifference * 500;
 
-            if (_MarketerType != "PlayersAgent") multiplier = 0.2;
+            if (_MarketerType != "BalancedMarketer") multiplier = 0.2;
 
             salary = (int)(salary * (1 + multiplier));
 
@@ -106,7 +123,7 @@ namespace SportsAgencyTycoon
             rating = rnd.Next(15, 22);
 
             // agentyType of PlayersAgent gets small boost in all categories
-            if (marketerType == "PlayersAgent")
+            if (marketerType == "BalancedMarketer")
             {
                 rating += 2;
             }
@@ -138,7 +155,7 @@ namespace SportsAgencyTycoon
             int rating = 0;
             bool marketerSpecialty;
 
-            if (marketerType == "SmoothTalker") marketerSpecialty = true;
+            if (marketerType == "CreativeVisionary") marketerSpecialty = true;
             else marketerSpecialty = false;
 
             rating = DetermineRating(marketerType, marketerSpecialty, rnd);
@@ -150,7 +167,7 @@ namespace SportsAgencyTycoon
             int rating = 0;
             bool marketerSpecialty;
 
-            if (marketerType == "SmoothTalker") marketerSpecialty = true;
+            if (marketerType == "OutreachPro") marketerSpecialty = true;
             else marketerSpecialty = false;
 
             rating = DetermineRating(marketerType, marketerSpecialty, rnd);
@@ -162,7 +179,7 @@ namespace SportsAgencyTycoon
             int rating = 0;
             bool marketerSpecialty;
 
-            if (marketerType == "SmoothTalker") marketerSpecialty = true;
+            if (marketerType == "StrategicPlanner") marketerSpecialty = true;
             else marketerSpecialty = false;
 
             rating = DetermineRating(marketerType, marketerSpecialty, rnd);

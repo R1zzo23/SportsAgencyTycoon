@@ -14,6 +14,7 @@ namespace SportsAgencyTycoon
         public List<Marketer> Marketers;
         public int AgentCount;
         public int ClientCount;
+        public int MarketerCount;
         public int Money;
         public int IndustryInfluence;
         public int MonthlyRent;
@@ -30,6 +31,7 @@ namespace SportsAgencyTycoon
             Clients = new List<Player>();
             AgentCount = 0;
             ClientCount = 0;
+            MarketerCount = 0;
             MonthlyRent = 5000;
         }
 
