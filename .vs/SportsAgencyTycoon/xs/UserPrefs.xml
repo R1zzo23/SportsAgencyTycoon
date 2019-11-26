@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/MainForm.cs">
     <Files>
-      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="1354" Column="80" />
+      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="1367" Column="32" />
       <File FileName="SportsAgencyTycoon/Agency.cs" Line="34" Column="31" />
       <File FileName="SportsAgencyTycoon/Player.cs" Line="59" Column="45" />
       <File FileName="SportsAgencyTycoon/Endorsement.cs" Line="32" Column="10" />
@@ -13,7 +13,7 @@
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="Player.cs" selected="True" />
+              <Node name="MainForm.cs" selected="True" />
             </Node>
           </Node>
         </State>
