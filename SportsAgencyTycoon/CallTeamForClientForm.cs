@@ -24,7 +24,7 @@ namespace SportsAgencyTycoon
         private List<Control> _AgeLabels = new List<Control>();
         private List<Control> _SkillLabels = new List<Control>();
         private List<Control> _ContractLabels = new List<Control>();
-
+        private RelationshipWithTeam relationship;
         public int years;
         public int yearlySalary;
         public int maxSalaryWillingToOffer;
@@ -137,7 +137,7 @@ namespace SportsAgencyTycoon
 
             GenerateTeamInterest();
 
-            lblTeamInterestLevel.Text = "Interest In Signing: " + _InterestLevel;
+            lblTeamInterestLevel.Text = "Interest In Signing: ???";
 
             ContractOffer();
         }
@@ -148,6 +148,7 @@ namespace SportsAgencyTycoon
             lblTitleContender.Text = "Title Contender: " + team.TitleConteder.ToString();
             lblMarketValue.Text = "Market Value: " + team.MarketValue.ToString();
             CreatePlayerCards(team);
+
         }
 
         private void GenerateTeamInterest()
@@ -428,6 +429,51 @@ namespace SportsAgencyTycoon
                     txtYears.Text = "4";
                 }
             }
+        }
+
+        private void btnOpenNegotiations_Click(object sender, EventArgs e)
+        {
+            if (_InterestLevel == "ZERO INTEREST")
+            {
+                MessageBox.Show("I think we've made it clear that we have no interest in your client.");
+                relationship.Relationship -= rnd.Next(1, 4);
+            }
+            else if (_InterestLevel == "VERY LOW")
+            {
+                int coinFlip = rnd.Next(1, 3);
+                if (coinFlip == 1)
+                {
+                    MessageBox.Show("Thanks for checking in but we aren't interested right now.");
+                    relationship.Relationship -= rnd.Next(0, 3);
+                }
+                else
+                {
+                    MessageBox.Show("We will toss you an offer.");
+                    negotiationGroupBox.Visible = true;
+                }
+            }
+        }
+
+        private void btnAskInterest_Click(object sender, EventArgs e)
+        {
+            int relationshipIndex = _Agent.RelationshipsWithTeams.FindIndex(o => o.Team == _League.TeamList[cbTeamList.SelectedIndex]);
+            if (relationshipIndex < 0)
+            {
+                relationship = new RelationshipWithTeam(_League.TeamList[cbTeamList.SelectedIndex], 50);
+                _Agent.RelationshipsWithTeams.Add(relationship);
+            }
+            else
+                relationship = _Agent.RelationshipsWithTeams[relationshipIndex];
+
+            foreach (RelationshipWithTeam r in _Agent.RelationshipsWithTeams)
+                Console.WriteLine("Team: " + r.Team.Mascot + ", Relationship: " + r.Relationship);
+
+            lblTeamInterestLevel.Text = "Interest In Signing: " + _InterestLevel;
+        }
+
+        private void btnSmoothTalk_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
