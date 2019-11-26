@@ -10,14 +10,18 @@ namespace SportsAgencyTycoon
     {
         public string First;
         public string Last;
+
         public int Salary;
         public int CareerEarnings;
+        public Roles Role;
+
         public int Negotiating;
         public int Greed;
         public int IndustryPower;
         public int Intelligence;
         public int Level;
-        public Roles Role;
+
+        public List<RelationshipWithTeam> RelationshipsWithTeams = new List<RelationshipWithTeam>();
         public List<Player> ClientList;
         public int ClientCount;
         public List<Licenses> LicensesHeld;

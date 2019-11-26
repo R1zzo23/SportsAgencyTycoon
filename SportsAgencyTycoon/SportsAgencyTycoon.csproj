@@ -222,6 +222,9 @@
     <Compile Include="EventType.cs" />
     <Compile Include="Boxing.cs" />
     <Compile Include="MMA.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="EndorsementType.cs" />
+    <Compile Include="RelationshipWithTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

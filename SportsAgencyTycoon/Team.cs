@@ -11,10 +11,13 @@ namespace SportsAgencyTycoon
         public string City;
         public string Mascot;
         public string Abbreviation;
+
         public string Conference;
         public string Division;
+
         public int MarketValue;
         public int TitleConteder;
+
         public int Wins;
         public int WinsThisWeek;
         public int ConferenceWins;
@@ -26,6 +29,7 @@ namespace SportsAgencyTycoon
         public int ConferenceLosses;
         public int DivisionLosses;
         public bool PlayedGameThisCycle;
+
         public List<Player> Roster = new List<Player>();
         public List<Award> Awards = new List<Award>();
 
