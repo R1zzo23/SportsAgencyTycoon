@@ -53,3 +53,5 @@ C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgen
 C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.pdb
 C:\Users\adamj\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.ViewStandingsForm.resources
 C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.ViewStandingsForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.HireMarketerForm.resources
+C:\Users\Adam Rizzo\Github\SportsAgencyTycoon\SportsAgencyTycoon\obj\Debug\SportsAgencyTycoon.MarketerSearch.resources

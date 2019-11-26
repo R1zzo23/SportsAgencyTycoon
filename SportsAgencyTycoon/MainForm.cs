@@ -581,7 +581,15 @@ namespace SportsAgencyTycoon
                 lblCareerEarnings.Text = selectedClient.CareerEarnings.ToString("C0");
                 clientPositionLabel.Text = selectedClient.Position.ToString();
                 if (selectedClient.FreeAgent) clientTeamLabel.Text = "Free Agent";
-                else clientTeamLabel.Text = selectedClient.Team.Mascot;
+                else if (selectedClient.Sport == Sports.Golf || selectedClient.Sport == Sports.Tennis || selectedClient.Sport == Sports.MMA || selectedClient.Sport == Sports.Boxing)
+                {
+                    clientTeamLabel.Text = "";
+                    clientPositionLabel.Text = "";
+                }
+                else
+                {
+                    clientTeamLabel.Text = selectedClient.Team.Mascot;
+                }
             }
             else
             {
@@ -1344,8 +1352,13 @@ namespace SportsAgencyTycoon
 
         private void BtnMarketPlayer_Click(object sender, EventArgs e)
         {
+            Player selectedClient;
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
+            if (cbAgentClientList.SelectedIndex < 0)
+                MessageBox.Show("You must first select a player to market!");
+            else
+                selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
+            
             if (agency.MarketerCount == 0)
                 MessageBox.Show("Hire a marketer before running a marketing plan for this player.");
             else
@@ -1359,6 +1372,8 @@ namespace SportsAgencyTycoon
         {
             Marketer hiredMarketer = null;
             MarketerSearch marketerSearch = new MarketerSearch(rnd, agency);
+            marketerSearch.BringToFront();
+            marketerSearch.ShowDialog();
             int fundsSpent = marketerSearch.FundsSpent;
             string marketerType = marketerSearch.MarketerType;
             Console.WriteLine(fundsSpent);

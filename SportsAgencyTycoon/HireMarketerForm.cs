@@ -84,8 +84,8 @@ namespace SportsAgencyTycoon
             Marketer m2 = marketers[1];
             radioApplicant1.Text = m1.First + " " + m1.Last + " (LVL " + _MarketerLevel + ")";
             radioApplicant2.Text = m2.First + " " + m2.Last + " (LVL " + _MarketerLevel + ")";
-            lblAgent1.Text = m1.Salary.ToString("C0") + "/month | OUTREACH: " + m1.Outreach.ToString() + " | CREATIVITY: " + m1.Creativity.ToString() + " | STRAT: " + m1.Strategy.ToString();
-            lblAgent2.Text = m2.Salary.ToString("C0") + "/month | OUTREACH: " + m2.Outreach.ToString() + " | CREATIVITY: " + m2.Creativity.ToString() + " | STRAT: " + m2.Strategy.ToString();
+            lblAgent1.Text = m1.Salary.ToString("C0") + "/month | OUTRCH: " + m1.Outreach.ToString() + " | CREATVTY: " + m1.Creativity.ToString() + " | STRAT: " + m1.Strategy.ToString();
+            lblAgent2.Text = m2.Salary.ToString("C0") + "/month | OUTRCH: " + m2.Outreach.ToString() + " | CREATVTY: " + m2.Creativity.ToString() + " | STRAT: " + m2.Strategy.ToString();
             if (marketers.Count < 3)
             {
                 radioApplicant3.Enabled = false;
@@ -96,7 +96,7 @@ namespace SportsAgencyTycoon
             {
                 Marketer m3 = marketers[2];
                 radioApplicant3.Text = m3.First + " " + m3.Last + " (LVL " + _MarketerLevel + ")";
-                lblAgent3.Text = m3.Salary.ToString("C0") + "/month | OUTREACH: " + m3.Outreach.ToString() + " | CREATIVITY: " + m3.Creativity.ToString() + " | STRAT: " + m3.Strategy.ToString();
+                lblAgent3.Text = m3.Salary.ToString("C0") + "/month | OUTRCH: " + m3.Outreach.ToString() + " | CREATVTY: " + m3.Creativity.ToString() + " | STRAT: " + m3.Strategy.ToString();
             }
         }
         public int DetermineSalary(int level, string type, Random rnd, List<int> ratings)
@@ -107,7 +107,7 @@ namespace SportsAgencyTycoon
             int sum = 0;
             foreach (int i in ratings) sum += i;
 
-            int ratingsDifference = sum - 80;
+            int ratingsDifference = sum - 60;
             salary += ratingsDifference * 500;
 
             if (_MarketerType != "BalancedMarketer") multiplier = 0.2;
@@ -185,6 +185,31 @@ namespace SportsAgencyTycoon
             rating = DetermineRating(marketerType, marketerSpecialty, rnd);
 
             return rating;
+        }
+
+        private void BtnHireSelected_Click(object sender, EventArgs e)
+        {
+            if (radioApplicant1.Checked)
+            {
+                _HiredMarketer = marketers[0];
+                this.Close();
+            }
+            else if (radioApplicant2.Checked)
+            {
+                _HiredMarketer = marketers[1];
+                this.Close();
+            }
+            else if (radioApplicant3.Checked)
+            {
+                _HiredMarketer = marketers[2];
+                this.Close();
+            }
+            else MessageBox.Show("You must select one of the applicants before hiring.");
+        }
+
+        private void BtnPassOnHiring_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

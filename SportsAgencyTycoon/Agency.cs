@@ -101,6 +101,7 @@ namespace SportsAgencyTycoon
             int monthlyCosts = 0;
             monthlyCosts += MonthlyRent;
             foreach (Agent a in Agents) monthlyCosts += a.Salary;
+            foreach (Marketer m in Marketers) monthlyCosts += m.Salary;
             return monthlyCosts;
         }
 
