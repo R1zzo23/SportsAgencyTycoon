@@ -144,11 +144,11 @@ namespace SportsAgencyTycoon
 
         private void cbTeamList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            negotiationGroupBox.Visible = false;
             Team team = _League.TeamList[cbTeamList.SelectedIndex];
             lblTitleContender.Text = "Title Contender: " + team.TitleConteder.ToString();
             lblMarketValue.Text = "Market Value: " + team.MarketValue.ToString();
             CreatePlayerCards(team);
-
         }
 
         private void GenerateTeamInterest()
@@ -365,6 +365,7 @@ namespace SportsAgencyTycoon
 
         private void btnAcceptOffer_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("Offer accepted! Years: " + years + " Salary: " + yearlySalary);
             DealHasBeenAgreedUpon();
         }
 
@@ -451,6 +452,11 @@ namespace SportsAgencyTycoon
                     MessageBox.Show("We will toss you an offer.");
                     negotiationGroupBox.Visible = true;
                 }
+            }
+            else
+            {
+                MessageBox.Show("I think there's something we could work on here...");
+                negotiationGroupBox.Visible = true;
             }
         }
 
