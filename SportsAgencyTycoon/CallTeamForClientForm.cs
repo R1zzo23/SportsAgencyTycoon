@@ -154,6 +154,8 @@ namespace SportsAgencyTycoon
         private void GenerateTeamInterest()
         {
             btnAcceptOffer.Enabled = false;
+            bool goodRelationshipWithTeam = false;
+            if (relationship.Relationship >= 75) goodRelationshipWithTeam = true;
 
             string interestLevel = "";
             //would free agent be a starter?
@@ -171,16 +173,35 @@ namespace SportsAgencyTycoon
                 //is lowest ranked player at position a young player with more potential?
                 if (_PositionPlayers[_PositionPlayers.Count - 1].Age <= 25 && _PositionPlayers[_PositionPlayers.Count - 1].PotentialSkill > _Client.PotentialSkill)
                 {
-                    //not playing over young developmental prospect
-                    interestLevel = "VERY LOW";
+                    if (goodRelationshipWithTeam)
+                    {
+                        //good relationship gains your client a little more love from team
+                        interestLevel = "LOW";
+                    }
+                    else
+                    {
+                        //not playing over young developmental prospect
+                        interestLevel = "VERY LOW";
+                    }
                 }
                 else
                 {
                     //starter much better than client
                     if (_PositionPlayers[0].CurrentSkill >= _Client.CurrentSkill + 25)
-                        interestLevel = "LOW";
+                    {
+                        if (goodRelationshipWithTeam)
+                            interestLevel = "MEDIUM";
+                        else 
+                            interestLevel = "LOW";
+                    }
                     else
-                        interestLevel = "MEDIUM";
+                    {
+                        if (goodRelationshipWithTeam)
+                            interestLevel = "HIGH";
+                        else
+                            interestLevel = "MEDIUM";
+                    }
+                        
                 }
             }
             else interestLevel = "ZERO INTEREST";
@@ -218,9 +239,12 @@ namespace SportsAgencyTycoon
             {
                 years = 1;
                 yearlySalary = _Client.League.MinSalary;
-                maxSalaryWillingToOffer = _Client.League.MinSalary;
-                maxYears = 1;
-                willingToNegotiate = false;
+                maxSalaryWillingToOffer = rnd.Next(_Client.League.MinSalary, _Client.League.MinSalary + 750000);
+                maxYears = rnd.Next(1,3);
+                if (relationship.Relationship >= 75)
+                    willingToNegotiate = true;
+                else 
+                    willingToNegotiate = false;
             }
             else if (_InterestLevel == "MEDIUM")
             {
@@ -231,7 +255,7 @@ namespace SportsAgencyTycoon
                 double percent = rnd.Next(1, 21);
                 double maxPercent = rnd.Next(5, 101);
                 yearlySalary = Convert.ToInt32((double)yearlySalary * (1 - (percent / 100)));
-                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (maxPercent / 100)));
+                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + ((maxPercent + 25) / 100)));
 
                 if (yearlySalary > maxSalaryWillingToOffer)
                 {
@@ -246,9 +270,9 @@ namespace SportsAgencyTycoon
             {
                 years = rnd.Next(2, 4);
                 maxYears = rnd.Next(2, 5);
-                if (maxYears < years) maxYears = years;
+                if (maxYears < years) maxYears = years + 1;
                 yearlySalary = _Client.DetermineYearlySalary(rnd);
-                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (rnd.Next(20, 51) / 100)));
+                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (rnd.Next(20, 101) / 100)));
                 willingToNegotiate = true;
             }
             else // _InterestLevel == "VERY HIGH"
@@ -260,10 +284,13 @@ namespace SportsAgencyTycoon
                 double percent = rnd.Next(10, 26);
                 yearlySalary = Convert.ToInt32((double)yearlySalary * (1 + (percent / 100)));
                 if (yearlySalary > _Client.League.MaxSalary) yearlySalary = _Client.League.MaxSalary;
-                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (rnd.Next(50, 101) / 100)));
+                maxSalaryWillingToOffer = Convert.ToInt32((double)yearlySalary * (1 + (rnd.Next(50, 151) / 100)));
                 if (yearlySalary > maxSalaryWillingToOffer) maxSalaryWillingToOffer = yearlySalary;
                 willingToNegotiate = true;
             }
+
+            if (yearlySalary > _Client.League.MaxSalary) yearlySalary = _Client.League.MaxSalary;
+            if (maxSalaryWillingToOffer > _Client.League.MaxSalary) maxSalaryWillingToOffer = _Client.League.MaxSalary;
 
             lblContractYears.Text = "# of Years: " + years.ToString();
             lblContractSalary.Text = "Yearly Salary: " + yearlySalary.ToString("C0");
