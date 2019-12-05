@@ -39,6 +39,7 @@ namespace SportsAgencyTycoon
         public int lastNameCount = 214;
         public Calendar Calendar;
         public List<CalendarEvent> EventsThisWeek = new List<CalendarEvent>();
+        public List<Achievement> GlobalAchievements = new List<Achievement>();
         public World(MainForm form)
         {
             AvailableLicenses = new List<Licenses>();

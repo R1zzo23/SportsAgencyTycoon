@@ -228,6 +228,7 @@
     <Compile Include="Company.cs" />
     <Compile Include="EndorsementType.cs" />
     <Compile Include="RelationshipWithTeam.cs" />
+    <Compile Include="Achievement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

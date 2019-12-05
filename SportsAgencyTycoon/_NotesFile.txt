@@ -14,14 +14,5 @@
 	  - RepayLoan
 		- public bool EnoughFunds()
 	  - RunAssociationEvent (already coded)
-
-
-- Weeks per Season:
-	- NBA: 32 (28 regular season, 4 postseason)
-	  - 3 games per week * 28 weeks = 84 games
-	    - take 1 game away per week during first two regular season weeks
-	- NFL: 26 (17 regular season, 5 postseason [skip week before SB], 4 preseason)
-	- NHL: 36 (32 regular season, 4 postseason)
-	- MLB: 30 (26 regular season, 4 postseason)
-	  - 
-	- MLS: 40
+- CallTeam Form
+  - need to add positive/negative relationshipWithTeams
