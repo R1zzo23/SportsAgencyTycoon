@@ -20,6 +20,7 @@ namespace SportsAgencyTycoon
         public int MonthlyRent;
         public Date LoanPaybackDate;
         public int LoanPaybackAmount;
+        public List<Achievement> Achievements = new List<Achievement>();
 
         public Agency(string name, int money, int industryInfluence)
         {
@@ -113,6 +114,15 @@ namespace SportsAgencyTycoon
                 if (index >= 0) return Agents[i];
             }
             return null;
+        }
+
+        public void AddAchievementToAgency(Achievement a, Agency agency)
+        {
+            agency.Achievements.Add(a);
+            if (a.AttributeToBoost == "IndustryInfluence")
+                agency.IndustryInfluence += a.PointsToBoost;
+            else if (a.AttributeToBoost == "Money")
+                agency.Money += a.PointsToBoost;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SportsAgencyTycoon
 {
@@ -14,6 +15,8 @@ namespace SportsAgencyTycoon
         public int Salary;
         public int CareerEarnings;
         public Roles Role;
+
+        public List<Achievement> Achievements = new List<Achievement>();
 
         public int Negotiating;
         public int Greed;
@@ -31,6 +34,7 @@ namespace SportsAgencyTycoon
         public bool BeingTrainedForTest;
         public bool TestedThisWeek;
 
+        public List<Sports> SportsRepresented = new List<Sports>();
         public Agent(string firstName, string lastName, int salary, int negotiatingRating, int greedRating, int industryPowerRating, int intelligence, int levelRating, Roles role)
         {
             First = firstName;
@@ -55,6 +59,10 @@ namespace SportsAgencyTycoon
         {
             ClientList.Add(client);
             ClientCount = ClientList.Count();
+
+            //check if this is a new sport being represented by this Agent
+            int index = SportsRepresented.FindIndex(o => o == client.Sport);
+            if (index < 0) SportsRepresented.Add(client.Sport);
         }
 
         public string TakeTest(World world, Agency agency)
@@ -63,7 +71,7 @@ namespace SportsAgencyTycoon
             //agent takes test
             Random rnd = new Random();
 
-            double agentTestingScore = ((1 + (rnd.Next(-10, 11) / 100)) * Intelligence * 0.5) + ((1 + (rnd.Next(-10, 11) / 100)) * LicenseTestPrep * 0.5);
+            double agentTestingScore = ((1 + (rnd.Next(-5, 11) / 100)) * Intelligence * 0.5) + ((1 + (rnd.Next(-5, 11) / 100)) * LicenseTestPrep * 0.8);
             Console.WriteLine("Agent Testing Score: " + agentTestingScore);
 
             //if agent obtains license
@@ -96,6 +104,41 @@ namespace SportsAgencyTycoon
             CallTeamForClientForm callTeamForClientForm = new CallTeamForClientForm(rnd, this, client, l, world);
             callTeamForClientForm.BringToFront();
             callTeamForClientForm.ShowDialog();
+        }
+
+        public void AddAchievementToAgent(Achievement a)
+        {
+            //check if Agent already has this achievement
+            bool hasAchievement = DoesAgentHaveAchievement(a);
+
+            if (!hasAchievement)
+            {
+                Achievements.Add(a);
+                if (a.AttributeToBoost == "Negotiating")
+                    Negotiating += a.PointsToBoost;
+                else if (a.AttributeToBoost == "Greed")
+                    Greed += a.PointsToBoost;
+                else if (a.AttributeToBoost == "IndustryPower")
+                    IndustryPower += a.PointsToBoost;
+                else if (a.AttributeToBoost == "Intelligence")
+                    Intelligence += a.PointsToBoost;
+
+                MessageBox.Show("Congrats on earning the '" + a.Name + "' achievement!");
+            }
+        }
+        public bool DoesAgentHaveAchievement(Achievement a)
+        {
+            bool hasAchievement = false;
+
+            int index = Achievements.FindIndex(x => x.Name == a.Name);
+            if (index >= 0)
+                hasAchievement = true;
+
+            Console.WriteLine("Looking for " + a.Name + " achievement...");
+            foreach (Achievement v in Achievements)
+                Console.WriteLine("Agent has the '" + v.Name + "' achievement.");
+
+            return hasAchievement;
         }
     }
 }

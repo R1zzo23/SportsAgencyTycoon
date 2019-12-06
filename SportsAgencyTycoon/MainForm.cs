@@ -62,6 +62,7 @@ namespace SportsAgencyTycoon
             world.Football = new Football(this, rnd, world, world.NFL);
             world.Hockey = new Hockey(this, rnd, world, world.NHL);
             world.Soccer = new Soccer(this, rnd, world, world.MLS);
+            world.CreateGlobalAchievements();
         }
 
         public void NerfFreeAgentsToStart()
@@ -166,7 +167,7 @@ namespace SportsAgencyTycoon
         {
             Random rnd = new Random();
             agency = new Agency("New Age Agency", 1000000, 5);
-            myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 1, Roles.Manager);
+            myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 3, Roles.Manager);
             agency.AddAgent(myManager);
             PopulateAgentClientList(myManager);
             PopulateAgencyAgentList();
@@ -1265,6 +1266,12 @@ namespace SportsAgencyTycoon
             agency.AddClient(player);
             Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
             agent.AddClient(player);
+
+            //check for first client signed Achievement
+            agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Sign 1st Client")]);
+
+            //check for client in 3 different sports
+            if (agent.SportsRepresented.Count >= 3) agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Athletically Diversified")]);
 
             UpdateAgencyInfo();
             UpdateAgentInfo(agent);
