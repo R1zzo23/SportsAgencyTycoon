@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SportsAgencyTycoon
 {
@@ -116,13 +117,39 @@ namespace SportsAgencyTycoon
             return null;
         }
 
-        public void AddAchievementToAgency(Achievement a, Agency agency)
+        public void AddAchievementToAgency(Achievement a)
         {
-            agency.Achievements.Add(a);
-            if (a.AttributeToBoost == "IndustryInfluence")
-                agency.IndustryInfluence += a.PointsToBoost;
-            else if (a.AttributeToBoost == "Money")
-                agency.Money += a.PointsToBoost;
+            bool agencyHasAchievement = DoesAgencyHaveAchievement(a);
+
+            if (!agencyHasAchievement)
+            {
+                Achievements.Add(a);
+                if (a.AttributeToBoost == "IndustryInfluence")
+                    IndustryInfluence += a.PointsToBoost;
+                else if (a.AttributeToBoost == "Money")
+                    Money += a.PointsToBoost;
+                else if (a.AttributeToBoost == "All")
+                {
+                    IndustryInfluence += a.PointsToBoost;
+                    Money += a.PointsToBoost;
+                }
+
+                MessageBox.Show("Congrats on earning the '" + a.Name + "' achievement!");
+            }            
+        }
+        public bool DoesAgencyHaveAchievement(Achievement a)
+        {
+            bool hasAchievement = false;
+
+            int index = Achievements.FindIndex(x => x.Name == a.Name);
+            if (index >= 0)
+                hasAchievement = true;
+
+            Console.WriteLine("Looking for " + a.Name + " achievement...");
+            foreach (Achievement v in Achievements)
+                Console.WriteLine("Agent has the '" + v.Name + "' achievement.");
+
+            return hasAchievement;
         }
     }
 }

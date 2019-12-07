@@ -21,6 +21,11 @@ namespace SportsAgencyTycoon
         private int MaxPercent;
         private int MinPercent = 2;
         private double ClientAsk;
+        private int _NumberOfAgentOffers = 0;
+        public int NumberOfAgentOffers
+        {
+            get { return _NumberOfAgentOffers;  }
+        }
         private int NumberOfCounterOffers = 0;
         private double _Percentage;
         public Double Percentage
@@ -103,6 +108,7 @@ namespace SportsAgencyTycoon
             if (d <= _ClientsAcceptancePercent)
             {
                 MessageBox.Show("You have yourself a deal!");
+                
                 _Percentage = d;
                 this.Close();
             }
@@ -168,6 +174,7 @@ namespace SportsAgencyTycoon
 
         private void btnMakeOffer_Click(object sender, EventArgs e)
         {
+            _NumberOfAgentOffers++;
             ClientConsidersOffer(Convert.ToDouble(txtYourAskingPercent.Text));
         }
 

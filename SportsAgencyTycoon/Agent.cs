@@ -122,6 +122,13 @@ namespace SportsAgencyTycoon
                     IndustryPower += a.PointsToBoost;
                 else if (a.AttributeToBoost == "Intelligence")
                     Intelligence += a.PointsToBoost;
+                else if (a.AttributeToBoost == "All")
+                {
+                    Negotiating += a.PointsToBoost;
+                    Greed += a.PointsToBoost;
+                    IndustryPower += a.PointsToBoost;
+                    Intelligence += a.PointsToBoost;
+                }
 
                 MessageBox.Show("Congrats on earning the '" + a.Name + "' achievement!");
             }

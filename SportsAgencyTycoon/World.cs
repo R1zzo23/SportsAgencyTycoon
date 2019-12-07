@@ -1059,15 +1059,24 @@ namespace SportsAgencyTycoon
 
         public void CreateGlobalAchievements()
         {
-            // sign your first client (Agent only)
+            // sign your first client (Agent)
             GlobalAchievements.Add(new Achievement("Sign 1st Client", "Agent has signed their 1st client.", 1, 2, "IndustryPower"));
-            // sign your first agent (Agency only)
-            GlobalAchievements.Add(new Achievement("Sign 1st Agent", "Agency has signed its 1st agent.", 1, 3, "IndustryInfluence"));
-            // sign your first marketer (Agency only)
-            GlobalAchievements.Add(new Achievement("Sign 1st Marketer", "Agency has signed its first marketer.", 1, 3, "IndustryInfluence"));
-            // work for clients in 3 different sports (Agent Only)
+            // sign your first agent (Agency)
+            GlobalAchievements.Add(new Achievement("Hire 1st Agent", "Agency has hired its 1st agent.", 1, 3, "IndustryInfluence"));
+            // sign your first marketer (Agency)
+            GlobalAchievements.Add(new Achievement("Hire 1st Marketer", "Agency has hired its first marketer.", 1, 3, "IndustryInfluence"));
+            // work for clients in 3 different sports (Agent)
             GlobalAchievements.Add(new Achievement("Athletically Diversified", "Agent has clients in 3 different sports.", 2, 3, "IndustryPower"));
-            //
+            // sign 3 clients in the same sport (Agent)
+            GlobalAchievements.Add(new Achievement("Gaining Traction", "Sign 3 clients in the same sport.", 2, 5, "Greed"));
+            // name agency Wolverine Studios (Agency)
+            GlobalAchievements.Add(new Achievement("WS Fanboy", "Agency named after Wolverine Studios.", 1, 100000, "Money"));
+            // name agent after either Adam Rizzo or Gary Gorski (Agent)
+            GlobalAchievements.Add(new Achievement("Dev Flattery", "Name your manager after Adam Rizzo or Gary Gorski.", 1, 5, "All"));
+            // negotiate highest possible percentage within 2 offers
+
+            // sign client on first offer
+            GlobalAchievements.Add(new Achievement("Smooth Signing", "Sign a client on your first offer.", 1, 2, "Negotiating"));
         }
     }
 }

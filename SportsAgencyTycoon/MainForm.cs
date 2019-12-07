@@ -408,6 +408,10 @@ namespace SportsAgencyTycoon
 
         public void UpdateAgencyInfo()
         {
+            //check for WS Fanboy achievement
+            if (agency.Name == "Wolverine Studios")
+                agency.AddAchievementToAgency(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "WS Fanboy")]);
+
             agencyNameLabel.Text = agency.Name;
             moneyLabel.Text = agency.Money.ToString("C0");
             industryInfluenceLabel.Text = agency.IndustryInfluence.ToString() + "/100";
@@ -418,6 +422,10 @@ namespace SportsAgencyTycoon
         }
         public void UpdateAgentInfo(Agent agent)
         {
+            //check for Dev Flattery achievement
+            if ((myManager.First == "Adam" && myManager.Last == "Rizzo") || (myManager.First == "Gary" && myManager.Last == "Gorski"))
+                myManager.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Dev Flattery")]);
+
             agentNameLabel.Text = agent.First + " " + agent.Last;
             lblAgentCareerEarnings.Text = agent.CareerEarnings.ToString("C0");
             greedLabel.Text = agent.Greed.ToString();
@@ -1211,6 +1219,10 @@ namespace SportsAgencyTycoon
                 {
                     agency.Agents.Add(hiredAgent);
                     agency.AgentCount++;
+
+                    if (agency.AgentCount == 2)
+                        agency.AddAchievementToAgency(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hire 1st Agent")]);
+
                     UpdateAgencyInfo();
                     PopulateAgencyAgentList();
                 }
@@ -1252,6 +1264,9 @@ namespace SportsAgencyTycoon
                 player.MemberOfAgency = true;
                 player.CurrentSkill += 20;
 
+                if (negotiatePercentageForm.NumberOfAgentOffers == 1)
+                    agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Smooth Signing")]);
+
                 SignClient(player);
             }
             else if (negotiatePercentageForm.Percentage == 0)
@@ -1272,6 +1287,14 @@ namespace SportsAgencyTycoon
 
             //check for client in 3 different sports
             if (agent.SportsRepresented.Count >= 3) agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Athletically Diversified")]);
+
+            //check for 3 clients in same sport
+            int clientsInSport = 0;
+            foreach (Player p in agent.ClientList)
+                if (p.Sport == player.Sport)
+                    clientsInSport++;
+            if (clientsInSport >= 3)
+                agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Gaining Traction")]);
 
             UpdateAgencyInfo();
             UpdateAgentInfo(agent);
@@ -1401,6 +1424,8 @@ namespace SportsAgencyTycoon
                 {
                     agency.Marketers.Add(hiredMarketer);
                     agency.MarketerCount++;
+                    if (agency.MarketerCount == 1)
+                        agency.AddAchievementToAgency(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hire 1st Marketer")]);
                     UpdateAgencyInfo();
                     PopulateAgencyAgentList();
                 }
