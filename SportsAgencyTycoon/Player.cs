@@ -10,6 +10,7 @@ namespace SportsAgencyTycoon
     public class Player
     {
         public int Id;
+        public string PGP;
         public Sports Sport;
         public PlayerType PlayerType;
         public Team Team;
