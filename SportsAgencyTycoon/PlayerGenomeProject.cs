@@ -16,7 +16,7 @@ namespace SportsAgencyTycoon
         public Random rnd;
         public void CreatePGP(Random r, Player p)
         {
-            string PGP = "";
+            //string PGP = "";
 
             rnd = r;
             Behavior = DetermineBehavior(rnd.Next(1, 101));
