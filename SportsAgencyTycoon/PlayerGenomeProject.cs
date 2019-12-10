@@ -8,57 +8,33 @@ namespace SportsAgencyTycoon
 {
     public class PlayerGenomeProject
     {
-        public char Athletics;
         public char Behavior;
         public char Composure;
         public char Greed;
-        public char Intelligence;
         public char Leadership;
-        public char Skills;
         public char WorkEthic;
         public Random rnd;
-        public string CreatePGP(Random r)
+        public void CreatePGP(Random r, Player p)
         {
             string PGP = "";
 
             rnd = r;
-            Athletics = DetermineAthletics(rnd.Next(1, 11));
-            Behavior = DetermineBehavior(rnd.Next(1, 6));
-            Composure = DetermineComposure(rnd.Next(1, 6));
-            Greed = DetermineGreed(rnd.Next(1, 6));
-            Intelligence = DetermineIntelligence(rnd.Next(1, 6));
-            Leadership = DetermineLeadership(rnd.Next(1, 6));
-            Skills = DetermineSkills(rnd.Next(1, 11));
-            WorkEthic = DetermineWorkEthic(rnd.Next(1, 11));
+            Behavior = DetermineBehavior(rnd.Next(1, 101));
+            Composure = DetermineComposure(rnd.Next(1, 101));
+            Greed = DetermineGreed(rnd.Next(1, 101));
+            Leadership = DetermineLeadership(rnd.Next(1, 101));
+            WorkEthic = DetermineWorkEthic(rnd.Next(1, 101));
 
-            PGP = Athletics.ToString() + Behavior.ToString() + Composure.ToString() + Greed.ToString() + Intelligence.ToString() + Leadership.ToString() + Skills.ToString() + WorkEthic.ToString();
-        }
-        private char DetermineAthletics(int i)
-        {
-            char A;
-
-            if (i == 1) A = Convert.ToChar("W");
-            else if (i == 2) A = Convert.ToChar("A");
-            else if (i == 3) A = Convert.ToChar("S");
-            else if (i == 4) A = Convert.ToChar("T");
-            else if (i == 5) A = Convert.ToChar("Z");
-            else if (i == 6) A = Convert.ToChar("C");
-            else if (i == 7) A = Convert.ToChar("G");
-            else if (i == 8) A = Convert.ToChar("X");
-            else if (i == 9) A = Convert.ToChar("B");
-            else A = Convert.ToChar("Y");
-
-            return A;
+            p.PGP = Behavior.ToString() + Composure.ToString() + Greed.ToString() + Leadership.ToString() + WorkEthic.ToString();
         }
         private char DetermineBehavior(int i)
         {
             char A;
 
-            if (i == 1) A = Convert.ToChar("A");
-            else if (i == 2) A = Convert.ToChar("T");
-            else if (i == 3) A = Convert.ToChar("G");
-            else if (i == 4) A = Convert.ToChar("C");
-            else A = Convert.ToChar("Z");
+            if (i <= 15) A = Convert.ToChar("Y"); // off field/court issues
+            else if (i <= 45) A = Convert.ToChar("X"); // pushes team rules
+            else if (i <= 80) A = Convert.ToChar("B"); // first in, last out
+            else A = Convert.ToChar("A"); // pro off & on court
 
             return A;
         }
@@ -66,11 +42,10 @@ namespace SportsAgencyTycoon
         {
             char A;
 
-            if (i == 1) A = Convert.ToChar("X");
-            else if (i == 2) A = Convert.ToChar("W");
-            else if (i == 3) A = Convert.ToChar("Y");
-            else if (i == 4) A = Convert.ToChar("S");
-            else A = Convert.ToChar("B");
+            if (i <= 15) A = Convert.ToChar("B"); // ejection waiting to happen
+            else if (i <= 45) A = Convert.ToChar("A"); // let's calls effect him
+            else if (i <= 80) A = Convert.ToChar("X"); // always under control
+            else A = Convert.ToChar("Y"); // emotionless
 
             return A;
         }
@@ -78,23 +53,10 @@ namespace SportsAgencyTycoon
         {
             char A;
 
-            if (i == 1) A = Convert.ToChar("G");
-            else if (i == 2) A = Convert.ToChar("Y");
-            else if (i == 3) A = Convert.ToChar("B");
-            else if (i == 4) A = Convert.ToChar("A");
-            else A = Convert.ToChar("X");
-
-            return A;
-        }
-        private char DetermineIntelligence(int i)
-        {
-            char A;
-
-            if (i == 1) A = Convert.ToChar("Z");
-            else if (i == 2) A = Convert.ToChar("C");
-            else if (i == 3) A = Convert.ToChar("A");
-            else if (i == 4) A = Convert.ToChar("W");
-            else A = Convert.ToChar("T");
+            if (i <= 20) A = Convert.ToChar("A"); // Brink's truck
+            else if (i <= 65) A = Convert.ToChar("B"); // pay me what I'm worth
+            else if (i <= 85) A = Convert.ToChar("X"); // hometown discount
+            else A = Convert.ToChar("Y"); // I'll accept any offer
 
             return A;
         }
@@ -102,28 +64,10 @@ namespace SportsAgencyTycoon
         {
             char A;
 
-            if (i == 1) A = Convert.ToChar("B");
-            else if (i == 2) A = Convert.ToChar("Y");
-            else if (i == 3) A = Convert.ToChar("S");
-            else if (i == 4) A = Convert.ToChar("T");
-            else A = Convert.ToChar("A");
-
-            return A;
-        }
-        private char DetermineSkills(int i)
-        {
-            char A;
-
-            if (i == 1) A = Convert.ToChar("G");
-            else if (i == 2) A = Convert.ToChar("C");
-            else if (i == 3) A = Convert.ToChar("A");
-            else if (i == 4) A = Convert.ToChar("T");
-            else if (i == 5) A = Convert.ToChar("Y");
-            else if (i == 6) A = Convert.ToChar("X");
-            else if (i == 7) A = Convert.ToChar("Z");
-            else if (i == 8) A = Convert.ToChar("W");
-            else if (i == 9) A = Convert.ToChar("B");
-            else A = Convert.ToChar("S");
+            if (i <= 10) A = Convert.ToChar("Y"); // total diva
+            else if (i <= 50) A = Convert.ToChar("B"); // loner
+            else if (i <= 00) A = Convert.ToChar("A"); // sheep
+            else A = Convert.ToChar("X"); // alpha male
 
             return A;
         }
@@ -131,16 +75,10 @@ namespace SportsAgencyTycoon
         {
             char A;
 
-            if (i == 1) A = Convert.ToChar("A");
-            else if (i == 2) A = Convert.ToChar("B");
-            else if (i == 3) A = Convert.ToChar("C");
-            else if (i == 4) A = Convert.ToChar("X");
-            else if (i == 5) A = Convert.ToChar("Y");
-            else if (i == 6) A = Convert.ToChar("Z");
-            else if (i == 7) A = Convert.ToChar("G");
-            else if (i == 8) A = Convert.ToChar("S");
-            else if (i == 9) A = Convert.ToChar("T");
-            else A = Convert.ToChar("W");
+            if (i <= 10) A = Convert.ToChar("A"); // skips training sessions
+            else if (i <= 40) A = Convert.ToChar("X"); // mandatory sessions only
+            else if (i <= 85) A = Convert.ToChar("Y"); // off season gains
+            else A = Convert.ToChar("B"); // gym rat
 
             return A;
         }
