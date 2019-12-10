@@ -135,6 +135,12 @@
     </Compile>
     <Compile Include="PaySchedule.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerCard.Designer.cs">
+      <DependentUpon>PlayerCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayerGenomeProject.cs" />
     <Compile Include="PlayerType.cs" />
     <Compile Include="PopularityDescription.cs" />
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NegotiatePercentageForm.resx">
       <DependentUpon>NegotiatePercentageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerCard.resx">
+      <DependentUpon>PlayerCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

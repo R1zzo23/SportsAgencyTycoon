@@ -1431,5 +1431,17 @@ namespace SportsAgencyTycoon
                 }
             }
         }
+
+        private void btnClientCard_Click(object sender, EventArgs e)
+        {
+            if (cbAgencyAgentList.SelectedIndex > -1 && cbAgentClientList.SelectedIndex > -1)
+            {
+                Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+                Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
+                PlayerCard playerCard = new PlayerCard(selectedClient);
+                playerCard.BringToFront();
+                playerCard.ShowDialog();
+            }
+        }
     }
 }

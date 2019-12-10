@@ -31,10 +31,22 @@ namespace SportsAgencyTycoon
         public int PotentialSkill;
 
         //player attributes to determine which teams or contracts a player prefers
-        public int Greed;
+        //public int Greed;
         public int Lifestyle;
         public int Loyalty;
         public int PlayForTitleContender;
+
+        //Player Genome
+        public int Behavior;
+        public int Composure;
+        public int Greed;
+        public int Leadership;
+        public int WorkEthic;
+        public string BehaviorDescription;
+        public string ComposureDescription;
+        public string GreedDescription;
+        public string LeadershipDescription;
+        public string WorkEthicDescription;
 
         //contract && endorsements
         public Contract Contract;

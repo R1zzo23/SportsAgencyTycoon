@@ -19,68 +19,87 @@ namespace SportsAgencyTycoon
             //string PGP = "";
 
             rnd = r;
-            Behavior = DetermineBehavior(rnd.Next(1, 101));
-            Composure = DetermineComposure(rnd.Next(1, 101));
-            Greed = DetermineGreed(rnd.Next(1, 101));
-            Leadership = DetermineLeadership(rnd.Next(1, 101));
-            WorkEthic = DetermineWorkEthic(rnd.Next(1, 101));
-
-            p.PGP = Behavior.ToString() + Composure.ToString() + Greed.ToString() + Leadership.ToString() + WorkEthic.ToString();
+            DetermineBehavior(p, rnd.Next(1, 101));
+            DetermineComposure(p, rnd.Next(1, 101));
+            DetermineGreed(p, rnd.Next(1, 101));
+            DetermineLeadership(p, rnd.Next(1, 101));
+            DetermineWorkEthic(p, rnd.Next(1, 101));
         }
-        private char DetermineBehavior(int i)
+        private void DetermineBehavior(Player p, int i)
         {
-            char A;
+            p.Behavior = i;
 
-            if (i <= 15) A = Convert.ToChar("Y"); // off field/court issues
-            else if (i <= 45) A = Convert.ToChar("X"); // pushes team rules
-            else if (i <= 80) A = Convert.ToChar("B"); // first in, last out
-            else A = Convert.ToChar("A"); // pro off & on court
+            string text = "";
 
-            return A;
+            if (i <= 10) text = "Serious off field issues.";
+            else if (i <= 20) text = "A social media menace.";
+            else if (i <= 30) text = "Likes to push team rules.";
+            else if (i <= 40) text = "Does what he's told but isn't happy about it.";
+            else if (i <= 50) text = "A 'yes man' towards coaches, front office and law enforcement.";
+            else if (i <= 70) text = "A family man when not at work.";
+            else if (i <= 90) text = "Volunteers for charity in his free time.";
+            else text = "An absolute saint of a man.";
+
+            p.BehaviorDescription = text;
         }
-        private char DetermineComposure(int i)
+        private void DetermineComposure(Player p, int i)
         {
-            char A;
+            p.Composure = i;
 
-            if (i <= 15) A = Convert.ToChar("B"); // ejection waiting to happen
-            else if (i <= 45) A = Convert.ToChar("A"); // let's calls effect him
-            else if (i <= 80) A = Convert.ToChar("X"); // always under control
-            else A = Convert.ToChar("Y"); // emotionless
+            string text = "";
 
-            return A;
+            if (i <= 10) text = "An ejection waiting to happen.";
+            else if (i <= 30) text = "Let's calls effect his play.";
+            else if (i <= 50) text = "Looks to coach for support against refs.";
+            else if (i <= 60) text = "Emotionless while playing; very robotic.";
+            else if (i <= 90) text = "Always keeps emotions in check.";
+            else text = "Accepts any call against him.";
+
+            p.ComposureDescription = text;
         }
-        private char DetermineGreed(int i)
+        private void DetermineGreed(Player p, int i)
         {
-            char A;
+            p.Greed = i;
 
-            if (i <= 20) A = Convert.ToChar("A"); // Brink's truck
-            else if (i <= 65) A = Convert.ToChar("B"); // pay me what I'm worth
-            else if (i <= 85) A = Convert.ToChar("X"); // hometown discount
-            else A = Convert.ToChar("Y"); // I'll accept any offer
+            string text = "";
 
-            return A;
+            if (i <= 20) text = "Better back up the Brinks truck!";
+            else if (i <= 50) text = "Wants to be paid what he's worth.";
+            else if (i <= 80) text = "Willing to negotiate a fair deal.";
+            else if (i <= 90) text = "Willing to take a hometown discount.";
+            else text = "Will accept any offer thrown his way.";
+
+            p.GreedDescription = text;
         }
-        private char DetermineLeadership(int i)
+        private void DetermineLeadership(Player p, int i)
         {
-            char A;
+            p.Leadership = i;
 
-            if (i <= 10) A = Convert.ToChar("Y"); // total diva
-            else if (i <= 50) A = Convert.ToChar("B"); // loner
-            else if (i <= 00) A = Convert.ToChar("A"); // sheep
-            else A = Convert.ToChar("X"); // alpha male
+            string text = "";
 
-            return A;
+            if (i <= 10) text = "A total diva.";
+            else if (i <= 30) text = "Easily influenced by a strong influence whether bad or good.";
+            else if (i <= 50) text = "A follower of the strongest personality in the locker room.";
+            else if (i <= 60) text = "A loner on and off the field of play.";
+            else if (i <= 80) text = "A team player that gets along with everyone.";
+            else if (i <= 90) text = "The prototypical alpha male.";
+            else text = "A player-coach type that's an extension of the coaching staff.";
+
+            p.LeadershipDescription = text;
         }
-        private char DetermineWorkEthic(int i)
+        private void DetermineWorkEthic(Player p, int i)
         {
-            char A;
+            p.WorkEthic = i;
 
-            if (i <= 10) A = Convert.ToChar("A"); // skips training sessions
-            else if (i <= 40) A = Convert.ToChar("X"); // mandatory sessions only
-            else if (i <= 85) A = Convert.ToChar("Y"); // off season gains
-            else A = Convert.ToChar("B"); // gym rat
+            string text = "";
 
-            return A;
+            if (i <= 10) text = "Known to skip training sessions.";
+            else if (i <= 40) text = "Will show up to mandatory training sessions only.";
+            else if (i <= 70) text = "Routinely will make offseason gains.";
+            else if (i <= 90) text = "A gym rat before, during and after the season.";
+            else text = "First person in the gym. Last person to leave. Every. Single. Day.";
+
+            p.WorkEthicDescription = text;
         }
     }
 }

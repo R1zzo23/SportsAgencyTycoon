@@ -40,6 +40,7 @@ namespace SportsAgencyTycoon
         public Calendar Calendar;
         public List<CalendarEvent> EventsThisWeek = new List<CalendarEvent>();
         public List<Achievement> GlobalAchievements = new List<Achievement>();
+        public PlayerGenomeProject PGP = new PlayerGenomeProject();
         public World(MainForm form)
         {
             AvailableLicenses = new List<Licenses>();
@@ -146,6 +147,7 @@ namespace SportsAgencyTycoon
             AssignTeamToPlayersInLeagues();
             DetermineTitleContenderForTeams();
             DetermineHappinessForPlayers();
+            CreatePlayerGenomes();
         }
         public void CreateLeagues(Random rnd)
         {
@@ -470,6 +472,20 @@ namespace SportsAgencyTycoon
             {
                 UFC.PlayerList.Add(new MMAFighter(rnd, i, Sports.MMA, rnd.Next(17, 31)));
             }
+        }
+        public void CreatePlayerGenomes()
+        {
+            foreach (League l in Leagues)
+            {
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
+                        PGP.CreatePGP(rnd, p);
+                foreach (Player p in l.FreeAgents)
+                    PGP.CreatePGP(rnd, p);
+            }
+            foreach (Association a in Associations)
+                foreach (Player p in a.PlayerList)
+                    PGP.CreatePGP(rnd, p);
         }
         public void CreatePlayerBirthdayCalendarEvents()
         {
