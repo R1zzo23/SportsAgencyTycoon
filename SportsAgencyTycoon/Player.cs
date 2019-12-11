@@ -61,6 +61,9 @@ namespace SportsAgencyTycoon
         public int BirthWeek;
         public Date Birthday;
 
+        //relationship with other players
+        public List<RelationshipWithPlayer> Relationships = new List<RelationshipWithPlayer>();
+
         //popularity by numbers and descriptions
         public int Popularity;
         public PopularityDescription PopularityDescription;
