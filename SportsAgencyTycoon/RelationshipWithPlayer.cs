@@ -9,9 +9,10 @@ namespace SportsAgencyTycoon
     public class RelationshipWithPlayer
     {
         public int relationshipNumber;
-        public string relationshipDescription;
+        public RelationshipDescription relationshipDescription;
         public Player Teammate;
         public Random rnd;
+        public int categoryChoice;
         public int playerRating = 0;
         public int teammateRating = 0;
         public List<Interaction> Interactions = new List<Interaction>();
@@ -22,11 +23,17 @@ namespace SportsAgencyTycoon
             relationshipNumber = 50;
             relationshipDescription = DescribeRelationship(relationshipNumber);
         }
-        private string DescribeRelationship(int i)
+        private RelationshipDescription DescribeRelationship(int i)
         {
-            string description = "";
+            RelationshipDescription description;
 
-            
+            if (i <= 10) description = RelationshipDescription.Toxic;
+            else if (i <= 25) description = RelationshipDescription.Poor;
+            else if (i <= 35) description = RelationshipDescription.Decent;
+            else if (i <= 55) description = RelationshipDescription.Fine;
+            else if (i <= 70) description = RelationshipDescription.Good;
+            else if (i <= 85) description = RelationshipDescription.Great;
+            else description = RelationshipDescription.Excellent;
 
             return description;
         }
@@ -36,7 +43,7 @@ namespace SportsAgencyTycoon
         }
         private void DetermineCategory(Player player)
         {
-            int categoryChoice = rnd.Next(1, 5);
+            categoryChoice = rnd.Next(1, 5);
 
             // Behavior check
             if (categoryChoice == 1)
@@ -66,11 +73,14 @@ namespace SportsAgencyTycoon
         }
         private void GoodOrBadInteraction()
         {
+            Interaction interaction;
             int ratingDifference = Math.Abs(playerRating - teammateRating);
             int interactionCheck = rnd.Next(1, 101);
             if (interactionCheck <= ratingDifference)
             {
-                // bad interaction
+                if (categoryChoice == 1)
+                    interaction = new Interaction("Behavior", "")
+
             }
             else
             {

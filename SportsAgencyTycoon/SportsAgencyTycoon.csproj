@@ -241,6 +241,7 @@
     <Compile Include="EndorsementType.cs" />
     <Compile Include="RelationshipWithTeam.cs" />
     <Compile Include="Achievement.cs" />
+    <Compile Include="RelationshipDescription.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
