@@ -23,10 +23,10 @@ namespace SportsAgencyTycoon
         {
             lblName.Text = p.FullName;
             lblBehavior.Text = p.BehaviorDescription;
-            lblComposure.Text = p.ComposureDescription;
-            lblGreed.Text = p.GreedDescription;
-            lblLeadership.Text = p.LeadershipDescription;
-            lblWorkEthic.Text = p.WorkEthicDescription;
+            lblComposure.Text = p.ComposureString;
+            lblGreed.Text = p.GreedString;
+            lblLeadership.Text = p.LeadershipString;
+            lblWorkEthic.Text = p.WorkEthicString;
         }
     }
 }

@@ -42,11 +42,16 @@ namespace SportsAgencyTycoon
         public int Greed;
         public int Leadership;
         public int WorkEthic;
-        public string BehaviorDescription;
-        public string ComposureDescription;
-        public string GreedDescription;
-        public string LeadershipDescription;
-        public string WorkEthicDescription;
+        public string BehaviorString;
+        public string ComposureString;
+        public string GreedString;
+        public string LeadershipString;
+        public string WorkEthicString;
+        public BehaviorDescription BehaviorDescription;
+        public ComposureDescription ComposureDescription;
+        public GreedDescription GreedDescription;
+        public LeadershipDescription LeadershipDescription;
+        public WorkEthicDescription WorkEthicDescription;
 
         //contract && endorsements
         public Contract Contract;

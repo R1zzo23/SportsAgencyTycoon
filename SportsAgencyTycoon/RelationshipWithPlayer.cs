@@ -10,16 +10,18 @@ namespace SportsAgencyTycoon
     {
         public int relationshipNumber;
         public RelationshipDescription relationshipDescription;
+        public Player Client;
         public Player Teammate;
         public Random rnd;
         public int categoryChoice;
         public int playerRating = 0;
         public int teammateRating = 0;
         public List<Interaction> Interactions = new List<Interaction>();
-        public RelationshipWithPlayer(Player p, Random r)
+        public RelationshipWithPlayer(Player client, Player t, Random r)
         {
             rnd = r;
-            Teammate = p;
+            Client = client;
+            Teammate = t;
             relationshipNumber = 50;
             relationshipDescription = DescribeRelationship(relationshipNumber);
         }
@@ -73,18 +75,67 @@ namespace SportsAgencyTycoon
         }
         private void GoodOrBadInteraction()
         {
-            Interaction interaction;
+            //Interaction interaction;
+            string message = "";
             int ratingDifference = Math.Abs(playerRating - teammateRating);
             int interactionCheck = rnd.Next(1, 101);
+            // bad interaction
             if (interactionCheck <= ratingDifference)
             {
+                //Behavior
                 if (categoryChoice == 1)
-                    interaction = new Interaction("Behavior", "")
+                {
+                    if (playerRating < teammateRating)
+                        message = Client.FullName + " made disparaging comments about " + Teammate.FullName + "'s personal life.";
+                    else message = Teammate.FullName + " made disparaging comments about " + Client.FullName + "'s personal life.";
+                }
+                //Composure
+                else if (categoryChoice == 2)
+                {
+                    if (playerRating < teammateRating)
+                        message = Teammate.FullName + " confronted " + Client.FullName + " about costing the team the game due to losing his cool.";
+                    else message = Client.FullName + " confronted " + Teammate.FullName + " about costing the team the game due to losing his cool.";
+                }
+                //Leadership
+                else if (categoryChoice == 3)
+                {
+                    if (playerRating < teammateRating)
+                        message = Teammate.FullName + " called out " + Client.FullName + " for not stepping up to be more of a role model on the team.";
+                    else message = Client.FullName + " called out " + Teammate.FullName + " for not stepping up to be more of a role model on the team.";
+                }
+            }
+                //Work Ethic
+                else if (categoryChoice == 4)
+                {
+                if (playerRating < teammateRating)
+                    message = Teammate.FullName + " questioned " + Client.FullName + "'s commitment for not putting in extra work in the weight room.";
+                else message = Client.FullName + " questioned " + Teammate.FullName + "'s commitment for not putting in extra work in the weight room.";
+            }
 
             }
+            // Good Interaction
             else
             {
-                // good interaction
+                //Behavior
+                if (categoryChoice == 1)
+                {
+
+                }
+                //Composure
+                else if (categoryChoice == 2)
+                {
+
+                }
+                //Leadership
+                else if (categoryChoice == 3)
+                {
+
+                }
+                //Work Ethic
+                else if (categoryChoice == 4)
+                {
+
+                }
             }
         }
     }
