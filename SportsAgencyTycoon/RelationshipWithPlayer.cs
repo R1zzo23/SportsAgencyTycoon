@@ -16,6 +16,7 @@ namespace SportsAgencyTycoon
         public int categoryChoice;
         public int playerRating = 0;
         public int teammateRating = 0;
+        public bool goodInteraction;
         public List<Interaction> Interactions = new List<Interaction>();
         public RelationshipWithPlayer(Player client, Player t, Random r)
         {
@@ -42,6 +43,7 @@ namespace SportsAgencyTycoon
         public void DetermineInteraction(Player player)
         {
             DetermineCategory(player);
+            goodInteraction = GoodInteraction();
         }
         private void DetermineCategory(Player player)
         {
@@ -73,14 +75,20 @@ namespace SportsAgencyTycoon
             }
 
         }
-        private void GoodOrBadInteraction()
+        private bool GoodInteraction()
         {
-            //Interaction interaction;
-            string message = "";
             int ratingDifference = Math.Abs(playerRating - teammateRating);
             int interactionCheck = rnd.Next(1, 101);
-            // bad interaction
             if (interactionCheck <= ratingDifference)
+                return false;
+            else return true;
+        }
+        private string GoodOrBadInteraction()
+        {
+            string message = "";
+
+            // bad interaction
+            if (!goodInteraction)
             {
                 //Behavior
                 if (categoryChoice == 1)
@@ -103,14 +111,13 @@ namespace SportsAgencyTycoon
                         message = Teammate.FullName + " called out " + Client.FullName + " for not stepping up to be more of a role model on the team.";
                     else message = Client.FullName + " called out " + Teammate.FullName + " for not stepping up to be more of a role model on the team.";
                 }
-            }
                 //Work Ethic
                 else if (categoryChoice == 4)
                 {
                 if (playerRating < teammateRating)
                     message = Teammate.FullName + " questioned " + Client.FullName + "'s commitment for not putting in extra work in the weight room.";
                 else message = Client.FullName + " questioned " + Teammate.FullName + "'s commitment for not putting in extra work in the weight room.";
-            }
+                }
 
             }
             // Good Interaction
@@ -119,24 +126,44 @@ namespace SportsAgencyTycoon
                 //Behavior
                 if (categoryChoice == 1)
                 {
-
+                    if (Client.BehaviorDescription == BehaviorDescription.CharityVolunteer)
+                        message = Client.FullName + " brought " + Teammate.FullName + " to volunteer with him at his favorite charity.";
+                    else if (Client.BehaviorDescription == BehaviorDescription.FamilyMan)
+                        message = Client.FullName + " invited " + Teammate.FullName + " and his family over for dinner.";
+                    else if (Client.BehaviorDescription == BehaviorDescription.Saint)
+                        message = Client.FullName + " has taken " + Teammate.FullName + " under his wing and has been mentoring him.";
+                    else message = Client.FullName + " has been spending time away from the team with " + Teammate.FullName;
                 }
                 //Composure
                 else if (categoryChoice == 2)
                 {
-
+                    if (Client.ComposureDescription == ComposureDescription.AcceptsCalls)
+                        message = Client.FullName + " has been a calming influence over " + Teammate.FullName + " when calls don't go his way.";
+                    else message = Client.FullName + " saved " + Teammate.FullName + " from getting tossed from the last game.";
                 }
                 //Leadership
                 else if (categoryChoice == 3)
                 {
-
+                    if (Client.LeadershipDescription == LeadershipDescription.PlayerCoach)
+                        message = Client.FullName + " organized an extra film session with " + Teammate.FullName;
+                    else if (Client.LeadershipDescription == LeadershipDescription.AlphaMale)
+                        message = Client.FullName + " has been boosting " + Teammate.FullName + "'s confidence in games and at practice.";
+                    else if (Client.LeadershipDescription == LeadershipDescription.TeamPlayer)
+                        message = Client.FullName + " stuck up for " + Teammate.FullName + " when the media questioned " + Teammate.FirstName + "'s most recent struggles";
+                    else message = Client.FullName + " has been playfully competing with " + Teammate.FullName + " before and after practice.";
                 }
                 //Work Ethic
                 else if (categoryChoice == 4)
                 {
-
+                    if (Client.WorkEthicDescription == WorkEthicDescription.FirstInLastOut)
+                        message = Client.FullName + " has been getting " + Teammate.FullName + " to stay after practice to work on a few skills.";
+                    else if (Client.WorkEthicDescription == WorkEthicDescription.GymRat)
+                        message = Client.FullName + " has been pushing " + Teammate.FullName + " in the gym with extra workout sessions.";
+                    else message = Client.FullName + " and " + Teammate.FullName + " have been pushing each other during drills at practice.";
                 }
             }
+
+            return message;
         }
     }
 }
