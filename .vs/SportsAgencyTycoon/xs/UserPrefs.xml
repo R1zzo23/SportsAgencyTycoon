@@ -5,8 +5,7 @@
       <File FileName="SportsAgencyTycoon/World.cs" />
       <File FileName="SportsAgencyTycoon/PlayerGenomeProject.cs" />
       <File FileName="SportsAgencyTycoon/Player.cs" />
-      <File FileName="SportsAgencyTycoon/RelationshipWithPlayer.cs" Line="86" Column="46" />
-      <File FileName="SportsAgencyTycoon/Interaction.cs" />
+      <File FileName="SportsAgencyTycoon/RelationshipWithPlayer.cs" Line="129" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
