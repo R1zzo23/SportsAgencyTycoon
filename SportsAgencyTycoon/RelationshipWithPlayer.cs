@@ -43,9 +43,8 @@ namespace SportsAgencyTycoon
                 categoryChoice = 3;
             else categoryChoice = 4;
         }
-        public void PositiveOrNegativeInteraction()
+        public int NumberNeededForPositiveInteraction()
         {
-            bool positiveInteraction = false;
             int numberForPositiveInteraction = 0;
             if (categoryChoice == 1)
             {
@@ -126,8 +125,33 @@ namespace SportsAgencyTycoon
             }
             else if (categoryChoice == 3)
             {
-
+                if (Client.WorkEthicDescription == WorkEthicDescription.FirstInLastOut ||
+                    Client.WorkEthicDescription == WorkEthicDescription.GymRat)
+                {
+                    if (Teammate.WorkEthicDescription == WorkEthicDescription.SkipsTraining) numberForPositiveInteraction = 4;
+                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.MandatarySessionsOnly) numberForPositiveInteraction = 6;
+                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.OffSeasonGains) numberForPositiveInteraction = 8;
+                    else numberForPositiveInteraction = 9;
+                }
+                else if (Client.WorkEthicDescription == WorkEthicDescription.OffSeasonGains)
+                {
+                    if (Teammate.WorkEthicDescription == WorkEthicDescription.SkipsTraining) numberForPositiveInteraction = 5;
+                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.MandatarySessionsOnly) numberForPositiveInteraction = 6;
+                    else numberForPositiveInteraction = 8;
+                }
+                else
+                {
+                    numberForPositiveInteraction = 4;
+                }
             }
+            return numberForPositiveInteraction;
+        }
+        public void PositiveOrNegativeInteraction()
+        {
+            bool positiveInteraction = false;
+            int numberForPositiveInteraction = NumberNeededForPositiveInteraction();
+            int diceRoll = DiceRoll();
+            if (diceRoll <= numberForPositiveInteraction) positiveInteraction = true;
         }
         private RelationshipDescription DescribeRelationship(int i)
         {
@@ -267,6 +291,12 @@ namespace SportsAgencyTycoon
             }
 
             return message;
+        }
+        public int DiceRoll()
+        {
+            int firstDie = rnd.Next(1, 7);
+            int secondDie = rnd.Next(1, 7);
+            return firstDie + secondDie;
         }
     }
 }
