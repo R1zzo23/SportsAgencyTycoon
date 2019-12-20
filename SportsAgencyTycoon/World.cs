@@ -50,7 +50,7 @@ namespace SportsAgencyTycoon
             AvailableAgents = new List<Agent>();
             Leagues = new List<League>();
             Associations = new List<Association>();
-            
+
             Year = 2000;
             MonthNumber = 0;
             MonthName = Months.January;
@@ -946,6 +946,7 @@ namespace SportsAgencyTycoon
         {
             //add 1 to week number
             WeekNumber++;
+            MainForm.agency.ClientInteractions(rnd);
 
             //check if month ends
             if (((WeekNumber == 5) && ((MonthNumber + 1) % 3 != 0)) || ((WeekNumber == 6) && ((MonthNumber + 1) % 3 == 0)))

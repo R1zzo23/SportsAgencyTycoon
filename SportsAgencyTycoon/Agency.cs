@@ -151,5 +151,27 @@ namespace SportsAgencyTycoon
 
             return hasAchievement;
         }
+        public void ClientInteractions(Random rnd)
+        {
+            foreach (Player p in Clients)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    int relationshipIndex;
+                    int teammateIndex = rnd.Next(0, p.Team.Roster.Count);
+                    while (p == p.Team.Roster[teammateIndex])
+                    {
+                        teammateIndex = rnd.Next(0, p.Team.Roster.Count);
+                    }
+                    relationshipIndex = p.Relationships.FindIndex(o => o.Teammate == p.Team.Roster[teammateIndex]);
+                    if (relationshipIndex < 0)
+                    {
+                        p.Relationships.Add(new RelationshipWithPlayer(p, p.Team.Roster[teammateIndex], rnd));
+                        relationshipIndex = p.Relationships.Count - 1;
+                    }
+                    p.Relationships[relationshipIndex].NewInteraction();
+                }
+            }
+        }
     }
 }

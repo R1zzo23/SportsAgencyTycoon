@@ -17,6 +17,7 @@ namespace SportsAgencyTycoon
         public int playerRating = 0;
         public int teammateRating = 0;
         public bool goodInteraction;
+        public string outputMesage = "";
         public List<Interaction> Interactions = new List<Interaction>();
         public RelationshipWithPlayer(Player client, Player t, Random r)
         {
@@ -30,6 +31,8 @@ namespace SportsAgencyTycoon
         {
             DetermineInteractionType();
             PositiveOrNegativeInteraction();
+            outputMesage = GoodOrBadInteraction();
+            //mainForm.newsLabel.Text = outputMesage + Environment.NewLine + mainForm.newsLabel.Text;
         }
         public void DetermineInteractionType()
         {
@@ -148,10 +151,15 @@ namespace SportsAgencyTycoon
         }
         public void PositiveOrNegativeInteraction()
         {
-            bool positiveInteraction = false;
+            goodInteraction = false;
             int numberForPositiveInteraction = NumberNeededForPositiveInteraction();
             int diceRoll = DiceRoll();
-            if (diceRoll <= numberForPositiveInteraction) positiveInteraction = true;
+            if (diceRoll <= numberForPositiveInteraction) goodInteraction = true;
+
+            int diceDifference = Math.Abs(diceRoll - numberForPositiveInteraction);
+            if (goodInteraction) relationshipNumber += diceDifference;
+            else relationshipNumber -= diceDifference;
+            DescribeRelationship(relationshipNumber);
         }
         private RelationshipDescription DescribeRelationship(int i)
         {
