@@ -946,12 +946,12 @@ namespace SportsAgencyTycoon
         {
             //add 1 to week number
             WeekNumber++;
-            MainForm.agency.ClientInteractions(rnd);
 
             //check if month ends
             if (((WeekNumber == 5) && ((MonthNumber + 1) % 3 != 0)) || ((WeekNumber == 6) && ((MonthNumber + 1) % 3 == 0)))
             {
                 SetNewMonth();
+                MainForm.agency.ClientInteractions(rnd, MainForm);
                 PayPlayersMonthlySalary();
             }
         }

@@ -9,7 +9,8 @@ namespace SportsAgencyTycoon
         Fine,
         Decent,
         Poor,
-        Toxic
+        Toxic,
+        Irreperable
     }
     public enum BehaviorDescription
     {

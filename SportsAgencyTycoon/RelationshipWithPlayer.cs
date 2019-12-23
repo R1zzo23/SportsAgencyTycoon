@@ -27,12 +27,12 @@ namespace SportsAgencyTycoon
             relationshipNumber = 50;
             relationshipDescription = DescribeRelationship(relationshipNumber);
         }
-        public void NewInteraction()
+        public void NewInteraction(MainForm mainForm)
         {
             DetermineInteractionType();
             PositiveOrNegativeInteraction();
             outputMesage = GoodOrBadInteraction();
-            //mainForm.newsLabel.Text = outputMesage + Environment.NewLine + mainForm.newsLabel.Text;
+            mainForm.newsLabel.Text = outputMesage + Environment.NewLine + mainForm.newsLabel.Text;
         }
         public void DetermineInteractionType()
         {
@@ -55,39 +55,39 @@ namespace SportsAgencyTycoon
                     Client.BehaviorDescription == BehaviorDescription.Saint ||
                     Client.BehaviorDescription == BehaviorDescription.FamilyMan)
                 {
-                    if (Teammate.BehaviorDescription == BehaviorDescription.OffFieldIssues) numberForPositiveInteraction = 3;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.SocialMediaMenace) numberForPositiveInteraction = 4;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.PushesTeamRules) numberForPositiveInteraction = 5;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.ReluctantlyListens) numberForPositiveInteraction = 6;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.YesMan) numberForPositiveInteraction = 8;
+                    if (Teammate.BehaviorDescription == BehaviorDescription.OffFieldIssues) numberForPositiveInteraction = 5;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.SocialMediaMenace) numberForPositiveInteraction = 6;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.PushesTeamRules) numberForPositiveInteraction = 7;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.ReluctantlyListens) numberForPositiveInteraction = 8;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.YesMan) numberForPositiveInteraction = 10;
                     else numberForPositiveInteraction = 11;
                 }
                 else if (Client.BehaviorDescription == BehaviorDescription.YesMan)
                 {
-                    if (Teammate.BehaviorDescription == BehaviorDescription.OffFieldIssues) numberForPositiveInteraction = 2;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.PushesTeamRules) numberForPositiveInteraction = 4;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.ReluctantlyListens) numberForPositiveInteraction = 5;
-                    else numberForPositiveInteraction = 9;
+                    if (Teammate.BehaviorDescription == BehaviorDescription.OffFieldIssues) numberForPositiveInteraction = 4;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.PushesTeamRules) numberForPositiveInteraction = 6;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.ReluctantlyListens) numberForPositiveInteraction = 7;
+                    else numberForPositiveInteraction = 10;
                 }
                 else if (Client.BehaviorDescription == BehaviorDescription.ReluctantlyListens)
                 {
-                    if (Teammate.BehaviorDescription == BehaviorDescription.YesMan) numberForPositiveInteraction = 5;
-                    else numberForPositiveInteraction = 7;
+                    if (Teammate.BehaviorDescription == BehaviorDescription.YesMan) numberForPositiveInteraction = 6;
+                    else numberForPositiveInteraction = 8;
                 }
                 else if (Client.BehaviorDescription == BehaviorDescription.SocialMediaMenace)
                 {
                     if (Teammate.BehaviorDescription == BehaviorDescription.CharityVolunteer ||
                         Teammate.BehaviorDescription == BehaviorDescription.Saint ||
-                        Teammate.BehaviorDescription == BehaviorDescription.FamilyMan) numberForPositiveInteraction = 4;
-                    else numberForPositiveInteraction = 6;
+                        Teammate.BehaviorDescription == BehaviorDescription.FamilyMan) numberForPositiveInteraction = 6;
+                    else numberForPositiveInteraction = 8;
                 }
                 else if (Client.BehaviorDescription == BehaviorDescription.OffFieldIssues)
                 {
                     if (Teammate.BehaviorDescription == BehaviorDescription.CharityVolunteer ||
                         Teammate.BehaviorDescription == BehaviorDescription.Saint ||
-                        Teammate.BehaviorDescription == BehaviorDescription.FamilyMan) numberForPositiveInteraction = 3;
-                    else if (Teammate.BehaviorDescription == BehaviorDescription.YesMan) numberForPositiveInteraction = 2;
-                    else numberForPositiveInteraction = 6;
+                        Teammate.BehaviorDescription == BehaviorDescription.FamilyMan) numberForPositiveInteraction = 5;
+                    else if (Teammate.BehaviorDescription == BehaviorDescription.YesMan) numberForPositiveInteraction = 4;
+                    else numberForPositiveInteraction = 8;
                 }
             }
             else if (categoryChoice == 2)
@@ -95,35 +95,35 @@ namespace SportsAgencyTycoon
                 if (Client.ComposureDescription == ComposureDescription.AcceptsCalls ||
                     Client.ComposureDescription == ComposureDescription.Composed)
                 {
-                    if (Teammate.ComposureDescription == ComposureDescription.EjectionWaitingToHappen) numberForPositiveInteraction = 3;
-                    else if (Teammate.ComposureDescription == ComposureDescription.EffectedByCalls) numberForPositiveInteraction = 5;
-                    else if (Teammate.ComposureDescription == ComposureDescription.NeedsCoachControl) numberForPositiveInteraction = 7;
-                    else numberForPositiveInteraction = 9;
+                    if (Teammate.ComposureDescription == ComposureDescription.EjectionWaitingToHappen) numberForPositiveInteraction = 5;
+                    else if (Teammate.ComposureDescription == ComposureDescription.EffectedByCalls) numberForPositiveInteraction = 7;
+                    else if (Teammate.ComposureDescription == ComposureDescription.NeedsCoachControl) numberForPositiveInteraction = 9;
+                    else numberForPositiveInteraction = 10;
                 }
                 else if (Client.ComposureDescription == ComposureDescription.Emotionless)
                 {
-                    numberForPositiveInteraction = 6;
+                    numberForPositiveInteraction = 7;
                 }
                 else if (Client.ComposureDescription == ComposureDescription.NeedsCoachControl)
                 {
-                    if (Teammate.ComposureDescription == ComposureDescription.EjectionWaitingToHappen) numberForPositiveInteraction = 3;
-                    else if (Teammate.ComposureDescription == ComposureDescription.EffectedByCalls) numberForPositiveInteraction = 5;
-                    else if (Teammate.ComposureDescription == ComposureDescription.NeedsCoachControl) numberForPositiveInteraction = 7;
-                    else numberForPositiveInteraction = 8;
+                    if (Teammate.ComposureDescription == ComposureDescription.EjectionWaitingToHappen) numberForPositiveInteraction = 5;
+                    else if (Teammate.ComposureDescription == ComposureDescription.EffectedByCalls) numberForPositiveInteraction = 7;
+                    else if (Teammate.ComposureDescription == ComposureDescription.NeedsCoachControl) numberForPositiveInteraction = 9;
+                    else numberForPositiveInteraction = 10;
                 }
                 else if (Client.ComposureDescription == ComposureDescription.EffectedByCalls)
                 {
-                    if (Teammate.ComposureDescription == ComposureDescription.AcceptsCalls) numberForPositiveInteraction = 5;
-                    else if (Teammate.ComposureDescription == ComposureDescription.Emotionless) numberForPositiveInteraction = 6;
-                    else numberForPositiveInteraction = 8;
+                    if (Teammate.ComposureDescription == ComposureDescription.AcceptsCalls) numberForPositiveInteraction = 7;
+                    else if (Teammate.ComposureDescription == ComposureDescription.Emotionless) numberForPositiveInteraction = 8;
+                    else numberForPositiveInteraction = 10;
                 }
                 else
                 {
-                    if (Teammate.ComposureDescription == ComposureDescription.EffectedByCalls) numberForPositiveInteraction = 8;
-                    else if (Teammate.ComposureDescription == ComposureDescription.NeedsCoachControl) numberForPositiveInteraction = 5;
-                    else if (Teammate.ComposureDescription == ComposureDescription.Emotionless) numberForPositiveInteraction = 6;
-                    else if (Teammate.ComposureDescription == ComposureDescription.EjectionWaitingToHappen) numberForPositiveInteraction = 4;
-                    else numberForPositiveInteraction = 3;
+                    if (Teammate.ComposureDescription == ComposureDescription.EffectedByCalls) numberForPositiveInteraction = 10;
+                    else if (Teammate.ComposureDescription == ComposureDescription.NeedsCoachControl) numberForPositiveInteraction = 7;
+                    else if (Teammate.ComposureDescription == ComposureDescription.Emotionless) numberForPositiveInteraction = 8;
+                    else if (Teammate.ComposureDescription == ComposureDescription.EjectionWaitingToHappen) numberForPositiveInteraction = 6;
+                    else numberForPositiveInteraction = 5;
                 }
             }
             else if (categoryChoice == 3)
@@ -131,20 +131,20 @@ namespace SportsAgencyTycoon
                 if (Client.WorkEthicDescription == WorkEthicDescription.FirstInLastOut ||
                     Client.WorkEthicDescription == WorkEthicDescription.GymRat)
                 {
-                    if (Teammate.WorkEthicDescription == WorkEthicDescription.SkipsTraining) numberForPositiveInteraction = 4;
-                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.MandatarySessionsOnly) numberForPositiveInteraction = 6;
-                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.OffSeasonGains) numberForPositiveInteraction = 8;
-                    else numberForPositiveInteraction = 9;
+                    if (Teammate.WorkEthicDescription == WorkEthicDescription.SkipsTraining) numberForPositiveInteraction = 6;
+                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.MandatarySessionsOnly) numberForPositiveInteraction = 8;
+                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.OffSeasonGains) numberForPositiveInteraction = 9;
+                    else numberForPositiveInteraction = 10;
                 }
                 else if (Client.WorkEthicDescription == WorkEthicDescription.OffSeasonGains)
                 {
-                    if (Teammate.WorkEthicDescription == WorkEthicDescription.SkipsTraining) numberForPositiveInteraction = 5;
-                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.MandatarySessionsOnly) numberForPositiveInteraction = 6;
-                    else numberForPositiveInteraction = 8;
+                    if (Teammate.WorkEthicDescription == WorkEthicDescription.SkipsTraining) numberForPositiveInteraction = 7;
+                    else if (Teammate.WorkEthicDescription == WorkEthicDescription.MandatarySessionsOnly) numberForPositiveInteraction = 8;
+                    else numberForPositiveInteraction = 10;
                 }
                 else
                 {
-                    numberForPositiveInteraction = 4;
+                    numberForPositiveInteraction = 6;
                 }
             }
             return numberForPositiveInteraction;
@@ -159,13 +159,15 @@ namespace SportsAgencyTycoon
             int diceDifference = Math.Abs(diceRoll - numberForPositiveInteraction);
             if (goodInteraction) relationshipNumber += diceDifference;
             else relationshipNumber -= diceDifference;
-            DescribeRelationship(relationshipNumber);
+            if (relationshipNumber < 0) relationshipNumber = 0;
+            relationshipDescription = DescribeRelationship(relationshipNumber);
         }
         private RelationshipDescription DescribeRelationship(int i)
         {
             RelationshipDescription description;
 
-            if (i <= 10) description = RelationshipDescription.Toxic;
+            if (i == 0) description = RelationshipDescription.Irreperable;
+            else if (i <= 10) description = RelationshipDescription.Toxic;
             else if (i <= 25) description = RelationshipDescription.Poor;
             else if (i <= 35) description = RelationshipDescription.Decent;
             else if (i <= 55) description = RelationshipDescription.Fine;

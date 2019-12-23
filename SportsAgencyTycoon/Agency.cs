@@ -151,25 +151,37 @@ namespace SportsAgencyTycoon
 
             return hasAchievement;
         }
-        public void ClientInteractions(Random rnd)
+        public void ClientInteractions(Random rnd, MainForm mainForm)
         {
             foreach (Player p in Clients)
             {
-                for (int i = 0; i < 3; i++)
+                if (p.Team != null)
                 {
-                    int relationshipIndex;
-                    int teammateIndex = rnd.Next(0, p.Team.Roster.Count);
-                    while (p == p.Team.Roster[teammateIndex])
+                    for (int i = 0; i < 3; i++)
                     {
-                        teammateIndex = rnd.Next(0, p.Team.Roster.Count);
+                        int relationshipIndex;
+                        int teammateIndex = rnd.Next(0, p.Team.Roster.Count);
+                        while (p == p.Team.Roster[teammateIndex])
+                        {
+                            teammateIndex = rnd.Next(0, p.Team.Roster.Count);
+                        }
+                        relationshipIndex = p.Relationships.FindIndex(o => o.Teammate == p.Team.Roster[teammateIndex]);
+                        if (relationshipIndex < 0)
+                        {
+                            p.Relationships.Add(new RelationshipWithPlayer(p, p.Team.Roster[teammateIndex], rnd));
+                            relationshipIndex = p.Relationships.Count - 1;
+                        }
+                        //irreperable relationship
+                        if (p.Relationships[relationshipIndex].relationshipDescription == RelationshipDescription.Irreperable)
+                        {
+                            //code something bad for irreperable relationship
+                            // demand trade
+                            // fight
+                            // public denouncement
+                        }
+                        else
+                            p.Relationships[relationshipIndex].NewInteraction(mainForm);
                     }
-                    relationshipIndex = p.Relationships.FindIndex(o => o.Teammate == p.Team.Roster[teammateIndex]);
-                    if (relationshipIndex < 0)
-                    {
-                        p.Relationships.Add(new RelationshipWithPlayer(p, p.Team.Roster[teammateIndex], rnd));
-                        relationshipIndex = p.Relationships.Count - 1;
-                    }
-                    p.Relationships[relationshipIndex].NewInteraction();
                 }
             }
         }

@@ -34,6 +34,7 @@
             this.lblGreed = new System.Windows.Forms.Label();
             this.lblLeadership = new System.Windows.Forms.Label();
             this.lblWorkEthic = new System.Windows.Forms.Label();
+            this.lblRelationshipWithPlayers = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -90,11 +91,21 @@
             this.lblWorkEthic.TabIndex = 5;
             this.lblWorkEthic.Text = "label5";
             // 
+            // lblRelationshipWithPlayers
+            // 
+            this.lblRelationshipWithPlayers.AutoSize = true;
+            this.lblRelationshipWithPlayers.Location = new System.Drawing.Point(263, 59);
+            this.lblRelationshipWithPlayers.Name = "lblRelationshipWithPlayers";
+            this.lblRelationshipWithPlayers.Size = new System.Drawing.Size(35, 13);
+            this.lblRelationshipWithPlayers.TabIndex = 6;
+            this.lblRelationshipWithPlayers.Text = "label1";
+            // 
             // PlayerCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblRelationshipWithPlayers);
             this.Controls.Add(this.lblWorkEthic);
             this.Controls.Add(this.lblLeadership);
             this.Controls.Add(this.lblGreed);
@@ -116,5 +127,6 @@
         private System.Windows.Forms.Label lblGreed;
         private System.Windows.Forms.Label lblLeadership;
         private System.Windows.Forms.Label lblWorkEthic;
+        private System.Windows.Forms.Label lblRelationshipWithPlayers;
     }
 }
