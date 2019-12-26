@@ -116,7 +116,14 @@ namespace SportsAgencyTycoon
             IndividualSportLicense.Add(ultimateFightingLicense);
 
             AvailableLicenses.Add(basketballLicense);
+            AvailableLicenses.Add(basketballLicense);
+            AvailableLicenses.Add(boxingLicense);
             AvailableLicenses.Add(footballLicense);
+            AvailableLicenses.Add(golfLicense);
+            AvailableLicenses.Add(hockeyLicense);
+            AvailableLicenses.Add(soccerLicense);
+            AvailableLicenses.Add(tennisLicense);
+            AvailableLicenses.Add(ultimateFightingLicense);
         }
         public int HowManyNewClients(int influence)
         {
@@ -1091,7 +1098,7 @@ namespace SportsAgencyTycoon
             // name agent after either Adam Rizzo or Gary Gorski (Agent)
             GlobalAchievements.Add(new Achievement("Dev Flattery", "Name your manager after Adam Rizzo or Gary Gorski.", 1, 5, "All"));
             // negotiate highest possible percentage within 2 offers
-
+            GlobalAchievements.Add(new Achievement("Percentage On Point", "Sign a client for highest percentage they would accept.", 1, 5, "Negotiating"));
             // sign client on first offer
             GlobalAchievements.Add(new Achievement("Smooth Signing", "Sign a client on your first offer.", 1, 2, "Negotiating"));
         }

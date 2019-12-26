@@ -160,7 +160,7 @@ namespace SportsAgencyTycoon
             }
             else if (i <= 30)
             {
-                text = "Easily influenced by a strong influence whether bad or good.";
+                text = "Easily influenced by a strong personality whether bad or good.";
                 p.LeadershipDescription = LeadershipDescription.Sheep;
             }
             else if (i <= 50)

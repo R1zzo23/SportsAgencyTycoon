@@ -86,6 +86,7 @@
             this.cbAvailableLicenses = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnClientCard = new System.Windows.Forms.Button();
             this.btnMarketPlayer = new System.Windows.Forms.Button();
             this.clientTeamLabel = new System.Windows.Forms.Label();
             this.clientPositionLabel = new System.Windows.Forms.Label();
@@ -165,7 +166,7 @@
             this.lblFootballSeason = new System.Windows.Forms.Label();
             this.lblBasketballSeason = new System.Windows.Forms.Label();
             this.btnViewStandings = new System.Windows.Forms.Button();
-            this.btnClientCard = new System.Windows.Forms.Button();
+            this.lblPlayerGenome = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -209,7 +210,7 @@
             // btnHireMarketer
             // 
             this.btnHireMarketer.Location = new System.Drawing.Point(90, 221);
-            this.btnHireMarketer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHireMarketer.Margin = new System.Windows.Forms.Padding(2);
             this.btnHireMarketer.Name = "btnHireMarketer";
             this.btnHireMarketer.Size = new System.Drawing.Size(82, 22);
             this.btnHireMarketer.TabIndex = 19;
@@ -791,10 +792,20 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Client Information";
             // 
+            // btnClientCard
+            // 
+            this.btnClientCard.Location = new System.Drawing.Point(281, 147);
+            this.btnClientCard.Name = "btnClientCard";
+            this.btnClientCard.Size = new System.Drawing.Size(75, 23);
+            this.btnClientCard.TabIndex = 38;
+            this.btnClientCard.Text = "Player Card";
+            this.btnClientCard.UseVisualStyleBackColor = true;
+            this.btnClientCard.Click += new System.EventHandler(this.btnClientCard_Click);
+            // 
             // btnMarketPlayer
             // 
             this.btnMarketPlayer.Location = new System.Drawing.Point(281, 179);
-            this.btnMarketPlayer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMarketPlayer.Margin = new System.Windows.Forms.Padding(2);
             this.btnMarketPlayer.Name = "btnMarketPlayer";
             this.btnMarketPlayer.Size = new System.Drawing.Size(76, 23);
             this.btnMarketPlayer.TabIndex = 37;
@@ -986,6 +997,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.lblPlayerGenome);
             this.groupBox6.Controls.Add(this.lblClientMonthlySalary);
             this.groupBox6.Controls.Add(this.btnNegotiatePercent);
             this.groupBox6.Controls.Add(this.lblClientSalary);
@@ -1011,7 +1023,7 @@
             // lblClientMonthlySalary
             // 
             this.lblClientMonthlySalary.AutoSize = true;
-            this.lblClientMonthlySalary.Location = new System.Drawing.Point(170, 171);
+            this.lblClientMonthlySalary.Location = new System.Drawing.Point(281, 161);
             this.lblClientMonthlySalary.Name = "lblClientMonthlySalary";
             this.lblClientMonthlySalary.Size = new System.Drawing.Size(82, 13);
             this.lblClientMonthlySalary.TabIndex = 47;
@@ -1030,7 +1042,7 @@
             // lblClientSalary
             // 
             this.lblClientSalary.AutoSize = true;
-            this.lblClientSalary.Location = new System.Drawing.Point(167, 198);
+            this.lblClientSalary.Location = new System.Drawing.Point(281, 188);
             this.lblClientSalary.Name = "lblClientSalary";
             this.lblClientSalary.Size = new System.Drawing.Size(71, 13);
             this.lblClientSalary.TabIndex = 45;
@@ -1039,7 +1051,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(90, 225);
+            this.label32.Location = new System.Drawing.Point(226, 215);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(49, 13);
             this.label32.TabIndex = 44;
@@ -1048,7 +1060,7 @@
             // lblClientAgentPercent
             // 
             this.lblClientAgentPercent.AutoSize = true;
-            this.lblClientAgentPercent.Location = new System.Drawing.Point(145, 225);
+            this.lblClientAgentPercent.Location = new System.Drawing.Point(281, 215);
             this.lblClientAgentPercent.Name = "lblClientAgentPercent";
             this.lblClientAgentPercent.Size = new System.Drawing.Size(71, 13);
             this.lblClientAgentPercent.TabIndex = 43;
@@ -1057,7 +1069,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(90, 198);
+            this.label30.Location = new System.Drawing.Point(204, 188);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(71, 13);
             this.label30.TabIndex = 42;
@@ -1087,7 +1099,7 @@
             // 
             this.availableClientSportLabel.AutoSize = true;
             this.availableClientSportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableClientSportLabel.Location = new System.Drawing.Point(13, 86);
+            this.availableClientSportLabel.Location = new System.Drawing.Point(269, 20);
             this.availableClientSportLabel.Name = "availableClientSportLabel";
             this.availableClientSportLabel.Size = new System.Drawing.Size(79, 15);
             this.availableClientSportLabel.TabIndex = 31;
@@ -1097,7 +1109,7 @@
             // availableClientCurrentSkillLabel
             // 
             this.availableClientCurrentSkillLabel.AutoSize = true;
-            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(79, 152);
+            this.availableClientCurrentSkillLabel.Location = new System.Drawing.Point(308, 104);
             this.availableClientCurrentSkillLabel.Name = "availableClientCurrentSkillLabel";
             this.availableClientCurrentSkillLabel.Size = new System.Drawing.Size(13, 13);
             this.availableClientCurrentSkillLabel.TabIndex = 39;
@@ -1106,7 +1118,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(7, 130);
+            this.label38.Location = new System.Drawing.Point(269, 82);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(29, 13);
             this.label38.TabIndex = 32;
@@ -1115,7 +1127,7 @@
             // availableClientPopularityLabel
             // 
             this.availableClientPopularityLabel.AutoSize = true;
-            this.availableClientPopularityLabel.Location = new System.Drawing.Point(69, 171);
+            this.availableClientPopularityLabel.Location = new System.Drawing.Point(75, 189);
             this.availableClientPopularityLabel.Name = "availableClientPopularityLabel";
             this.availableClientPopularityLabel.Size = new System.Drawing.Size(24, 13);
             this.availableClientPopularityLabel.TabIndex = 37;
@@ -1124,7 +1136,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(7, 171);
+            this.label36.Location = new System.Drawing.Point(13, 189);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(56, 13);
             this.label36.TabIndex = 34;
@@ -1133,7 +1145,7 @@
             // availableClientAgeLabel
             // 
             this.availableClientAgeLabel.AutoSize = true;
-            this.availableClientAgeLabel.Location = new System.Drawing.Point(46, 130);
+            this.availableClientAgeLabel.Location = new System.Drawing.Point(308, 82);
             this.availableClientAgeLabel.Name = "availableClientAgeLabel";
             this.availableClientAgeLabel.Size = new System.Drawing.Size(13, 13);
             this.availableClientAgeLabel.TabIndex = 36;
@@ -1142,11 +1154,11 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(7, 152);
+            this.label35.Location = new System.Drawing.Point(269, 104);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(66, 13);
+            this.label35.Size = new System.Drawing.Size(29, 13);
             this.label35.TabIndex = 35;
-            this.label35.Text = "Current Skill:";
+            this.label35.Text = "Skill:";
             // 
             // groupBox7
             // 
@@ -1551,15 +1563,13 @@
             this.btnViewStandings.UseVisualStyleBackColor = true;
             this.btnViewStandings.Click += new System.EventHandler(this.BtnViewStandings_Click);
             // 
-            // btnClientCard
+            // lblPlayerGenome
             // 
-            this.btnClientCard.Location = new System.Drawing.Point(281, 147);
-            this.btnClientCard.Name = "btnClientCard";
-            this.btnClientCard.Size = new System.Drawing.Size(75, 23);
-            this.btnClientCard.TabIndex = 38;
-            this.btnClientCard.Text = "Player Card";
-            this.btnClientCard.UseVisualStyleBackColor = true;
-            this.btnClientCard.Click += new System.EventHandler(this.btnClientCard_Click);
+            this.lblPlayerGenome.AutoSize = true;
+            this.lblPlayerGenome.Location = new System.Drawing.Point(13, 83);
+            this.lblPlayerGenome.Name = "lblPlayerGenome";
+            this.lblPlayerGenome.Size = new System.Drawing.Size(0, 13);
+            this.lblPlayerGenome.TabIndex = 48;
             // 
             // MainForm
             // 
@@ -1773,6 +1783,7 @@
         private System.Windows.Forms.Button btnMarketPlayer;
         private System.Windows.Forms.Button btnHireMarketer;
         private System.Windows.Forms.Button btnClientCard;
+        private System.Windows.Forms.Label lblPlayerGenome;
     }
 }
 

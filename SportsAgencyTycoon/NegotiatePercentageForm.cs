@@ -18,6 +18,10 @@ namespace SportsAgencyTycoon
         private int _ClientMood;
         private double _ClientsCurrentAgentPercent;
         private double _ClientsAcceptancePercent;
+        public double ClientsAcceptancePercent
+        {
+            get { return _ClientsAcceptancePercent; }
+        }
         private int MaxPercent;
         private int MinPercent = 2;
         private double ClientAsk;

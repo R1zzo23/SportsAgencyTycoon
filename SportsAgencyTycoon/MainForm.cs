@@ -70,8 +70,8 @@ namespace SportsAgencyTycoon
             foreach (League l in world.Leagues)
                 foreach (Player p in l.FreeAgents)
                 {
-                    if (p.CurrentSkill > 35) p.CurrentSkill = 35;
-                    if (p.PotentialSkill > 40) p.PotentialSkill = 40;
+                    if (p.CurrentSkill > 45) p.CurrentSkill = 40;
+                    if (p.PotentialSkill > 55) p.PotentialSkill = 50;
                 }                   
         }
 
@@ -623,7 +623,7 @@ namespace SportsAgencyTycoon
             cbAgentClientList.SelectedIndex = -1;
             UpdateAgentInfo(selectedAgent);
 
-            //resest Available Licenses section
+            //reset Available Licenses section
             cbAvailableLicenses.SelectedIndex = -1;
             licenseApplicationFeeLabel.Text = "";
             licenseYearlyDuesLabel.Text = "";
@@ -797,8 +797,13 @@ namespace SportsAgencyTycoon
                     lblClientSalary.Text = "";
                     lblClientMonthlySalary.Text = "";
                     lblClientAgentPercent.Text = "";
-                }                   
-                
+                }
+                lblPlayerGenome.Text = "Behavior: " + Regex.Replace(selectedClient.BehaviorDescription.ToString(), @"\B[A-Z]", " $0") + Environment.NewLine +
+                    "Composure: " + Regex.Replace(selectedClient.ComposureDescription.ToString(), @"\B[A-Z]", " $0") + Environment.NewLine +
+                    "Greed: " + Regex.Replace(selectedClient.GreedDescription.ToString(), @"\B[A-Z]", " $0") + Environment.NewLine +
+                    "Leadership: " + Regex.Replace(selectedClient.LeadershipDescription.ToString(), @"\B[A-Z]", " $0") + Environment.NewLine +
+                    "Work Ethic: " + Regex.Replace(selectedClient.WorkEthicDescription.ToString(), @"\B[A-Z]", " $0");
+
             }
             else
             {
@@ -809,6 +814,7 @@ namespace SportsAgencyTycoon
                 availableClientPopularityLabel.Text = "";
                 lblClientSalary.Text = "";
                 lblClientAgentPercent.Text = "";
+                lblPlayerGenome.Text = "";
             }
         }
 
@@ -1208,7 +1214,7 @@ namespace SportsAgencyTycoon
 
             if (fundsSpent != 0)
             {
-                HireAgentForm hireAgentForm = new HireAgentForm(fundsSpent, agentType);
+                HireAgentForm hireAgentForm = new HireAgentForm(world, rnd, fundsSpent, agentType);
                 hireAgentForm.HowManyAgents();
                 hireAgentForm.CreateApplicants(world, rnd);
                 hireAgentForm.BringToFront();
@@ -1266,6 +1272,9 @@ namespace SportsAgencyTycoon
 
                 if (negotiatePercentageForm.NumberOfAgentOffers == 1)
                     agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Smooth Signing")]);
+
+                if (negotiatePercentageForm.Percentage == negotiatePercentageForm.ClientsAcceptancePercent)
+                    agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Percentage On Point")]);
 
                 SignClient(player);
             }

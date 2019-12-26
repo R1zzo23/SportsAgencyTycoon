@@ -12,6 +12,8 @@ namespace SportsAgencyTycoon
 {
     public partial class HireAgentForm : Form
     {
+        private Random rnd;
+        private World world;
         private int _AgentApplicants;
         private int _AgentLevel;
         private List<Agent> agents = new List<Agent>();
@@ -31,9 +33,11 @@ namespace SportsAgencyTycoon
             get { return _AgentType; }
         }
 
-        public HireAgentForm(int i, string s)
+        public HireAgentForm(World w, Random r, int i, string s)
         {
             InitializeComponent();
+            world = w;
+            rnd = r;
             _FundsSpent = i;
             _AgentType = s;
         }
@@ -77,8 +81,23 @@ namespace SportsAgencyTycoon
                     ratings[3],
                     _AgentLevel, 
                     Roles.Agent));
+                DetermineLicensesHeld(i, _AgentLevel);
             }
             DisplayApplicantInformation();
+        }
+        public void DetermineLicensesHeld(int i, int level)
+        {
+            List<int> licenseNumbers = new List<int>();
+            for (int x = 0; x < level; x++)
+            {
+                int number = rnd.Next(0, world.AvailableLicenses.Count);
+                if (licenseNumbers.IndexOf(number) < 0)
+                    licenseNumbers.Add(number);
+            }
+            for (int y = 0; y < licenseNumbers.Count; y++)
+            {
+                agents[i].LicensesHeld.Add(world.AvailableLicenses[licenseNumbers[y]]);
+            }
         }
         public int DetermineSalary(int level, string type, Random rnd, List<int> ratings)
         {
@@ -186,18 +205,43 @@ namespace SportsAgencyTycoon
             radioApplicant1.Text = a1.First + " " + a1.Last + " (LVL " + _AgentLevel + ")";
             radioApplicant2.Text = a2.First + " " + a2.Last + " (LVL " + _AgentLevel + ")";
             lblAgent1.Text = a1.Salary.ToString("C0") + "/month | NEG: " + a1.Negotiating.ToString() + " | GRD: " + a1.Greed.ToString() + " | POW: " + a1.IndustryPower.ToString() + " | IQ: " + a1.Intelligence.ToString();
+            lblA1Licenses.Text = "Licenses Held: ";
+            for (int i = 0; i < a1.LicensesHeld.Count; i++)
+                lblA1Licenses.Text += a1.LicensesHeld[i].Sport + ", ";
+            lblA1Licenses.Text = lblA1Licenses.Text.Substring(0, lblA1Licenses.Text.Length - 2);
+            
             lblAgent2.Text = a2.Salary.ToString("C0") + "/month | NEG: " + a2.Negotiating.ToString() + " | GRD: " + a2.Greed.ToString() + " | POW: " + a2.IndustryPower.ToString() + " | IQ: " + a2.Intelligence.ToString();
+            lblA2Licenses.Text = "Licenses Held: ";
+            for (int i = 0; i < a2.LicensesHeld.Count; i++)
+                lblA2Licenses.Text += a2.LicensesHeld[i].Sport + ", ";
+            lblA2Licenses.Text = lblA2Licenses.Text.Substring(0, lblA2Licenses.Text.Length - 2);
+
             if (agents.Count < 3)
             {
                 radioApplicant3.Enabled = false;
                 radioApplicant3.Text = "";
                 lblAgent3.Text = "";
+                lblA3Licenses.Text = "";
             }
             else
             {
                 Agent a3 = agents[2];
                 radioApplicant3.Text = a3.First + " " + a3.Last + " (LVL " + _AgentLevel + ")";
                 lblAgent3.Text = a3.Salary.ToString("C0") + "/month | NEG: " + a3.Negotiating.ToString() + " | GRD: " + a3.Greed.ToString() + " | POW: " + a3.IndustryPower.ToString() + " | IQ: " + a3.Intelligence.ToString();
+                lblA3Licenses.Text = "Licenses Held: ";
+                for (int i = 0; i < a1.LicensesHeld.Count; i++)
+                    lblA3Licenses.Text += a3.LicensesHeld[i].Sport + ", ";
+                lblA3Licenses.Text = lblA3Licenses.Text.Substring(0, lblA3Licenses.Text.Length - 2);
+            }
+            Console.WriteLine(a1.First + " " + a1.Last + "'s Licenses: ");
+            for (int i = 0; i < a1.LicensesHeld.Count; i++)
+            {
+                Console.WriteLine(a1.LicensesHeld[i].Sport.ToString());
+            }
+            Console.WriteLine(a2.First + " " + a2.Last + "'s Licenses: ");
+            for (int i = 0; i < a2.LicensesHeld.Count; i++)
+            {
+                Console.WriteLine(a2.LicensesHeld[i].Sport.ToString());
             }
         }
 

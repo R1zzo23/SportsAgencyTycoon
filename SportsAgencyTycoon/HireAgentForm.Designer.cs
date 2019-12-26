@@ -37,12 +37,15 @@
             this.radioApplicant3 = new System.Windows.Forms.RadioButton();
             this.radioApplicant2 = new System.Windows.Forms.RadioButton();
             this.radioApplicant1 = new System.Windows.Forms.RadioButton();
+            this.lblA3Licenses = new System.Windows.Forms.Label();
+            this.lblA1Licenses = new System.Windows.Forms.Label();
+            this.lblA2Licenses = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHireSelected
             // 
-            this.btnHireSelected.Location = new System.Drawing.Point(50, 200);
+            this.btnHireSelected.Location = new System.Drawing.Point(49, 243);
             this.btnHireSelected.Name = "btnHireSelected";
             this.btnHireSelected.Size = new System.Drawing.Size(85, 22);
             this.btnHireSelected.TabIndex = 1;
@@ -53,7 +56,7 @@
             // btnPassOnHiring
             // 
             this.btnPassOnHiring.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnPassOnHiring.Location = new System.Drawing.Point(190, 200);
+            this.btnPassOnHiring.Location = new System.Drawing.Point(189, 243);
             this.btnPassOnHiring.Name = "btnPassOnHiring";
             this.btnPassOnHiring.Size = new System.Drawing.Size(92, 23);
             this.btnPassOnHiring.TabIndex = 2;
@@ -63,6 +66,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblA2Licenses);
+            this.groupBox1.Controls.Add(this.lblA1Licenses);
+            this.groupBox1.Controls.Add(this.lblA3Licenses);
             this.groupBox1.Controls.Add(this.lblAgent3);
             this.groupBox1.Controls.Add(this.lblAgent2);
             this.groupBox1.Controls.Add(this.lblAgent1);
@@ -71,7 +77,7 @@
             this.groupBox1.Controls.Add(this.radioApplicant1);
             this.groupBox1.Location = new System.Drawing.Point(5, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(323, 189);
+            this.groupBox1.Size = new System.Drawing.Size(323, 232);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Applicants";
@@ -79,7 +85,7 @@
             // lblAgent3
             // 
             this.lblAgent3.AutoSize = true;
-            this.lblAgent3.Location = new System.Drawing.Point(8, 164);
+            this.lblAgent3.Location = new System.Drawing.Point(10, 182);
             this.lblAgent3.Name = "lblAgent3";
             this.lblAgent3.Size = new System.Drawing.Size(35, 13);
             this.lblAgent3.TabIndex = 5;
@@ -88,7 +94,7 @@
             // lblAgent2
             // 
             this.lblAgent2.AutoSize = true;
-            this.lblAgent2.Location = new System.Drawing.Point(10, 104);
+            this.lblAgent2.Location = new System.Drawing.Point(10, 108);
             this.lblAgent2.Name = "lblAgent2";
             this.lblAgent2.Size = new System.Drawing.Size(35, 13);
             this.lblAgent2.TabIndex = 4;
@@ -106,7 +112,7 @@
             // radioApplicant3
             // 
             this.radioApplicant3.AutoSize = true;
-            this.radioApplicant3.Location = new System.Drawing.Point(8, 140);
+            this.radioApplicant3.Location = new System.Drawing.Point(10, 158);
             this.radioApplicant3.Name = "radioApplicant3";
             this.radioApplicant3.Size = new System.Drawing.Size(85, 17);
             this.radioApplicant3.TabIndex = 2;
@@ -117,7 +123,7 @@
             // radioApplicant2
             // 
             this.radioApplicant2.AutoSize = true;
-            this.radioApplicant2.Location = new System.Drawing.Point(8, 80);
+            this.radioApplicant2.Location = new System.Drawing.Point(8, 84);
             this.radioApplicant2.Name = "radioApplicant2";
             this.radioApplicant2.Size = new System.Drawing.Size(85, 17);
             this.radioApplicant2.TabIndex = 1;
@@ -136,13 +142,40 @@
             this.radioApplicant1.Text = "radioButton1";
             this.radioApplicant1.UseVisualStyleBackColor = true;
             // 
+            // lblA3Licenses
+            // 
+            this.lblA3Licenses.AutoSize = true;
+            this.lblA3Licenses.Location = new System.Drawing.Point(10, 206);
+            this.lblA3Licenses.Name = "lblA3Licenses";
+            this.lblA3Licenses.Size = new System.Drawing.Size(35, 13);
+            this.lblA3Licenses.TabIndex = 6;
+            this.lblA3Licenses.Text = "label1";
+            // 
+            // lblA1Licenses
+            // 
+            this.lblA1Licenses.AutoSize = true;
+            this.lblA1Licenses.Location = new System.Drawing.Point(7, 67);
+            this.lblA1Licenses.Name = "lblA1Licenses";
+            this.lblA1Licenses.Size = new System.Drawing.Size(35, 13);
+            this.lblA1Licenses.TabIndex = 7;
+            this.lblA1Licenses.Text = "label2";
+            // 
+            // lblA2Licenses
+            // 
+            this.lblA2Licenses.AutoSize = true;
+            this.lblA2Licenses.Location = new System.Drawing.Point(10, 131);
+            this.lblA2Licenses.Name = "lblA2Licenses";
+            this.lblA2Licenses.Size = new System.Drawing.Size(35, 13);
+            this.lblA2Licenses.TabIndex = 8;
+            this.lblA2Licenses.Text = "label3";
+            // 
             // HireAgentForm
             // 
             this.AcceptButton = this.btnHireSelected;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnPassOnHiring;
-            this.ClientSize = new System.Drawing.Size(338, 233);
+            this.ClientSize = new System.Drawing.Size(338, 277);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnPassOnHiring);
@@ -168,5 +201,8 @@
         private System.Windows.Forms.Label lblAgent3;
         private System.Windows.Forms.Label lblAgent2;
         private System.Windows.Forms.Label lblAgent1;
+        private System.Windows.Forms.Label lblA2Licenses;
+        private System.Windows.Forms.Label lblA1Licenses;
+        private System.Windows.Forms.Label lblA3Licenses;
     }
 }
