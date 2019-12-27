@@ -573,7 +573,13 @@ namespace SportsAgencyTycoon
             if (selectedAgent.ClientList.Count > 0 && cbAgentClientList.SelectedIndex >= 0)
             {
                 Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
-
+                if (selectedClient.PlayerType == PlayerType.Individual) btnClientCallTeams.Enabled = false;
+                else
+                {
+                    btnClientCallTeams.Enabled = true;
+                    if (selectedClient.FreeAgent) btnClientCallTeams.Text = "Call Teams";
+                    else btnClientCallTeams.Text = "Call Front Office";
+                }
                 if (selectedClient.FreeAgent) btnClientCallTeams.Enabled = true;
                 else if (!selectedClient.FreeAgent || selectedClient.PlayerType == PlayerType.Individual) btnClientCallTeams.Enabled = false;
 
