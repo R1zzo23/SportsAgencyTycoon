@@ -63,6 +63,7 @@ namespace SportsAgencyTycoon
             world.Hockey = new Hockey(this, rnd, world, world.NHL);
             world.Soccer = new Soccer(this, rnd, world, world.MLS);
             world.CreateGlobalAchievements();
+            world.CreateTeamRelationships(myManager);
         }
 
         public void NerfFreeAgentsToStart()
@@ -111,6 +112,7 @@ namespace SportsAgencyTycoon
             agency.Name = agencyName;
             myManager.First = firstName;
             myManager.Last = lastName;
+            myManager.FullName = myManager.First + " " + myManager.Last;
             myManager.LicensesHeld.Add(world.TeamSportLicenses[teamIndex]);
             world.AvailableLicenses.Add(world.TeamSportLicenses[teamIndex]);
             world.IndividualSportLicense.Remove(world.TeamSportLicenses[teamIndex]);
@@ -248,7 +250,7 @@ namespace SportsAgencyTycoon
             {
                 Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
 
-                int agentSkills = (int)((agent.IndustryPower + agent.Intelligence + agent.Negotiating) * 0.75);
+                int agentSkills = (int)((agent.IndustryPower + agent.Intelligence + agent.Negotiating) * .75);
 
                 foreach (Licenses l in agent.LicensesHeld)
                 {
@@ -578,10 +580,8 @@ namespace SportsAgencyTycoon
                 {
                     btnClientCallTeams.Enabled = true;
                     if (selectedClient.FreeAgent) btnClientCallTeams.Text = "Call Teams";
-                    else btnClientCallTeams.Text = "Call Front Office";
+                    else btnClientCallTeams.Text = "Call GM";
                 }
-                if (selectedClient.FreeAgent) btnClientCallTeams.Enabled = true;
-                else if (!selectedClient.FreeAgent || selectedClient.PlayerType == PlayerType.Individual) btnClientCallTeams.Enabled = false;
 
                 clientSportLabel.Text = selectedClient.Sport.ToString();
                 clientNameLabel.Text = selectedClient.FullName;
@@ -1231,6 +1231,7 @@ namespace SportsAgencyTycoon
                 {
                     agency.Agents.Add(hiredAgent);
                     agency.AgentCount++;
+                    world.CreateTeamRelationships(hiredAgent);
 
                     if (agency.AgentCount == 2)
                         agency.AddAchievementToAgency(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hire 1st Agent")]);
@@ -1274,7 +1275,7 @@ namespace SportsAgencyTycoon
                 else player.Contract = new Contract(50, 0, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
 
                 player.MemberOfAgency = true;
-                player.CurrentSkill += 20;
+                //player.CurrentSkill += 20;
 
                 if (negotiatePercentageForm.NumberOfAgentOffers == 1)
                     agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Smooth Signing")]);
@@ -1310,6 +1311,10 @@ namespace SportsAgencyTycoon
                     clientsInSport++;
             if (clientsInSport >= 3)
                 agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Gaining Traction")]);
+            if (clientsInSport >= 5)
+                agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Making A Name")]);
+            if (clientsInSport >= 10)
+                agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Taking Over The Sport")]);
 
             UpdateAgencyInfo();
             UpdateAgentInfo(agent);
@@ -1385,7 +1390,10 @@ namespace SportsAgencyTycoon
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
             Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
-            selectedAgent.CallTeamsForClient(rnd, world, selectedClient);
+
+            if (selectedClient.FreeAgent)
+                selectedAgent.CallTeamsForClient(rnd, world, selectedClient);
+            else selectedAgent.CallTeamGM(rnd, world, selectedClient);
         }
 
         private void BtnViewStandings_Click(object sender, EventArgs e)

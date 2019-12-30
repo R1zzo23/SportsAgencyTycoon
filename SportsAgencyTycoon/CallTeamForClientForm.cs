@@ -155,10 +155,16 @@ namespace SportsAgencyTycoon
         {
             btnAcceptOffer.Enabled = false;
             bool goodRelationshipWithTeam = false;
+            int relationshipIndex = _Agent.RelationshipsWithTeams.FindIndex(o => o.Team == _League.TeamList[cbTeamList.SelectedIndex]);
             //see if agent has current relationship with team
-            if (_Agent.RelationshipsWithTeams.FindIndex(o => o.Team == _League.TeamList[cbTeamList.SelectedIndex]) >= 0)
+            if (relationshipIndex >= 0)
+            {
+                relationship = _Agent.RelationshipsWithTeams[relationshipIndex];
                 //see if current relationship is a good one
                 if (relationship.Relationship >= 75) goodRelationshipWithTeam = true;
+            }
+            //if not, create a new relationship for with this team
+            else _Agent.RelationshipsWithTeams.Add(new RelationshipWithTeam(_League.TeamList[cbTeamList.SelectedIndex], 50));
 
             string interestLevel = "";
             //would free agent be a starter?

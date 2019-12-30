@@ -1072,6 +1072,13 @@ namespace SportsAgencyTycoon
 
         #endregion
 
+        public void CreateTeamRelationships(Agent a)
+        {
+            foreach (League l in Leagues)
+                foreach (Team t in l.TeamList)
+                    a.RelationshipsWithTeams.Add(new RelationshipWithTeam(t, 50));
+        }
+
         public void CheckForEventsThisWeek()
         {
             EventsThisWeek.Clear();
@@ -1092,7 +1099,11 @@ namespace SportsAgencyTycoon
             // work for clients in 3 different sports (Agent)
             GlobalAchievements.Add(new Achievement("Athletically Diversified", "Agent has clients in 3 different sports.", 2, 3, "IndustryPower"));
             // sign 3 clients in the same sport (Agent)
-            GlobalAchievements.Add(new Achievement("Gaining Traction", "Sign 3 clients in the same sport.", 2, 5, "Greed"));
+            GlobalAchievements.Add(new Achievement("Gaining Traction", "Sign 3 clients in the same sport.", 2, 3, "IndustryInfluence"));
+            // sign 5 clients in the same sport (Agent)
+            GlobalAchievements.Add(new Achievement("Making A Name", "Sign 5 clients in the same sport.", 2, 5, "IndustryPower"));
+            // sign 10 clients in the same sport (Agent)
+            GlobalAchievements.Add(new Achievement("Taking Over The Sport", "Sign 10 clients in the same sport.", 2, 7, "All"));
             // name agency Wolverine Studios (Agency)
             GlobalAchievements.Add(new Achievement("WS Fanboy", "Agency named after Wolverine Studios.", 1, 100000, "Money"));
             // name agent after either Adam Rizzo or Gary Gorski (Agent)

@@ -85,6 +85,12 @@
     <Compile Include="CallTeamForClientForm.Designer.cs">
       <DependentUpon>CallTeamForClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CallTeamGMForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CallTeamGMForm.Designer.cs">
+      <DependentUpon>CallTeamGMForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Date.cs" />
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CallTeamForClientForm.resx">
       <DependentUpon>CallTeamForClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CallTeamGMForm.resx">
+      <DependentUpon>CallTeamGMForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HireAgentForm.resx">
       <DependentUpon>HireAgentForm.cs</DependentUpon>

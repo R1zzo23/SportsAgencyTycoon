@@ -11,6 +11,7 @@ namespace SportsAgencyTycoon
     {
         public string First;
         public string Last;
+        public string FullName;
 
         public int Salary;
         public int CareerEarnings;
@@ -39,6 +40,7 @@ namespace SportsAgencyTycoon
         {
             First = firstName;
             Last = lastName;
+            FullName = firstName + " " + lastName;
             Salary = salary;
             CareerEarnings = 0;
             Negotiating = negotiatingRating;
@@ -105,7 +107,13 @@ namespace SportsAgencyTycoon
             callTeamForClientForm.BringToFront();
             callTeamForClientForm.ShowDialog();
         }
-
+        public void CallTeamGM(Random rnd, World world, Player client)
+        {
+            Team team = client.Team;
+            CallTeamGMForm callTeamGMForm = new CallTeamGMForm(rnd, this, client, team, world);
+            callTeamGMForm.BringToFront();
+            callTeamGMForm.Show();
+        }
         public void AddAchievementToAgent(Achievement a)
         {
             //check if Agent already has this achievement
@@ -131,6 +139,7 @@ namespace SportsAgencyTycoon
                 }
 
                 MessageBox.Show("Congrats on earning the '" + a.Name + "' achievement!");
+                Level++;
             }
         }
         public bool DoesAgentHaveAchievement(Achievement a)
