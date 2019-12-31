@@ -376,7 +376,10 @@ namespace SportsAgencyTycoon
             //populate combo box
             foreach (Player client in agent.ClientList)
             {
-                cbAgentClientList.Items.Add(client.FullName);
+                if (client.PlayerType == PlayerType.Individual)
+                    cbAgentClientList.Items.Add(client.FullName + " [" + client.Sport.ToString() + "]");
+                else
+                    cbAgentClientList.Items.Add(client.Team.Mascot + " " + client.Position.ToString() + " " + client.FullName);
             }
 
             //go back to selected client
@@ -1389,11 +1392,14 @@ namespace SportsAgencyTycoon
         private void btnClientCallTeams_Click(object sender, EventArgs e)
         {
             Agent selectedAgent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
+            if (cbAgentClientList.SelectedIndex > -1)
+            {
+                Player selectedClient = selectedAgent.ClientList[cbAgentClientList.SelectedIndex];
 
-            if (selectedClient.FreeAgent)
-                selectedAgent.CallTeamsForClient(rnd, world, selectedClient);
-            else selectedAgent.CallTeamGM(rnd, world, selectedClient);
+                if (selectedClient.FreeAgent)
+                    selectedAgent.CallTeamsForClient(rnd, world, selectedClient);
+                else selectedAgent.CallTeamGM(rnd, world, selectedClient);
+            }
         }
 
         private void BtnViewStandings_Click(object sender, EventArgs e)
