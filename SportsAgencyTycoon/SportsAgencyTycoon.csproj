@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="PlayerGenomeProject.cs" />
     <Compile Include="PlayerType.cs" />
+    <Compile Include="PlayingTimeDiscussion.cs" />
     <Compile Include="PopularityDescription.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />

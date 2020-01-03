@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportsAgencyTycoon
 {
@@ -16,12 +13,20 @@ namespace SportsAgencyTycoon
         private Team team;
         private League league;
         private Player player;
+        private List<Player> playersAtPosition = new List<Player>();
         public PlayingTimeDiscussion(Team t, League l, Player p)
         {
             team = t;
             league = l;
             player = p;
             ResolveBools();
+            PlayersAtPosition();
+        }
+        private void PlayersAtPosition()
+        {
+            foreach (Player p in team.Roster)
+                if (p.Position == player.Position && p.DepthChart < player.DepthChart)
+                    playersAtPosition.Add(p);
         }
         private void ResolveBools()
         {
@@ -43,6 +48,58 @@ namespace SportsAgencyTycoon
             else if (index < teams.Count * .7) InTheHunt = true;
             else if (index >= teams.Count - 4) Tanking = true;
             else Rebuilding = true;
+        }
+        public string GMResponse()
+        {
+            string response = "";
+
+            if (TitleContender) response = TitleContenderPT();
+            else if (PlayoffTeam) response = PlayoffTeamPT();
+            else if (InTheHunt) response = InTheHuntPT();
+            else if (Rebuilding) response = RebuildingPT();
+            else if (Tanking) response = TankingPT();
+
+            return response;
+        }
+        private string TitleContenderPT()
+        {
+            string response = "";
+
+            
+
+            return response;
+        }
+        private string PlayoffTeamPT()
+        {
+            string response = "";
+
+
+
+            return response;
+        }
+        private string InTheHuntPT()
+        {
+            string response = "";
+
+
+
+            return response;
+        }
+        private string RebuildingPT()
+        {
+            string response = "";
+
+
+
+            return response;
+        }
+        private string TankingPT()
+        {
+            string response = "";
+
+
+
+            return response;
         }
     }
 }
