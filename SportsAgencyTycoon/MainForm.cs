@@ -379,7 +379,13 @@ namespace SportsAgencyTycoon
                 if (client.PlayerType == PlayerType.Individual)
                     cbAgentClientList.Items.Add(client.FullName + " [" + client.Sport.ToString() + "]");
                 else
-                    cbAgentClientList.Items.Add(client.Team.Mascot + " " + client.Position.ToString() + " " + client.FullName);
+                {
+                    if (client.FreeAgent)
+                        cbAgentClientList.Items.Add("Free Agent " + client.Position.ToString() + " " + client.FullName);
+                    else
+                        cbAgentClientList.Items.Add(client.Team.Mascot + " " + client.Position.ToString() + " " + client.FullName);
+                }
+                    
             }
 
             //go back to selected client

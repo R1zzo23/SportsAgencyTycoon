@@ -38,7 +38,8 @@ namespace SportsAgencyTycoon
         }
         private void DetermineStarterInFrontOfClient()
         {
-            starter = playersAtPosition[player.DepthChart - 2];
+            if (player.DepthChart != 1)
+                starter = playersAtPosition[player.DepthChart - 2];
         }
         private void ResolveBools()
         {

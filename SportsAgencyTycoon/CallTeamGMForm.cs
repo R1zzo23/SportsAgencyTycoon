@@ -18,6 +18,7 @@ namespace SportsAgencyTycoon
         private Team _Team;
         private World world;
         private RelationshipWithTeam _Relationship;
+        private PlayingTimeDiscussion PlayingTimeDiscussion;
         public CallTeamGMForm(Random r, Agent a, Player p, Team t, World w)
         {
             InitializeComponent();
@@ -26,9 +27,11 @@ namespace SportsAgencyTycoon
             _Client = p;
             _Team = t;
             world = w;
+            PlayingTimeDiscussion = new PlayingTimeDiscussion(rnd, _Team, _Client.League, _Client);
             FillTeamInfo();
             FindAgentTeamRelationship();
             InitialGMTalk();
+            if (_Client.DepthChart == 1) btnPlayingTime.Enabled = false;
         }
         private void FillTeamInfo()
         {
@@ -58,7 +61,9 @@ namespace SportsAgencyTycoon
         private void BtnPlayingTime_Click(object sender, EventArgs e)
         {
             string message = "";
-            if (_Client.DepthChart == 1)
+
+            message = PlayingTimeDiscussion.GMResponse();
+            /*if (_Client.DepthChart == 1)
             {
                 message = _Client.FirstName + ", you're already the starter. What more do you want?";
                 _Client.TeamHappiness -= rnd.Next(1, 4);
@@ -102,8 +107,9 @@ namespace SportsAgencyTycoon
                     else
                         message = "Why would we change the rotation? Because your guy isn't playing enough?";
                 }
-            }
+            }*/
             lblGMTalk.Text = message;
+            gbRespondToPT.Visible = true;
         }
     }
 }
