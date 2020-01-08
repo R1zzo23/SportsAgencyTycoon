@@ -46,18 +46,19 @@
             // lblGMTalk
             // 
             this.lblGMTalk.AutoSize = true;
-            this.lblGMTalk.Location = new System.Drawing.Point(13, 56);
+            this.lblGMTalk.Location = new System.Drawing.Point(26, 108);
+            this.lblGMTalk.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblGMTalk.Name = "lblGMTalk";
-            this.lblGMTalk.Size = new System.Drawing.Size(35, 13);
+            this.lblGMTalk.Size = new System.Drawing.Size(70, 25);
             this.lblGMTalk.TabIndex = 0;
             this.lblGMTalk.Text = "label1";
             // 
             // btnPlayingTime
             // 
-            this.btnPlayingTime.Location = new System.Drawing.Point(16, 118);
-            this.btnPlayingTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPlayingTime.Location = new System.Drawing.Point(32, 227);
+            this.btnPlayingTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPlayingTime.Name = "btnPlayingTime";
-            this.btnPlayingTime.Size = new System.Drawing.Size(98, 24);
+            this.btnPlayingTime.Size = new System.Drawing.Size(196, 46);
             this.btnPlayingTime.TabIndex = 1;
             this.btnPlayingTime.Text = "Playing Time";
             this.btnPlayingTime.UseVisualStyleBackColor = true;
@@ -65,40 +66,40 @@
             // 
             // btnDemandTrade
             // 
-            this.btnDemandTrade.Location = new System.Drawing.Point(16, 228);
-            this.btnDemandTrade.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDemandTrade.Location = new System.Drawing.Point(32, 438);
+            this.btnDemandTrade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDemandTrade.Name = "btnDemandTrade";
-            this.btnDemandTrade.Size = new System.Drawing.Size(98, 24);
+            this.btnDemandTrade.Size = new System.Drawing.Size(196, 46);
             this.btnDemandTrade.TabIndex = 2;
             this.btnDemandTrade.Text = "Demand Trade";
             this.btnDemandTrade.UseVisualStyleBackColor = true;
             // 
             // btnPersonalRequest
             // 
-            this.btnPersonalRequest.Location = new System.Drawing.Point(16, 200);
-            this.btnPersonalRequest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPersonalRequest.Location = new System.Drawing.Point(32, 385);
+            this.btnPersonalRequest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPersonalRequest.Name = "btnPersonalRequest";
-            this.btnPersonalRequest.Size = new System.Drawing.Size(98, 24);
+            this.btnPersonalRequest.Size = new System.Drawing.Size(196, 46);
             this.btnPersonalRequest.TabIndex = 3;
             this.btnPersonalRequest.Text = "Personal Request";
             this.btnPersonalRequest.UseVisualStyleBackColor = true;
             // 
             // btnContract
             // 
-            this.btnContract.Location = new System.Drawing.Point(16, 173);
-            this.btnContract.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnContract.Location = new System.Drawing.Point(32, 333);
+            this.btnContract.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnContract.Name = "btnContract";
-            this.btnContract.Size = new System.Drawing.Size(98, 24);
+            this.btnContract.Size = new System.Drawing.Size(196, 46);
             this.btnContract.TabIndex = 4;
             this.btnContract.Text = "Contract";
             this.btnContract.UseVisualStyleBackColor = true;
             // 
             // btnTeammateIssue
             // 
-            this.btnTeammateIssue.Location = new System.Drawing.Point(16, 145);
-            this.btnTeammateIssue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTeammateIssue.Location = new System.Drawing.Point(32, 279);
+            this.btnTeammateIssue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTeammateIssue.Name = "btnTeammateIssue";
-            this.btnTeammateIssue.Size = new System.Drawing.Size(98, 24);
+            this.btnTeammateIssue.Size = new System.Drawing.Size(196, 46);
             this.btnTeammateIssue.TabIndex = 5;
             this.btnTeammateIssue.Text = "Teammate Issue";
             this.btnTeammateIssue.UseVisualStyleBackColor = true;
@@ -106,58 +107,66 @@
             // lblTitleContender
             // 
             this.lblTitleContender.AutoSize = true;
-            this.lblTitleContender.Location = new System.Drawing.Point(16, 7);
-            this.lblTitleContender.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitleContender.Location = new System.Drawing.Point(32, 13);
+            this.lblTitleContender.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitleContender.Name = "lblTitleContender";
-            this.lblTitleContender.Size = new System.Drawing.Size(82, 13);
+            this.lblTitleContender.Size = new System.Drawing.Size(165, 25);
             this.lblTitleContender.TabIndex = 6;
             this.lblTitleContender.Text = "Title Contender:";
             // 
             // lblRecord
             // 
             this.lblRecord.AutoSize = true;
-            this.lblRecord.Location = new System.Drawing.Point(150, 7);
-            this.lblRecord.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRecord.Location = new System.Drawing.Point(300, 13);
+            this.lblRecord.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRecord.Name = "lblRecord";
-            this.lblRecord.Size = new System.Drawing.Size(48, 13);
+            this.lblRecord.Size = new System.Drawing.Size(93, 25);
             this.lblRecord.TabIndex = 7;
             this.lblRecord.Text = "Record: ";
             // 
             // btnSmoothTalk
             // 
-            this.btnSmoothTalk.Location = new System.Drawing.Point(6, 19);
+            this.btnSmoothTalk.Location = new System.Drawing.Point(12, 37);
+            this.btnSmoothTalk.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnSmoothTalk.Name = "btnSmoothTalk";
-            this.btnSmoothTalk.Size = new System.Drawing.Size(75, 23);
+            this.btnSmoothTalk.Size = new System.Drawing.Size(150, 44);
             this.btnSmoothTalk.TabIndex = 8;
             this.btnSmoothTalk.Text = "Smooth Talk";
             this.btnSmoothTalk.UseVisualStyleBackColor = true;
+            this.btnSmoothTalk.Click += new System.EventHandler(this.BtnSmoothTalk_Click);
             // 
             // btnPowerPlay
             // 
-            this.btnPowerPlay.Location = new System.Drawing.Point(87, 19);
+            this.btnPowerPlay.Location = new System.Drawing.Point(174, 37);
+            this.btnPowerPlay.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnPowerPlay.Name = "btnPowerPlay";
-            this.btnPowerPlay.Size = new System.Drawing.Size(75, 23);
+            this.btnPowerPlay.Size = new System.Drawing.Size(150, 44);
             this.btnPowerPlay.TabIndex = 9;
             this.btnPowerPlay.Text = "Power Play";
             this.btnPowerPlay.UseVisualStyleBackColor = true;
+            this.btnPowerPlay.Click += new System.EventHandler(this.BtnPowerPlay_Click);
             // 
             // btnDemand
             // 
-            this.btnDemand.Location = new System.Drawing.Point(168, 19);
+            this.btnDemand.Location = new System.Drawing.Point(336, 37);
+            this.btnDemand.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnDemand.Name = "btnDemand";
-            this.btnDemand.Size = new System.Drawing.Size(75, 23);
+            this.btnDemand.Size = new System.Drawing.Size(150, 44);
             this.btnDemand.TabIndex = 10;
             this.btnDemand.Text = "Demand";
             this.btnDemand.UseVisualStyleBackColor = true;
+            this.btnDemand.Click += new System.EventHandler(this.BtnDemand_Click);
             // 
             // gbRespondToPT
             // 
             this.gbRespondToPT.Controls.Add(this.btnSmoothTalk);
             this.gbRespondToPT.Controls.Add(this.btnDemand);
             this.gbRespondToPT.Controls.Add(this.btnPowerPlay);
-            this.gbRespondToPT.Location = new System.Drawing.Point(119, 97);
+            this.gbRespondToPT.Location = new System.Drawing.Point(238, 187);
+            this.gbRespondToPT.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gbRespondToPT.Name = "gbRespondToPT";
-            this.gbRespondToPT.Size = new System.Drawing.Size(250, 45);
+            this.gbRespondToPT.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbRespondToPT.Size = new System.Drawing.Size(500, 87);
             this.gbRespondToPT.TabIndex = 11;
             this.gbRespondToPT.TabStop = false;
             this.gbRespondToPT.Text = "Respond To Playing";
@@ -165,9 +174,9 @@
             // 
             // CallTeamGMForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 269);
+            this.ClientSize = new System.Drawing.Size(1364, 517);
             this.Controls.Add(this.gbRespondToPT);
             this.Controls.Add(this.lblRecord);
             this.Controls.Add(this.lblTitleContender);
@@ -177,6 +186,7 @@
             this.Controls.Add(this.btnDemandTrade);
             this.Controls.Add(this.btnPlayingTime);
             this.Controls.Add(this.lblGMTalk);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "CallTeamGMForm";
             this.Text = "Call Team GM";
             this.gbRespondToPT.ResumeLayout(false);

@@ -1112,6 +1112,8 @@ namespace SportsAgencyTycoon
             GlobalAchievements.Add(new Achievement("Percentage On Point", "Sign a client for highest percentage they would accept.", 1, 5, "Negotiating"));
             // sign client on first offer
             GlobalAchievements.Add(new Achievement("Smooth Signing", "Sign a client on your first offer.", 1, 2, "Negotiating"));
+            // convince front office to elevate your client up the depth chart
+            GlobalAchievements.Add(new Achievement("Playing Time Power", "Convince front office to elevate your client up the depth chart.", 1, 3, "All"));
         }
     }
 }

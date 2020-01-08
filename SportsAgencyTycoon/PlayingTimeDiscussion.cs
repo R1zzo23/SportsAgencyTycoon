@@ -13,14 +13,17 @@ namespace SportsAgencyTycoon
         private bool Rebuilding = false;
         private bool Tanking = false;
         private int GMCertainty = 100;
+        private bool GMAgreed = false;
+        private World world;
         private Team team;
         private League league;
         private Player player;
         private Player starter;
         private List<Player> playersAtPosition = new List<Player>();
-        public PlayingTimeDiscussion(Random r, Team t, League l, Player p)
+        public PlayingTimeDiscussion(Random r, World w, Team t, League l, Player p)
         {
             rnd = r;
+            world = w;
             team = t;
             league = l;
             player = p;
@@ -265,12 +268,21 @@ namespace SportsAgencyTycoon
             return response;
         }
 
+        public int OutputGMCertainty()
+        {
+            return GMCertainty;
+        }
+
         private void ChangeDepthChartPositions()
         {
             starter.DepthChart++;
             player.DepthChart--;
+            GMAgreed = true;
         }
-
+        public bool OutputGMAgreed()
+        {
+            return GMAgreed;
+        }
         public int DiceRoll()
         {
             int firstDie = rnd.Next(1, 7);

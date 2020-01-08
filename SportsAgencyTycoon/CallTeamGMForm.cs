@@ -19,6 +19,8 @@ namespace SportsAgencyTycoon
         private World world;
         private RelationshipWithTeam _Relationship;
         private PlayingTimeDiscussion PlayingTimeDiscussion;
+        private int GMCertainty;
+        private bool GMAgreed;
         public CallTeamGMForm(Random r, Agent a, Player p, Team t, World w)
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace SportsAgencyTycoon
             _Client = p;
             _Team = t;
             world = w;
-            PlayingTimeDiscussion = new PlayingTimeDiscussion(rnd, _Team, _Client.League, _Client);
+            PlayingTimeDiscussion = new PlayingTimeDiscussion(rnd, world, _Team, _Client.League, _Client);
             FillTeamInfo();
             FindAgentTeamRelationship();
             InitialGMTalk();
@@ -63,53 +65,41 @@ namespace SportsAgencyTycoon
             string message = "";
 
             message = PlayingTimeDiscussion.GMResponse();
-            /*if (_Client.DepthChart == 1)
-            {
-                message = _Client.FirstName + ", you're already the starter. What more do you want?";
-                _Client.TeamHappiness -= rnd.Next(1, 4);
-                _Relationship.Relationship -= rnd.Next(1, 6);
-            }
-            else if (_Client.DepthChart == 2)
-            {
-                Player starter = _Team.Roster.Find(o => (o.Position == _Client.Position) && (o.DepthChart == 1));
-                if (starter.CurrentSkill < _Client.CurrentSkill)
-                {
-                    if (starter.PotentialSkill > _Client.PotentialSkill)
-                        message = starter.FullName + " is someone we value very much and need to see his game blossom.";
-                    else if (_Team.TitleConteder < 40)
-                        message = "It's a rebuilding year and " + starter.FullName + " is a young player we want to see play.";
-                    else if (_Team.TitleConteder < 60)
-                        message = "I completely hear your argument and think we can have Coach find more minutes for you.";
-                    else
-                        message = "We need to push for the playoffs. Let's have Coach elevate you on the depth chart.";
-                }
-                else
-                {
-                    if (starter.PotentialSkill > _Client.PotentialSkill)
-                        message = starter.FullName + " is just a better player. Period.";
-                    else
-                        message = "We do see some promise in your client.";
-                }
-            }
+            GMCertainty = PlayingTimeDiscussion.OutputGMCertainty();
+            GMAgreed = PlayingTimeDiscussion.OutputGMAgreed();
+
+            lblGMTalk.Text = message;
+
+            if (!GMAgreed)
+                gbRespondToPT.Visible = true;
             else
             {
-                if (_Team.TitleConteder < 50)
-                {
-                    if (_Team.Wins < _Team.Losses)
-                        message = "Maybe we need to shake some things up to keep some hope this season.";
-                    else
-                        message = "We've got a good thing going right now, let's not do anything drastic!";
-                }
-                else
-                {
-                    if (_Team.Wins < _Team.Losses)
-                        message = "We are a better team than our record shows so we will stick with the current depth chart.";
-                    else
-                        message = "Why would we change the rotation? Because your guy isn't playing enough?";
-                }
-            }*/
-            lblGMTalk.Text = message;
-            gbRespondToPT.Visible = true;
+                int playingTimePowerIndex = _Agent.Achievements.FindIndex(o => o.Name == "Playing Time Power");
+                if (playingTimePowerIndex < 0)
+                    _Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Playing Time Power")]);
+            }
+        }
+
+        private void BtnSmoothTalk_Click(object sender, EventArgs e)
+        {
+            int agentSmoothTalk = _Agent.Negotiating + _Agent.Intelligence;
+
+        }
+
+        private void BtnPowerPlay_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDemand_Click(object sender, EventArgs e)
+        {
+
+        }
+        public int DiceRoll()
+        {
+            int firstDie = rnd.Next(1, 7);
+            int secondDie = rnd.Next(1, 7);
+            return firstDie + secondDie;
         }
     }
 }

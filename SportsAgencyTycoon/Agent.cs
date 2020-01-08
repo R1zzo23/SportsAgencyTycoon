@@ -62,6 +62,7 @@ namespace SportsAgencyTycoon
             ClientList.Add(client);
             ClientCount = ClientList.Count();
 
+
             //check if this is a new sport being represented by this Agent
             int index = SportsRepresented.FindIndex(o => o == client.Sport);
             if (index < 0) SportsRepresented.Add(client.Sport);
