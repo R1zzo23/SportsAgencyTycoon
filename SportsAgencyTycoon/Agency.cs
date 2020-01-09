@@ -44,6 +44,8 @@ namespace SportsAgencyTycoon
         }
         public void AddClient(Player client)
         {
+            client.Age = 18;
+            client.PotentialSkill = 80;
             Clients.Add(client);
             ClientCount = Clients.Count;
         }

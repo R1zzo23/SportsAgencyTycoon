@@ -56,7 +56,7 @@ namespace SportsAgencyTycoon
             PopulateAssociations();
             PopulateEventList();
             DetermineSeasons();
-            NerfFreeAgentsToStart();
+            //NerfFreeAgentsToStart();
             world.Basketball = new Basketball(this, rnd, world, world.NBA);
             world.Baseball = new Baseball(this, rnd, world, world.MLB);
             world.Football = new Football(this, rnd, world, world.NFL);

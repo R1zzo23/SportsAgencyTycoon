@@ -69,7 +69,7 @@ namespace SportsAgencyTycoon
             GMAgreed = PlayingTimeDiscussion.OutputGMAgreed();
 
             lblGMTalk.Text = message;
-
+            Console.WriteLine("GMCertainty = " + GMCertainty);
             if (!GMAgreed)
                 gbRespondToPT.Visible = true;
             else

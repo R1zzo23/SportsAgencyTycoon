@@ -50,10 +50,10 @@ namespace SportsAgencyTycoon
             foreach (Team t in league.TeamList)
                 teams.Add(t);
 
-            // less than 30 games played; sort by TitleContender rating
-            if (teams[0].Wins + teams[0].Losses < 30)
+            // less than 3rd games played; sort by TitleContender rating
+            if (teams[0].Wins + teams[0].Losses < player.League.GamesPerSeason * .33)
                 teams = teams.OrderByDescending(o => o.TitleConteder).ToList();
-            // 30+ games played; sort by record
+            // more than 3rd games played; sort by record
             else teams = teams.OrderByDescending(o => o.Wins).ToList();
 
             // find index of player's team in the list

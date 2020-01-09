@@ -158,11 +158,11 @@ namespace SportsAgencyTycoon
         }
         public void CreateLeagues(Random rnd)
         {
-            NBA = new League(Sports.Basketball, "National Basketball Association", "NBA", rnd.Next(45, 100), new Date(10, Months.October, 4), new Date(6, Months.June, 2), 8, 40000000, 582180);
-            MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(3, Months.April, 1), new Date(10, Months.October, 4), 6, 35000000, 555000);
-            NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.September, 3), new Date(2, Months.February, 1), 6, 30000000, 495000);
-            NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(9, Months.October, 1), new Date(6, Months.June, 2), 8, 9500000, 650000);
-            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(2, Months.March, 2), new Date(11, Months.December, 1), 9, 7000000, 56250);
+            NBA = new League(Sports.Basketball, "National Basketball Association", "NBA", rnd.Next(45, 100), new Date(10, Months.October, 4), new Date(6, Months.June, 2), 82, 8, 40000000, 582180);
+            MLB = new League(Sports.Baseball, "Major League Baseball", "MLB", rnd.Next(30, 70), new Date(3, Months.April, 1), new Date(10, Months.October, 4), 162, 6, 35000000, 555000);
+            NFL = new League(Sports.Football, "National Football League", "NFL", rnd.Next(50, 100), new Date(8, Months.September, 3), new Date(2, Months.February, 1), 16, 6, 30000000, 495000);
+            NHL = new League(Sports.Hockey, "National Hockey League", "NHL", rnd.Next(30, 55), new Date(9, Months.October, 1), new Date(6, Months.June, 2), 82, 8, 9500000, 650000);
+            MLS = new League(Sports.Soccer, "Major League Soccer", "MLS", rnd.Next(15, 50), new Date(2, Months.March, 2), new Date(11, Months.December, 1), 34, 9, 7000000, 56250);
         }
         public void CreateCalendarEventsForLeagueStartAndEnd()
         {
@@ -290,6 +290,8 @@ namespace SportsAgencyTycoon
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.FB));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.WR));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.WR));
+                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.WR));
+                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.WR));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.TE));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.TE));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.C));
@@ -304,6 +306,10 @@ namespace SportsAgencyTycoon
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.DE));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.DT));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.DT));
+                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.DT));
+                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.DT));
+                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.LB));
+                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.LB));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.LB));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.LB));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.LB));
@@ -318,8 +324,6 @@ namespace SportsAgencyTycoon
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.FS));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.K));
                 NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.P));
-                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.WR));
-                NFL.AddPlayer(NFL.TeamList[i].Roster, new FootballPlayer(rnd, NFL.IdCount, Sports.Football, rnd.Next(21, 33), Position.WR));
             }
             // Create Free Agents
             for (int j = 0; j < 7; j++)
@@ -665,7 +669,7 @@ namespace SportsAgencyTycoon
             foreach (FootballPlayer f in t.Roster)
                 if (f.Position == position) playersAtPosition.Add(f);
 
-            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+            playersAtPosition = playersAtPosition.OrderBy(o => o.DepthChart).ThenByDescending(o => o.CurrentSkill).ToList();
 
             if (position == Position.WR || position == Position.DE || position == Position.DT || position == Position.OT || position == Position.OG)
                 starterCount = 2;
