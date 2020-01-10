@@ -784,6 +784,10 @@ namespace SportsAgencyTycoon
             {
                 //pay agency rent
                 agency.DeductMonthlyCosts(world);
+                //allow agents to ask GM about playing time again
+                foreach (Agent a in agency.Agents)
+                    foreach (Player p in a.ClientList)
+                        p.AgentPushedForMorePT = false;
             }
         }
 

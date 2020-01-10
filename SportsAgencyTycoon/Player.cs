@@ -84,6 +84,8 @@ namespace SportsAgencyTycoon
         public HappinessDescription TeamHappinessDescription;
         public string TeamHappinessString;
 
+        public bool AgentPushedForMorePT = false;
+
         public int CareerEarnings;
         public int WorldRanking;
         

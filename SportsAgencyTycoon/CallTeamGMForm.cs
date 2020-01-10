@@ -34,6 +34,7 @@ namespace SportsAgencyTycoon
             FindAgentTeamRelationship();
             InitialGMTalk();
             if (_Client.DepthChart == 1) btnPlayingTime.Enabled = false;
+            if (_Client.AgentPushedForMorePT) btnPlayingTime.Enabled = false;
         }
         private void FillTeamInfo()
         {
@@ -144,6 +145,7 @@ namespace SportsAgencyTycoon
                 {
                     gmLastResponse = "Hmm, I think I can see what you're saying. I'll talk to Coach and have him make the switch.";
                     _Relationship.Relationship += rnd.Next(2, 6);
+                    PlayingTimeDiscussion.ChangeDepthChartPositions();
                 }
                 else
                 {
@@ -167,6 +169,8 @@ namespace SportsAgencyTycoon
             }
             lblGMTalk.Text = gmLastResponse;
             gbRespondToPT.Visible = false;
+            btnPlayingTime.Enabled = false;
+            _Client.AgentPushedForMorePT = true;
         }
         public int DiceRoll()
         {

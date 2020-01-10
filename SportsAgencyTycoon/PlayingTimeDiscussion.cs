@@ -273,7 +273,7 @@ namespace SportsAgencyTycoon
             return GMCertainty;
         }
 
-        private void ChangeDepthChartPositions()
+        public void ChangeDepthChartPositions()
         {
             starter.DepthChart++;
             player.DepthChart--;
