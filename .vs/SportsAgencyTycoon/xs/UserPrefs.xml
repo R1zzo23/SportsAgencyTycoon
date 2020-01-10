@@ -1,9 +1,18 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/CallTeamGMForm.cs">
     <Files>
-      <File FileName="SportsAgencyTycoon/CallTeamGMForm.cs" Line="114" Column="1" />
-      <File FileName="SportsAgencyTycoon/PlayingTimeDiscussion.cs" Line="189" Column="84" />
+      <File FileName="SportsAgencyTycoon/CallTeamGMForm.cs" Line="170" Column="10" />
+      <File FileName="SportsAgencyTycoon/PlayingTimeDiscussion.cs" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SportsAgencyTycoon" expanded="True" selected="True">
+            <Node name="SportsAgencyTycoon" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.SportsAgencyTycoon PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

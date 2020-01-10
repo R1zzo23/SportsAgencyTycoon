@@ -111,7 +111,62 @@ namespace SportsAgencyTycoon
         }
         private void GMLastResponse(int agentResponse, string tone)
         {
+            string gmLastResponse = "";
 
+            if (GMCertainty > agentResponse)
+            {
+                if (tone == "smooth")
+                {
+                    gmLastResponse = "Listen, I know you're trying to do right by your client but it's just not going to happen right now.";
+                    _Relationship.Relationship -= rnd.Next(1, 3);
+                }
+                else if (tone == "power")
+                {
+                    gmLastResponse = "Nice try but you don't have that type of pull around here.";
+                    _Relationship.Relationship -= rnd.Next(2, 6);
+                }
+                else
+                {
+                    gmLastResponse = "You think you can come in here and make baseless demands like that?!? This won't work!";
+                    _Relationship.Relationship -= rnd.Next(7, 16);
+                }
+            }
+            else
+            {
+                int highRoll = 0;
+                int numberOfRolls = (agentResponse - GMCertainty) / 10 + 1;
+                for (int i = 0; i < numberOfRolls; i++)
+                {
+                    int roll = DiceRoll();
+                    if (roll > highRoll) highRoll = roll;
+                }
+                if (highRoll >= 9)
+                {
+                    gmLastResponse = "Hmm, I think I can see what you're saying. I'll talk to Coach and have him make the switch.";
+                    _Relationship.Relationship += rnd.Next(2, 6);
+                }
+                else
+                {
+                    if (tone == "smooth")
+                    {
+                        gmLastResponse = "I hear what you're saying, and appreciate your approach, but now is not the time.";
+                        _Relationship.Relationship -= rnd.Next(0, 3);
+                        gbRespondToPT.Visible = false;
+                    }
+                    else if (tone == "power")
+                    {
+                        gmLastResponse = "Well done on that power play, but it's not going to happen.";
+                        _Relationship.Relationship -= rnd.Next(2, 6);
+                    }
+                    else
+                    {
+                        gmLastResponse = "I see someone's found their voice, huh? How cute. This meeting is over.";
+                        _Relationship.Relationship -= rnd.Next(4, 11);
+                    }
+                }
+            }
+            lblGMTalk.Text = gmLastResponse;
+            gbRespondToPT.Visible = false;
         }
         public int DiceRoll()
         {
