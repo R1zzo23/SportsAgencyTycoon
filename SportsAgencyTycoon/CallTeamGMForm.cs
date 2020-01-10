@@ -82,16 +82,34 @@ namespace SportsAgencyTycoon
 
         private void BtnSmoothTalk_Click(object sender, EventArgs e)
         {
-            int agentSmoothTalk = _Agent.Negotiating + _Agent.Intelligence;
-
+            int agentSmoothTalk = _Agent.Negotiating + _Agent.Intelligence + _Relationship.Relationship / 2;
+            GMLastResponse(agentSmoothTalk, "smooth");
         }
 
         private void BtnPowerPlay_Click(object sender, EventArgs e)
         {
+            int agentPowerPlay = _Agent.IndustryPower + _Agent.Intelligence;
+            int clientsInSport = 0;
+            foreach (Player p in _Agent.ClientList)
+                if (p.Sport == _Client.Sport)
+                    clientsInSport++;
+            for (int i = 0; i < clientsInSport; i++)
+                agentPowerPlay += rnd.Next(1, 7);
 
+            GMLastResponse(agentPowerPlay, "power");
         }
 
         private void BtnDemand_Click(object sender, EventArgs e)
+        {
+            int agentDemand = _Agent.Greed + _Agent.IndustryPower;
+            foreach (Player p in _Agent.ClientList)
+                if (p.Sport == _Client.Sport)
+                    if (p.CurrentSkill > 60 || p.PotentialSkill > 70)
+                        agentDemand += DiceRoll();
+
+            GMLastResponse(agentDemand, "demand");
+        }
+        private void GMLastResponse(int agentResponse, string tone)
         {
 
         }

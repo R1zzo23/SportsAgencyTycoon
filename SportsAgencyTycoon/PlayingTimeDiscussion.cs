@@ -164,7 +164,7 @@ namespace SportsAgencyTycoon
                     else
                     {
                         response = starter.FullName + " is younger and better. He's the guy we are sticking with.";
-                        GMCertainty -= ((starter.CurrentSkill - player.CurrentSkill) / (player.Age - starter.Age));
+                        GMCertainty = GMCertainty - (starter.CurrentSkill - player.CurrentSkill) / (player.Age - starter.Age);
                     }
                 }
             }
@@ -186,7 +186,7 @@ namespace SportsAgencyTycoon
                 if (starter.PopularityDescription == PopularityDescription.ExtremelyPopular ||
                     starter.PopularityDescription == PopularityDescription.Superstar)
                 {
-                    response = "We might be losing but still need to sell tickets." + starter.FullName + " does just that!";
+                    response = "We might be losing but still need to sell tickets. " + starter.FullName + " does just that!";
                     GMCertainty = 100;
                 }
                 else if (player.PotentialSkill > starter.CurrentSkill)
