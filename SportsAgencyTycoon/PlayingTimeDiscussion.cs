@@ -152,6 +152,32 @@ namespace SportsAgencyTycoon
                         GMCertainty -= (starter.CurrentSkill - player.CurrentSkill);
                     }
                 }
+                else if (player.Age == starter.Age)
+                {
+                    if (player.PotentialSkill > starter.PotentialSkill)
+                    {
+                        response = "Both players are equally as young but we see a bit more potential from your guy.";
+                        ChangeDepthChartPositions();
+                    }
+                    else if (player.PotentialSkill < starter.PotentialSkill)
+                    {
+                        response = "Both players are equally as young but " + starter.FullName + " shows more promise.";
+                        GMCertainty = (GMCertainty - (starter.PotentialSkill - player.PotentialSkill)) / 2;
+                    }
+                    else //potential is equal
+                    {
+                        if (player.CurrentSkill >= starter.CurrentSkill)
+                        {
+                            response = "It's time for your client to shine.";
+                            ChangeDepthChartPositions();
+                        }
+                        else
+                        {
+                            response = starter.FullName + " is better now and will be in the future.";
+                            GMCertainty = 100;
+                        }
+                    }
+                }
                 else
                 {
                     //is starter younger but not ready to contribute?
@@ -278,7 +304,7 @@ namespace SportsAgencyTycoon
             starter.DepthChart++;
             player.DepthChart--;
             GMAgreed = true;
-        }
+        } 
         public bool OutputGMAgreed()
         {
             return GMAgreed;

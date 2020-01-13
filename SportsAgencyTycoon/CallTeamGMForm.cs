@@ -70,11 +70,26 @@ namespace SportsAgencyTycoon
             GMAgreed = PlayingTimeDiscussion.OutputGMAgreed();
 
             lblGMTalk.Text = message;
+            if (GMCertainty >= 80)
+            {
+                lblGMTalk.Text += Environment.NewLine + "And that's a final decision, so don't try to convince me otherwise.";
+                btnPlayingTime.Enabled = false;
+                _Client.AgentPushedForMorePT = true;
+            }
+                
             Console.WriteLine("GMCertainty = " + GMCertainty);
+
             if (!GMAgreed)
-                gbRespondToPT.Visible = true;
+            {
+                if (GMCertainty < 80)
+                    gbRespondToPT.Visible = true;
+            }
             else
             {
+                btnPlayingTime.Enabled = false;
+                _Client.AgentPushedForMorePT = true;
+
+                //check for Playing Time Power achievement
                 int playingTimePowerIndex = _Agent.Achievements.FindIndex(o => o.Name == "Playing Time Power");
                 if (playingTimePowerIndex < 0)
                     _Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Playing Time Power")]);
