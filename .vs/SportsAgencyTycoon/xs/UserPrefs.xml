@@ -7,8 +7,10 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="SportsAgencyTycoon" expanded="True" selected="True">
-            <Node name="SportsAgencyTycoon" expanded="True" />
+          <Node name="SportsAgencyTycoon" expanded="True">
+            <Node name="SportsAgencyTycoon" expanded="True">
+              <Node name="CallTeamGMForm.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
