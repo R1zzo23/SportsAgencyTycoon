@@ -172,6 +172,17 @@ namespace SportsAgencyTycoon
                 Calendar.AddCalendarEvent(new CalendarEvent(l, "end"));
             }
         }
+        public void CreateProgressionRegressionEventsForPlayers()
+        {
+            foreach (League l in Leagues)
+            {
+                Calendar.AddCalendarEvent(new CalendarEvent("progression/regression", l));
+            }
+            foreach (Association a in Associations)
+            {
+                Calendar.AddCalendarEvent(new CalendarEvent(a));
+            }
+        }
         public void CreateAssociations(Random rnd)
         {
             PGA = new Association(Sports.Golf, "Professional Golf Association", "PGA", rnd.Next(40, 80));

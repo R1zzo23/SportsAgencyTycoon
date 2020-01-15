@@ -34,6 +34,7 @@ namespace SportsAgencyTycoon
             FindAgentTeamRelationship();
             InitialGMTalk();
             if (_Client.DepthChart == 1) btnPlayingTime.Enabled = false;
+            if (!_Client.League.InSeason) btnPlayingTime.Enabled = false;
             if (_Client.AgentPushedForMorePT) btnPlayingTime.Enabled = false;
         }
         private void FillTeamInfo()
@@ -129,7 +130,7 @@ namespace SportsAgencyTycoon
         {
             string gmLastResponse = "";
 
-            if (GMCertainty > agentResponse)
+            if (GMCertainty > agentResponse || GMCertainty > 90)
             {
                 if (tone == "smooth")
                 {
@@ -187,6 +188,7 @@ namespace SportsAgencyTycoon
             btnPlayingTime.Enabled = false;
             _Client.AgentPushedForMorePT = true;
         }
+
         public int DiceRoll()
         {
             int firstDie = rnd.Next(1, 7);

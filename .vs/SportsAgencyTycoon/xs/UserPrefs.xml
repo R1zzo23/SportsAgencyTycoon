@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/CallTeamGMForm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/CalendarEvent.cs">
     <Files>
-      <File FileName="SportsAgencyTycoon/CallTeamGMForm.cs" Line="170" Column="10" />
-      <File FileName="SportsAgencyTycoon/PlayingTimeDiscussion.cs" />
+      <File FileName="SportsAgencyTycoon/CallTeamGMForm.cs" Line="191" Column="1" />
+      <File FileName="SportsAgencyTycoon/PlayingTimeDiscussion.cs" Line="299" Column="20" />
+      <File FileName="SportsAgencyTycoon/World.cs" Line="183" Column="65" />
+      <File FileName="SportsAgencyTycoon/CalendarEvent.cs" Line="95" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="CallTeamGMForm.cs" selected="True" />
+              <Node name="CalendarEvent.cs" selected="True" />
             </Node>
           </Node>
         </State>

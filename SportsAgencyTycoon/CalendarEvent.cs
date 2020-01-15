@@ -76,5 +76,23 @@ namespace SportsAgencyTycoon
             EventDate = l.SeasonEnd;
             Sport = l.Sport;
         }
+
+        // constructor method for Progression/Regression for leagues
+        public CalendarEvent(string s, League l)
+        {
+            EventType = CalendarEventType.ProgressionRegression;
+            EventName = l.Abbreviation + " Progression/Regression";
+            EventDate = new Date(l.SeasonStart.MonthNumber - 1, l.SeasonStart.MonthName - 1,  l.SeasonStart.Week);
+            Sport = l.Sport;
+        }
+
+        // constructor method for Progression/Regression for Associations
+        public CalendarEvent(Association a)
+        {
+            EventType = CalendarEventType.ProgressionRegression;
+            EventName = a.Abbreviation + " Progression/Regression";
+            EventDate = new Date(11, Months.December, 1);
+            Sport = a.Sport;
+        }
     }
 }
