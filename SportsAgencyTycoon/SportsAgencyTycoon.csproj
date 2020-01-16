@@ -154,6 +154,7 @@
     <Compile Include="PopularityDescription.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgressionRegression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationshipWithPlayer.cs" />
     <Compile Include="Role.cs" />

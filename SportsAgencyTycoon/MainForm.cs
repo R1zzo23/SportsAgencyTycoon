@@ -1102,6 +1102,10 @@ namespace SportsAgencyTycoon
                     else if (e.Sport == Sports.Soccer) world.PayPlayersAnnualSalary(world.MLS);
                     DetermineSeasons();
                 }
+                else if (e.EventType == CalendarEventType.ProgressionRegression)
+                {
+                    newsLabel.Text = "Running progression and regression for " + e.EventName + Environment.NewLine + newsLabel.Text;
+                }
             }
         }
         public void ResetPlayerStats(League l)

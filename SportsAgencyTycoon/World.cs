@@ -149,6 +149,7 @@ namespace SportsAgencyTycoon
             CreateCalendarEventsForAssociationEvents();
             CreatePlayersForTeams(rnd);
             CreateCalendarEventsForLeagueStartAndEnd();
+            CreateProgressionRegressionEventsForPlayers();
             CreatePlayerBirthdayCalendarEvents();
             CalculateWorldRankings();
             AssignTeamToPlayersInLeagues();
