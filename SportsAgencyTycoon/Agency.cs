@@ -185,5 +185,31 @@ namespace SportsAgencyTycoon
                 }
             }
         }
+
+        public string DisplayAgencyProgressionRegression(Sports sport)
+        {
+            List<Player> progressionList = new List<Player>();
+
+            foreach (Agent a in Agents)
+                foreach (Player client in a.ClientList)
+                    if (client.Sport == sport) progressionList.Add(client);
+
+            string output = sport.ToString() + " progression/regression report:" + Environment.NewLine;
+
+            for (int i = 0; i < progressionList.Count; i++)
+            {
+                if (progressionList[i].CurrentSkill >= progressionList[i].PreviousCurrentSkill)
+                {
+                    output += progressionList[i].FullName + " progressed by " + (progressionList[i].CurrentSkill - progressionList[i].PreviousCurrentSkill).ToString() + " points.";
+                }
+                else
+                {
+                    output += progressionList[i].FullName + " regressed by " + (progressionList[i].PreviousCurrentSkill - progressionList[i].CurrentSkill).ToString() + " points.";
+                }
+                output += Environment.NewLine;
+            }
+
+            return output;
+        }
     }
 }

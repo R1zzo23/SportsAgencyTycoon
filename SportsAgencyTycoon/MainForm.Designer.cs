@@ -108,6 +108,7 @@
             this.clientSportLabel = new System.Windows.Forms.Label();
             this.clientNameLabel = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblPlayerGenome = new System.Windows.Forms.Label();
             this.lblClientMonthlySalary = new System.Windows.Forms.Label();
             this.btnNegotiatePercent = new System.Windows.Forms.Button();
             this.lblClientSalary = new System.Windows.Forms.Label();
@@ -166,7 +167,7 @@
             this.lblFootballSeason = new System.Windows.Forms.Label();
             this.lblBasketballSeason = new System.Windows.Forms.Label();
             this.btnViewStandings = new System.Windows.Forms.Button();
-            this.lblPlayerGenome = new System.Windows.Forms.Label();
+            this.lblClientPriorSkill = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -764,6 +765,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.lblClientPriorSkill);
             this.groupBox5.Controls.Add(this.btnClientCard);
             this.groupBox5.Controls.Add(this.btnMarketPlayer);
             this.groupBox5.Controls.Add(this.clientTeamLabel);
@@ -1019,6 +1021,14 @@
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Available Clients to Sign";
+            // 
+            // lblPlayerGenome
+            // 
+            this.lblPlayerGenome.AutoSize = true;
+            this.lblPlayerGenome.Location = new System.Drawing.Point(13, 83);
+            this.lblPlayerGenome.Name = "lblPlayerGenome";
+            this.lblPlayerGenome.Size = new System.Drawing.Size(0, 13);
+            this.lblPlayerGenome.TabIndex = 48;
             // 
             // lblClientMonthlySalary
             // 
@@ -1563,13 +1573,14 @@
             this.btnViewStandings.UseVisualStyleBackColor = true;
             this.btnViewStandings.Click += new System.EventHandler(this.BtnViewStandings_Click);
             // 
-            // lblPlayerGenome
+            // lblClientPriorSkill
             // 
-            this.lblPlayerGenome.AutoSize = true;
-            this.lblPlayerGenome.Location = new System.Drawing.Point(13, 83);
-            this.lblPlayerGenome.Name = "lblPlayerGenome";
-            this.lblPlayerGenome.Size = new System.Drawing.Size(0, 13);
-            this.lblPlayerGenome.TabIndex = 48;
+            this.lblClientPriorSkill.AutoSize = true;
+            this.lblClientPriorSkill.Location = new System.Drawing.Point(111, 107);
+            this.lblClientPriorSkill.Name = "lblClientPriorSkill";
+            this.lblClientPriorSkill.Size = new System.Drawing.Size(53, 13);
+            this.lblClientPriorSkill.TabIndex = 39;
+            this.lblClientPriorSkill.Text = "Prior Skill:";
             // 
             // MainForm
             // 
@@ -1784,6 +1795,7 @@
         private System.Windows.Forms.Button btnHireMarketer;
         private System.Windows.Forms.Button btnClientCard;
         private System.Windows.Forms.Label lblPlayerGenome;
+        private System.Windows.Forms.Label lblClientPriorSkill;
     }
 }
 

@@ -21,6 +21,7 @@ namespace SportsAgencyTycoon
         public Boxing Boxing;
         public MMA MMA;
         public Random rnd = new Random();
+        public ProgressionRegression ProgressionRegression;
         public MainForm()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace SportsAgencyTycoon
             MMA = new MMA(agency);
             Tennis = new Tennis(agency);
             world.InitializeCalendar(myManager.LicensesHeld[0]);
+            ProgressionRegression = new ProgressionRegression(rnd);
         }
 
         #region Game Start
@@ -599,6 +601,7 @@ namespace SportsAgencyTycoon
                 clientTeamHappinessLabel.Text = selectedClient.TeamHappinessString;
                 clientAgencyHappinessLabel.Text = selectedClient.AgencyHappinessString;
                 clientSkillLabel.Text = selectedClient.CurrentSkill.ToString() + "/" + selectedClient.PotentialSkill.ToString();
+                lblClientPriorSkill.Text = "Prior Skill: " + selectedClient.PreviousCurrentSkill.ToString();
                 clientAgeLabel.Text = selectedClient.Age.ToString();
                 lblBirthMonth.Text = selectedClient.BirthMonth.ToString();
                 lblBirthWeek.Text = selectedClient.BirthWeek.ToString();
@@ -1104,7 +1107,31 @@ namespace SportsAgencyTycoon
                 }
                 else if (e.EventType == CalendarEventType.ProgressionRegression)
                 {
+                    League league = null;
+                    Association association = null;
                     newsLabel.Text = "Running progression and regression for " + e.EventName + Environment.NewLine + newsLabel.Text;
+                    if (e.Sport == Sports.Baseball) league = world.MLB;
+                    else if (e.Sport == Sports.Basketball) league = world.NBA;
+                    else if (e.Sport == Sports.Football) league = world.NFL;
+                    else if (e.Sport == Sports.Hockey) league = world.NHL;
+                    else if (e.Sport == Sports.Soccer) league = world.MLS;
+                    else if (e.Sport == Sports.Boxing) association = world.WBA;
+                    else if (e.Sport == Sports.Golf) association = world.PGA;
+                    else if (e.Sport == Sports.Tennis) association = world.ATP;
+                    else if (e.Sport == Sports.MMA) association = world.UFC;
+
+                    if (league != null)
+                    {
+                        foreach (Team t in league.TeamList)
+                            foreach (Player p in t.Roster) ProgressionRegression.PlayerProgression(p);
+
+                        foreach (Player p in league.FreeAgents) ProgressionRegression.PlayerProgression(p);
+                    }
+                    else if (association != null)
+                    {
+                        foreach (Player p in association.PlayerList) ProgressionRegression.PlayerProgression(p);
+                    }
+                    newsLabel.Text = agency.DisplayAgencyProgressionRegression(e.Sport) + Environment.NewLine + newsLabel.Text;
                 }
             }
         }

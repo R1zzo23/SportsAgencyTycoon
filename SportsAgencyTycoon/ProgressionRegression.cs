@@ -39,13 +39,14 @@ namespace SportsAgencyTycoon
 
             skillAdded = Convert.ToInt32(modifierSum * skillDifference) + diceRoll;
             player.CurrentSkill += skillAdded;
-
+            if (player.CurrentSkill > player.PotentialSkill) player.CurrentSkill = player.PotentialSkill;
+            if (player.CurrentSkill < 1) player.CurrentSkill = 1;
         }
         public void DiceRollForBoost(Player player)
         {
             bool gettingBoost = false;
-            int boostCheck = rnd.Next(1, 101);
-            if (boostCheck <= player.WorkEthic) gettingBoost = true;
+            int boostCheck = rnd.Next(1, 7);
+            if (boostCheck == 6) gettingBoost = true;
 
             if (gettingBoost)
                 diceRoll = rnd.Next(1, 7);
@@ -65,11 +66,17 @@ namespace SportsAgencyTycoon
             ageModifier = (30 - player.Age) / 75;
 
             if (player.Age > 30)
+            {
                 over30Modifier = -0.05;
+            }
+                
             else over30Modifier = 0.00;
 
             if (player.Age > 31)
+            {
                 over31Modifier = over30Modifier * (player.Age - 31) * 5;
+                if (skillDifference == 0) skillDifference = player.Age - 30;
+            }                
             else over31Modifier = 0.00;
         }
         public void DetermineWorkEthicModifier(Player player)
