@@ -100,33 +100,50 @@ namespace SportsAgencyTycoon
         }
         public void ShouldPlayerRetire(Player player)
         {
-            if (player.CurrentSkill <= 30)
+            if (player.PlayerType == PlayerType.Team)
             {
-                if (player.Contract.Years < 3)
+                if (!player.FreeAgent)
                 {
-                    if (player.Contract.YearlySalary < 5000000)
+                    if (player.CurrentSkill <= 30)
+                    {
+                        if (player.Contract.Years < 3)
+                        {
+                            if (player.Contract.YearlySalary < 5000000)
+                            {
+                                player.Retiring = true;
+                            }
+                        }
+                        else if (player.Contract.Years <2)
+                        {
+                            if (player.Contract.YearlySalary < 7000000)
+                            {
+                                player.Retiring = true;
+                            }
+                        }
+                    }
+                    else if (player.CurrentSkill <= 20)
+                    {
+                        if (player.Contract.Years == 0)
+                        {
+                            player.Retiring = true;
+                        }
+                        else if (player.Contract.Years == 1)
+                        {
+                            if (player.Contract.YearlySalary < 5000000)
+                            {
+                                player.Retiring = true;
+                            }
+                        }
+                    }
+                    else if (player.CurrentSkill <= 15)
                     {
                         player.Retiring = true;
                     }
                 }
-            }
-            else if (player.CurrentSkill <= 20)
-            {
-                if (player.Contract.Years == 0)
+                else
                 {
-                    player.Retiring = true;
+                    if (player.CurrentSkill < 25) player.Retiring = true;
                 }
-                else if (player.Contract.Years == 1)
-                {
-                    if (player.Contract.YearlySalary < 5000000)
-                    {
-                        player.Retiring = true;
-                    }
-                }
-            }
-            else if (player.CurrentSkill <= 15)
-            {
-                player.Retiring = true;
             }
         }
     }

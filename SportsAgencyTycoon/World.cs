@@ -1041,6 +1041,7 @@ namespace SportsAgencyTycoon
                             MainForm.agency.FindAgent(p).CareerEarnings += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
                         }
                     }
+                    p.Contract.Years--;
                 }
             l.InSeason = false;
         }
