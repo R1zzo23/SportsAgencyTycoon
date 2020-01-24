@@ -41,6 +41,7 @@ namespace SportsAgencyTycoon
             player.CurrentSkill += skillAdded;
             if (player.CurrentSkill > player.PotentialSkill) player.CurrentSkill = player.PotentialSkill;
             if (player.CurrentSkill < 1) player.CurrentSkill = 1;
+            ShouldPlayerRetire(player);
         }
         public void DiceRollForBoost(Player player)
         {
@@ -96,6 +97,37 @@ namespace SportsAgencyTycoon
             if (player.IsStarter)
                 starterModifier = 0.05;
             else starterModifier = 0.00;
+        }
+        public void ShouldPlayerRetire(Player player)
+        {
+            if (player.CurrentSkill <= 30)
+            {
+                if (player.Contract.Years < 3)
+                {
+                    if (player.Contract.YearlySalary < 5000000)
+                    {
+                        player.Retiring = true;
+                    }
+                }
+            }
+            else if (player.CurrentSkill <= 20)
+            {
+                if (player.Contract.Years == 0)
+                {
+                    player.Retiring = true;
+                }
+                else if (player.Contract.Years == 1)
+                {
+                    if (player.Contract.YearlySalary < 5000000)
+                    {
+                        player.Retiring = true;
+                    }
+                }
+            }
+            else if (player.CurrentSkill <= 15)
+            {
+                player.Retiring = true;
+            }
         }
     }
 }

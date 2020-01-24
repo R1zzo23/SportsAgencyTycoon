@@ -1132,6 +1132,7 @@ namespace SportsAgencyTycoon
                         foreach (Player p in association.PlayerList) ProgressionRegression.PlayerProgression(p);
                     }
                     newsLabel.Text = agency.DisplayAgencyProgressionRegression(e.Sport) + Environment.NewLine + newsLabel.Text;
+                    newsLabel.Text = agency.DisplayAgencyRetirements(e.Sport);
                 }
             }
         }

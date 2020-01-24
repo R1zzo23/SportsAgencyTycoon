@@ -211,5 +211,30 @@ namespace SportsAgencyTycoon
 
             return output;
         }
+        public string DisplayAgencyRetirements(Sports sport)
+        {
+            List<Player> list = new List<Player>();
+            string output = "";
+
+            foreach (Agent a in Agents)
+                foreach (Player client in a.ClientList)
+                    if (client.Sport == sport) list.Add(client);
+
+            if (list.Count > 0)
+            {
+                output = sport.ToString() + " retirement report:";
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].Retiring)
+                    {
+                        output += Environment.NewLine + "- " + list[i].Position.ToString() + " " + list[i].FullName;
+                    }
+                }
+            }
+            else output = "No " + sport.ToString() + " retirements for the agency this year.";
+
+            return output;
+        }
     }
 }

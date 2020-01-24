@@ -30,6 +30,7 @@ namespace SportsAgencyTycoon
         public int CurrentSkill;
         public int PreviousCurrentSkill;
         public int PotentialSkill;
+        public bool Retiring = false;
 
         //player attributes to determine which teams or contracts a player prefers
         //public int Greed;
