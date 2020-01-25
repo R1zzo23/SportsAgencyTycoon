@@ -12,8 +12,10 @@ namespace SportsAgencyTycoon
         public double ageModifier;
         public double workEthicModifier;
         public double starterModifier;
-        public double over31Modifier;
-        public double over30Modifier;
+        public double regressionAgeModifier;
+        public double pastPrimeModifier;
+        public int primeAge;
+        public int regressionAge;
         public int skillDifference;
         public double modifierSum;
         public int diceRoll;
@@ -27,6 +29,7 @@ namespace SportsAgencyTycoon
         {
             int skillAdded;
 
+            DeterminePrimeAndRegressionAges(player.Sport);
             DetermineSkillDifference(player);
             DetermineAgeModifier(player);
             DetermineStarterModifier(player);
@@ -42,6 +45,54 @@ namespace SportsAgencyTycoon
             if (player.CurrentSkill > player.PotentialSkill) player.CurrentSkill = player.PotentialSkill;
             if (player.CurrentSkill < 1) player.CurrentSkill = 1;
             ShouldPlayerRetire(player);
+        }
+        public void DeterminePrimeAndRegressionAges(Sports sport)
+        {
+            if (sport == Sports.Basketball)
+            {
+                primeAge = 30;
+                regressionAge = 31;
+            }
+            else if (sport == Sports.Baseball)
+            {
+                primeAge = 28;
+                regressionAge = 32;
+            }
+            else if (sport == Sports.Football)
+            {
+                primeAge = 28;
+                regressionAge = 30;
+            }
+            else if (sport == Sports.Hockey)
+            {
+                primeAge = 27;
+                regressionAge = 31;
+            }
+            else if (sport == Sports.Soccer)
+            {
+                primeAge = 25;
+                regressionAge = 29;
+            }
+            else if (sport == Sports.Golf)
+            {
+                primeAge = 35;
+                regressionAge = 45;
+            }
+            else if (sport == Sports.Tennis)
+            {
+                primeAge = 25;
+                regressionAge = 28;
+            }
+            else if (sport == Sports.MMA)
+            {
+                primeAge = 24;
+                regressionAge = 27;
+            }
+            else if (sport == Sports.Boxing)
+            {
+                primeAge = 26;
+                regressionAge = 28;
+            }
         }
         public void DiceRollForBoost(Player player)
         {
@@ -60,25 +111,25 @@ namespace SportsAgencyTycoon
         }
         public void ModifierSum()
         {
-            modifierSum = ageModifier + workEthicModifier + starterModifier + over30Modifier + over31Modifier;
+            modifierSum = ageModifier + workEthicModifier + starterModifier + pastPrimeModifier + regressionAgeModifier;
         }
         public void DetermineAgeModifier(Player player)
         {
-            ageModifier = (30 - player.Age) / 75;
+            ageModifier = (primeAge - player.Age) / 75;
 
-            if (player.Age > 30)
+            if (player.Age > primeAge)
             {
-                over30Modifier = -0.05;
+                pastPrimeModifier = -0.05;
             }
                 
-            else over30Modifier = 0.00;
+            else pastPrimeModifier = 0.00;
 
-            if (player.Age > 31)
+            if (player.Age > regressionAge)
             {
-                over31Modifier = over30Modifier * (player.Age - 31) * 5;
-                if (skillDifference == 0) skillDifference = player.Age - 30;
+                regressionAgeModifier = pastPrimeModifier * (player.Age - regressionAge) * 5;
+                if (skillDifference == 0) skillDifference = player.Age - primeAge;
             }                
-            else over31Modifier = 0.00;
+            else regressionAgeModifier = 0.00;
         }
         public void DetermineWorkEthicModifier(Player player)
         {
