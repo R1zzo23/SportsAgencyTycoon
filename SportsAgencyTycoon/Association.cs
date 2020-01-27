@@ -13,6 +13,7 @@ namespace SportsAgencyTycoon
         public string Abbreviation;
         public List<Player> PlayerList;
         public List<Event> EventList;
+        public List<Player> RetiredPlayers;
         public int Popularity;
 
         public Association(Sports sport, string name, string abbreviation, int popularity)
@@ -22,6 +23,7 @@ namespace SportsAgencyTycoon
             Abbreviation = abbreviation;
             PlayerList = new List<Player>();
             EventList = new List<Event>();
+            RetiredPlayers = new List<Player>();
             Popularity = popularity;
         }
     }

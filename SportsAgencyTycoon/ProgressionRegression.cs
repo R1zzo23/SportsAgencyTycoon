@@ -9,6 +9,8 @@ namespace SportsAgencyTycoon
     public class ProgressionRegression
     {
         public Random rnd;
+        public World world;
+        public Association association;
         public double ageModifier;
         public double workEthicModifier;
         public double starterModifier;
@@ -20,9 +22,10 @@ namespace SportsAgencyTycoon
         public double modifierSum;
         public int diceRoll;
 
-        public ProgressionRegression(Random r)
+        public ProgressionRegression(Random r, World w)
         {
             rnd = r;
+            world = w;
         }
 
         public void PlayerProgression(Player player)
@@ -77,21 +80,25 @@ namespace SportsAgencyTycoon
             {
                 primeAge = 35;
                 regressionAge = 45;
+                association = world.PGA; 
             }
             else if (sport == Sports.Tennis)
             {
                 primeAge = 25;
                 regressionAge = 28;
+                association = world.ATP;
             }
             else if (sport == Sports.MMA)
             {
                 primeAge = 24;
                 regressionAge = 27;
+                association = world.UFC;
             }
             else if (sport == Sports.Boxing)
             {
                 primeAge = 26;
                 regressionAge = 28;
+                association = world.WBA;
             }
         }
         public void DiceRollForBoost(Player player)
@@ -195,6 +202,29 @@ namespace SportsAgencyTycoon
                 {
                     if (player.CurrentSkill < 25) player.Retiring = true;
                 }
+            }
+        }
+        public void RetirePlayer(Player player)
+        {
+            if (player.PlayerType == PlayerType.Team)
+            {
+                player.League.RetiredPlayers.Add(player);
+                if (player.FreeAgent)
+                {
+                    int index = player.League.FreeAgents.FindIndex(o => o == player);
+                    player.League.FreeAgents.RemoveAt(index);
+                }
+                else
+                {
+                    int index = player.Team.Roster.FindIndex(o => o == player);
+                    player.Team.Roster.RemoveAt(index);
+                }
+            }
+            else if (player.PlayerType == PlayerType.Individual)
+            {
+                association.RetiredPlayers.Add(player);
+                int index = association.PlayerList.FindIndex(o => o == player);
+                association.PlayerList.RemoveAt(index);
             }
         }
     }

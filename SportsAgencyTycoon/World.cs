@@ -41,6 +41,7 @@ namespace SportsAgencyTycoon
         public List<CalendarEvent> EventsThisWeek = new List<CalendarEvent>();
         public List<Achievement> GlobalAchievements = new List<Achievement>();
         public PlayerGenomeProject PGP = new PlayerGenomeProject();
+        public ProgressionRegression ProgressionRegression;
         public World(MainForm form)
         {
             AvailableLicenses = new List<Licenses>();
@@ -58,6 +59,7 @@ namespace SportsAgencyTycoon
 
             MainForm = form;
             Calendar = new Calendar(form);
+            ProgressionRegression = new ProgressionRegression(rnd, this);
         }
 
         public void InitializeCalendar(Licenses teamLicense)
@@ -977,6 +979,28 @@ namespace SportsAgencyTycoon
             foreach (Association a in Associations)
                 foreach (Player p in a.PlayerList)
                     p.DetermineCareerStartYear(Year);
+        }
+
+        public void RetireLeaguePlayers(League league)
+        {
+            foreach (Team t in league.TeamList)
+            {
+                for (int i = t.Roster.Count - 1; i > 0; i--)
+                {
+                    if (t.Roster[i].Retiring) ProgressionRegression.RetirePlayer(t.Roster[i]);
+                }
+            }
+            for (int j = league.FreeAgents.Count - 1; j > 0; j--)
+            {
+                if (league.FreeAgents[j].Retiring) ProgressionRegression.RetirePlayer(league.FreeAgents[j]);
+            }
+        }
+        public void RetireAssociationPlayers(Association association)
+        {
+            for (int i = association.PlayerList.Count - 1; i > 0; i--)
+            {
+                if (association.PlayerList[i].Retiring) ProgressionRegression.RetirePlayer(association.PlayerList[i]);
+            }
         }
         #region Calendar - Set Month/Year
         public void HandleCalendar(Agency agency)

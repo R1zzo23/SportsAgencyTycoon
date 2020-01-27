@@ -80,9 +80,18 @@ namespace SportsAgencyTycoon
         // constructor method for Progression/Regression for leagues
         public CalendarEvent(string s, League l)
         {
+            int month;
+            int week;
+
+            if (l.SeasonEnd.MonthNumber == 11) month = -1;
+            else month = l.SeasonEnd.MonthNumber;
+
+            if (l.SeasonEnd.Week == 5) week = 4;
+            else week = l.SeasonEnd.Week;
+
             EventType = CalendarEventType.ProgressionRegression;
             EventName = l.Abbreviation + " Progression/Regression";
-            EventDate = new Date(l.SeasonStart.MonthNumber - 1, l.SeasonStart.MonthName - 1,  l.SeasonStart.Week);
+            EventDate = new Date(month + 1, (Months)month + 1, week);
             Sport = l.Sport;
         }
 

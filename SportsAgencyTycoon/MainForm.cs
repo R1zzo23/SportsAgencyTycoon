@@ -33,7 +33,7 @@ namespace SportsAgencyTycoon
             MMA = new MMA(agency);
             Tennis = new Tennis(agency);
             world.InitializeCalendar(myManager.LicensesHeld[0]);
-            ProgressionRegression = new ProgressionRegression(rnd);
+            ProgressionRegression = new ProgressionRegression(rnd, world);
         }
 
         #region Game Start
@@ -1126,11 +1126,16 @@ namespace SportsAgencyTycoon
                             foreach (Player p in t.Roster) ProgressionRegression.PlayerProgression(p);
 
                         foreach (Player p in league.FreeAgents) ProgressionRegression.PlayerProgression(p);
+
+                        world.RetireLeaguePlayers(league);
                     }
                     else if (association != null)
                     {
                         foreach (Player p in association.PlayerList) ProgressionRegression.PlayerProgression(p);
+
+                        world.RetireAssociationPlayers(association);
                     }
+
                     newsLabel.Text = agency.DisplayAgencyProgressionRegression(e.Sport) + Environment.NewLine + newsLabel.Text;
                     newsLabel.Text = agency.DisplayAgencyRetirements(e.Sport);
                 }
@@ -1303,37 +1308,40 @@ namespace SportsAgencyTycoon
 
         private void btnNegotiatePercent_Click(object sender, EventArgs e)
         {
-            Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
-            Player client = world.AvailableClients[cbAvailableClients.SelectedIndex];
-            NegotiatePercentageForm negotiatePercentageForm = new NegotiatePercentageForm(rnd, agent, client);
-            negotiatePercentageForm.BringToFront();
-            negotiatePercentageForm.ShowDialog();
-
-            Player player = FindPlayer(client);
-
-            if (negotiatePercentageForm.Percentage > 0)
+            if (cbAgencyAgentList.SelectedIndex > -1)
             {
-                if (player.League != null)
-                    if (player.Contract != null)
-                        player.Contract.AgentPercentage = negotiatePercentageForm.Percentage;
-                    else player.Contract = new Contract(0, 0, 0, player.League.SeasonStart, player.League.SeasonEnd, 0, negotiatePercentageForm.Percentage, PaySchedule.Monthly);
-                else player.Contract = new Contract(50, 0, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
+                Agent agent = agency.Agents[cbAgencyAgentList.SelectedIndex];
+                Player client = world.AvailableClients[cbAvailableClients.SelectedIndex];
+                NegotiatePercentageForm negotiatePercentageForm = new NegotiatePercentageForm(rnd, agent, client);
+                negotiatePercentageForm.BringToFront();
+                negotiatePercentageForm.ShowDialog();
 
-                player.MemberOfAgency = true;
-                //player.CurrentSkill += 20;
+                Player player = FindPlayer(client);
 
-                if (negotiatePercentageForm.NumberOfAgentOffers == 1)
-                    agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Smooth Signing")]);
+                if (negotiatePercentageForm.Percentage > 0)
+                {
+                    if (player.League != null)
+                        if (player.Contract != null)
+                            player.Contract.AgentPercentage = negotiatePercentageForm.Percentage;
+                        else player.Contract = new Contract(0, 0, 0, player.League.SeasonStart, player.League.SeasonEnd, 0, negotiatePercentageForm.Percentage, PaySchedule.Monthly);
+                    else player.Contract = new Contract(50, 0, 0, new Date(0, Months.January, 1), new Date(11, Months.December, 5), 0, negotiatePercentageForm.Percentage, PaySchedule.Winnings);
 
-                if (negotiatePercentageForm.Percentage == negotiatePercentageForm.ClientsAcceptancePercent)
-                    agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Percentage On Point")]);
+                    player.MemberOfAgency = true;
+                    //player.CurrentSkill += 20;
 
-                SignClient(player);
-            }
-            else if (negotiatePercentageForm.Percentage == 0)
-            {
-                player.WillingToNegotiate = false;
-                PopulateAvailableClientsList();
+                    if (negotiatePercentageForm.NumberOfAgentOffers == 1)
+                        agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Smooth Signing")]);
+
+                    if (negotiatePercentageForm.Percentage == negotiatePercentageForm.ClientsAcceptancePercent)
+                        agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Percentage On Point")]);
+
+                    SignClient(player);
+                }
+                else if (negotiatePercentageForm.Percentage == 0)
+                {
+                    player.WillingToNegotiate = false;
+                    PopulateAvailableClientsList();
+                }
             }
         }
 

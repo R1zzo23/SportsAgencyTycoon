@@ -46,6 +46,7 @@ namespace SportsAgencyTycoon
                 teamName = t.City + " " + t.Mascot;
                 cbTeamList.Items.Add(teamName);
             }
+            cbTeamList.Items.Add("Retired Players");
         }
 
         private void FillTeamRosterComboBox()
@@ -71,48 +72,61 @@ namespace SportsAgencyTycoon
 
         private void cbTeamList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FillTeamRosterComboBox();
-
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
-            Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
 
-            lblAwards.Text = "";
-            if (selectedTeam.Awards.Count > 0)
-                foreach (Award award in selectedTeam.Awards)
-                    lblAwards.Text += award.Year + " " + award.AwardName + Environment.NewLine;
+            if (cbTeamList.SelectedIndex == cbTeamList.Items.Count - 1)
+                ShowRetiredPlayers(selectedLeague);
 
-            lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
-            if (selectedLeague.Sport == Sports.Hockey)
-            {
-                lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.OTLosses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
-            }
-            else if (selectedLeague.Sport == Sports.Soccer)
-            {
-                lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.Ties + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
-            }
             else
             {
-                lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+                FillTeamRosterComboBox();
+
+                Team selectedTeam = selectedLeague.TeamList[cbTeamList.SelectedIndex];
+
+                lblAwards.Text = "";
+                if (selectedTeam.Awards.Count > 0)
+                    foreach (Award award in selectedTeam.Awards)
+                        lblAwards.Text += award.Year + " " + award.AwardName + Environment.NewLine;
+
+                lblRoster.Text = "[POS] LAST, FIRST:                CUR/POT          AGE" + Environment.NewLine;
+                if (selectedLeague.Sport == Sports.Hockey)
+                {
+                    lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.OTLosses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+                }
+                else if (selectedLeague.Sport == Sports.Soccer)
+                {
+                    lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + "-" + selectedTeam.Ties + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+                }
+                else
+                {
+                    lblTeamInfo.Text = selectedTeam.City + " " + selectedTeam.Mascot + "(" + selectedTeam.Wins + "-" + selectedTeam.Losses + ")   Title Contender (" + selectedTeam.TitleConteder + ") || Market Value: (" + selectedTeam.MarketValue + ")";
+                }
+
+                if (selectedLeague.Sport == Sports.Basketball)
+                    foreach (BasketballPlayer p in selectedTeam.Roster)
+                        lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;
+                else if (selectedLeague.Sport == Sports.Football)
+                    lblRoster.Text = DisplayFootballTeamStats(selectedTeam);
+                //foreach (FootballPlayer p in selectedTeam.Roster)
+                //lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                if (selectedLeague.Sport == Sports.Baseball)
+                    foreach (BaseballPlayer p in selectedTeam.Roster)
+                        lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                if (selectedLeague.Sport == Sports.Hockey)
+                    foreach (HockeyPlayer p in selectedTeam.Roster)
+                        lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
+                if (selectedLeague.Sport == Sports.Soccer)
+                    foreach (SoccerPlayer p in selectedTeam.Roster)
+                        lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
             }
             
-            if (selectedLeague.Sport == Sports.Basketball)
-                foreach (BasketballPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + p.AgencyHappinessString + " " + p.TeamHappinessString + " " + p.PopularityString + Environment.NewLine;
-            else if (selectedLeague.Sport == Sports.Football)
-                lblRoster.Text = DisplayFootballTeamStats(selectedTeam);
-                //foreach (FootballPlayer p in selectedTeam.Roster)
-                    //lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
-            if (selectedLeague.Sport == Sports.Baseball)
-                foreach (BaseballPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
-            if (selectedLeague.Sport == Sports.Hockey)
-                foreach (HockeyPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
-            if (selectedLeague.Sport == Sports.Soccer)
-                foreach (SoccerPlayer p in selectedTeam.Roster)
-                    lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
         }
-
+        private void ShowRetiredPlayers(League league)
+        {
+            lblRoster.Text = "";
+            foreach (Player p in league.RetiredPlayers)
+                lblRoster.Text += p.Position.ToString() + " " + p.FullName + Environment.NewLine;
+        }
         private void cbTeamRoster_SelectedIndexChanged(object sender, EventArgs e)
         {
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
