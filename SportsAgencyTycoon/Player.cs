@@ -30,6 +30,8 @@ namespace SportsAgencyTycoon
         public int CurrentSkill;
         public int PreviousCurrentSkill;
         public int PotentialSkill;
+        public int CareerStartYear;
+        public int RetiredYear;
         public bool Retiring = false;
 
         //player attributes to determine which teams or contracts a player prefers
@@ -133,7 +135,10 @@ namespace SportsAgencyTycoon
             
             CareerEarnings = 0;
         }
-
+        public void DetermineCareerStartYear(int i)
+        {
+            CareerStartYear = i;
+        }
         public PlayerType DeterminePlayerType(Sports s)
         {
             if (s == Sports.Boxing || s == Sports.Golf || s == Sports.MMA || s == Sports.Tennis) return PlayerType.Individual;

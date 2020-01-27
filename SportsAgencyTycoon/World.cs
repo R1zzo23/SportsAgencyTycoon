@@ -156,6 +156,7 @@ namespace SportsAgencyTycoon
             DetermineTitleContenderForTeams();
             DetermineHappinessForPlayers();
             CreatePlayerGenomes();
+            SetInitialPlayerCareerDates();
         }
         public void CreateLeagues(Random rnd)
         {
@@ -963,7 +964,20 @@ namespace SportsAgencyTycoon
             Associations.Add(WBA);
             Associations.Add(UFC);
         }
-
+        public void SetInitialPlayerCareerDates()
+        {
+            foreach (League l in Leagues)
+            {
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
+                        p.DetermineCareerStartYear(Year);
+                foreach (Player p in l.FreeAgents)
+                    p.DetermineCareerStartYear(Year);
+            }
+            foreach (Association a in Associations)
+                foreach (Player p in a.PlayerList)
+                    p.DetermineCareerStartYear(Year);
+        }
         #region Calendar - Set Month/Year
         public void HandleCalendar(Agency agency)
         {
