@@ -206,6 +206,9 @@ namespace SportsAgencyTycoon
         }
         public void RetirePlayer(Player player)
         {
+            player.RetiredYear = world.Year;
+            player.PlayerStatus = PlayerType.Retired;
+
             if (player.PlayerType == PlayerType.Team)
             {
                 player.League.RetiredPlayers.Add(player);

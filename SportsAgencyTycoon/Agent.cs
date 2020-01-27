@@ -75,7 +75,6 @@ namespace SportsAgencyTycoon
             Random rnd = new Random();
 
             double agentTestingScore = ((1 + (rnd.Next(-5, 11) / 100)) * Intelligence * 0.5) + ((1 + (rnd.Next(-5, 11) / 100)) * LicenseTestPrep * 0.8);
-            Console.WriteLine("Agent Testing Score: " + agentTestingScore);
 
             //if agent obtains license
             if (agentTestingScore >= 75)
@@ -150,10 +149,6 @@ namespace SportsAgencyTycoon
             int index = Achievements.FindIndex(x => x.Name == a.Name);
             if (index >= 0)
                 hasAchievement = true;
-
-            Console.WriteLine("Looking for " + a.Name + " achievement...");
-            foreach (Achievement v in Achievements)
-                Console.WriteLine("Agent has the '" + v.Name + "' achievement.");
 
             return hasAchievement;
         }

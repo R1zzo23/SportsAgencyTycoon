@@ -54,7 +54,6 @@ namespace SportsAgencyTycoon
         }
         private void InitialGMTalk()
         {
-            Console.WriteLine("First: " + _Agent.First + ", Last: " + _Agent.Last + ", Full: " + _Agent.FullName);
             if (_Relationship.Relationship >= 75)
                 lblGMTalk.Text = "Hey " + _Agent.FullName + "! Great to see you again!" + Environment.NewLine + "You know I'm always willing to help so what can I do for you today?";
             else if (_Relationship.Relationship >= 35)

@@ -233,16 +233,6 @@ namespace SportsAgencyTycoon
                     lblA3Licenses.Text += a3.LicensesHeld[i].Sport + ", ";
                 lblA3Licenses.Text = lblA3Licenses.Text.Substring(0, lblA3Licenses.Text.Length - 2);
             }
-            Console.WriteLine(a1.First + " " + a1.Last + "'s Licenses: ");
-            for (int i = 0; i < a1.LicensesHeld.Count; i++)
-            {
-                Console.WriteLine(a1.LicensesHeld[i].Sport.ToString());
-            }
-            Console.WriteLine(a2.First + " " + a2.Last + "'s Licenses: ");
-            for (int i = 0; i < a2.LicensesHeld.Count; i++)
-            {
-                Console.WriteLine(a2.LicensesHeld[i].Sport.ToString());
-            }
         }
 
         private void btnPassOnHiring_Click(object sender, EventArgs e)

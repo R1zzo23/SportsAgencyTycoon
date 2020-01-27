@@ -159,6 +159,7 @@ namespace SportsAgencyTycoon
             DetermineHappinessForPlayers();
             CreatePlayerGenomes();
             SetInitialPlayerCareerDates();
+            SetAllPlayersToActive();
         }
         public void CreateLeagues(Random rnd)
         {
@@ -980,20 +981,43 @@ namespace SportsAgencyTycoon
                 foreach (Player p in a.PlayerList)
                     p.DetermineCareerStartYear(Year);
         }
-
+        public void SetAllPlayersToActive()
+        {
+            foreach (League l in Leagues)
+            {
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
+                        p.PlayerStatus = PlayerType.Active;
+                foreach (Player p in l.FreeAgents)
+                    p.PlayerStatus = PlayerType.Active;
+            }
+            foreach (Association a in Associations)
+                foreach (Player p in a.PlayerList)
+                    p.PlayerStatus = PlayerType.Active;
+        }
         public void RetireLeaguePlayers(League league)
         {
+            int count = 0;
             foreach (Team t in league.TeamList)
             {
                 for (int i = t.Roster.Count - 1; i > 0; i--)
                 {
-                    if (t.Roster[i].Retiring) ProgressionRegression.RetirePlayer(t.Roster[i]);
+                    if (t.Roster[i].Retiring)
+                    {
+                        ProgressionRegression.RetirePlayer(t.Roster[i]);
+                        count++;
+                    }
                 }
             }
             for (int j = league.FreeAgents.Count - 1; j > 0; j--)
             {
-                if (league.FreeAgents[j].Retiring) ProgressionRegression.RetirePlayer(league.FreeAgents[j]);
+                if (league.FreeAgents[j].Retiring)
+                {
+                    ProgressionRegression.RetirePlayer(league.FreeAgents[j]);
+                    count++;
+                }                 
             }
+            Console.WriteLine(league.Name + " retirements this year: " + count);
         }
         public void RetireAssociationPlayers(Association association)
         {

@@ -48,13 +48,11 @@ namespace SportsAgencyTycoon
                 {
                     winnerList.Add(entrantList[x * 2]);
                     loserList.Add(entrantList[x * 2 + 1]);
-                    Console.WriteLine(entrantList[x * 2].FirstName + " " + entrantList[x * 2].LastName + " defeats " + entrantList[x * 2 + 1].FirstName + " " + entrantList[x * 2 + 1].LastName);
                 }
                 else if (winner == 2)
                 {
                     winnerList.Add(entrantList[x * 2 + 1]);
                     loserList.Add(entrantList[x * 2]);
-                    Console.WriteLine(entrantList[x * 2 + 1].FirstName + " " + entrantList[x * 2 + 1].LastName + " defeats " + entrantList[x * 2].FirstName + " " + entrantList[x * 2].LastName);
                 }
             }
             results = "Results written in console.";

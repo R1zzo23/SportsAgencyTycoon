@@ -9,6 +9,9 @@ namespace SportsAgencyTycoon
     public enum PlayerType
     {
         Team,
-        Individual
+        Individual,
+        Active,
+        Retired,
+        Draftee
     }
 }

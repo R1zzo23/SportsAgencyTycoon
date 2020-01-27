@@ -401,7 +401,6 @@ namespace SportsAgencyTycoon
 
         private void btnAcceptOffer_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Offer accepted! Years: " + years + " Salary: " + yearlySalary);
             DealHasBeenAgreedUpon();
         }
 

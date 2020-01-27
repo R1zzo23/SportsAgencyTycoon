@@ -13,6 +13,7 @@ namespace SportsAgencyTycoon
         public string PGP;
         public Sports Sport;
         public PlayerType PlayerType;
+        public PlayerType PlayerStatus;
         public Team Team;
         public League League;
         public Position Position;

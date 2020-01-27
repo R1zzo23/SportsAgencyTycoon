@@ -145,10 +145,6 @@ namespace SportsAgencyTycoon
             if (index >= 0)
                 hasAchievement = true;
 
-            Console.WriteLine("Looking for " + a.Name + " achievement...");
-            foreach (Achievement v in Achievements)
-                Console.WriteLine("Agent has the '" + v.Name + "' achievement.");
-
             return hasAchievement;
         }
         public void ClientInteractions(Random rnd, MainForm mainForm)

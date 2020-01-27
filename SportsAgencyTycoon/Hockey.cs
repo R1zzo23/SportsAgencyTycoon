@@ -64,7 +64,6 @@ namespace SportsAgencyTycoon
             //if (NHL.WeekNumber == 0)
             //InitializeGAA();
             NHL.WeekNumber++;
-            Console.WriteLine("NHL.WeekNumber: " + NHL.WeekNumber);
             if (!NHL.Playoffs)
             {
                 SimulateGames();
@@ -462,7 +461,6 @@ namespace SportsAgencyTycoon
                 if (overtime)
                     team2.OTLosses++;
                 else team2.Losses++;
-                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
             }
             else
             {
@@ -471,7 +469,6 @@ namespace SportsAgencyTycoon
                 else team1.Losses++;
                 team2.WinsThisWeek++;
                 team2.Wins++;
-                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
             }
             team1.PlayedGameThisCycle = true;
             team2.PlayedGameThisCycle = true;

@@ -53,7 +53,6 @@ namespace SportsAgencyTycoon
                     foreach (SoccerPlayer p in t.Roster)
                         InitializeMatchRating(p);
             MLS.WeekNumber++;
-            Console.WriteLine("MLS.WeekNumber: " + MLS.WeekNumber);
             if (!MLS.Playoffs)
             {
                 SimulateGames();
@@ -391,7 +390,6 @@ namespace SportsAgencyTycoon
             {
                 team1.Ties++;
                 team2.Ties++;
-                Console.WriteLine(team1.City + " " + team1.Mascot + " and  " + team2.City + " " + team2.Mascot + " played to a tie!");
             }
             else
             {
@@ -401,13 +399,11 @@ namespace SportsAgencyTycoon
                 {
                     team1.Wins++;
                     team2.Losses++;
-                    Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
                 }
                 else
                 {
                     team1.Losses++;
                     team2.Wins++;
-                    Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
                 }
             }
             team1.PlayedGameThisCycle = true;

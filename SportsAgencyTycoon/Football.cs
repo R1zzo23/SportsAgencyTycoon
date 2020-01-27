@@ -966,13 +966,11 @@ namespace SportsAgencyTycoon
             int winningNumber = rnd.Next(1, totalNumber);
             if (winningNumber <= team1.TitleConteder)
             {
-                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
                 mainForm.newsLabel.Text = team1.Mascot + " beat the " + team2.Mascot + Environment.NewLine + mainForm.newsLabel.Text;
                 winningTeam = 1;
             }
             else
             {
-                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
                 mainForm.newsLabel.Text = team2.Mascot + " beat the " + team1.Mascot + Environment.NewLine + mainForm.newsLabel.Text;
                 winningTeam = 2;
             }
@@ -1057,7 +1055,6 @@ namespace SportsAgencyTycoon
                     team1.ConferenceWins++;
                     team2.ConferenceLosses++;
                 }
-                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
             }
             else
             {
@@ -1073,7 +1070,6 @@ namespace SportsAgencyTycoon
                     team2.ConferenceWins++;
                     team1.ConferenceLosses++;
                 }
-                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
             }
         }
         

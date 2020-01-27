@@ -100,7 +100,6 @@ namespace SportsAgencyTycoon
                 for (int j = 0; j < NBA.TeamList.Count / 2; j++)
                 {
                     int opponentIndex = rnd.Next(1, indexList.Count);
-                    Console.WriteLine("Team1 Index: " + NBA.TeamList[indexList[0]] + " - Team2 Index: " + NBA.TeamList[indexList[opponentIndex]]);
                     SimulateGame(NBA.TeamList[indexList[0]], NBA.TeamList[indexList[opponentIndex]]);
                     indexList.RemoveAt(opponentIndex);
                     indexList.RemoveAt(0);
@@ -296,13 +295,11 @@ namespace SportsAgencyTycoon
             {
                 team1.Wins++;
                 team2.Losses++;
-                Console.WriteLine(team1.Mascot + " beat the " + team2.Mascot);
             }
             else
             {
                 team1.Losses++;
                 team2.Wins++;
-                Console.WriteLine(team2.Mascot + " beat the " + team1.Mascot);
             }
             team1.PlayedGameThisCycle = true;
             team2.PlayedGameThisCycle = true;

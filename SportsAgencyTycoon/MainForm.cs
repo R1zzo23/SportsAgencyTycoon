@@ -1263,8 +1263,6 @@ namespace SportsAgencyTycoon
 
             int fundsSpent = newAgentSearch.FundsSpent;
             string agentType = newAgentSearch.AgentType;
-            Console.WriteLine(fundsSpent);
-            Console.WriteLine(agentType);
             agency.Money -= fundsSpent;
             UpdateAgencyInfo();
 
@@ -1485,8 +1483,6 @@ namespace SportsAgencyTycoon
             marketerSearch.ShowDialog();
             int fundsSpent = marketerSearch.FundsSpent;
             string marketerType = marketerSearch.MarketerType;
-            Console.WriteLine(fundsSpent);
-            Console.WriteLine(marketerType);
             agency.Money -= fundsSpent;
             UpdateAgencyInfo();
 
