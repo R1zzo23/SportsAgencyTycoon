@@ -8,6 +8,12 @@ namespace SportsAgencyTycoon
     public class Golf
     {
         Agency myAgency;
+        //lists to run tournament 
+        List<Golfer> resultsList = new List<Golfer>();
+        List<Golfer> tempList = new List<Golfer>();
+        List<Golfer> madeCutList = new List<Golfer>();
+        List<Golfer> listOfGolfers = new List<Golfer>();
+        List<Golfer> playoffList = new List<Golfer>();
 
         public Golf (Agency agency)
         {
@@ -16,16 +22,16 @@ namespace SportsAgencyTycoon
 
         public string RunTournament(Event e, World world)
         {
+            Console.WriteLine("# of PGA golfers before tournament: " + world.PGA.PlayerList.Count);
             //string to print out results to user in newsLabel
             string results = "";
             Random rnd = new Random();
 
-            //lists to run tournament 
-            List<Golfer> resultsList = new List<Golfer>();
-            List<Golfer> tempList = new List<Golfer>();
-            List<Golfer> madeCutList = new List<Golfer>();
-            List<Golfer> listOfGolfers = new List<Golfer>();
-            List<Golfer> playoffList = new List<Golfer>();
+            resultsList.Clear();
+            tempList.Clear();
+            madeCutList.Clear();
+            listOfGolfers.Clear();
+            playoffList.Clear();
 
             //grab list of golfers from world.PGA
             List<Player> playerList = world.PGA.PlayerList.OrderBy(o => o.WorldRanking).ToList();
@@ -109,7 +115,9 @@ namespace SportsAgencyTycoon
                     }
                     //or add them to resultsList because they are out
                     else resultsList.Insert(0, tempList[i]);
-                    
+
+                    //remove golfer from tempList
+                    tempList.RemoveAt(i);
                 }
                 //all golfers in playoffList play 1 hole at a time until someone wins
                 foreach (Golfer g in playoffList)
@@ -122,7 +130,7 @@ namespace SportsAgencyTycoon
                 foreach (Golfer g in playoffList) tempList.Add(g);
             }
             //add all remaining golfers from tempList to resultsList
-            for (int i = tempList.Count - 1; i > 0; i--) resultsList.Insert(0, tempList[i]);
+            for (int i = playoffList.Count - 1; i > 0; i--) resultsList.Insert(0, tempList[i]);
 
             // Order list: Playoff Holes - Made Playoffs - Made Cut - Current Score
             resultsList.OrderBy(o => o.PlayoffHoles).ThenBy(o => o.MadePlayoff).ThenBy(o => o.MadeCut).ThenBy(o => o.CurrentScore);
@@ -130,13 +138,15 @@ namespace SportsAgencyTycoon
             string tournamentResults = "";
             for (var i = 1; i < 10; i++)
             {
-                tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + Environment.NewLine;
+                tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + "(" + resultsList[0].PlayoffHoles + ")" + Environment.NewLine;
             }
-            results = resultsList[0].FirstName + " " + resultsList[0].LastName
+            results = resultsList[0].FirstName + " " + resultsList[0].LastName + "(" + resultsList[0].PlayoffHoles + ")" 
                 + " is the " + e.Year.ToString() + " " + e.Name + " champion!"
                 + Environment.NewLine + "Here are the rest of the top-10 finishers:"
                 + Environment.NewLine + tournamentResults + Environment.NewLine;
             AwardPayoutsAndTourPoints(e, resultsList, world);
+
+            Console.WriteLine("# of PGA golfers after tournament: " + world.PGA.PlayerList.Count);
 
             return results;
         }
@@ -275,7 +285,7 @@ namespace SportsAgencyTycoon
             resultList = resultList.OrderByDescending(o => o.TourPoints).ToList();
             for (var j = 0; j < resultList.Count; j++)
             {
-                resultList[j].WorldRanking = j + 1;
+                //resultList[j].WorldRanking = j + 1;
                 for (var i = 0; i < world.PGA.PlayerList.Count; i++)
                 {
                     if (resultList[j].FirstName == world.PGA.PlayerList[i].FirstName && resultList[j].LastName == world.PGA.PlayerList[i].LastName && resultList[j].Age == world.PGA.PlayerList[i].Age)
@@ -284,6 +294,9 @@ namespace SportsAgencyTycoon
                     }
                 }
             }
+            resultList.Clear();
+            foreach (Golfer g in world.PGA.PlayerList) resultList.Add(g);
+
         }
     }
 }

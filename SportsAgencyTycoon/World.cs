@@ -206,15 +206,16 @@ namespace SportsAgencyTycoon
         }
         public void CreatePGAEvents()
         {
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "World Golf Championships", 0, EventType.PGATourEvent, "Mexico City, MEX", 10250000, 100, 70, new Date(2, Months.February, 3)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "THE PLAYERS Championship", 1, EventType.Major, "Ponte Vedra Beach,  FL", 6700000, 75, 50, new Date(3, Months.March, 2)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "Masters Tournament", 2, EventType.Major, "Augusta, GA", 11500000, 60, 50, new Date(4, Months.April, 2)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "PGA Championship", 3, EventType.Major, "Farmingdale, NY", 11000000, 100, 70, new Date(5, Months.May, 3)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "U.S. Open", 4, EventType.PGATourEvent, "Pebble Beach, CA", 12000000, 100, 70, new Date(6, Months.June, 2)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "The Open Championship", 5, EventType.Major, "Portrush, NIR", 11000000, 85, 60, new Date(7, Months.July, 3)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "THE NORTHERN TRUST", 6, EventType.PGATourEvent, "Jersey City, NJ", 9250000, 100, 70, new Date(8, Months.August, 1)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "BMW Championship", 7,EventType.PGATourEvent, "Medinah, IL", 9250000, 100, 70, new Date(8, Months.August, 3)));
-            PGA.EventList.Add(new Event(Sports.Golf, Year, "TOUR Championship", 8, EventType.PGATourEvent, "Atlanta, GA", 9000000, 100, 70, new Date(10, Months.October, 2)));
+            // 100, 75, 60, 100, 100, 85, 100, 100, 100
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "World Golf Championships", 0, EventType.PGATourEvent, "Mexico City, MEX", 10250000, 144, 70, new Date(2, Months.February, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "THE PLAYERS Championship", 1, EventType.Major, "Ponte Vedra Beach,  FL", 6700000, 144, 50, new Date(3, Months.March, 2)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "Masters Tournament", 2, EventType.Major, "Augusta, GA", 11500000, 144, 50, new Date(4, Months.April, 2)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "PGA Championship", 3, EventType.Major, "Farmingdale, NY", 11000000, 144, 70, new Date(5, Months.May, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "U.S. Open", 4, EventType.PGATourEvent, "Pebble Beach, CA", 12000000, 144, 70, new Date(6, Months.June, 2)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "The Open Championship", 5, EventType.Major, "Portrush, NIR", 11000000, 144, 60, new Date(7, Months.July, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "THE NORTHERN TRUST", 6, EventType.PGATourEvent, "Jersey City, NJ", 9250000, 144, 70, new Date(8, Months.August, 1)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "BMW Championship", 7,EventType.PGATourEvent, "Medinah, IL", 9250000, 144, 70, new Date(8, Months.August, 3)));
+            PGA.EventList.Add(new Event(Sports.Golf, Year, "TOUR Championship", 8, EventType.PGATourEvent, "Atlanta, GA", 9000000, 144, 70, new Date(10, Months.October, 2)));
         }
         public void CreateATPEvents()
         {
