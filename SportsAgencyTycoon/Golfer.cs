@@ -16,6 +16,7 @@ namespace SportsAgencyTycoon
         public List<double> TourPointsList;
         public List<int> CurrentTournamentScores;
         public int CurrentScore;
+        public int PlayoffScore;
         public bool MadeCut;
         public bool MadePlayoff;
         public int PlayoffHoles;

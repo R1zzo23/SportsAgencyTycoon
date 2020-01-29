@@ -102,8 +102,47 @@ namespace SportsAgencyTycoon
                 Console.WriteLine(i + ") " + tempList[i].FullName + " - " + tempList[i].CurrentScore);
             }
 
+            tempList = tempList.OrderBy(o => o.CurrentScore).ToList();
+
+            //find the top score in the tournament
+            int bestScore = tempList[0].CurrentScore;
+
+            for (int i = tempList.Count - 1; i >= 0; i--)
+            {
+                if (tempList[i].CurrentScore > bestScore)
+                    resultsList.Insert(0, tempList[i]);
+                else
+                {
+                    tempList[i].MadePlayoff = true;
+                    playoffList.Add(tempList[i]);
+                }
+                tempList.RemoveAt(i);
+            }
+
+            while (playoffList.Count > 1)
+            {
+                foreach (Golfer g in playoffList)
+                {
+                    g.PlayoffHoles++;
+                    g.PlayoffScore += PlayHole(g, rnd);
+                }
+                playoffList = playoffList.OrderBy(o => o.PlayoffScore).ToList();
+
+                for (int i = playoffList.Count - 1; i >= 0; i--)
+                {
+                    if (playoffList[i].PlayoffScore != playoffList[0].PlayoffScore)
+                    {
+                        resultsList.Insert(0, playoffList[i]);
+                        playoffList.RemoveAt(i);
+                    }
+                }
+            }
+
+            resultsList.Insert(0, playoffList[0]);
+
+
             //check for tie
-            while (IsThereATie(tempList))
+            /*while (IsThereATie(tempList))
             {
                 playoffList.Clear();
                 tempList = tempList.OrderBy(o => o.CurrentScore).ToList();
@@ -111,7 +150,6 @@ namespace SportsAgencyTycoon
                 int bestScore = tempList[0].CurrentScore;
                 //add all golfers with matching score to playoffList
                 for (int i = tempList.Count - 1; i > 0; i--)
-                //foreach (Golfer g in tempList)
                 {
                     //add Golfer to playoffList to keep playing
                     if (tempList[i].CurrentScore == bestScore)
@@ -147,7 +185,7 @@ namespace SportsAgencyTycoon
 
             // Order list: Playoff Holes - Made Playoffs - Made Cut - Current Score
             resultsList.OrderBy(o => o.PlayoffHoles).ThenBy(o => o.MadePlayoff).ThenBy(o => o.MadeCut).ThenBy(o => o.CurrentScore);
-
+            */
             string tournamentResults = "";
             for (var i = 1; i < 10; i++)
             {
