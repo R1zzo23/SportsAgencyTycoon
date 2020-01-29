@@ -96,6 +96,12 @@ namespace SportsAgencyTycoon
             tempList.Clear();
             foreach (Golfer g in madeCutList) tempList.Add(g);
             
+            //display top-10 for testing
+            for(int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(i + ") " + tempList[i].FullName + " - " + tempList[i].CurrentScore);
+            }
+
             //check for tie
             while (IsThereATie(tempList))
             {
@@ -125,7 +131,14 @@ namespace SportsAgencyTycoon
                     g.PlayoffHoles++;
                     g.CurrentScore += PlayHole(g, rnd);
                 }
+                //display playoff list for testing
+                for (int i = 0; i < playoffList.Count; i++)
+                {
+                    Console.WriteLine("PLAYOFFS: " + i + ") " + playoffList[i].FullName + " - " + tempList[i].CurrentScore);
+                }
+
                 playoffList = playoffList.OrderBy(o => o.CurrentScore).ToList();
+
                 tempList.Clear();
                 foreach (Golfer g in playoffList) tempList.Add(g);
             }
