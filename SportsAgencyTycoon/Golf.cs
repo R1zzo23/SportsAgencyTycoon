@@ -27,6 +27,7 @@ namespace SportsAgencyTycoon
             string results = "";
             Random rnd = new Random();
 
+            e.EntrantList.Clear();
             resultsList.Clear();
             tempList.Clear();
             madeCutList.Clear();
@@ -45,6 +46,8 @@ namespace SportsAgencyTycoon
                 listOfGolfers[i].CurrentTournamentScores.Clear();
                 listOfGolfers[i].MadeCut = false;
                 listOfGolfers[i].MadePlayoff = false;
+                listOfGolfers[i].PlayoffHoles = 0;
+                listOfGolfers[i].PlayoffScore = 0;
                 e.EntrantList.Add(listOfGolfers[i]);
             }
 
@@ -189,7 +192,7 @@ namespace SportsAgencyTycoon
             string tournamentResults = "";
             for (var i = 1; i < 10; i++)
             {
-                tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + "(" + resultsList[0].PlayoffHoles + ")" + Environment.NewLine;
+                tournamentResults += i + 1 + ") " + resultsList[i].FirstName + " " + resultsList[i].LastName + "(" + resultsList[i].PlayoffHoles + ")" + Environment.NewLine;
             }
             results = resultsList[0].FirstName + " " + resultsList[0].LastName + "(" + resultsList[0].PlayoffHoles + ")" 
                 + " is the " + e.Year.ToString() + " " + e.Name + " champion!"
@@ -336,7 +339,7 @@ namespace SportsAgencyTycoon
             resultList = resultList.OrderByDescending(o => o.TourPoints).ToList();
             for (var j = 0; j < resultList.Count; j++)
             {
-                //resultList[j].WorldRanking = j + 1;
+                resultList[j].WorldRanking = j + 1;
                 for (var i = 0; i < world.PGA.PlayerList.Count; i++)
                 {
                     if (resultList[j].FirstName == world.PGA.PlayerList[i].FirstName && resultList[j].LastName == world.PGA.PlayerList[i].LastName && resultList[j].Age == world.PGA.PlayerList[i].Age)

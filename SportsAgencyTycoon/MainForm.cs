@@ -981,7 +981,7 @@ namespace SportsAgencyTycoon
                     }
                     else if (e.Sport == Sports.Golf)
                     {
-                        Event thisEvent = world.PGA.EventList.Find(x => x.Id == e.EventID);
+                        Event thisEvent = world.PGA.EventList.Find(x => x.Id == e.EventID && x.Year == world.Year);
                         newsLabel.Text = Golf.RunTournament(thisEvent, world) + newsLabel.Text;
                     }
                     else if (e.Sport == Sports.MMA)
