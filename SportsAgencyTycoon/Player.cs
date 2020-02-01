@@ -33,6 +33,7 @@ namespace SportsAgencyTycoon
         public int PotentialSkill;
         public int CareerStartYear;
         public int RetiredYear;
+        public int Experience = 0;
         public bool Retiring = false;
 
         //player attributes to determine which teams or contracts a player prefers

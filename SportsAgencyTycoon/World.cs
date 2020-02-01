@@ -199,6 +199,13 @@ namespace SportsAgencyTycoon
         #region Create Events for Associations
         public void CreateAllEvents()
         {
+            //remove all old events for associations from the Calendar
+            for (int i = Calendar.Events.Count - 1; i >= 0; i--)
+            {
+                if (Calendar.Events[i].EventType == CalendarEventType.AssociationEvent)
+                    Calendar.Events.RemoveAt(i);
+            }
+
             CreatePGAEvents();
             CreateATPEvents();
             CreateWBAEvents();
@@ -1101,6 +1108,9 @@ namespace SportsAgencyTycoon
             foreach (Team t in l.TeamList)
                 foreach (Player p in t.Roster)
                 {
+                    //add one year to player's experience
+                    p.Experience++;
+
                     // all players getting paid annually get their money
                     if (p.Contract.AgentPaySchedule == PaySchedule.Annually)
                     {
