@@ -199,18 +199,20 @@ namespace SportsAgencyTycoon
         #region Create Events for Associations
         public void CreateAllEvents()
         {
-            //remove all old events for associations from the Calendar
-            for (int i = Calendar.Events.Count - 1; i >= 0; i--)
-            {
-                if (Calendar.Events[i].EventType == CalendarEventType.AssociationEvent)
-                    Calendar.Events.RemoveAt(i);
-            }
-
+            RemoveOldAssociationEvents();
             CreatePGAEvents();
             CreateATPEvents();
             CreateWBAEvents();
             CreateUFCEvents();
             CreateCalendarEventsForAssociationEvents();
+        }
+        public void RemoveOldAssociationEvents()
+        {
+            for (int i = Calendar.Events.Count - 1; i >= 0; i--)
+            {
+                if (Calendar.Events[i].EventType == CalendarEventType.AssociationEvent)
+                    Calendar.Events.RemoveAt(i);
+            }
         }
         public void CreatePGAEvents()
         {
