@@ -1,17 +1,21 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/World.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/BasketballDraft.cs">
     <Files>
-      <File FileName="SportsAgencyTycoon/World.cs" Line="1113" Column="1" />
-      <File FileName="SportsAgencyTycoon/ProgressionRegression.cs" Line="1" Column="1" />
-      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="1" Column="1" />
-      <File FileName="SportsAgencyTycoon/Player.cs" Line="36" Column="35" />
+      <File FileName="SportsAgencyTycoon/World.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/Player.cs" />
+      <File FileName="SportsAgencyTycoon/BasketballDraft.cs" Line="48" Column="14" />
+      <File FileName="SportsAgencyTycoon/League.cs" Line="25" Column="64" />
+      <File FileName="SportsAgencyTycoon/BasketballPlayer.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/PlayerType.cs" Line="15" Column="21" />
+      <File FileName="SportsAgencyTycoon/Basketball.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="973" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="World.cs" selected="True" />
+              <Node name="BasketballDraft.cs" selected="True" />
             </Node>
           </Node>
         </State>

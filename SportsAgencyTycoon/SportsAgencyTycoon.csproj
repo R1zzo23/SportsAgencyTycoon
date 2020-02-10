@@ -253,6 +253,7 @@
     <Compile Include="RelationshipWithTeam.cs" />
     <Compile Include="Achievement.cs" />
     <Compile Include="GenomeDescriptions.cs" />
+    <Compile Include="BasketballDraft.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -12,6 +12,6 @@ namespace SportsAgencyTycoon
         Individual,
         Active,
         Retired,
-        Draftee
+        DraftEntrant
     }
 }

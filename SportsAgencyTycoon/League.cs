@@ -22,6 +22,7 @@ namespace SportsAgencyTycoon
         public int MaxSalary;
         public int MinSalary;
         public List<Player> FreeAgents = new List<Player>();
+        public List<Player> DraftEntrants = new List<Player>();
         public List<Player> RetiredPlayers = new List<Player>();
         public bool InSeason;
         public int IdCount = 0;
