@@ -44,10 +44,30 @@ namespace SportsAgencyTycoon
 
             for (int i = 0; i < rounds; i++)
             {
-
+                for (int j = 0; j < DraftOrder.Count; j++)
+                {
+                    Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, j, i);
+                    AddPlayerToTeam(draftedPlayer, DraftOrder[j]);
+                    RemoveDraftedPlayerFromDraftPool(draftedPlayer);
+                }
             }
-
-            // remove undrafted DraftEntrants from list, add to FreeAgents
+            for (int i = league.DraftEntrants.Count - 1; i >= 0; i--)
+            {
+                league.DraftEntrants[i].PlayerStatus = PlayerType.Active;
+                league.DraftEntrants[i].FreeAgent = true;
+                league.FreeAgents.Add(league.DraftEntrants[i]);
+                league.DraftEntrants.RemoveAt(i);
+            }
+        }
+        public void AddPlayerToTeam(Player p, Team t)
+        {
+            p.PlayerStatus = PlayerType.Active;
+            t.Roster.Add(p);
+        }
+        public void RemoveDraftedPlayerFromDraftPool(Player draftedPlayer)
+        {
+            int index = league.DraftEntrants.FindIndex(o => o == draftedPlayer);
+            league.DraftEntrants.RemoveAt(index);
         }
     }
 }
