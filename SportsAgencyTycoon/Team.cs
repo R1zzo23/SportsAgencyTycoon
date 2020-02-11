@@ -77,9 +77,33 @@ namespace SportsAgencyTycoon
 
                     draftedPlayer = DraftEntrants[index];
                 }
-                else draftedPlayer = null;
+                else if (pick <= 20)
+                {
+                    int coinFlip = rnd.Next(1, 3);
+                    if (coinFlip == 1)
+                    {
+                        DraftEntrants = DraftEntrants.OrderByDescending(o => o.CurrentSkill).ToList();
+                    }
+                    else DraftEntrants = DraftEntrants.OrderByDescending(o => o.PotentialSkill).ToList();
+
+                    int index = rnd.Next(0, 3);
+                    draftedPlayer = DraftEntrants[index];
+                }
+                else
+                {
+                    DraftEntrants = DraftEntrants.OrderByDescending(o => o.CurrentSkill).ToList();
+                    int index = rnd.Next(0, 3);
+                    draftedPlayer = DraftEntrants[index];
+                }
             }
-            else draftedPlayer = DraftEntrants[0];
+            else
+            {
+                DraftEntrants = DraftEntrants.OrderByDescending(o => o.PotentialSkill).ToList();
+                int index = rnd.Next(0, 3);
+                if (DraftEntrants[0].PotentialSkill > DraftEntrants[1].PotentialSkill + 15) index = 0;
+
+                draftedPlayer = DraftEntrants[index];
+            }
 
             return draftedPlayer;
         }
