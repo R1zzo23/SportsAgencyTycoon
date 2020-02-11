@@ -9,6 +9,7 @@ namespace SportsAgencyTycoon
     public class Basketball
     {
         public MainForm mainForm;
+        public BasketballDraft basketballDraft;
         public Random rnd;
         public League NBA;
         public World World;
@@ -31,6 +32,7 @@ namespace SportsAgencyTycoon
             World = w;
             NBA = l;
             index = 1;
+            basketballDraft = new BasketballDraft(rnd, NBA);
             Conferences = new List<string>();
             Divisions = new List<string>();
             FillLists();
@@ -52,6 +54,13 @@ namespace SportsAgencyTycoon
         {
             if (World.MonthName == Months.October && World.WeekNumber == 4)
                 World.Basketball.InitializeStats();
+
+            if (World.MonthName == Months.January && World.WeekNumber == 3)
+            {
+                mainForm.newsLabel.Text += "NBA draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
+                World.Basketball.basketballDraft.CreateDraftEntrants();
+            }
+                
 
             if (!World.NBA.Playoffs)
             {

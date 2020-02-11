@@ -969,6 +969,9 @@ namespace SportsAgencyTycoon
         }
         private void RunEventsThisWeek()
         {
+            if (world.MonthName == Months.July && world.WeekNumber == 1)
+                newsLabel.Text += world.Basketball.basketballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
+
             foreach (CalendarEvent e in world.EventsThisWeek)
             {
                 if (e.EventType == CalendarEventType.AssociationEvent)

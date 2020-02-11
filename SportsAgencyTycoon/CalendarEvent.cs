@@ -95,6 +95,7 @@ namespace SportsAgencyTycoon
             Sport = l.Sport;
         }
 
+
         // constructor method for Progression/Regression for Associations
         public CalendarEvent(Association a)
         {

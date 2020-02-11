@@ -47,6 +47,7 @@ namespace SportsAgencyTycoon
                 cbTeamList.Items.Add(teamName);
             }
             cbTeamList.Items.Add("Retired Players");
+            cbTeamList.Items.Add("Draft Class");
         }
 
         private void FillTeamRosterComboBox()
@@ -74,8 +75,10 @@ namespace SportsAgencyTycoon
         {
             League selectedLeague = World.Leagues[cbLeagues.SelectedIndex];
 
-            if (cbTeamList.SelectedIndex == cbTeamList.Items.Count - 1)
+            if (cbTeamList.SelectedIndex == cbTeamList.Items.Count - 2)
                 ShowRetiredPlayers(selectedLeague);
+            else if (cbTeamList.SelectedIndex == cbTeamList.Items.Count - 1)
+                ShowDraftClass(selectedLeague);
 
             else
             {
@@ -120,6 +123,19 @@ namespace SportsAgencyTycoon
                         lblRoster.Text += "[" + p.Position.ToString() + "] " + p.LastName + ", " + p.FirstName + ": " + p.CurrentSkill + "/" + p.PotentialSkill + " - " + p.Age + "-years old" + Environment.NewLine;
             }
             
+        }
+        private void ShowDraftClass(League league)
+        {
+            lblRoster.Text = "";
+
+            List<Player> draftClass = new List<Player>();
+
+            foreach (Player p in league.DraftEntrants) draftClass.Add(p);
+
+            draftClass = draftClass.OrderByDescending(o => o.CurrentSkill).ToList();
+
+            foreach (Player p in draftClass)
+                lblRoster.Text += p.LastName + ", " + p.FirstName + ": " + p.Age + "-year old " + p.Position.ToString() + " [" + p.CurrentSkill + "/" + p.PotentialSkill + "]" + Environment.NewLine;
         }
         private void ShowRetiredPlayers(League league)
         {
