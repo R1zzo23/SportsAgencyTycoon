@@ -17,6 +17,8 @@ namespace SportsAgencyTycoon
         public Team Team;
         public League League;
         public Position Position;
+        public int DraftRound;
+        public int DraftPick;
         public int DepthChart = -1;
         public bool IsStarter;
 

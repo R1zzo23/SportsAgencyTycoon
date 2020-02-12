@@ -57,7 +57,7 @@ namespace SportsAgencyTycoon
 
             if (World.MonthName == Months.January && World.WeekNumber == 3)
             {
-                mainForm.newsLabel.Text += "NBA draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
+                mainForm.newsLabel.Text += Environment.NewLine + "NBA draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
                 World.Basketball.basketballDraft.CreateDraftEntrants();
             }
                 

@@ -50,7 +50,7 @@ namespace SportsAgencyTycoon
                 for (int j = 0; j < DraftOrder.Count; j++)
                 {
                     Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, j, i);
-                    AddPlayerToTeam(draftedPlayer, DraftOrder[j]);
+                    AddPlayerToTeam(draftedPlayer, DraftOrder[j], i, j);
                     RemoveDraftedPlayerFromDraftPool(draftedPlayer);
                     results = results + i + "." + j + " - " + DraftOrder[j].Abbreviation + " selects " + draftedPlayer.Position.ToString() + " " + draftedPlayer.FullName + Environment.NewLine;
                 }
@@ -65,8 +65,10 @@ namespace SportsAgencyTycoon
 
             return results;
         }
-        public void AddPlayerToTeam(Player p, Team t)
+        public void AddPlayerToTeam(Player p, Team t, int round, int pick)
         {
+            p.DraftRound = round + 1;
+            p.DraftPick = pick + 1;
             p.PlayerStatus = PlayerType.Active;
             t.Roster.Add(p);
         }
