@@ -7,10 +7,10 @@ namespace SportsAgencyTycoon
 {
     public class BasketballDraft
     {
-        Random rnd;
-        int rounds = 2;
-        int numberOfEntrants;
-        League league;
+        public Random rnd;
+        public int rounds = 2;
+        public int numberOfEntrants;
+        public League league;
         public BasketballDraft(Random r, League l)
         {
             rnd = r;
@@ -25,6 +25,7 @@ namespace SportsAgencyTycoon
                 b.PlayerType = PlayerType.DraftEntrant;
                 league.DraftEntrants.Add(b);
             }
+            ModifyDraftClass(league.DraftEntrants);
         }
         public void ModifyDraftClass(List<Player> draftEntrants)
         {
@@ -34,26 +35,56 @@ namespace SportsAgencyTycoon
             int current70count = 0;
             int current60count = 0;
 
+            int draftStrength = rnd.Next(1, 11);
+
+            int league80potential = 0;
+            int league70potential = 0;
+            int league80current = 0;
+            int league70current = 0;
+            int league60current = 0;
+
+            foreach (Team t in league.TeamList)
+            {
+                foreach (Player p in t.Roster)
+                {
+                    if (p.PotentialSkill >= 80) league80potential++;
+                    if (p.PotentialSkill >= 70 && p.PotentialSkill < 80) league70potential++;
+                    if (p.CurrentSkill >= 80) league80current++;
+                    if (p.CurrentSkill >= 70 && p.CurrentSkill < 80) league70current++;
+                    if (p.CurrentSkill >= 60 && p.CurrentSkill < 70) league60current++;
+                }
+            }
+                
+
             foreach (Player p in draftEntrants)
             {
-                if (p.Age >= 21) p.PotentialSkill = p.CurrentSkill + rnd.Next(3, 20);
+                /*if (p.Age >= 21) p.PotentialSkill = p.CurrentSkill + rnd.Next(3, 20);
                 else if (p.Age == 20) p.PotentialSkill = p.CurrentSkill + rnd.Next(8, 25);
                 else if (p.Age == 19) p.PotentialSkill = p.CurrentSkill + rnd.Next(10, 30);
-                else p.PotentialSkill = p.CurrentSkill + rnd.Next(15, 40);
+                else p.PotentialSkill = p.CurrentSkill + rnd.Next(15, 40);*/
+
+                int nerf = rnd.Next(15-draftStrength, 30-draftStrength);
+                p.CurrentSkill -= nerf;
+                p.PotentialSkill -= nerf;
 
                 if (p.PotentialSkill >= 80) potential80count++;
-                if (p.PotentialSkill >= 70) potential70count++;
+                if (p.PotentialSkill >= 70 && p.PotentialSkill < 80) potential70count++;
                 if (p.CurrentSkill >= 80) current80count++;
-                if (p.CurrentSkill >= 70) current70count++;
-                if (p.CurrentSkill >= 60) current60count++;
-
-                Console.WriteLine("Players with 70+ Potential: " + potential70count);
-                Console.WriteLine("Players with 80+ Potential: " + potential80count);
-                Console.WriteLine("Players with 60+ Current: " + current60count);
-                Console.WriteLine("Players with 70+ Current: " + current70count);
-                Console.WriteLine("Players with 80+ Potential: " + current80count);
+                if (p.CurrentSkill >= 70 && p.CurrentSkill < 80) current70count++;
+                if (p.CurrentSkill >= 60 && p.CurrentSkill < 70) current60count++;
             }
+            Console.WriteLine("Draft Strength: " + draftStrength);
+            Console.WriteLine("Draft with 70+ Potential: " + potential70count);
+            Console.WriteLine("Draft with 80+ Potential: " + potential80count);
+            Console.WriteLine("Draft with 60+ Current: " + current60count);
+            Console.WriteLine("Draft with 70+ Current: " + current70count);
+            Console.WriteLine("Draft with 80+ Current: " + current80count);
 
+            Console.WriteLine("Players with 70+ Potential: " + league70potential);
+            Console.WriteLine("Players with 80+ Potential: " + league80potential);
+            Console.WriteLine("Players with 60+ Current: " + league60current);
+            Console.WriteLine("Players with 70+ Current: " + league70current);
+            Console.WriteLine("Players with 80+ Current: " + league80current);
 
         }
         public Position DeterminePosition()
@@ -80,6 +111,9 @@ namespace SportsAgencyTycoon
                 for (int j = 0; j < DraftOrder.Count; j++)
                 {
                     Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, j, i);
+                    draftedPlayer.DraftRound = i + 1;
+                    draftedPlayer.DraftPick = j + 1;
+                    draftedPlayer.Contract = CreateRookieContract(draftedPlayer);
                     AddPlayerToTeam(draftedPlayer, DraftOrder[j], i, j);
                     RemoveDraftedPlayerFromDraftPool(draftedPlayer);
                     results = results + i + "." + j + " - " + DraftOrder[j].Abbreviation + " selects " + draftedPlayer.Position.ToString() + " " + draftedPlayer.FullName + Environment.NewLine;
@@ -97,8 +131,6 @@ namespace SportsAgencyTycoon
         }
         public void AddPlayerToTeam(Player p, Team t, int round, int pick)
         {
-            p.DraftRound = round + 1;
-            p.DraftPick = pick + 1;
             p.PlayerStatus = PlayerType.Active;
             t.Roster.Add(p);
         }
@@ -106,6 +138,36 @@ namespace SportsAgencyTycoon
         {
             int index = league.DraftEntrants.FindIndex(o => o == draftedPlayer);
             league.DraftEntrants.RemoveAt(index);
+        }
+        public Contract CreateRookieContract(Player player)
+        {
+            Contract contract = null;
+            int salary = 0;
+            int years = 0;
+
+
+            if (player.DraftRound == 1)
+            {
+                years = 4;
+                salary = 9000000 - ((player.DraftPick - 1) * 250000);
+            }
+            else
+            {
+                if (player.DraftPick <= 15)
+                {
+                    years = 2;
+                    salary = Convert.ToInt32(league.MinSalary * 1.5);
+                }
+                else
+                {
+                    years = 1;
+                    salary = league.MinSalary;
+                }
+            }
+
+            contract = new Contract(years, salary, salary / 10, new Date(9, Months.October, 1), new Date(6, Months.July, 1), 0, 3, PaySchedule.Monthly);
+
+            return contract;
         }
     }
 }

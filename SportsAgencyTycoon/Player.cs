@@ -154,10 +154,13 @@ namespace SportsAgencyTycoon
             int potentialSkill = 0;
             int potential = 0;
 
-            if (age <= 20) potential = rnd.Next(15, 41);
-            else if (age <= 25) potential = rnd.Next(10, 36);
-            else if (age <= 30) potential = rnd.Next(5, 26);
-            else if (age <= 35) potential = rnd.Next(0, 7);
+            if (age <= 19) potential = rnd.Next(10, 30);
+            else if (age == 20) potential = rnd.Next(10, 27);
+            else if (age <= 22) potential = rnd.Next(5, 20);
+            else if (age <= 25) potential = rnd.Next(5, 17);
+            else if (age <= 27) potential = rnd.Next(1, 12);
+            else if (age <= 30) potential = rnd.Next(0, 6);
+            else potential = rnd.Next(0, 3);
 
             potentialSkill = currentSkill + potential;
             if (potentialSkill > 100) potentialSkill = 100;
