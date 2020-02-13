@@ -26,6 +26,36 @@ namespace SportsAgencyTycoon
                 league.DraftEntrants.Add(b);
             }
         }
+        public void ModifyDraftClass(List<Player> draftEntrants)
+        {
+            int potential80count = 0;
+            int potential70count = 0;
+            int current80count = 0;
+            int current70count = 0;
+            int current60count = 0;
+
+            foreach (Player p in draftEntrants)
+            {
+                if (p.Age >= 21) p.PotentialSkill = p.CurrentSkill + rnd.Next(3, 20);
+                else if (p.Age == 20) p.PotentialSkill = p.CurrentSkill + rnd.Next(8, 25);
+                else if (p.Age == 19) p.PotentialSkill = p.CurrentSkill + rnd.Next(10, 30);
+                else p.PotentialSkill = p.CurrentSkill + rnd.Next(15, 40);
+
+                if (p.PotentialSkill >= 80) potential80count++;
+                if (p.PotentialSkill >= 70) potential70count++;
+                if (p.CurrentSkill >= 80) current80count++;
+                if (p.CurrentSkill >= 70) current70count++;
+                if (p.CurrentSkill >= 60) current60count++;
+
+                Console.WriteLine("Players with 70+ Potential: " + potential70count);
+                Console.WriteLine("Players with 80+ Potential: " + potential80count);
+                Console.WriteLine("Players with 60+ Current: " + current60count);
+                Console.WriteLine("Players with 70+ Current: " + current70count);
+                Console.WriteLine("Players with 80+ Potential: " + current80count);
+            }
+
+
+        }
         public Position DeterminePosition()
         {
             int position = rnd.Next(1, 6);
