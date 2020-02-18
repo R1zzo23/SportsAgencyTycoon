@@ -17,6 +17,8 @@ namespace SportsAgencyTycoon
         public int Popularity;
         public Date SeasonStart;
         public Date SeasonEnd;
+        public Date DraftDeclarationDate;
+        public bool DeclaredEntrants = false;
         public int GamesPerSeason;
         public int MonthsInSeason;
         public int MaxSalary;
@@ -44,12 +46,21 @@ namespace SportsAgencyTycoon
             MonthsInSeason = monthsInSeason;
             MaxSalary = maxSalary;
             MinSalary = minSalary;
+            DraftDeclarationDate = DetermineDeclareDate(sport);
         }
 
         public void AddPlayer(List<Player> l, Player p)
         {
             l.Add(p);
             IdCount++;
+        }
+        public Date DetermineDeclareDate(Sports sport)
+        {
+            if (sport == Sports.Basketball) return new Date(3, Months.April, 1);
+            else if (sport == Sports.Football) return new Date(0, Months.January, 3);
+            else if (sport == Sports.Hockey) return new Date(4, Months.May, 4);
+            else if (sport == Sports.Soccer) return new Date(11, Months.December, 1);
+            else return new Date(4, Months.May, 1);
         }
     }
 }

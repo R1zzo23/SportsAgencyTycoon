@@ -151,6 +151,7 @@ namespace SportsAgencyTycoon
             //CreateCalendarEventsForAssociationEvents();
             CreatePlayersForTeams(rnd);
             CreateCalendarEventsForLeagueStartAndEnd();
+            CreateDraftDeclarationEvents();
             CreateProgressionRegressionEventsForPlayers();
             CreatePlayerBirthdayCalendarEvents();
             CalculateWorldRankings();
@@ -187,6 +188,11 @@ namespace SportsAgencyTycoon
             {
                 Calendar.AddCalendarEvent(new CalendarEvent(a));
             }
+        }
+        public void CreateDraftDeclarationEvents()
+        {
+            foreach (League l in Leagues)
+                Calendar.AddCalendarEvent(new CalendarEvent(l, l.DraftDeclarationDate));
         }
         public void CreateAssociations(Random rnd)
         {

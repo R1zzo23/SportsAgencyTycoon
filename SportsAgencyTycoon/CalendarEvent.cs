@@ -104,5 +104,13 @@ namespace SportsAgencyTycoon
             EventDate = new Date(11, Months.December, 1);
             Sport = a.Sport;
         }
+        //constructor method for DraftDeclaration for Leagues
+        public CalendarEvent(League l, Date d)
+        {
+            EventType = CalendarEventType.DraftDeclaration;
+            EventName = l.Abbreviation + " Draft Declaration";
+            EventDate = d;
+            Sport = l.Sport;
+        }
     }
 }

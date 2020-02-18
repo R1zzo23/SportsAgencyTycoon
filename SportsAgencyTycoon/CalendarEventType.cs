@@ -18,6 +18,7 @@ namespace SportsAgencyTycoon
         LicenseWindowClose,
         LeagueYearBegins,
         LeagueYearEnds,
-        ProgressionRegression
+        ProgressionRegression,
+        DraftDeclaration
     }
 }

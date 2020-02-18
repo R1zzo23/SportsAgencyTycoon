@@ -25,9 +25,21 @@ namespace SportsAgencyTycoon
             {
                 BasketballPlayer b = new BasketballPlayer(rnd, league.IdCount, Sports.Basketball, rnd.Next(18, 23), DeterminePosition());
                 b.PlayerType = PlayerType.DraftEntrant;
+                b.League = league;
                 league.DraftEntrants.Add(b);
             }
             ModifyDraftClass(league.DraftEntrants);
+            ModifyDraftClassPopularityAndPGP(league.DraftEntrants);
+        }
+        public void ModifyDraftClassPopularityAndPGP(List<Player> draftEntrants)
+        {
+            foreach (Player p in draftEntrants)
+            {
+                world.PGP.CreatePGP(rnd, p);
+                p.Popularity = p.DeterminePopularity(p.CurrentSkill, p.PotentialSkill, p.Age);
+                p.PopularityDescription = p.DescribePopularity(p.Popularity);
+                p.PopularityString = p.EnumToString(p.PopularityDescription.ToString());
+            }
         }
         public void ModifyDraftClass(List<Player> draftEntrants)
         {
@@ -124,6 +136,7 @@ namespace SportsAgencyTycoon
             for (int i = league.DraftEntrants.Count - 1; i >= 0; i--)
             {
                 league.DraftEntrants[i].PlayerStatus = PlayerType.Active;
+                league.DraftEntrants[i].PlayerType = PlayerType.Team;
                 league.DraftEntrants[i].FreeAgent = true;
                 league.FreeAgents.Add(league.DraftEntrants[i]);
                 league.DraftEntrants.RemoveAt(i);
@@ -131,11 +144,14 @@ namespace SportsAgencyTycoon
 
             Console.WriteLine(results);
 
+            league.DeclaredEntrants = false;
+
             return results;
         }
         public void AddPlayerToTeam(Player p, Team t, int round, int pick)
         {
             p.PlayerStatus = PlayerType.Active;
+            p.PlayerType = PlayerType.Team;
             p.CareerStartYear = world.Year;
             p.Team = t;
             p.DetermineTeamHappiness(rnd, p.IsStarter);

@@ -9,6 +9,8 @@ namespace SportsAgencyTycoon
 {
     public class Player
     {
+        public Random random;
+
         public int Id;
         public string PGP;
         public Sports Sport;
@@ -100,6 +102,7 @@ namespace SportsAgencyTycoon
 
         public Player(Random rnd, int id, Sports sport, int age)
         {
+            random = rnd;
             Id = id;
             Sport = sport;
             PlayerType = DeterminePlayerType(Sport);
@@ -300,12 +303,18 @@ namespace SportsAgencyTycoon
         public int DeterminePopularity(int currentSkill, int potentialSkill, int age)
         {
             int popularity = 0;
+            int randomMax = 0;
 
-            popularity = currentSkill + (potentialSkill - currentSkill);
-            if (age <= 21) popularity += 20;
-            else if (age <= 24) popularity += 15;
-            else if (age <= 27) popularity += 10;
-            else if (age <= 29) popularity += 5;
+            popularity = potentialSkill;
+
+            if (age <= 20) randomMax = 20;
+            else if (age <= 22) randomMax = 15;
+            else if (age <= 25) randomMax = 10;
+            else if (age <= 27) randomMax = 5;
+            else randomMax = 0;
+
+            int randomPopularity = random.Next(randomMax - 15, randomMax);
+            popularity += randomPopularity;
 
             return popularity;
         }

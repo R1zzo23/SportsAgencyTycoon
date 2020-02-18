@@ -308,6 +308,9 @@ namespace SportsAgencyTycoon
                     //of the agent's IndustryPower, Intelligence and Negotiationg levels
                     if (isLeague)
                     {
+                        if (league.DeclaredEntrants)
+                            foreach (Player p in league.DraftEntrants)
+                                availableClients.Add(p);
                         foreach (Player p in league.FreeAgents)
                             if ((p.WillingToNegotiate) && (p.AgencyHappinessDescription == HappinessDescription.Disgruntled || p.AgencyHappinessDescription == HappinessDescription.Displeased) && (p.CurrentSkill + p.PotentialSkill) < agentSkills)
                                 availableClients.Add(p);
@@ -339,8 +342,16 @@ namespace SportsAgencyTycoon
                 {
                     if (p.Sport == Sports.Baseball || p.Sport == Sports.Basketball || p.Sport == Sports.Football || p.Sport == Sports.Hockey || p.Sport == Sports.Soccer)
                         if (p.Team != null)
+                        {
                             nameAndSport = "[" + p.Team.Abbreviation + "] " + p.Position.ToString() + " " + p.FullName + " - " + p.Sport.ToString();
-                        else nameAndSport = "[Free Agent] " + p.Position.ToString() + " " + p.FullName + " - " + p.Sport.ToString();
+                        }
+                        else
+                        {
+                            if (p.PlayerType == PlayerType.DraftEntrant)
+                                nameAndSport = "[Draft] " + p.Position.ToString() + " " + p.FullName + " - " + p.Sport.ToString();
+                            else
+                                nameAndSport = "[Free Agent] " + p.Position.ToString() + " " + p.FullName + " - " + p.Sport.ToString();
+                        }
                     else
                         nameAndSport = p.FullName + " - " + p.Sport.ToString();
 
@@ -385,7 +396,12 @@ namespace SportsAgencyTycoon
                     if (client.FreeAgent)
                         cbAgentClientList.Items.Add("Free Agent " + client.Position.ToString() + " " + client.FullName);
                     else
-                        cbAgentClientList.Items.Add(client.Team.Mascot + " " + client.Position.ToString() + " " + client.FullName);
+                    {
+                        if (client.PlayerType == PlayerType.DraftEntrant)
+                            cbAgentClientList.Items.Add("Draft Entrant " + client.Position.ToString() + " " + client.FullName);
+                        else
+                            cbAgentClientList.Items.Add(client.Team.Mascot + " " + client.Position.ToString() + " " + client.FullName);
+                    }
                 }
                     
             }
@@ -608,6 +624,7 @@ namespace SportsAgencyTycoon
                 lblCareerEarnings.Text = selectedClient.CareerEarnings.ToString("C0");
                 clientPositionLabel.Text = selectedClient.Position.ToString();
                 if (selectedClient.FreeAgent) clientTeamLabel.Text = "Free Agent";
+                else if (selectedClient.PlayerType == PlayerType.DraftEntrant) clientTeamLabel.Text = "Draft Entrant";
                 else if (selectedClient.Sport == Sports.Golf || selectedClient.Sport == Sports.Tennis || selectedClient.Sport == Sports.MMA || selectedClient.Sport == Sports.Boxing)
                 {
                     clientTeamLabel.Text = "";
@@ -1142,6 +1159,18 @@ namespace SportsAgencyTycoon
                     newsLabel.Text = agency.DisplayAgencyProgressionRegression(e.Sport) + Environment.NewLine + newsLabel.Text;
                     newsLabel.Text = agency.DisplayAgencyRetirements(e.Sport);
                 }
+                else if (e.EventType == CalendarEventType.DraftDeclaration)
+                {
+                    if (e.Sport == Sports.Basketball)
+                    {
+                        world.NBA.DeclaredEntrants = true;
+                        newsLabel.Text = "NBA Declared Entrants = " + world.NBA.DeclaredEntrants + Environment.NewLine + newsLabel.Text;
+                    }
+                    else if (e.Sport == Sports.Baseball) world.MLB.DeclaredEntrants = true;
+                    else if (e.Sport == Sports.Football) world.NFL.DeclaredEntrants = true;
+                    else if (e.Sport == Sports.Hockey) world.NHL.DeclaredEntrants = true;
+                    else world.MLS.DeclaredEntrants = true;
+                }
             }
         }
         public void ResetPlayerStats(League l)
@@ -1383,7 +1412,7 @@ namespace SportsAgencyTycoon
         {
             Player player;
             //find player and change AgencyHappiness
-            if (client.PlayerType == PlayerType.Team)
+            if (client.PlayerType == PlayerType.Team || client.PlayerType == PlayerType.DraftEntrant)
             {
                 int leagueIndex = -1;
                 int teamIndex = -1;
@@ -1392,7 +1421,7 @@ namespace SportsAgencyTycoon
                 for (int i = 0; i < world.Leagues.Count; i++)
                     if (client.League.Name == world.Leagues[i].Name) leagueIndex = i;
                 
-                if (!client.FreeAgent)
+                if (!client.FreeAgent && client.PlayerType != PlayerType.DraftEntrant)
                 {
                     for (int i = 0; i < world.Leagues[leagueIndex].TeamList.Count; i++)
                         if (client.Team.Mascot == world.Leagues[leagueIndex].TeamList[i].Mascot) teamIndex = i;
@@ -1408,14 +1437,28 @@ namespace SportsAgencyTycoon
                 }
                 else
                 {
-                    for (int i = 0; i < world.Leagues[leagueIndex].FreeAgents.Count; i++)
-                        if (client.FullName == world.Leagues[leagueIndex].FreeAgents[i].FullName) playerIndex = i;
+                    if (client.PlayerType == PlayerType.DraftEntrant)
+                    {
+                        for (int i = 0; i < world.Leagues[leagueIndex].DraftEntrants.Count; i++)
+                            if (client.FullName == world.Leagues[leagueIndex].DraftEntrants[i].FullName) playerIndex = i;
 
-                    world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappiness = 50;
-                    world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessDescription = world.Leagues[leagueIndex].FreeAgents[playerIndex].DescribeHappiness(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappiness);
-                    world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessString = world.Leagues[leagueIndex].FreeAgents[playerIndex].EnumToString(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessDescription.ToString());
+                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappiness = 50;
+                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessDescription = world.Leagues[leagueIndex].FreeAgents[playerIndex].DescribeHappiness(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappiness);
+                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessString = world.Leagues[leagueIndex].FreeAgents[playerIndex].EnumToString(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessDescription.ToString());
 
-                    player = world.Leagues[leagueIndex].FreeAgents[playerIndex];
+                        player = world.Leagues[leagueIndex].DraftEntrants[playerIndex];
+                    }
+                    else
+                    {
+                        for (int i = 0; i < world.Leagues[leagueIndex].FreeAgents.Count; i++)
+                            if (client.FullName == world.Leagues[leagueIndex].FreeAgents[i].FullName) playerIndex = i;
+
+                        world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappiness = 50;
+                        world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessDescription = world.Leagues[leagueIndex].FreeAgents[playerIndex].DescribeHappiness(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappiness);
+                        world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessString = world.Leagues[leagueIndex].FreeAgents[playerIndex].EnumToString(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessDescription.ToString());
+
+                        player = world.Leagues[leagueIndex].FreeAgents[playerIndex];
+                    }
                 }
 
 
