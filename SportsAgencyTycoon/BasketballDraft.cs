@@ -8,12 +8,14 @@ namespace SportsAgencyTycoon
     public class BasketballDraft
     {
         public Random rnd;
+        public World world;
         public int rounds = 2;
         public int numberOfEntrants;
         public League league;
-        public BasketballDraft(Random r, League l)
+        public BasketballDraft(Random r, World w, League l)
         {
             rnd = r;
+            world = w;
             league = l;
             numberOfEntrants = rnd.Next(85, 101);
         }
@@ -127,11 +129,16 @@ namespace SportsAgencyTycoon
                 league.DraftEntrants.RemoveAt(i);
             }
 
+            Console.WriteLine(results);
+
             return results;
         }
         public void AddPlayerToTeam(Player p, Team t, int round, int pick)
         {
             p.PlayerStatus = PlayerType.Active;
+            p.CareerStartYear = world.Year;
+            p.Team = t;
+            p.DetermineTeamHappiness(rnd, p.IsStarter);
             t.Roster.Add(p);
         }
         public void RemoveDraftedPlayerFromDraftPool(Player draftedPlayer)

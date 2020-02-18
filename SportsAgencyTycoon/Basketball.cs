@@ -32,7 +32,7 @@ namespace SportsAgencyTycoon
             World = w;
             NBA = l;
             index = 1;
-            basketballDraft = new BasketballDraft(rnd, NBA);
+            basketballDraft = new BasketballDraft(rnd, World, NBA);
             Conferences = new List<string>();
             Divisions = new List<string>();
             FillLists();
