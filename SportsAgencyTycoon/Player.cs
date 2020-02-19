@@ -69,6 +69,7 @@ namespace SportsAgencyTycoon
         public bool WillingToNegotiate;
         public bool MemberOfAgency;
         public bool FreeAgent;
+        public Agent Agent;
 
         //age and birthday
         public int Age;
@@ -93,6 +94,7 @@ namespace SportsAgencyTycoon
         public int TeamHappiness;
         public HappinessDescription TeamHappinessDescription;
         public string TeamHappinessString;
+        public Team FormerTeam;
 
         public bool AgentPushedForMorePT = false;
 

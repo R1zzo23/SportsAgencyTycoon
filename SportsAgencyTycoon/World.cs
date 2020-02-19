@@ -577,41 +577,45 @@ namespace SportsAgencyTycoon
             foreach (League l in Leagues)
                 foreach (Team t in l.TeamList)
                 {
-                    int titleContender = 0;
-                    int topHalfTotal = 0;
-                    int numberOfStarters = 0;
-                    int numberOfBackups = 0;
-                    int bottomHalfAverage = 0;
-                    int rosterCount = t.Roster.Count();
-
-                    if (rosterCount % 2 == 0) numberOfStarters = rosterCount / 2;
-                    else numberOfStarters = (int)((rosterCount / 2) - 0.5);
-
-                    numberOfBackups = rosterCount - numberOfStarters;
-
-                    List<Player> roster = new List<Player>();
-
-                    foreach (Player p in t.Roster) roster.Add(p);
-
-                    roster = roster.OrderByDescending(o => o.CurrentSkill).ToList();
-
-                    // add every player's CurrentSkill from top half of roster
-                    for (int i = 0; i < numberOfStarters; i++)
-                    {
-                        topHalfTotal += roster[i].CurrentSkill;
-                    }
-
-                    // add average of bottom half of the roster's CurrentSkill
-                    for (int i = numberOfStarters; i < t.Roster.Count; i++)
-                    {
-                        bottomHalfAverage += roster[i].CurrentSkill;
-                    }
-
-                    bottomHalfAverage = bottomHalfAverage / numberOfBackups;
-
-                    titleContender = (int)(topHalfTotal + bottomHalfAverage) / (numberOfStarters + 1);
-                    t.TitleConteder = titleContender;
+                    SetTeamTitleContender(l, t);
                 }
+        }
+        public void SetTeamTitleContender(League l, Team t)
+        {
+            int titleContender = 0;
+            int topHalfTotal = 0;
+            int numberOfStarters = 0;
+            int numberOfBackups = 0;
+            int bottomHalfAverage = 0;
+            int rosterCount = t.Roster.Count();
+
+            if (rosterCount % 2 == 0) numberOfStarters = rosterCount / 2;
+            else numberOfStarters = (int)((rosterCount / 2) - 0.5);
+
+            numberOfBackups = rosterCount - numberOfStarters;
+
+            List<Player> roster = new List<Player>();
+
+            foreach (Player p in t.Roster) roster.Add(p);
+
+            roster = roster.OrderByDescending(o => o.CurrentSkill).ToList();
+
+            // add every player's CurrentSkill from top half of roster
+            for (int i = 0; i < numberOfStarters; i++)
+            {
+                topHalfTotal += roster[i].CurrentSkill;
+            }
+
+            // add average of bottom half of the roster's CurrentSkill
+            for (int i = numberOfStarters; i < t.Roster.Count; i++)
+            {
+                bottomHalfAverage += roster[i].CurrentSkill;
+            }
+
+            bottomHalfAverage = bottomHalfAverage / numberOfBackups;
+
+            titleContender = (int)(topHalfTotal + bottomHalfAverage) / (numberOfStarters + 1);
+            t.TitleConteder = titleContender;
         }
         public void DetermineHappinessForPlayers()
         {
@@ -685,15 +689,19 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < playersAtPosition.Count; i++)
             {
                 playersAtPosition[i].DepthChart = i + 1;
+                if (playersAtPosition[i].DepthChart <= starterCount)
+                    starter = true;
+                else
+                    starter = false;
             }
-
+            /*
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
                 {
                     starter = true;
                 }
-            }
+            }*/
             
             player.IsStarter = starter;
 
@@ -720,15 +728,19 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < playersAtPosition.Count; i++)
             {
                 playersAtPosition[i].DepthChart = i + 1;
+                if (playersAtPosition[i].DepthChart <= starterCount)
+                    starter = true;
+                else
+                    starter = false;
             }
-
+            /*
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
                 {
                     starter = true;
                 }
-            }
+            }*/
             
             player.IsStarter = starter;
 
@@ -754,15 +766,19 @@ namespace SportsAgencyTycoon
             for (int i = 0; i < playersAtPosition.Count; i++)
             {
                 playersAtPosition[i].DepthChart = i + 1;
+                if (playersAtPosition[i].DepthChart <= starterCount)
+                    starter = true;
+                else
+                    starter = false;
             }
-
+            /*
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
                 {
                     starter = true;
                 }
-            }
+            }*/
             
             player.IsStarter = starter;
 
@@ -1134,6 +1150,25 @@ namespace SportsAgencyTycoon
                     p.Contract.Years--;
                 }
             l.InSeason = false;
+            MakePlayerAFreeAgent(l);
+        }
+        private void MakePlayerAFreeAgent(League l)
+        {
+            for (int i = 0; i < l.TeamList.Count; i++)
+                for (int j = l.TeamList[i].Roster.Count - 1; j >= 0; j--)
+                {
+                    if (l.TeamList[i].Roster[j].Contract.Years == 0)
+                    {
+                        l.TeamList[i].Roster[j].Contract.MonthlySalary = 0;
+                        l.TeamList[i].Roster[j].Contract.YearlySalary = 0;
+                        l.TeamList[i].Roster[j].Contract.SigningBonus = 0;
+                        l.TeamList[i].Roster[j].FormerTeam = l.TeamList[i].Roster[j].Team;
+                        l.TeamList[i].Roster[j].Team = null;
+                        l.FreeAgents.Add(l.TeamList[i].Roster[j]);
+                        l.TeamList[i].Roster[j].FreeAgent = true;
+                        l.TeamList[i].Roster.RemoveAt(j);
+                    }
+                }
         }
         private void IncreasePrizePool()
         {
@@ -1221,6 +1256,12 @@ namespace SportsAgencyTycoon
             GlobalAchievements.Add(new Achievement("Smooth Signing", "Sign a client on your first offer.", 1, 2, "Negotiating"));
             // convince front office to elevate your client up the depth chart
             GlobalAchievements.Add(new Achievement("Playing Time Power", "Convince front office to elevate your client up the depth chart.", 1, 3, "All"));
+            // have client drafted in NBA Draft
+            GlobalAchievements.Add(new Achievement("Hoop Dream Realized", "Have a client drafted in NBA Draft.", 1, 1, "IndustryPower"));
+            // have client drafted in 1st round of NBA Draft
+            GlobalAchievements.Add(new Achievement("Shake My Hand, Commish!", "Have a client drafted in 1st round of NBA Draft.", 1, 2, "IndustryPower"));
+            // have client drafted #1 overall in NBA Draft
+            GlobalAchievements.Add(new Achievement("Future Hoops Superstar", "Have a client drafted #1 overall in NBA Draft.", 1, 5, "All"));
         }
     }
 }

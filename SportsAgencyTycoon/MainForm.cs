@@ -1075,11 +1075,13 @@ namespace SportsAgencyTycoon
                 }
                 else if (e.EventType == CalendarEventType.LeagueYearBegins)
                 {
+                    League l = null;
                     if (e.Sport == Sports.Baseball)
                     {
                         world.MLB.InSeason = true;
                         world.MLB.Initialized = true;
                         world.MLB.WeekNumber = 0;
+                        l = world.MLB;
                         ResetTeamRecords(world.MLB);
                         ResetPlayerStats(world.MLB);
                     }   
@@ -1087,6 +1089,7 @@ namespace SportsAgencyTycoon
                     {
                         world.NBA.InSeason = true;
                         world.NBA.Initialized = true;
+                        l = world.NBA;
                         ResetTeamRecords(world.NBA);
                         ResetPlayerStats(world.NBA);
                     }
@@ -1095,6 +1098,7 @@ namespace SportsAgencyTycoon
                         world.NFL.InSeason = true;
                         world.NFL.Initialized = true;
                         world.NFL.WeekNumber = 0;
+                        l = world.NFL;
                         ResetTeamRecords(world.NFL);
                         ResetPlayerStats(world.NFL);
                     }
@@ -1103,6 +1107,7 @@ namespace SportsAgencyTycoon
                         world.NHL.InSeason = true;
                         world.NHL.Initialized = true;
                         world.NHL.WeekNumber = 0;
+                        l = world.NHL;
                         ResetTeamRecords(world.NHL);
                         ResetPlayerStats(world.NHL);
                     }
@@ -1111,10 +1116,23 @@ namespace SportsAgencyTycoon
                         world.MLS.InSeason = true;
                         world.MLS.Initialized = true;
                         world.MLS.WeekNumber = 0;
+                        l = world.MLS;
                         ResetTeamRecords(world.MLS);
                         ResetPlayerStats(world.MLS);
                     }
                     DetermineSeasons();
+                    foreach (Team t in l.TeamList)
+                    {
+                        world.SetTeamTitleContender(l, t);
+                        foreach (Player p in t.Roster)
+                        {
+                            if (p.Sport == Sports.Baseball) world.IsBaseballStarter(t, p);
+                            else if (p.Sport == Sports.Basketball) world.IsBasketballStarter(t, p);
+                            else if (p.Sport == Sports.Football) world.IsFootballStarter(t, p);
+                            else if (p.Sport == Sports.Hockey) world.IsHockeyStarter(t, p);
+                            else if (p.Sport == Sports.Soccer) world.IsSoccerStarter(t, p);
+                        }
+                    }
                 }
                 else if (e.EventType == CalendarEventType.LeagueYearEnds)
                 {
@@ -1443,8 +1461,8 @@ namespace SportsAgencyTycoon
                             if (client.FullName == world.Leagues[leagueIndex].DraftEntrants[i].FullName) playerIndex = i;
 
                         world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappiness = 50;
-                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessDescription = world.Leagues[leagueIndex].FreeAgents[playerIndex].DescribeHappiness(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappiness);
-                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessString = world.Leagues[leagueIndex].FreeAgents[playerIndex].EnumToString(world.Leagues[leagueIndex].FreeAgents[playerIndex].AgencyHappinessDescription.ToString());
+                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessDescription = world.Leagues[leagueIndex].DraftEntrants[playerIndex].DescribeHappiness(world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappiness);
+                        world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessString = world.Leagues[leagueIndex].DraftEntrants[playerIndex].EnumToString(world.Leagues[leagueIndex].DraftEntrants[playerIndex].AgencyHappinessDescription.ToString());
 
                         player = world.Leagues[leagueIndex].DraftEntrants[playerIndex];
                     }

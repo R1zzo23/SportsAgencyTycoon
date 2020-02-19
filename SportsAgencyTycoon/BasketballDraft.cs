@@ -108,7 +108,7 @@ namespace SportsAgencyTycoon
             else if (position == 2) return Position.SG;
             else if (position == 3) return Position.SF;
             else if (position == 4) return Position.PF;
-            else return Position.C;
+            else return Position.CE;
         }
         public string RunDraft()
         {
@@ -128,6 +128,18 @@ namespace SportsAgencyTycoon
                     draftedPlayer.DraftRound = i + 1;
                     draftedPlayer.DraftPick = j + 1;
                     draftedPlayer.Contract = CreateRookieContract(draftedPlayer);
+                    if (draftedPlayer.MemberOfAgency)
+                    {
+                        draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hoop Dream Realized")]);
+                        if (i == 0)
+                        {
+                            draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Shake My Hand, Commish!")]);
+                            if (j == 0)
+                                draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Hoops Superstar")]);
+                        }
+                            
+                    }
+                        
                     AddPlayerToTeam(draftedPlayer, DraftOrder[j], i, j);
                     RemoveDraftedPlayerFromDraftPool(draftedPlayer);
                     results = results + i + "." + j + " - " + DraftOrder[j].Abbreviation + " selects " + draftedPlayer.Position.ToString() + " " + draftedPlayer.FullName + Environment.NewLine;

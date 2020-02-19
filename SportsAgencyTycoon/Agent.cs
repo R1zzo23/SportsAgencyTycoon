@@ -59,6 +59,7 @@ namespace SportsAgencyTycoon
 
         public void AddClient(Player client)
         {
+            client.Agent = this;
             ClientList.Add(client);
             ClientCount = ClientList.Count();
 
