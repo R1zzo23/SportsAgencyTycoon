@@ -69,6 +69,7 @@ namespace SportsAgencyTycoon
 
             if (round <= numberOfRounds / 2)
             {
+                // do not draft Kickers or Punters in top half of the draft
                 if (sport == Sports.Football)
                 {
                     for (int i = 2; i >= 0; i--)
