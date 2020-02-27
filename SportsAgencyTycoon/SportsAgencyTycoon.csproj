@@ -254,6 +254,7 @@
     <Compile Include="Achievement.cs" />
     <Compile Include="GenomeDescriptions.cs" />
     <Compile Include="BasketballDraft.cs" />
+    <Compile Include="FootballDraft.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

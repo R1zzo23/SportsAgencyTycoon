@@ -9,7 +9,7 @@ namespace SportsAgencyTycoon
     {
         public Random rnd;
         public World world;
-        public int rounds = 2;
+        public int rounds;
         public int numberOfEntrants;
         public League league;
         public BasketballDraft(Random r, World w, League l)
@@ -17,7 +17,18 @@ namespace SportsAgencyTycoon
             rnd = r;
             world = w;
             league = l;
-            numberOfEntrants = rnd.Next(85, 101);
+            DetermineRoundsAndNumberOfEntrants();
+        }
+        public void DetermineRoundsAndNumberOfEntrants()
+        {
+            if (league.Sport == Sports.Basketball) rounds = 2;
+            else if (league.Sport == Sports.Football) rounds = 7;
+            else if (league.Sport == Sports.Hockey) rounds = 7;
+            else if (league.Sport == Sports.Baseball) rounds = 10;
+            else if (league.Sport == Sports.Soccer) rounds = 4;
+            else rounds = 0;
+
+            numberOfEntrants = rnd.Next(((league.TeamList.Count + 10) * rounds), ((league.TeamList.Count + 20) * rounds));
         }
         public void CreateDraftEntrants()
         {
@@ -124,7 +135,7 @@ namespace SportsAgencyTycoon
                 results = results + "Round #" + i + " Results:" + Environment.NewLine;
                 for (int j = 0; j < DraftOrder.Count; j++)
                 {
-                    Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, j, i);
+                    Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, league.Sport, rounds, j, i);
                     draftedPlayer.DraftRound = i + 1;
                     draftedPlayer.DraftPick = j + 1;
                     draftedPlayer.Contract = CreateRookieContract(draftedPlayer);

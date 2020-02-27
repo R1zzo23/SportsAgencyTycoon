@@ -63,11 +63,24 @@ namespace SportsAgencyTycoon
             ConferenceLosses = 0;
             DivisionLosses = 0;
         }
-        public Player DraftPlayer(Random rnd, List<Player> DraftEntrants, int pick, int round)
+        public Player DraftPlayer(Random rnd, List<Player> DraftEntrants, Sports sport, int numberOfRounds, int pick, int round)
         {
             Player draftedPlayer;
-            if (round == 1)
+
+            if (round <= numberOfRounds / 2)
             {
+                if (sport == Sports.Football)
+                {
+                    for (int i = 2; i >= 0; i--)
+                    {
+                        if (DraftEntrants[i].Position == Position.K || DraftEntrants[i].Position == Position.P)
+                        {
+                            Player p = DraftEntrants[i];
+                            DraftEntrants.RemoveAt(i);
+                            DraftEntrants.Insert(DraftEntrants.Count - 1, p);
+                        }
+                    }
+                }
                 //make pick based on highest potential
                 if (pick <= 10)
                 {
