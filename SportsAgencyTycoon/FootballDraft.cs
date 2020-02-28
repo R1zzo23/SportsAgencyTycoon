@@ -34,21 +34,10 @@ namespace SportsAgencyTycoon
         {
             for (int i = 0; i < numberOfEntrants; i++)
             {
-                FootballPlayer f = new FootballPlayer(rnd, league.IdCount, Sports.Basketball, rnd.Next(21, 24), DeterminePosition());
-                f.PlayerType = PlayerType.DraftEntrant;
-                f.League = league;
-                league.DraftEntrants.Add(f);
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                FootballPlayer f = new FootballPlayer(rnd, league.IdCount, Sports.Football, rnd.Next(22, 25), Position.K);
-                FootballPlayer p = new FootballPlayer(rnd, league.IdCount, Sports.Football, rnd.Next(22, 25), Position.P);
-                f.PlayerType = PlayerType.DraftEntrant;
-                f.League = league;
-                league.DraftEntrants.Add(f);
-                p.PlayerType = PlayerType.DraftEntrant;
-                p.League = league;
-                league.DraftEntrants.Add(p);
+                FootballPlayer b = new FootballPlayer(rnd, league.IdCount, Sports.Football, rnd.Next(18, 23), DeterminePosition());
+                b.PlayerType = PlayerType.DraftEntrant;
+                b.League = league;
+                league.DraftEntrants.Add(b);
             }
             ModifyDraftClass(league.DraftEntrants);
             ModifyDraftClassPopularityAndPGP(league.DraftEntrants);
@@ -65,13 +54,15 @@ namespace SportsAgencyTycoon
         }
         public void ModifyDraftClass(List<Player> draftEntrants)
         {
+            int draftStrength = rnd.Next(1, 11);
+            int superStars = DetermineSuperStars(draftStrength);
+
+            #region Testing Data
             int potential80count = 0;
             int potential70count = 0;
             int current80count = 0;
             int current70count = 0;
             int current60count = 0;
-
-            int draftStrength = rnd.Next(1, 11);
 
             int league80potential = 0;
             int league70potential = 0;
@@ -90,18 +81,49 @@ namespace SportsAgencyTycoon
                     if (p.CurrentSkill >= 60 && p.CurrentSkill < 70) league60current++;
                 }
             }
+            #endregion
+            draftEntrants = draftEntrants.OrderByDescending(o => o.CurrentSkill).ToList();
+            for (int i = 0; i < draftEntrants.Count; i++)
+            {
+                if (i < superStars)
+                {
+                    draftEntrants[i].PotentialSkill = rnd.Next(75, 86);
+                    draftEntrants[i].CurrentSkill = rnd.Next(60, 71);
+                }
+                else if (i < 25 + draftStrength)
+                {
+                    draftEntrants[i].CurrentSkill = rnd.Next(50, 65);
+                    draftEntrants[i].PotentialSkill = draftEntrants[i].CurrentSkill + rnd.Next(5, 15);
+                }
+                else if (i < 65)
+                {
+                    draftEntrants[i].CurrentSkill = rnd.Next(45, 58);
+                    draftEntrants[i].PotentialSkill = draftEntrants[i].CurrentSkill + rnd.Next(5, 11);
+                }
+                else if (i < 100)
+                {
+                    draftEntrants[i].CurrentSkill = rnd.Next(35, 45);
+                    draftEntrants[i].PotentialSkill = draftEntrants[i].CurrentSkill + rnd.Next(0, 7);
+                }
+                else
+                {
+                    draftEntrants[i].CurrentSkill = rnd.Next(20, 35);
+                    draftEntrants[i].PotentialSkill = draftEntrants[i].CurrentSkill + rnd.Next(0, 6);
+                }
+            }
 
-
+            DetermineRandomPotentialBoosts(draftEntrants);
+            #region Display Testing Data
             foreach (Player p in draftEntrants)
             {
                 /*if (p.Age >= 21) p.PotentialSkill = p.CurrentSkill + rnd.Next(3, 20);
                 else if (p.Age == 20) p.PotentialSkill = p.CurrentSkill + rnd.Next(8, 25);
                 else if (p.Age == 19) p.PotentialSkill = p.CurrentSkill + rnd.Next(10, 30);
-                else p.PotentialSkill = p.CurrentSkill + rnd.Next(15, 40);*/
+                else p.PotentialSkill = p.CurrentSkill + rnd.Next(15, 40);
 
-                int nerf = rnd.Next(15 - draftStrength, 30 - draftStrength);
+                int nerf = rnd.Next(15-draftStrength, 30-draftStrength);
                 p.CurrentSkill -= nerf;
-                p.PotentialSkill -= nerf;
+                p.PotentialSkill -= nerf;*/
 
                 if (p.PotentialSkill >= 80) potential80count++;
                 if (p.PotentialSkill >= 70 && p.PotentialSkill < 80) potential70count++;
@@ -109,6 +131,7 @@ namespace SportsAgencyTycoon
                 if (p.CurrentSkill >= 70 && p.CurrentSkill < 80) current70count++;
                 if (p.CurrentSkill >= 60 && p.CurrentSkill < 70) current60count++;
             }
+
             Console.WriteLine("Draft Strength: " + draftStrength);
             Console.WriteLine("Draft with 70+ Potential: " + potential70count);
             Console.WriteLine("Draft with 80+ Potential: " + potential80count);
@@ -121,7 +144,30 @@ namespace SportsAgencyTycoon
             Console.WriteLine("Players with 60+ Current: " + league60current);
             Console.WriteLine("Players with 70+ Current: " + league70current);
             Console.WriteLine("Players with 80+ Current: " + league80current);
+            #endregion
+        }
+        public void DetermineRandomPotentialBoosts(List<Player> draftEntrants)
+        {
+            int randomBoosts = rnd.Next(3, 11);
+            for (int i = 0; i < randomBoosts; i++)
+            {
+                int index = rnd.Next(100, draftEntrants.Count);
+                draftEntrants[index].PotentialSkill += 10;
+            }
+        }
+        public int DetermineSuperStars(int i)
+        {
+            int numberOfSuperStars = 0;
 
+            if (i == 10) numberOfSuperStars = rnd.Next(3, 7);
+            else if (i == 9) numberOfSuperStars = rnd.Next(2, 6);
+            else if (i == 8) numberOfSuperStars = rnd.Next(2, 5);
+            else if (i == 7) numberOfSuperStars = rnd.Next(1, 5);
+            else if (i == 6) numberOfSuperStars = rnd.Next(1, 4);
+            else if (i == 5) numberOfSuperStars = rnd.Next(1, 4);
+            else numberOfSuperStars = 1;
+
+            return numberOfSuperStars;
         }
         public Position DeterminePosition()
         {
@@ -150,32 +196,56 @@ namespace SportsAgencyTycoon
 
             DraftOrder = DraftOrder.OrderBy(o => o.Wins).ThenBy(o => o.TitleConteder).ToList();
 
-            for (int i = 0; i < rounds; i++)
+            for (int i = 1; i < rounds + 1; i++)
             {
                 results = results + "Round #" + i + " Results:" + Environment.NewLine;
                 for (int j = 0; j < DraftOrder.Count; j++)
                 {
+                    // team selects player to draft
                     Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, league.Sport, rounds, j, i);
-                    draftedPlayer.DraftRound = i + 1;
-                    draftedPlayer.DraftPick = j + 1;
+                    // player has info updated for Round # and Pick #
+                    RecordPlayerDraftPosition(draftedPlayer, i, j);
+                    // draftedPlayer receives rookie contract
                     draftedPlayer.Contract = CreateRookieContract(draftedPlayer);
-                    if (draftedPlayer.MemberOfAgency)
-                    {
-                        draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hoop Dream Realized")]);
-                        if (i == 0)
-                        {
-                            draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Shake My Hand, Commish!")]);
-                            if (j == 0)
-                                draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Hoops Superstar")]);
-                        }
-
-                    }
-
+                    // check for achivements for agent
+                    DraftedPlayerAchievementCheck(i, j, draftedPlayer);
+                    // add draftedPlayer to his respective team
                     AddPlayerToTeam(draftedPlayer, DraftOrder[j], i, j);
+                    // remove player from draft pool
                     RemoveDraftedPlayerFromDraftPool(draftedPlayer);
+                    // add selection to results to be printed later
                     results = results + i + "." + j + " - " + DraftOrder[j].Abbreviation + " selects " + draftedPlayer.Position.ToString() + " " + draftedPlayer.FullName + Environment.NewLine;
                 }
             }
+
+            RemoveUndraftedPlayersFromDraftPool();
+
+            Console.WriteLine(results);
+
+            league.DeclaredEntrants = false;
+
+            return results;
+        }
+        public void RecordPlayerDraftPosition(Player draftedPlayer, int i, int j)
+        {
+            draftedPlayer.DraftRound = i;
+            draftedPlayer.DraftPick = j;
+        }
+        public void DraftedPlayerAchievementCheck(int i, int j, Player draftedPlayer)
+        {
+            if (draftedPlayer.MemberOfAgency)
+            {
+                draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Gridiron Dream Realized")]);
+                if (i == 1)
+                {
+                    draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Face of the Franchise: Football!")]);
+                    if (j == 1)
+                        draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Gridiron Superstar")]);
+                }
+            }
+        }
+        public void RemoveUndraftedPlayersFromDraftPool()
+        {
             for (int i = league.DraftEntrants.Count - 1; i >= 0; i--)
             {
                 league.DraftEntrants[i].PlayerStatus = PlayerType.Active;
@@ -184,12 +254,6 @@ namespace SportsAgencyTycoon
                 league.FreeAgents.Add(league.DraftEntrants[i]);
                 league.DraftEntrants.RemoveAt(i);
             }
-
-            Console.WriteLine(results);
-
-            league.DeclaredEntrants = false;
-
-            return results;
         }
         public void AddPlayerToTeam(Player p, Team t, int round, int pick)
         {
@@ -210,28 +274,32 @@ namespace SportsAgencyTycoon
             Contract contract = null;
             int salary = 0;
             int years = 0;
-
+            int signingBonus = 0;
 
             if (player.DraftRound == 1)
             {
+                years = 5;
+                salary = 5500000 - ((player.DraftPick - 1) * 120000);
+                signingBonus = Convert.ToInt32(salary * .1);
+            }
+            else if (player.DraftRound == 2)
+            {
                 years = 4;
-                salary = 9000000 - ((player.DraftPick - 1) * 250000);
+                salary = 1320000 - ((player.DraftPick - 1) * 16250);
+                signingBonus = Convert.ToInt32(salary * .05);
+            }
+            else if (player.DraftRound == 3 || player.DraftRound == 4)
+            {
+                years = 4;
+                salary = 800000 - ((player.DraftPick - 1) * 6250);
             }
             else
             {
-                if (player.DraftPick <= 15)
-                {
-                    years = 2;
-                    salary = Convert.ToInt32(league.MinSalary * 1.5);
-                }
-                else
-                {
-                    years = 1;
-                    salary = league.MinSalary;
-                }
+                years = 3;
+                salary = 600000 - ((player.DraftPick - 1) * 5625);
             }
 
-            contract = new Contract(years, salary, salary / 10, new Date(9, Months.October, 1), new Date(6, Months.July, 1), 0, 3, PaySchedule.Monthly);
+            contract = new Contract(years, salary, salary / 10, new Date(9, Months.October, 1), new Date(6, Months.July, 1), signingBonus, 3, PaySchedule.Monthly);
 
             return contract;
         }

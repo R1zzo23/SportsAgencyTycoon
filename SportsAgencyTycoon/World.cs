@@ -1262,6 +1262,12 @@ namespace SportsAgencyTycoon
             GlobalAchievements.Add(new Achievement("Shake My Hand, Commish!", "Have a client drafted in 1st round of NBA Draft.", 1, 2, "IndustryPower"));
             // have client drafted #1 overall in NBA Draft
             GlobalAchievements.Add(new Achievement("Future Hoops Superstar", "Have a client drafted #1 overall in NBA Draft.", 1, 5, "All"));
+            // have client drafted in NFL Draft
+            GlobalAchievements.Add(new Achievement("Gridiron Dream Realized", "Have a client drafted in NFL Draft.", 1, 1, "IndustryPower"));
+            // have client drafted in 1st round of NFL Draft
+            GlobalAchievements.Add(new Achievement("Face of the Franchise: Football", "Have a client drafted in 1st round of NFL Draft.", 1, 2, "IndustryPower"));
+            // have client drafted #1 overall in NFL Draft
+            GlobalAchievements.Add(new Achievement("Future Gridiron Superstar", "Have a client drafted #1 overall in NFL Draft.", 1, 5, "All"));
         }
     }
 }
