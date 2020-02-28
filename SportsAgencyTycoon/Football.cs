@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public Random rnd;
         public League NFL;
         public World World;
+        public FootballDraft footballDraft;
         public int index;
         public int losingIndex;
         public List<string> Conferences;
@@ -50,6 +51,7 @@ namespace SportsAgencyTycoon
             rnd = r;
             World = w;
             NFL = l;
+            footballDraft = new FootballDraft(rnd, World, NFL);
             index = 1;
             Conferences = new List<string>();
             Divisions = new List<string>();
@@ -78,6 +80,13 @@ namespace SportsAgencyTycoon
                 SimulateGames();
                 DetermineStats();
             }
+
+            if (World.MonthName == Months.December && World.WeekNumber == 1)
+            {
+                mainForm.newsLabel.Text += Environment.NewLine + "NFL draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
+                World.Football.footballDraft.CreateDraftEntrants();
+            }
+
             if (NFL.WeekNumber == 16)
             {
                 NFL.Playoffs = true;

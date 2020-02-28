@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SportsAgencyTycoon
 {
@@ -718,7 +716,7 @@ namespace SportsAgencyTycoon
             foreach (FootballPlayer f in t.Roster)
                 if (f.Position == position) playersAtPosition.Add(f);
 
-            playersAtPosition = playersAtPosition.OrderBy(o => o.DepthChart).ThenByDescending(o => o.CurrentSkill).ToList();
+            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
 
             if (position == Position.WR || position == Position.DE || position == Position.DT || position == Position.OT || position == Position.OG)
                 starterCount = 2;

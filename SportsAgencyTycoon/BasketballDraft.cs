@@ -176,9 +176,9 @@ namespace SportsAgencyTycoon
 
             DraftOrder = DraftOrder.OrderBy(o => o.Wins).ThenBy(o => o.TitleConteder).ToList();
 
-            for (int i = 1; i < rounds + 1; i++)
+            for (int i = 0; i < rounds; i++)
             {
-                results = results + "Round #" + i + " Results:" + Environment.NewLine;
+                results = results + "Round #" + (i + 1) + " Results:" + Environment.NewLine;
                 for (int j = 0; j < DraftOrder.Count; j++)
                 {
                     // team selects player to draft
@@ -194,7 +194,7 @@ namespace SportsAgencyTycoon
                     // remove player from draft pool
                     RemoveDraftedPlayerFromDraftPool(draftedPlayer);
                     // add selection to results to be printed later
-                    results = results + i + "." + j + " - " + DraftOrder[j].Abbreviation + " selects " + draftedPlayer.Position.ToString() + " " + draftedPlayer.FullName + Environment.NewLine;
+                    results = results + (i + 1) + "." + (j + 1) + " - " + DraftOrder[j].Abbreviation + " selects " + draftedPlayer.Position.ToString() + " " + draftedPlayer.FullName + Environment.NewLine;
                 }
             }
 
@@ -208,18 +208,18 @@ namespace SportsAgencyTycoon
         }
         public void RecordPlayerDraftPosition(Player draftedPlayer, int i, int j)
         {
-            draftedPlayer.DraftRound = i;
-            draftedPlayer.DraftPick = j;
+            draftedPlayer.DraftRound = i + 1;
+            draftedPlayer.DraftPick = j + 1;
         }
         public void DraftedPlayerAchievementCheck(int i, int j, Player draftedPlayer)
         {
             if (draftedPlayer.MemberOfAgency)
             {
                 draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hoop Dream Realized")]);
-                if (i == 1)
+                if (i == 0)
                 {
                     draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Shake My Hand, Commish!")]);
-                    if (j == 1)
+                    if (j == 0)
                         draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Hoops Superstar")]);
                 }
 

@@ -34,7 +34,7 @@ namespace SportsAgencyTycoon
         {
             for (int i = 0; i < numberOfEntrants; i++)
             {
-                FootballPlayer b = new FootballPlayer(rnd, league.IdCount, Sports.Football, rnd.Next(18, 23), DeterminePosition());
+                FootballPlayer b = new FootballPlayer(rnd, league.IdCount, Sports.Football, rnd.Next(21, 25), DeterminePosition());
                 b.PlayerType = PlayerType.DraftEntrant;
                 b.League = league;
                 league.DraftEntrants.Add(b);
@@ -171,7 +171,7 @@ namespace SportsAgencyTycoon
         }
         public Position DeterminePosition()
         {
-            int position = rnd.Next(1, 6);
+            int position = rnd.Next(1, 15);
             if (position == 1) return Position.QB;
             else if (position == 2) return Position.RB;
             else if (position == 3) return Position.FB;
@@ -238,7 +238,7 @@ namespace SportsAgencyTycoon
                 draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Gridiron Dream Realized")]);
                 if (i == 1)
                 {
-                    draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Face of the Franchise: Football!")]);
+                    draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Face of the Franchise: Football")]);
                     if (j == 1)
                         draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Gridiron Superstar")]);
                 }

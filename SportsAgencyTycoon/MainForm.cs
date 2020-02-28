@@ -988,6 +988,8 @@ namespace SportsAgencyTycoon
         {
             if (world.MonthName == Months.July && world.WeekNumber == 1)
                 newsLabel.Text += world.Basketball.basketballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
+            if (world.MonthName == Months.April && world.WeekNumber == 3)
+                newsLabel.Text += world.Football.footballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
 
             foreach (CalendarEvent e in world.EventsThisWeek)
             {
@@ -1185,7 +1187,11 @@ namespace SportsAgencyTycoon
                         newsLabel.Text = "NBA Declared Entrants = " + world.NBA.DeclaredEntrants + Environment.NewLine + newsLabel.Text;
                     }
                     else if (e.Sport == Sports.Baseball) world.MLB.DeclaredEntrants = true;
-                    else if (e.Sport == Sports.Football) world.NFL.DeclaredEntrants = true;
+                    else if (e.Sport == Sports.Football)
+                    {
+                        world.NFL.DeclaredEntrants = true;
+                        newsLabel.Text = "NFL Declared Entrants = " + world.NFL.DeclaredEntrants + Environment.NewLine + newsLabel.Text;
+                    }
                     else if (e.Sport == Sports.Hockey) world.NHL.DeclaredEntrants = true;
                     else world.MLS.DeclaredEntrants = true;
                 }
