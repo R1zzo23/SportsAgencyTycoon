@@ -618,6 +618,8 @@ namespace SportsAgencyTycoon
         public void DetermineHappinessForPlayers()
         {
             foreach (League l in Leagues)
+            {
+                ReorderDepthCharts(l);
                 foreach (Team t in l.TeamList)
                     foreach (Player p in t.Roster)
                     {
@@ -636,11 +638,32 @@ namespace SportsAgencyTycoon
                         // determine player AgencyHappiness
                         p.DetermineAgencyHappiness(rnd, p.Contract);
                     }
+            }
             foreach (Association a in Associations)
                 foreach (Player p in a.PlayerList)
                     p.DetermineAgencyHappiness(rnd, p.Contract);
         }
         #region Is Player A Starter
+        public void ReorderDepthCharts(League l)
+        {
+            List<Player> playersAtPosition = new List<Player>();
+            foreach (Team t in l.TeamList)
+            {
+                foreach (Player p in t.Roster)
+                {
+                    playersAtPosition.Clear();
+                    foreach (Player x in t.Roster)
+                    {
+                        if (x.Position == p.Position) playersAtPosition.Add(x);
+                    }
+                    playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
+                    for (int i = 0; i < playersAtPosition.Count; i++)
+                    {
+                        playersAtPosition[i].DepthChart = i + 1;
+                    }
+                }
+            }
+        }
         public bool IsBasketballStarter(Team t, Player p)
         {
             bool starter = false;
@@ -723,24 +746,34 @@ namespace SportsAgencyTycoon
             else if (position == Position.LB) starterCount = 4;
             else starterCount = 1;
 
-            for (int i = 0; i < playersAtPosition.Count; i++)
+            if (p.DepthChart <= starterCount)
+            {
+                if (p.MemberOfAgency)
+                    Console.WriteLine("test");
+                p.IsStarter = true;
+            }
+            else
+                p.IsStarter = false;
+            
+            /*for (int i = 0; i < playersAtPosition.Count; i++)
             {
                 playersAtPosition[i].DepthChart = i + 1;
-                if (playersAtPosition[i].DepthChart <= starterCount)
-                    starter = true;
-                else
-                    starter = false;
             }
-            /*
+           
             for (int i = 0; i < starterCount; i++)
             {
                 if (player == playersAtPosition[i])
                 {
+                    player.IsStarter = true;
                     starter = true;
+                    return true;
                 }
             }*/
-            
-            player.IsStarter = starter;
+
+            if (p.MemberOfAgency)
+                Console.WriteLine("Updated football depth charts");
+
+            //player.IsStarter = starter;
 
             return starter;
         }
@@ -1148,7 +1181,7 @@ namespace SportsAgencyTycoon
                     p.Contract.Years--;
                 }
             l.InSeason = false;
-            MakePlayerAFreeAgent(l);
+            //MakePlayerAFreeAgent(l);
         }
         private void MakePlayerAFreeAgent(League l)
         {

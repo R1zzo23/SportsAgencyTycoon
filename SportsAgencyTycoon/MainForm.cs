@@ -1123,16 +1123,17 @@ namespace SportsAgencyTycoon
                         ResetPlayerStats(world.MLS);
                     }
                     DetermineSeasons();
+                    world.ReorderDepthCharts(l);
                     foreach (Team t in l.TeamList)
                     {
                         world.SetTeamTitleContender(l, t);
                         foreach (Player p in t.Roster)
                         {
-                            if (p.Sport == Sports.Baseball) world.IsBaseballStarter(t, p);
-                            else if (p.Sport == Sports.Basketball) world.IsBasketballStarter(t, p);
-                            else if (p.Sport == Sports.Football) world.IsFootballStarter(t, p);
-                            else if (p.Sport == Sports.Hockey) world.IsHockeyStarter(t, p);
-                            else if (p.Sport == Sports.Soccer) world.IsSoccerStarter(t, p);
+                            if (p.Sport == Sports.Baseball) p.IsStarter = world.IsBaseballStarter(t, p);
+                            else if (p.Sport == Sports.Basketball) p.IsStarter = world.IsBasketballStarter(t, p);
+                            else if (p.Sport == Sports.Football) p.IsStarter = world.IsFootballStarter(t, p);
+                            else if (p.Sport == Sports.Hockey) p.IsStarter = world.IsHockeyStarter(t, p);
+                            else if (p.Sport == Sports.Soccer) p.IsStarter = world.IsSoccerStarter(t, p);
                         }
                     }
                 }
@@ -1167,7 +1168,7 @@ namespace SportsAgencyTycoon
 
                         foreach (Player p in league.FreeAgents) ProgressionRegression.PlayerProgression(p);
 
-                        world.RetireLeaguePlayers(league);
+                        //world.RetireLeaguePlayers(league);
                     }
                     else if (association != null)
                     {
