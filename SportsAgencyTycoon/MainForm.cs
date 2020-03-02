@@ -986,9 +986,9 @@ namespace SportsAgencyTycoon
         }
         private void RunEventsThisWeek()
         {
-            if (world.MonthName == Months.July && world.WeekNumber == 1)
+            if (world.MonthName == Months.July && world.WeekNumber == 1 && world.NBA.Initialized)
                 newsLabel.Text += world.Basketball.basketballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
-            if (world.MonthName == Months.April && world.WeekNumber == 3)
+            if (world.MonthName == Months.April && world.WeekNumber == 3 && world.NFL.Initialized)
                 newsLabel.Text += world.Football.footballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
 
             foreach (CalendarEvent e in world.EventsThisWeek)
@@ -1168,7 +1168,7 @@ namespace SportsAgencyTycoon
 
                         foreach (Player p in league.FreeAgents) ProgressionRegression.PlayerProgression(p);
 
-                        //world.RetireLeaguePlayers(league);
+                        world.RetireLeaguePlayers(league);
                     }
                     else if (association != null)
                     {

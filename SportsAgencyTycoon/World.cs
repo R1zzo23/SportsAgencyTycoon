@@ -730,16 +730,8 @@ namespace SportsAgencyTycoon
         }
         public bool IsFootballStarter(Team t, Player p)
         {
-            bool starter = false;
+            Position position = p.Position;
             int starterCount = 0;
-            FootballPlayer player = (FootballPlayer)p;
-            Position position = player.Position;
-            List<FootballPlayer> playersAtPosition = new List<FootballPlayer>();
-
-            foreach (FootballPlayer f in t.Roster)
-                if (f.Position == position) playersAtPosition.Add(f);
-
-            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
 
             if (position == Position.WR || position == Position.DE || position == Position.DT || position == Position.OT || position == Position.OG)
                 starterCount = 2;
@@ -751,31 +743,13 @@ namespace SportsAgencyTycoon
                 if (p.MemberOfAgency)
                     Console.WriteLine("test");
                 p.IsStarter = true;
+                return true;
             }
             else
+            {
                 p.IsStarter = false;
-            
-            /*for (int i = 0; i < playersAtPosition.Count; i++)
-            {
-                playersAtPosition[i].DepthChart = i + 1;
+                return false;
             }
-           
-            for (int i = 0; i < starterCount; i++)
-            {
-                if (player == playersAtPosition[i])
-                {
-                    player.IsStarter = true;
-                    starter = true;
-                    return true;
-                }
-            }*/
-
-            if (p.MemberOfAgency)
-                Console.WriteLine("Updated football depth charts");
-
-            //player.IsStarter = starter;
-
-            return starter;
         }
         public bool IsHockeyStarter(Team t, Player p)
         {
@@ -791,7 +765,7 @@ namespace SportsAgencyTycoon
             playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
 
             if (position == Position.G) starterCount = 1;
-            else if (position == Position.W) starterCount = 3;
+            else if (position == Position.W || position == Position.D) starterCount = 4;
             else starterCount = 2;
 
             for (int i = 0; i < playersAtPosition.Count; i++)
@@ -802,14 +776,6 @@ namespace SportsAgencyTycoon
                 else
                     starter = false;
             }
-            /*
-            for (int i = 0; i < starterCount; i++)
-            {
-                if (player == playersAtPosition[i])
-                {
-                    starter = true;
-                }
-            }*/
             
             player.IsStarter = starter;
 
@@ -1132,7 +1098,7 @@ namespace SportsAgencyTycoon
         private void PayPlayersMonthlySalary()
         {
             foreach (League l in Leagues)
-                if (l.InSeason)
+                if (l.InSeason && l.Initialized)
                     foreach (Team t in l.TeamList)
                         foreach (Player p in t.Roster)
                         {
@@ -1160,28 +1126,31 @@ namespace SportsAgencyTycoon
         }
         public void PayPlayersAnnualSalary(League l)
         {
-            foreach (Team t in l.TeamList)
-                foreach (Player p in t.Roster)
-                {
-                    //add one year to player's experience
-                    p.Experience++;
-
-                    // all players getting paid annually get their money
-                    if (p.Contract.AgentPaySchedule == PaySchedule.Annually)
+            if (l.Initialized)
+            {
+                foreach (Team t in l.TeamList)
+                    foreach (Player p in t.Roster)
                     {
-                        p.CareerEarnings += p.Contract.YearlySalary;
-                        // if player is member of agency, agency gets paid too
-                        if (p.MemberOfAgency)
+                        //add one year to player's experience
+                        p.Experience++;
+
+                        // all players getting paid annually get their money
+                        if (p.Contract.AgentPaySchedule == PaySchedule.Annually)
                         {
-                            MainForm.agency.Money += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
-                            //find which Agent represents this client and give money to Agent
-                            MainForm.agency.FindAgent(p).CareerEarnings += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
+                            p.CareerEarnings += p.Contract.YearlySalary;
+                            // if player is member of agency, agency gets paid too
+                            if (p.MemberOfAgency)
+                            {
+                                MainForm.agency.Money += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
+                                //find which Agent represents this client and give money to Agent
+                                MainForm.agency.FindAgent(p).CareerEarnings += Convert.ToInt32((double)p.Contract.YearlySalary * (double)(p.Contract.AgentPercentage / 100));
+                            }
                         }
+                        p.Contract.Years--;
                     }
-                    p.Contract.Years--;
-                }
-            l.InSeason = false;
-            //MakePlayerAFreeAgent(l);
+                l.InSeason = false;
+                MakePlayerAFreeAgent(l);
+            }
         }
         private void MakePlayerAFreeAgent(League l)
         {

@@ -66,6 +66,7 @@
       <DependentUpon>BankruptcyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Baseball.cs" />
+    <Compile Include="BaseballDraft.cs" />
     <Compile Include="BaseballPlayer.cs" />
     <Compile Include="Basketball.cs" />
     <Compile Include="BasketballPlayer.cs" />
