@@ -191,7 +191,7 @@ namespace SportsAgencyTycoon
             for (int i = 1; i < rounds + 1; i++)
             {
                 results = results + "Round #" + i + " Results:" + Environment.NewLine;
-                for (int j = 0; j < DraftOrder.Count; j++)
+                for (int j = 1; j < DraftOrder.Count + 1; j++)
                 {
                     // team selects player to draft
                     Player draftedPlayer = DraftOrder[j].DraftPlayer(rnd, league.DraftEntrants, league.Sport, rounds, j, i);

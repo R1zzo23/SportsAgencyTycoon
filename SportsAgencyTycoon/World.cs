@@ -1247,6 +1247,18 @@ namespace SportsAgencyTycoon
             GlobalAchievements.Add(new Achievement("Face of the Franchise: Baseball", "Have a client drafted in 1st round of MLB Draft.", 1, 2, "IndustryPower"));
             // have client drafted #1 overall in MLB Draft
             GlobalAchievements.Add(new Achievement("Future Diamond Superstar", "Have a client drafted #1 overall in MLB Draft.", 1, 5, "All"));
+            // have client drafted in NHL Draft
+            GlobalAchievements.Add(new Achievement("Rink Dream Realized", "Have a client drafted in NHL Draft.", 1, 1, "IndustryPower"));
+            // have client drafted in 1st round of NHL Draft
+            GlobalAchievements.Add(new Achievement("Face of the Franchise: Hockey", "Have a client drafted in 1st round of NHL Draft.", 1, 2, "IndustryPower"));
+            // have client drafted #1 overall in NHL Draft
+            GlobalAchievements.Add(new Achievement("Future Rink Superstar", "Have a client drafted #1 overall in NHL Draft.", 1, 5, "All"));
+            // have client drafted in MLS Draft
+            GlobalAchievements.Add(new Achievement("Pitch Dream Realized", "Have a client drafted in MLS Draft.", 1, 1, "IndustryPower"));
+            // have client drafted in 1st round of MLS Draft
+            GlobalAchievements.Add(new Achievement("Face of the Franchise: Soccer", "Have a client drafted in 1st round of MLS Draft.", 1, 2, "IndustryPower"));
+            // have client drafted #1 overall in MLS Draft
+            GlobalAchievements.Add(new Achievement("Future Pitch Superstar", "Have a client drafted #1 overall in MLB Draft.", 1, 5, "All"));
         }
     }
 }
