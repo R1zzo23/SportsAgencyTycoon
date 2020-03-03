@@ -256,6 +256,8 @@
     <Compile Include="GenomeDescriptions.cs" />
     <Compile Include="BasketballDraft.cs" />
     <Compile Include="FootballDraft.cs" />
+    <Compile Include="HockeyDraft.cs" />
+    <Compile Include="SoccerDraft.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

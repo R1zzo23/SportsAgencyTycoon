@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public Random rnd;
         public League NHL;
         public World World;
+        public HockeyDraft hockeyDraft;
         public int gamesThisWeek = 0;
         public int gamesForStarter = 0;
         public int gamesForBackup = 0;
@@ -38,6 +39,7 @@ namespace SportsAgencyTycoon
             rnd = r;
             World = w;
             NHL = l;
+            hockeyDraft = new HockeyDraft(rnd, w, l);
             index = 1;
             Conferences = new List<string>();
             Divisions = new List<string>();
@@ -63,6 +65,13 @@ namespace SportsAgencyTycoon
         {
             //if (NHL.WeekNumber == 0)
             //InitializeGAA();
+
+            if (World.MonthName == Months.March && World.WeekNumber == 5)
+            {
+                mainForm.newsLabel.Text += Environment.NewLine + "NHL draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
+                World.Hockey.hockeyDraft.CreateDraftEntrants();
+            }
+
             NHL.WeekNumber++;
             if (!NHL.Playoffs)
             {

@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public Random rnd;
         public League MLS;
         public World World;
+        public SoccerDraft soccerDraft;
         public int gamesThisWeek = 0;
         public int gamesForStarter = 0;
         public int gamesForBackup = 0;
@@ -33,6 +34,7 @@ namespace SportsAgencyTycoon
             rnd = r;
             World = w;
             MLS = l;
+            soccerDraft = new SoccerDraft(rnd, w, l);
             index = 1;
             Conferences = new List<string>();
             Divisions = new List<string>();
@@ -48,6 +50,12 @@ namespace SportsAgencyTycoon
         }
         public void SimWeek()
         {
+            if (World.MonthName == Months.October && World.WeekNumber == 3)
+            {
+                mainForm.newsLabel.Text += Environment.NewLine + "MLS draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
+                World.Soccer.soccerDraft.CreateDraftEntrants();
+            }
+
             if (MLS.WeekNumber == 0)
                 foreach (Team t in MLS.TeamList)
                     foreach (SoccerPlayer p in t.Roster)

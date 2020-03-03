@@ -992,6 +992,10 @@ namespace SportsAgencyTycoon
                 newsLabel.Text += world.Football.footballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
             if (world.MonthName == Months.January && world.WeekNumber == 2 && world.MLB.Initialized)
                 newsLabel.Text += world.Baseball.baseballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
+            if (world.MonthName == Months.June && world.WeekNumber == 4 && world.NHL.Initialized)
+                newsLabel.Text += world.Hockey.hockeyDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
+            if (world.MonthName == Months.January && world.WeekNumber == 2 && world.MLS.Initialized)
+                newsLabel.Text += world.Soccer.soccerDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
 
             foreach (CalendarEvent e in world.EventsThisWeek)
             {
