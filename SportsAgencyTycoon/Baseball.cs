@@ -12,6 +12,7 @@ namespace SportsAgencyTycoon
         public Random rnd;
         public League MLB;
         public World World;
+        public BaseballDraft baseballDraft;
         public int index;
         public int losingIndex;
         public List<string> Conferences;
@@ -33,6 +34,7 @@ namespace SportsAgencyTycoon
             mainForm = mf;
             rnd = r;
             World = w;
+            baseballDraft = new BaseballDraft(rnd, w, l);
             MLB = l;
             index = 1;
             Conferences = new List<string>();
@@ -61,6 +63,13 @@ namespace SportsAgencyTycoon
         {
             if (MLB.WeekNumber == 0)
                 InitializeStats();
+
+            if (World.MonthName == Months.September && World.WeekNumber == 1)
+            {
+                mainForm.newsLabel.Text += Environment.NewLine + "MLB draft entrants finalized!" + Environment.NewLine + mainForm.newsLabel.Text;
+                World.Baseball.baseballDraft.CreateDraftEntrants();
+            }
+
             MLB.WeekNumber++;
             if (!MLB.Playoffs)
             {

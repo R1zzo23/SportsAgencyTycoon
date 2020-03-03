@@ -162,7 +162,7 @@ namespace SportsAgencyTycoon
 
             if (i == 10) numberOfSuperStars = rnd.Next(5, 12);
             else if (i == 9) numberOfSuperStars = rnd.Next(4, 10);
-            else if (i == 8) numberOfSuperStars = rnd.Next(4, 8;
+            else if (i == 8) numberOfSuperStars = rnd.Next(4, 8);
             else if (i == 7) numberOfSuperStars = rnd.Next(4, 7);
             else if (i == 6) numberOfSuperStars = rnd.Next(3, 7);
             else if (i == 5) numberOfSuperStars = rnd.Next(3, 6);
@@ -227,12 +227,12 @@ namespace SportsAgencyTycoon
         {
             if (draftedPlayer.MemberOfAgency)
             {
-                draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Gridiron Dream Realized")]);
+                draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Diamond Dream Realized")]);
                 if (i == 1)
                 {
-                    draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Face of the Franchise: Football")]);
+                    draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Face of the Franchise: Baseball")]);
                     if (j == 1)
-                        draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Gridiron Superstar")]);
+                        draftedPlayer.Agent.AddAchievementToAgent(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Future Diamond Superstar")]);
                 }
             }
         }

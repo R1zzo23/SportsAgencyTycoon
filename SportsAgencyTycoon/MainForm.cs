@@ -990,6 +990,8 @@ namespace SportsAgencyTycoon
                 newsLabel.Text += world.Basketball.basketballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
             if (world.MonthName == Months.April && world.WeekNumber == 3 && world.NFL.Initialized)
                 newsLabel.Text += world.Football.footballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
+            if (world.MonthName == Months.January && world.WeekNumber == 2 && world.MLB.Initialized)
+                newsLabel.Text += world.Baseball.baseballDraft.RunDraft() + Environment.NewLine + newsLabel.Text;
 
             foreach (CalendarEvent e in world.EventsThisWeek)
             {

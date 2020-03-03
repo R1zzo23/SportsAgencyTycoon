@@ -690,16 +690,8 @@ namespace SportsAgencyTycoon
         }
         public bool IsBaseballStarter(Team t, Player p)
         {
-            bool starter = false;
+            Position position = p.Position;
             int starterCount = 0;
-            BaseballPlayer player = (BaseballPlayer)p;
-            Position position = player.Position;
-            List<BaseballPlayer> playersAtPosition = new List<BaseballPlayer>();
-
-            foreach (BaseballPlayer b in t.Roster)
-                if (b.Position == position) playersAtPosition.Add(b);
-
-            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
 
             if (position == Position.INF) starterCount = 4;
             else if (position == Position.OF) starterCount = 3;
@@ -707,26 +699,18 @@ namespace SportsAgencyTycoon
             else if (position == Position.C) starterCount = 1;
             else if (position == Position.RP) starterCount = 2;
 
-            for (int i = 0; i < playersAtPosition.Count; i++)
+            if (p.DepthChart <= starterCount)
             {
-                playersAtPosition[i].DepthChart = i + 1;
-                if (playersAtPosition[i].DepthChart <= starterCount)
-                    starter = true;
-                else
-                    starter = false;
+                if (p.MemberOfAgency)
+                    Console.WriteLine("test");
+                p.IsStarter = true;
+                return true;
             }
-            /*
-            for (int i = 0; i < starterCount; i++)
+            else
             {
-                if (player == playersAtPosition[i])
-                {
-                    starter = true;
-                }
-            }*/
-            
-            player.IsStarter = starter;
-
-            return starter;
+                p.IsStarter = false;
+                return false;
+            }
         }
         public bool IsFootballStarter(Team t, Player p)
         {
@@ -753,58 +737,47 @@ namespace SportsAgencyTycoon
         }
         public bool IsHockeyStarter(Team t, Player p)
         {
-            bool starter = false;
+            Position position = p.Position;
             int starterCount = 0;
-            HockeyPlayer player = (HockeyPlayer)p;
-            Position position = player.Position;
-            List<HockeyPlayer> playersAtPosition = new List<HockeyPlayer>();
-
-            foreach (HockeyPlayer h in t.Roster)
-                if (h.Position == position) playersAtPosition.Add(h);
-
-            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
 
             if (position == Position.G) starterCount = 1;
             else if (position == Position.W || position == Position.D) starterCount = 4;
             else starterCount = 2;
 
-            for (int i = 0; i < playersAtPosition.Count; i++)
+            if (p.DepthChart <= starterCount)
             {
-                playersAtPosition[i].DepthChart = i + 1;
-                if (playersAtPosition[i].DepthChart <= starterCount)
-                    starter = true;
-                else
-                    starter = false;
+                if (p.MemberOfAgency)
+                    Console.WriteLine("test");
+                p.IsStarter = true;
+                return true;
             }
-            
-            player.IsStarter = starter;
-
-            return starter;
+            else
+            {
+                p.IsStarter = false;
+                return false;
+            }
         }
         public bool IsSoccerStarter(Team t, Player p)
         {
-            bool starter = false;
-            SoccerPlayer player = (SoccerPlayer)p;
-            Position position = player.Position;
-            List<SoccerPlayer> playersAtPosition = new List<SoccerPlayer>();
+            Position position = p.Position;
+            int starterCount = 0;
 
-            foreach (SoccerPlayer s in t.Roster)
-                if (s.Position == position) playersAtPosition.Add(s);
+            if (position == Position.G) starterCount = 1;
+            else if (position == Position.F || position == Position.D) starterCount = 4;
+            else starterCount = 3;
 
-            playersAtPosition = playersAtPosition.OrderByDescending(o => o.CurrentSkill).ToList();
-
-            for (int i = 0; i < playersAtPosition.Count; i++)
+            if (p.DepthChart <= starterCount)
             {
-                playersAtPosition[i].DepthChart = i + 1;
+                if (p.MemberOfAgency)
+                    Console.WriteLine("test");
+                p.IsStarter = true;
+                return true;
             }
-
-            if (player == playersAtPosition[0]) starter = true;
-            else starter = false;
-            
-
-            player.IsStarter = starter;
-
-            return starter;
+            else
+            {
+                p.IsStarter = false;
+                return false;
+            }
         }
         #endregion
         #region Create Teams for Leagues
@@ -1268,6 +1241,12 @@ namespace SportsAgencyTycoon
             GlobalAchievements.Add(new Achievement("Face of the Franchise: Football", "Have a client drafted in 1st round of NFL Draft.", 1, 2, "IndustryPower"));
             // have client drafted #1 overall in NFL Draft
             GlobalAchievements.Add(new Achievement("Future Gridiron Superstar", "Have a client drafted #1 overall in NFL Draft.", 1, 5, "All"));
+            // have client drafted in MLB Draft
+            GlobalAchievements.Add(new Achievement("Diamond Dream Realized", "Have a client drafted in MLB Draft.", 1, 1, "IndustryPower"));
+            // have client drafted in 1st round of MLB Draft
+            GlobalAchievements.Add(new Achievement("Face of the Franchise: Baseball", "Have a client drafted in 1st round of MLB Draft.", 1, 2, "IndustryPower"));
+            // have client drafted #1 overall in MLB Draft
+            GlobalAchievements.Add(new Achievement("Future Diamond Superstar", "Have a client drafted #1 overall in MLB Draft.", 1, 5, "All"));
         }
     }
 }
