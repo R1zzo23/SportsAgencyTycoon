@@ -267,31 +267,36 @@ namespace SportsAgencyTycoon
             int salary = 0;
             int years = 0;
             int signingBonus = 0;
+            double agentPercentage;
 
             if (player.DraftRound == 1)
             {
                 years = 5;
-                salary = 5500000 - ((player.DraftPick - 1) * 120000);
-                signingBonus = Convert.ToInt32(salary * .1);
+                salary = 8500000 - ((player.DraftPick - 1) * 208300);
+                signingBonus = Convert.ToInt32(salary * .08);
             }
             else if (player.DraftRound == 2)
             {
-                years = 4;
-                salary = 1320000 - ((player.DraftPick - 1) * 16250);
-                signingBonus = Convert.ToInt32(salary * .05);
-            }
-            else if (player.DraftRound == 3 || player.DraftRound == 4)
-            {
-                years = 4;
-                salary = 800000 - ((player.DraftPick - 1) * 6250);
+                years = 5;
+                salary = 2000000 - ((player.DraftPick - 1) * 33300);
+                signingBonus = Convert.ToInt32(salary * .025);
             }
             else
             {
                 years = 3;
-                salary = 600000 - ((player.DraftPick - 1) * 5625);
+                salary = 780000 - ((((player.DraftRound - 3) * 30) + (player.DraftPick - 1)) * 2600);
             }
 
-            contract = new Contract(years, salary, salary / 10, new Date(9, Months.October, 1), new Date(6, Months.July, 1), signingBonus, 3, PaySchedule.Monthly);
+            if (player.MemberOfAgency)
+                agentPercentage = player.Contract.AgentPercentage;
+            else
+            {
+                if (player.Sport == Sports.Baseball || player.Sport == Sports.Hockey || player.Sport == Sports.Soccer)
+                    agentPercentage = 5;
+                else agentPercentage = 3;
+            }
+
+            contract = new Contract(years, salary, salary / league.MonthsInSeason, league.SeasonStart, league.SeasonEnd, signingBonus, agentPercentage, PaySchedule.Monthly);
 
             return contract;
         }

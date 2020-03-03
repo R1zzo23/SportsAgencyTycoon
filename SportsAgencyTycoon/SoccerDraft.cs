@@ -265,31 +265,24 @@ namespace SportsAgencyTycoon
             int salary = 0;
             int years = 0;
             int signingBonus = 0;
+            double agentPercentage;
 
-            if (player.DraftRound == 1)
-            {
-                years = 5;
-                salary = 5500000 - ((player.DraftPick - 1) * 120000);
-                signingBonus = Convert.ToInt32(salary * .1);
-            }
-            else if (player.DraftRound == 2)
-            {
-                years = 4;
-                salary = 1320000 - ((player.DraftPick - 1) * 16250);
-                signingBonus = Convert.ToInt32(salary * .05);
-            }
-            else if (player.DraftRound == 3 || player.DraftRound == 4)
-            {
-                years = 4;
-                salary = 800000 - ((player.DraftPick - 1) * 6250);
-            }
+            if (player.Age <= 21) years = 3;
+            else if (player.Age <= 23) years = 2;
+            else years = 1;
+
+            salary = 925000 - ((((player.DraftRound - 1) * 24) + (player.DraftPick - 1)) * 2200);
+
+            if (player.MemberOfAgency)
+                agentPercentage = player.Contract.AgentPercentage;
             else
             {
-                years = 3;
-                salary = 600000 - ((player.DraftPick - 1) * 5625);
+                if (player.Sport == Sports.Baseball || player.Sport == Sports.Hockey || player.Sport == Sports.Soccer)
+                    agentPercentage = 5;
+                else agentPercentage = 3;
             }
 
-            contract = new Contract(years, salary, salary / 10, new Date(9, Months.October, 1), new Date(6, Months.July, 1), signingBonus, 3, PaySchedule.Monthly);
+            contract = new Contract(years, salary, salary / league.MonthsInSeason, league.SeasonStart, league.SeasonEnd, signingBonus, agentPercentage, PaySchedule.Monthly);
 
             return contract;
         }

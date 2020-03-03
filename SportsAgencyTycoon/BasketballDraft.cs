@@ -255,7 +255,8 @@ namespace SportsAgencyTycoon
             Contract contract = null;
             int salary = 0;
             int years = 0;
-
+            int signingBonus = 0;
+            double agentPercentage;
 
             if (player.DraftRound == 1)
             {
@@ -276,7 +277,17 @@ namespace SportsAgencyTycoon
                 }
             }
 
-            contract = new Contract(years, salary, salary / 10, new Date(9, Months.October, 1), new Date(6, Months.July, 1), 0, 3, PaySchedule.Monthly);
+            if (player.MemberOfAgency)
+                agentPercentage = player.Contract.AgentPercentage;
+            else
+            {
+                if (player.Sport == Sports.Baseball || player.Sport == Sports.Hockey || player.Sport == Sports.Soccer)
+                    agentPercentage = 5;
+                else agentPercentage = 3;
+            }
+
+
+            contract = new Contract(years, salary, salary / league.MonthsInSeason, league.SeasonStart, league.SeasonEnd, signingBonus, agentPercentage, PaySchedule.Monthly);
 
             return contract;
         }

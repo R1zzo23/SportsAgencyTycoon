@@ -1,19 +1,22 @@
 ﻿<Properties StartupConfiguration="{C7565F86-B952-41CF-AC56-AD9FF3A0DEBD}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/Soccer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SportsAgencyTycoon/HockeyDraft.cs">
     <Files>
-      <File FileName="SportsAgencyTycoon/World.cs" Line="760" Column="21" />
-      <File FileName="SportsAgencyTycoon/HockeyDraft.cs" Line="36" Column="14" />
-      <File FileName="SportsAgencyTycoon/Hockey.cs" Line="69" Column="13" />
-      <File FileName="SportsAgencyTycoon/MainForm.cs" Line="1001" Column="14" />
-      <File FileName="SportsAgencyTycoon/SoccerDraft.cs" Line="178" Column="37" />
-      <File FileName="SportsAgencyTycoon/Soccer.cs" Line="56" Column="41" />
+      <File FileName="SportsAgencyTycoon/World.cs" Line="646" Column="9" />
+      <File FileName="SportsAgencyTycoon/HockeyDraft.cs" Line="285" Column="151" />
+      <File FileName="SportsAgencyTycoon/MainForm.cs" />
+      <File FileName="SportsAgencyTycoon/SoccerDraft.cs" Line="268" Column="36" />
+      <File FileName="SportsAgencyTycoon/BaseballDraft.cs" Line="270" Column="36" />
+      <File FileName="SportsAgencyTycoon/Player.cs" Line="1" Column="1" />
+      <File FileName="SportsAgencyTycoon/FootballDraft.cs" Line="278" Column="36" />
+      <File FileName="SportsAgencyTycoon/BasketballDraft.cs" Line="280" Column="13" />
+      <File FileName="SportsAgencyTycoon/NegotiatePercentageForm.cs" Line="60" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SportsAgencyTycoon" expanded="True">
             <Node name="SportsAgencyTycoon" expanded="True">
-              <Node name="Soccer.cs" selected="True" />
+              <Node name="HockeyDraft.cs" selected="True" />
             </Node>
           </Node>
         </State>
