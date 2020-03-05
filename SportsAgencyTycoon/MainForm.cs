@@ -170,8 +170,8 @@ namespace SportsAgencyTycoon
         public void CreateManagerAndAgency()
         {
             Random rnd = new Random();
-            agency = new Agency("New Age Agency", 1000000, 5);
-            myManager = new Agent("First", "Last", 0, 25, 25, 25, 25, 3, Roles.Manager);
+            agency = new Agency("New Age Agency", 1000000, 0);
+            myManager = new Agent("First", "Last", 0, 10, 10, 10, 10, 1, Roles.Manager);
             agency.AddAgent(myManager);
             PopulateAgentClientList(myManager);
             PopulateAgencyAgentList();
@@ -1321,34 +1321,40 @@ namespace SportsAgencyTycoon
         {
             Agent hiredAgent = null;
             AgentSearch newAgentSearch = new AgentSearch(agency);
-            newAgentSearch.BringToFront();
-            newAgentSearch.ShowDialog();
 
-            int fundsSpent = newAgentSearch.FundsSpent;
-            string agentType = newAgentSearch.AgentType;
-            agency.Money -= fundsSpent;
-            UpdateAgencyInfo();
-
-            if (fundsSpent != 0)
+            if (agency.ClientCount < 5)
+                MessageBox.Show("Not enough clients to need additional agents.");
+            else
             {
-                HireAgentForm hireAgentForm = new HireAgentForm(world, rnd, fundsSpent, agentType);
-                hireAgentForm.HowManyAgents();
-                hireAgentForm.CreateApplicants(world, rnd);
-                hireAgentForm.BringToFront();
-                hireAgentForm.ShowDialog();
+                newAgentSearch.BringToFront();
+                newAgentSearch.ShowDialog();
 
-                hiredAgent = hireAgentForm.HiredAgent;
-                if (hiredAgent != null)
+                int fundsSpent = newAgentSearch.FundsSpent;
+                string agentType = newAgentSearch.AgentType;
+                agency.Money -= fundsSpent;
+                UpdateAgencyInfo();
+
+                if (fundsSpent != 0)
                 {
-                    agency.Agents.Add(hiredAgent);
-                    agency.AgentCount++;
-                    world.CreateTeamRelationships(hiredAgent);
+                    HireAgentForm hireAgentForm = new HireAgentForm(world, rnd, fundsSpent, agentType);
+                    hireAgentForm.HowManyAgents();
+                    hireAgentForm.CreateApplicants(world, rnd);
+                    hireAgentForm.BringToFront();
+                    hireAgentForm.ShowDialog();
 
-                    if (agency.AgentCount == 2)
-                        agency.AddAchievementToAgency(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hire 1st Agent")]);
+                    hiredAgent = hireAgentForm.HiredAgent;
+                    if (hiredAgent != null)
+                    {
+                        agency.Agents.Add(hiredAgent);
+                        agency.AgentCount++;
+                        world.CreateTeamRelationships(hiredAgent);
 
-                    UpdateAgencyInfo();
-                    PopulateAgencyAgentList();
+                        if (agency.AgentCount == 2)
+                            agency.AddAchievementToAgency(world.GlobalAchievements[world.GlobalAchievements.FindIndex(o => o.Name == "Hire 1st Agent")]);
+
+                        UpdateAgencyInfo();
+                        PopulateAgencyAgentList();
+                    }
                 }
             }
         }
